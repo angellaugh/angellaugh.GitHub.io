@@ -4,6 +4,7 @@
 
 
 3. change the network config to generate ip
+
   3.1 `vi /etc/sysconfig/network/ifcfg-eth0`
   3.2 add one line `ZONE=public`
   ```
