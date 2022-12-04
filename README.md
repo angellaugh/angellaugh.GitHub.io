@@ -1,6 +1,6 @@
 first try
 
 
-https://github.com/angellaugh/angellaugh.GitHub.io/blob/main/es-suse.md
+[es-suse] (https://github.com/angellaugh/angellaugh.GitHub.io/blob/main/es-suse.md)
 
-theme:minima
+
