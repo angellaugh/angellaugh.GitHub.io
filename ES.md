@@ -481,5 +481,3 @@ Tue Dec  6 08:55:46 GMT 2022
 ```
 
 
-using it:
-http://durbiox.west.isilon.com/qa/log/powerload/BR_MAIN/B_MAIN_3219(RELEASE)/2022_12_06_08_53_54/task_logs/26136/results.html
