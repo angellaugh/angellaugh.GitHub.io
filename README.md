@@ -10,3 +10,6 @@ first try
 
 ### ES-SUSE install steps 2022.12.10
 [ES-SUSE install steps](https://github.com/angellaugh/angellaugh.GitHub.io/blob/main/ES.md)
+
+### dockerfile parameters
+[dockerfile parameters](https://github.com/angellaugh/angellaugh.GitHub.io/blob/main/dockerfile.md)
