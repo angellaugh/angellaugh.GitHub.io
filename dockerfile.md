@@ -125,3 +125,17 @@ ENTRYPOINT echo $A
 17. USER         ---> 不指定的话，是root
 USER  用户名:用户组   或
 USER  用户id:组id
+
+
+新版本的docker还支持多个from分阶段构建，这样可以把一些编译之类的工作放在第一个from的镜像里，直接把编译结果copy到第二个from的镜像中，从而减小最终的镜像大小。
+```
+这个其实是COPY --from的一个用法：
+COPY --from=xxx /src /des
+这里的from指定文件来源，默认不写是宿主机文件系统，xxx可以是另一个镜像，比如nginx，当然也可以是你说的多from啦，另一个from段构建成的一个临时镜像，需要给临时镜像一个临时名字，使用AS用法。形如：
+FROM alpine AS haha
+......
+.......
+FROM ubuntu 
+.....
+COPY --from=haha /src /des
+
