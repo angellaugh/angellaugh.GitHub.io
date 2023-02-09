@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Angellaugh's Blog
-subtitle: ''
-description: ''
-keywords:
+title: Angellaugh's blog
+subtitle: '记录琐碎'
+description: '技术，生活，艺术，旅行，都记录下来'
+keywords: "java, python, javascript, linux, storage, db, performance"
 author: Angellaugh
-language: zh-Hans
-timezone: ''
+language: en
+timezone: 'Asia/Beijing'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://angellaugh.GitHub.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -97,10 +97,11 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
-/
+  type: git
+  repo: https://github.com/angellaugh/angellaugh.GitHub.io.git
+  branch: main
