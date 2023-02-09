@@ -9,7 +9,7 @@ description: '技术，生活，艺术，旅行，都记录下来'
 keywords: "java, python, javascript, linux, storage, db, performance"
 author: Angellaugh
 language: en
-timezone: 'Asia/Beijing'
+timezone: 
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
