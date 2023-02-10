@@ -4,3 +4,7 @@ description: Bookmark this to keep an eye on my project updates!
 repository: angellaugh/angellaugh.Github.io
 github_url: https://github.com/angellaugh/angellaugh.GitHub.io.git
 url: https://angellaugh.github.io/
+
+- name: Checkout
+  uses: actions/checkout@v3.3.0
+
