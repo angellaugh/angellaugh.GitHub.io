@@ -3,7 +3,7 @@ name: Pages
 on:
   push:
     branches:
-      - autodep # default branch
+      - autodep# default branch
 
 jobs:
   pages:
