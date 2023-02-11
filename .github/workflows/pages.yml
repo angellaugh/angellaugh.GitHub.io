@@ -26,7 +26,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: ddd
-        run: npm run deploy
+        run: hexo deploy
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
