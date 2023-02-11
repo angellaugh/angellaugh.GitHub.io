@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env: # 统一设置环境变量
-  GIT_USER: angellaugh
-  GIT_EMAIL: asuna211218@gmail.com
+  GIT_USER: annie 
+  GIT_EMAIL: annie.li1@dell.com
   THEME_REPO: theme-next/hexo-theme-next.git   # 你使用的主题仓库地址
   THEME_BRANCH: master
   DEPLOY_REPO: angellaugh/angellaugh.github.io # 你用来发布github pages的仓库地址
