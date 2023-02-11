@@ -1,0 +1,49 @@
+name: Pages
+
+on:
+  push:
+    branches:
+      - autodep # default branch
+
+
+jons:
+    # job1
+    blog-cicd:
+        name: Hexo blog build & deploy
+        runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
+
+    # jon2 这里可以配置多个job
+    job2:
+
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.14.0"
+
+
+      - name: Install hexo dependencies
+        env:
+          #设置环境变量 仓库私钥， 用来在构建完成后 推送到仓库
+          ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
+         # 设置 ssh 私钥， 下载 hexo-cli 脚手架及相关安装包， 
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "asuna211218@gmain.com"
+          git config --global user.name "angellaugh"
+          npm install -g hexo-cli
+          npm install
+
+      - name: Generate files
+        run: |
+          hexo clean
+          hexo generate
+          hexo deploy
