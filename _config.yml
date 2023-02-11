@@ -117,5 +117,5 @@ search:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  #repo: git@github.com:angellaugh/angellaugh.GitHub.io.git
-  branch: gh-pages 
+  repo: git@github.com:angellaugh/angellaugh.GitHub.io.git
+  branch:  autodep
