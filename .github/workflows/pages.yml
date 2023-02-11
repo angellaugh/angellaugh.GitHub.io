@@ -1,32 +1,32 @@
-name: pages-auto-build-deploy
+name: Pages
+
 on:
-  # workflow_dispatch: 
   push:
     branches:
-      - autodep
+      - autodep # default branch
 
 jobs:
-  build-and-deploy:
+  pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
         with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+          node-version: "18.14.0"
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
         with:
-          hugo-version: '0.100.2'
-          extended: true
-
-      - name: Build Hugo
-        run: hugo -b "https://lucumt.info/" -e "production"
-
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAGE_ACTION_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          commit_message: ${{ github.event.head_commit.message }}
-
