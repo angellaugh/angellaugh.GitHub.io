@@ -5,17 +5,6 @@ on:
     branches:
       - autodep # default branch
 
-
-jons:
-    # job1
-    blog-cicd:
-        name: Hexo blog build & deploy
-        runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
-
-    # jon2 这里可以配置多个job
-    job2:
-
-
 jobs:
   pages:
     runs-on: ubuntu-latest
