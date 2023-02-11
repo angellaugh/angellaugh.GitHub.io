@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>ES</title>
+    <url>/2023/02/11/ES/</url>
+    <content><![CDATA[<p>sudo zypper refresh<br>sudo zypper update -y<br>sudo zypper install yum</p>
+<h3 id="Import-the-Elasticsearch-GPG-Key"><a href="#Import-the-Elasticsearch-GPG-Key" class="headerlink" title="Import the Elasticsearch GPG Key"></a>Import the Elasticsearch GPG Key</h3><p><code>sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch</code></p>
+<h3 id="Install-Elasticsearch-from-the-RPM-repository"><a href="#Install-Elasticsearch-from-the-RPM-repository" class="headerlink" title="Install Elasticsearch from the RPM repository"></a>Install Elasticsearch from the RPM repository</h3><p>create elasticsearch.repo and config the es install repo</p>
+<p><code>sudo vim /etc/zypp/repos.d/elasticsearch.repo</code></p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[elasticsearch]</span><br><span class="line">name=Elasticsearch repository for 8.x packages</span><br><span class="line">baseurl=https://artifacts.elastic.co/packages/8.x/yum</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch</span><br><span class="line">enabled=0</span><br><span class="line">autorefresh=1</span><br><span class="line">type=rpm-md</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>install ES</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo zypper modifyrepo --enable elasticsearch &amp;&amp; \</span><br><span class="line">  sudo zypper install elasticsearch; \</span><br><span class="line">  sudo zypper modifyrepo --disable elasticsearch </span><br></pre></td></tr></table></figure>
+
+<p>download and install RPM </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.5.2-x86_64.rpm</span><br><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.5.2-x86_64.rpm.sha512</span><br><span class="line">shasum -a 512 -c elasticsearch-8.5.2-x86_64.rpm.sha512 </span><br><span class="line">sudo rpm --install elasticsearch-8.5.2-x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>config the es start automatically when system boots up</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ES-suse:/etc/zypp/repos.d # sudo /bin/systemctl daemon-reload</span><br><span class="line">ES-suse:/etc/zypp/repos.d # sudo /bin/systemctl enable elasticsearch.service</span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/elasticsearch.service → /usr/lib/systemd/system/elasticsearch.service.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>check the ES</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ES-suse:/etc/zypp/repos.d # rpm -qi elasticsearch</span><br><span class="line">Name        : elasticsearch</span><br><span class="line">Epoch       : 0</span><br><span class="line">Version     : 7.17.7</span><br><span class="line">Release     : 1</span><br><span class="line">Architecture: x86_64</span><br><span class="line">Install Date: Sun Dec  4 21:37:47 2022</span><br><span class="line">Group       : Application/Internet</span><br><span class="line">Size        : 525810397</span><br><span class="line">License     : Elastic License</span><br><span class="line">Signature   : RSA/SHA512, Mon Oct 17 14:57:09 2022, Key ID d27d666cd88e42b4</span><br><span class="line">Source RPM  : elasticsearch-7.17.7-1-src.rpm</span><br><span class="line">Build Date  : Mon Oct 17 11:35:59 2022</span><br><span class="line">Build Host  : packer-virtualbox-iso-1646848364</span><br><span class="line">Relocations : /usr</span><br><span class="line">Packager    : Elasticsearch</span><br><span class="line">Vendor      : Elasticsearch</span><br><span class="line">URL         : https://www.elastic.co/</span><br><span class="line">Summary     : Distributed RESTful search engine built for the cloud</span><br><span class="line">Description :</span><br><span class="line">Reference documentation can be found at</span><br><span class="line">  https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</span><br><span class="line">  and the &#x27;Elasticsearch: The Definitive Guide&#x27; book can be found at</span><br><span class="line">  https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html</span><br><span class="line">Distribution: Elasticsearch</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>start es server</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ES-suse:/etc/zypp/repos.d # sudo systemctl start elasticsearch</span><br><span class="line">ES-suse:/etc/zypp/repos.d # sudo systemctl status elasticsearch</span><br><span class="line">● elasticsearch.service - Elasticsearch</span><br><span class="line">     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; disabled; vendor preset: disabled)</span><br><span class="line">     Active: active (running) since Sun 2022-12-04 21:39:35 EST; 21s ago</span><br><span class="line">       Docs: https://www.elastic.co</span><br><span class="line">   Main PID: 8555 (java)</span><br><span class="line">      Tasks: 97 (limit: 4915)</span><br><span class="line">     CGroup: /system.slice/elasticsearch.service</span><br><span class="line">             ├─ 8555 /usr/share/elasticsearch/jdk/bin/java -Xshare:auto -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.negative.ttl=10 -XX:+Always&gt;</span><br><span class="line">             └─ 8767 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller</span><br><span class="line"></span><br><span class="line">Dec 04 21:39:17 ES-suse systemd[1]: Starting Elasticsearch...</span><br><span class="line">Dec 04 21:39:35 ES-suse systemd[1]: Started Elasticsearch.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>related log:<br><code> vi /var/log/elasticsearch/elasticsearch.log</code></p>
+<p>datapath<br><code>/var/lib/elasticsearch</code></p>
+<p>To list journal entries for the elasticsearch service:</p>
+<p><code>sudo journalctl --unit elasticsearch</code></p>
+<p>verify es installation</p>
+<ol>
+<li><code>ss -antpl | grep 9200</code></li>
+<li><code>curl -X GET &quot;localhost:9200/&quot;</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ES-suse:/etc/zypp/repos.d # ss -antpl | grep 9200</span><br><span class="line">LISTEN 0      4096   [::ffff:127.0.0.1]:9200             *:*    users:((&quot;java&quot;,pid=8555,fd=305))</span><br><span class="line">LISTEN 0      4096                [::1]:9200          [::]:*    users:((&quot;java&quot;,pid=8555,fd=304))</span><br><span class="line">ES-suse:/etc/zypp/repos.d # curl -X GET &quot;localhost:9200/&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot; : &quot;ES-suse&quot;,</span><br><span class="line">  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,</span><br><span class="line">  &quot;cluster_uuid&quot; : &quot;0zL15OxVTY6SrXO2aQ6qGQ&quot;,</span><br><span class="line">  &quot;version&quot; : &#123;</span><br><span class="line">    &quot;number&quot; : &quot;7.17.7&quot;,</span><br><span class="line">    &quot;build_flavor&quot; : &quot;default&quot;,</span><br><span class="line">    &quot;build_type&quot; : &quot;rpm&quot;,</span><br><span class="line">    &quot;build_hash&quot; : &quot;78dcaaa8cee33438b91eca7f5c7f56a70fec9e80&quot;,</span><br><span class="line">    &quot;build_date&quot; : &quot;2022-10-17T15:29:54.167373105Z&quot;,</span><br><span class="line">    &quot;build_snapshot&quot; : false,</span><br><span class="line">    &quot;lucene_version&quot; : &quot;8.11.1&quot;,</span><br><span class="line">    &quot;minimum_wire_compatibility_version&quot; : &quot;6.8.0&quot;,</span><br><span class="line">    &quot;minimum_index_compatibility_version&quot; : &quot;6.0.0-beta1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>input one data:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -H &#x27;Content-Type: application/json&#x27; -X POST &#x27;http://localhost:9200/todo/task/1&#x27; -d &#x27;&#123; &quot;name&quot;: &quot;Go to the mall.&quot; &#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>and read it again:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ES-suse:/etc/zypp/repos.d # curl -X GET &#x27;http://localhost:9200/todo/task/1?pretty&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;_index&quot; : &quot;todo&quot;,</span><br><span class="line">  &quot;_type&quot; : &quot;task&quot;,</span><br><span class="line">  &quot;_id&quot; : &quot;1&quot;,</span><br><span class="line">  &quot;_version&quot; : 1,</span><br><span class="line">  &quot;_seq_no&quot; : 0,</span><br><span class="line">  &quot;_primary_term&quot; : 1,</span><br><span class="line">  &quot;found&quot; : true,</span><br><span class="line">  &quot;_source&quot; : &#123;</span><br><span class="line">    &quot;name&quot; : &quot;Go to the mall.&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p> curl -XGET ‘<a href="http://localhost:9200/_nodes/stats?pretty&#39;">http://localhost:9200/_nodes/stats?pretty&#39;</a> | grep thread</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#125;ES-suse:/etc/zypp/repos.d #  curl -XGET &#x27;http://localhost:9200/_nodes/stats?pretty&#x27; | grep thread</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100 39463  100 39463    0     0  1144k      0 --:--:-- --:--:--        &quot;threads&quot; : &#123;</span><br><span class="line"> --:--:--      &quot;thread_pool&quot; : &#123;</span><br><span class="line"> 1          &quot;threads&quot; : 0,</span><br><span class="line">16          &quot;threads&quot; : 0,</span><br><span class="line">7          &quot;threads&quot; : 0,</span><br><span class="line">k          &quot;threads&quot; : 0,</span><br><span class="line"></span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 1,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 11,</span><br><span class="line">          &quot;threads&quot; : 2,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 2,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 1,</span><br><span class="line">          &quot;threads&quot; : 3,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line">          &quot;threads&quot; : 0,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">ES-suse:/etc # ll /usr/share/elasticsearch/bin</span><br><span class="line">total 3028</span><br><span class="line">-rwxr-xr-x 1 root root     101 Nov 17 14:04 elasticsearch</span><br><span class="line">-rwxr-xr-x 1 root root     376 Nov 17 13:59 elasticsearch-certgen</span><br><span class="line">-rwxr-xr-x 1 root root     376 Nov 17 13:59 elasticsearch-certutil</span><br><span class="line">-rwxr-xr-x 1 root root     674 Nov 17 14:04 elasticsearch-cli</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-create-enrollment-token</span><br><span class="line">-rwxr-xr-x 1 root root     352 Nov 17 13:59 elasticsearch-croneval</span><br><span class="line">-rwxr-xr-x 1 root root    2340 Nov 17 14:04 elasticsearch-env</span><br><span class="line">-rwxr-xr-x 1 root root    2595 Nov 17 14:04 elasticsearch-env-from-file</span><br><span class="line">-rwxr-xr-x 1 root root      84 Nov 17 14:04 elasticsearch-geoip</span><br><span class="line">-rwxr-xr-x 1 root root      87 Nov 17 14:04 elasticsearch-keystore</span><br><span class="line">-rwxr-xr-x 1 root root      55 Nov 17 14:04 elasticsearch-node</span><br><span class="line">-rwxr-xr-x 1 root root     172 Nov 17 14:04 elasticsearch-plugin</span><br><span class="line">-rwxr-xr-x 1 root root     376 Nov 17 13:59 elasticsearch-reconfigure-node</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-reset-password</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-saml-metadata</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-service-tokens</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-setup-passwords</span><br><span class="line">-rwxr-xr-x 1 root root      55 Nov 17 14:04 elasticsearch-shard</span><br><span class="line">-rwxr-xr-x 1 root root     403 Nov 17 13:59 elasticsearch-sql-cli</span><br><span class="line">-rwxr-xr-x 1 root root 3008975 Nov 17 13:59 elasticsearch-sql-cli-8.5.2.jar</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-syskeygen</span><br><span class="line">-rwxr-xr-x 1 root root     353 Nov 17 13:59 elasticsearch-users</span><br><span class="line">-rwxr-xr-x 1 root root     332 Nov 17 14:01 systemd-entrypoint</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="health-check"><a href="#health-check" class="headerlink" title="health check"></a>health check</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl &#x27;localhost:9200/_cat/health?v&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodes-list"><a href="#nodes-list" class="headerlink" title="nodes list"></a>nodes list</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl &#x27;localhost:9200/_cat/nodes?v&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="index-list"><a href="#index-list" class="headerlink" title="index list"></a>index list</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl &#x27;localhost:9200/_cat/indices?v&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="search-detail-data-using-index"><a href="#search-detail-data-using-index" class="headerlink" title="search detail data using index"></a>search detail data using index</h3><p><code>curl -X GET http://localhost:9200/je_index_1663720218/</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@powerload-es-2:~ # curl -X GET http://localhost:9200/je_index_1663720218/_search?pretty</span><br><span class="line">&#123;</span><br><span class="line">  &quot;took&quot; : 7,</span><br><span class="line">  &quot;timed_out&quot; : false,</span><br><span class="line">  &quot;_shards&quot; : &#123;</span><br><span class="line">    &quot;total&quot; : 5,</span><br><span class="line">    &quot;successful&quot; : 5,</span><br><span class="line">    &quot;skipped&quot; : 0,</span><br><span class="line">    &quot;failed&quot; : 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hits&quot; : &#123;</span><br><span class="line">    &quot;total&quot; : 0,</span><br><span class="line">    &quot;max_score&quot; : null,</span><br><span class="line">    &quot;hits&quot; : [ ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="查看集群全部节点的指标"><a href="#查看集群全部节点的指标" class="headerlink" title="查看集群全部节点的指标"></a>查看集群全部节点的指标</h1><p>$ curl “localhost:9200/_nodes/stats”</p>
+<hr>
+<p>Issue1</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ES-suse:/etc/zypp/repos.d # sudo systemctl enable elasticsearch</span><br><span class="line">Synchronizing state of elasticsearch.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.</span><br><span class="line">Executing: /usr/lib/systemd/systemd-sysv-install enable elasticsearch</span><br><span class="line">ln -sf ../elasticsearch /etc/init.d/rc2.d/S50elasticsearch</span><br><span class="line">ln: failed to create symbolic link &#x27;/etc/init.d/rc2.d/S50elasticsearch&#x27;: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>It seems that this product is not from the standard openSUSE OSS repo.</p>
+<p>It tries to use /etc/init.d/rc2.d which directory belongs to the old SystemV ways of doing (as the message also says). but in openSUSE that directory is no longer in use and most probably not available anymore.</p>
+<p>Issue2: refused了</p>
+<p>root@ldm-controller-01:/usr/local/stress_test/Island_TPPC # curl -X GET “<a href="http://10.219.61.175:9200/_cat/indices?v&quot;">http://10.219.61.175:9200/_cat/indices?v&quot;</a><br>curl: (7) Failed connect to 10.219.61.175:9200; Connection refused</p>
+<p>—————————————Dry run es-opensuse on powerload————————<br>Config ES-suse to powerload json file</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@ldm-controller-01:/usr/local/stress_test/Island_TPPC # nslookup ES-suse.west.isilon.com</span><br><span class="line">Server:         10.231.252.14</span><br><span class="line">Address:        10.231.252.14#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:   ES-suse.west.isilon.com</span><br><span class="line">Address: 10.219.61.175</span><br></pre></td></tr></table></figure>
+
+<p>![](vx_images/65815239672.png =800x)</p>
+<h3 id="cat-methods"><a href="#cat-methods" class="headerlink" title="cat methods"></a>cat methods</h3><p><code>curl http://localhost:9200/_cat</code></p>
+<p>ES-suse:/var/lib/elasticsearch #  curl <a href="http://localhost:9200/_cat">http://localhost:9200/_cat</a><br>=^.^=<br>/_cat/allocation<br>/_cat/shards<br>/_cat/shards/{index}<br>/_cat/master<br>/_cat/nodes<br>/_cat/tasks<br>/_cat/indices<br>/_cat/indices/{index}<br>/_cat/segments<br>/_cat/segments/{index}<br>/_cat/count<br>/_cat/count/{index}<br>/_cat/recovery<br>/_cat/recovery/{index}<br>/_cat/health<br>/_cat/pending_tasks<br>/_cat/aliases<br>/_cat/aliases/{alias}<br>/_cat/thread_pool<br>/_cat/thread_pool/{thread_pools}<br>/_cat/plugins<br>/_cat/fielddata<br>/_cat/fielddata/{fields}<br>/_cat/nodeattrs<br>/_cat/repositories<br>/_cat/snapshots/{repository}<br>/_cat/templates<br>/_cat/ml/anomaly_detectors<br>/_cat/ml/anomaly_detectors/{job_id}<br>/_cat/ml/trained_models<br>/_cat/ml/trained_models/{model_id}<br>/_cat/ml/datafeeds<br>/_cat/ml/datafeeds/{datafeed_id}<br>/_cat/ml/data_frame/analytics<br>/_cat/ml/data_frame/analytics/{id}<br>/_cat/transforms<br>/_cat/transforms/{transform_id}</p>
+<p><a href="https://juejin.cn/post/7145773678649671694">https://juejin.cn/post/7145773678649671694</a></p>
+<p>curl localhost:9200/_cat/nodes?help</p>
+<h1 id="指定查看每个节点的堆内存使用率，段数量和合并数量"><a href="#指定查看每个节点的堆内存使用率，段数量和合并数量" class="headerlink" title="指定查看每个节点的堆内存使用率，段数量和合并数量"></a>指定查看每个节点的堆内存使用率，段数量和合并数量</h1><p>$ curl “<a href="http://localhost:9200/_cat/nodes?h=http,heapPercent,segmentsCount,mergesTotal&quot;">http://localhost:9200/_cat/nodes?h=http,heapPercent,segmentsCount,mergesTotal&quot;</a><br>172.16.71.231:9200 56 99 108182<br>172.16.71.229:9200 31 95 122551<br>172.16.71.232:9200 50 66  73871<br>172.16.71.230:9200 41 63  76470<br>172.16.71.234:9200 32 64  93256<br>172.16.71.233:9200 14 90 136450</p>
+<p>当集群为red或者yellow的时候怎么办<br>集群为RED表示集群中有primary shard没有分配，yellow表示有replica没有分配</p>
+<p>root@powerload-es-2:/var/lib/elasticsearch/nodes # curl -X GET “<a href="http://localhost:9200/_cluster/allocation/explain?pretty&quot;">http://localhost:9200/_cluster/allocation/explain?pretty&quot;</a><br>{<br>  “index” : “je_index_1664986024”,<br>  “shard” : 3,<br>  “primary” : false,<br>  “current_state” : “unassigned”,<br>  “unassigned_info” : {<br>    “reason” : “CLUSTER_RECOVERED”,<br>    “at” : “2022-12-05T02:18:25.712Z”,<br>    “last_allocation_status” : “no_attempt”<br>  },<br>  “can_allocate” : “no”,<br>  “allocate_explanation” : “cannot allocate because allocation is not permitted to any of the nodes”,<br>  “node_allocation_decisions” : [<br>    {<br>      “node_id” : “R2DFntg7RLiwYsEN4mwYuw”,<br>      “node_name” : “R2DFntg”,<br>      “transport_address” : “10.219.61.247:9300”,<br>      “node_attributes” : {<br>        “ml.machine_memory” : “16656269312”,<br>        “xpack.installed” : “true”,<br>        “ml.max_open_jobs” : “20”,<br>        “ml.enabled” : “true”<br>      },<br>      “node_decision” : “no”,<br>      “deciders” : [<br>        {<br>          “decider” : “same_shard”,<br>          “decision” : “NO”,<br>          “explanation” : “the shard cannot be allocated to the same node on which a copy of the shard already exists [[je_index_1664986024][3], node[R2DFntg7RLiwYsEN4mwYuw], [P], s[STARTED], a[id=488Lf_8lTI2raran4YNWoQ]]”<br>        }<br>      ]<br>    }<br>  ]<br>}</p>
+<p>分片长时间处于未分配状态 ES内部会对一个unassigned 分片尝试5次进行分配,失败后不再尝试进行分配，这时候需要调用进行手动控制集群处理 unassigned 分片：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Before starting Elasticsearch for the first time</span><br><span class="line">Set xpack.security.enabled: false and then start Elasticsearch</span><br><span class="line"></span><br><span class="line">After you have started Elasticsearch for the first time</span><br><span class="line">You have two options here</span><br><span class="line"></span><br><span class="line">Set</span><br><span class="line"></span><br><span class="line">xpack.security.enabled: false</span><br><span class="line">xpack.security.transport.ssl.enabled: false</span><br><span class="line">xpack.security.http.ssl.enabled: false</span><br><span class="line">and then start Elasticsearch.</span><br><span class="line"></span><br><span class="line">Run</span><br><span class="line"></span><br><span class="line">bin/elasticsearch-keystore remove xpack.security.transport.ssl.keystore.secure_password</span><br><span class="line">bin/elasticsearch-keystore remove xpack.security.transport.ssl.truststore.secure_password</span><br><span class="line">bin/elasticsearch-keystore remove xpack.security.http.ssl.keystore.secure_password</span><br><span class="line">Set</span><br><span class="line"></span><br><span class="line">xpack.security.enabled: false</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="change-timezone"><a href="#change-timezone" class="headerlink" title="change timezone"></a>change timezone</h3><p>step1: vi /etc/sysconfig/clock</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DEFAULT_TIMEZONE=&quot;Etc/GMT&quot;</span><br><span class="line">ZONE=&quot;Etc/GMT&quot;</span><br><span class="line">~</span><br><span class="line">```  </span><br><span class="line">step2: zic -l Etc/GMT</span><br><span class="line">step3: date</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>ES-suse:/var/log/elasticsearch # date<br>Tue Dec  6 03:46:47 EST 2022<br>ES-suse:/var/log/elasticsearch # vi /etc/sysconfig/clock<br>ES-suse:/var/log/elasticsearch # zic -l Etc/GMT<br>ES-suse:/var/log/elasticsearch # date<br>Tue Dec  6 08:55:46 GMT 2022</p>
+<pre><code>
+</code></pre>
+]]></content>
+      <categories>
+        <category>Teckknowledge</category>
+      </categories>
+      <tags>
+        <tag>ES</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>diango</title>
+    <url>/2023/02/11/django/</url>
+    <content><![CDATA[<h1 id="1-django"><a href="#1-django" class="headerlink" title="1. django"></a>1. django</h1><ol>
+<li><p>pip3.8 install djangon</p>
+</li>
+<li><p>python3.8 -m django –version</p>
+</li>
+<li><p>django-admin</p>
+</li>
+<li><p>django-admin startproject  <del>myprojectname</del>  Multicorn_project  | on desktop</p>
+</li>
+<li><p>cd <del>myprojectname</del> Multicorn_project</p>
+</li>
+<li><p>tree<br>![](_v_images/20201001165628417_1726437634.png =200x)</p>
+</li>
+<li><p>python manage.py runserver</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">October 01, 2020 - 08:57:22</span><br><span class="line">Django version 3.1.2, using settings &#x27;Multicorn_project.settings&#x27;</span><br><span class="line">Starting development server at http://127.0.0.1:8000/</span><br></pre></td></tr></table></figure></li>
+<li><p>python manage.py runserver 9999   | grep 端口</p>
+</li>
+<li><p>python manage.py startapp <del>yourappname</del> mouticorn</p>
+</li>
+<li><p>dirs:   multicorn -&gt; templates -&gt; multicorn -&gt; 2 files: home.html  and multicornjson.html</p>
+</li>
+<li><p>in home.html,  just input “html + tab”</p>
+</li>
+<li><p>look at the apps.py in the multicorn app </p>
+</li>
+<li><p>in project settings.py,  add multicorn.apps.MulticornConfig into the top of ‘INSTALLED_APPS’<br>![](_v_images/20201003160503076_808966192.png =320x)</p>
+</li>
+<li><p>dirs: multicorn -&gt; static -&gt; multicorn   </p>
+<span id="more"></span></li>
+<li><p>python manage.py makemigrations</p>
+</li>
+<li><p>python manage.py migrate</p>
+</li>
+<li></li>
+<li><p> python manage.py createsuperuser  创建一个 admin user<br>username: ali1<br>password: lantian<br>email: <a href="mailto:&#x61;&#x6e;&#x6e;&#x69;&#101;&#46;&#x6c;&#105;&#x31;&#64;&#x64;&#x65;&#x6c;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#x61;&#x6e;&#x6e;&#x69;&#101;&#46;&#x6c;&#105;&#x31;&#64;&#x64;&#x65;&#x6c;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a></p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/Desktop/Multicorn_project 🔥» python manage.py createsuperuser                                                                      vivi@vivideMacBook-Pro</span><br><span class="line">Username (leave blank to use &#x27;vivi&#x27;): ali1</span><br><span class="line">Email address: annie.li1@dell.com</span><br><span class="line">Password:</span><br><span class="line">Password (again):</span><br><span class="line">This password is too short. It must contain at least 8 characters.</span><br><span class="line">Bypass password validation and create user anyway? [y/N]: y</span><br><span class="line">Superuser created successfully.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="https://getbootstrap.com/docs/4.5/getting-started/introduction/">一个有用的css网站</a><br>18.  在base.css中，把Login的 href 改成 <strong>href=”/admin/“</strong>, 即可登录<br>![](_v_images/20201004152628847_575819787.png =520x)</p>
+</blockquote>
+<p>username: TestUser   password: django123</p>
+<p>![](_v_images/20201004154036210_1241846727.png =220x)</p>
+<ol start="19">
+<li>models.py</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line">from django.utils import timezone</span><br><span class="line">from django.contrib.auth.models import User</span><br><span class="line"></span><br><span class="line">class Post(models.Model):</span><br><span class="line">    title = models.CharField(max_length=100)</span><br><span class="line">    content = models.TextField()</span><br><span class="line">    # auto_now, auto_now_add, default</span><br><span class="line">    date_posted = models.DateTimeField(default=timezone.now)</span><br><span class="line">    author = models.ForeignKey(User, on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
+
+
+<ol start="20">
+<li>python manage.py makemigrations    muticorn -&gt; migrations -&gt; 0001_initial.py &amp; <strong>init</strong>.py<br>在 0001_initial.py中是 建表语句</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~/Desktop/Multicorn_project 🔥» python manage.py makemigrations                                                                       vivi@vivideMacBook-Pro</span><br><span class="line">Migrations for &#x27;multicorn&#x27;:</span><br><span class="line">  multicorn/migrations/0001_initial.py</span><br><span class="line">    - Create model Post</span><br></pre></td></tr></table></figure>
+
+<ol start="21">
+<li> python manage.py sqlmigrate multicorn 0001_initial<br>执行建表语句并且commit 到db中</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~/Desktop/Multicorn_project 🔥» python manage.py sqlmigrate multicorn 0001_initial                                                    vivi@vivideMacBook-Pro</span><br><span class="line">BEGIN;</span><br><span class="line">--</span><br><span class="line">-- Create model Post</span><br><span class="line">--</span><br><span class="line">CREATE TABLE &quot;multicorn_post&quot; (&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, &quot;title&quot; varchar(100) NOT NULL, &quot;content&quot; text NOT NULL, &quot;date_posted&quot; datetime NOT NULL, &quot;author_id&quot; integer NOT NULL REFERENCES &quot;auth_user&quot; (&quot;id&quot;) DEFERRABLE INITIALLY DEFERRED);</span><br><span class="line">CREATE INDEX &quot;multicorn_post_author_id_82a8e3b2&quot; ON &quot;multicorn_post&quot; (&quot;author_id&quot;);</span><br><span class="line">COMMIT;</span><br></pre></td></tr></table></figure>
+<ol start="22">
+<li><p>python manage.py migrate</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~/Desktop/Multicorn_project 🔥» python manage.py migrate                                   vivi@vivideMacBook-Pro</span><br><span class="line">Operations to perform:</span><br><span class="line">  Apply all migrations: admin, auth, contenttypes, multicorn, sessions</span><br><span class="line">Running migrations:</span><br><span class="line">  Applying multicorn.0001_initial... OK</span><br></pre></td></tr></table></figure></li>
+<li><p>进入 django shell 模式</p>
+</li>
+<li><p>python manage.py shell</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multicorn.models <span class="keyword">import</span> Post</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> User</span><br><span class="line">User.objects.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">&gt;&gt; &lt;QuerySet [&lt;User: ali1&gt;, &lt;User: TestUser&gt;]&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以在shell模式下，筛选<br>    1. User.objects.all()        –&gt;     &lt;QuerySet [&lt;User: ali1&gt;, &lt;User: TestUser&gt;]&gt;<br>    2. User.objects.first()         –&gt;           &lt;User: ali1&gt;<br>    3. User.objects.filter(username=’ali1’)            –&gt;               &lt;QuerySet [&lt;User: ali1&gt;]&gt;<br>    4. User.objects.filter(username=’ali1’).first()      –&gt;           &lt;User: ali1&gt;</p>
+<p>可以 赋值 user 做各种操作：<br>    1. user = User.objects.filter(username=’ali1’).first()<br>        ![](_v_images/20201004221441020_1148517328.png =300x)<br>    2. user.id<br>    3. user.pk<br>    4. user = User.objects.get(id=1)<br>    5. user   —&gt;   &lt;User: ali1&gt;<br>    ![](_v_images/20201004222758993_1547712460.png =200x)<br>ctrl + l  python中的清屏</p>
+<p>可以给新表 Post 增加数据：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet []&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post_1 = Post(title=<span class="string">&#x27;blog 1&#x27;</span>, content=<span class="string">&#x27;First Post Content!&#x27;</span>, author=user)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet []&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post_1.save()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: Post <span class="built_in">object</span> (<span class="number">1</span>)&gt;]&gt;</span><br></pre></td></tr></table></figure>
+<ol start="25">
+<li>因为打印出来的 Post.objects.all()  没有展示title<br>进入 multicorn -&gt; models.py  在class Post中添加<br>def <strong>str</strong>(self):<pre><code>return self.title
+</code></pre>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Post</span>(models.Model):</span><br><span class="line">    title = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    content = models.TextField()</span><br><span class="line">    <span class="comment"># auto_now, auto_now_add, default</span></span><br><span class="line">    date_posted = models.DateTimeField(default=timezone.now)</span><br><span class="line">    author = models.ForeignKey(User, on_delete=models.CASCADE)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.title</span><br></pre></td></tr></table></figure>
+
+
+<ol start="26">
+<li><p>重新打开shell：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python manage.py shell</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> multicorn.models <span class="keyword">import</span> Post</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> User</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;]&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>添加第二个blog,  注意<code>post_2.save()</code>, 注意 <code>author_id = user.id</code></p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>user = User.objects.<span class="built_in">filter</span>(username=<span class="string">&#x27;ali1&#x27;</span>).first()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user</span><br><span class="line">&lt;User: ali1&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post_2 = Post(title=<span class="string">&#x27;Blog 2&#x27;</span>, content=<span class="string">&#x27;Second Post Content!&#x27;</span>, author=user)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post_2 = Post(title=<span class="string">&#x27;Blog 2&#x27;</span>, content=<span class="string">&#x27;Second Post Content!&#x27;</span>, author_id=user.<span class="built_in">id</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post_2.save()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;, &lt;Post: Blog <span class="number">2</span>&gt;]&gt;</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<ol start="28">
+<li>可以查看post的各种属性，包括 <code>date_posted</code>,  和 <code>内建的user</code>, 和 <code>email</code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;, &lt;Post: Blog <span class="number">2</span>&gt;]&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post = Post.objects.first()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post.content</span><br><span class="line"><span class="string">&#x27;First Post Content!&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post.date_posted</span><br><span class="line">datetime.datetime(<span class="number">2020</span>, <span class="number">10</span>, <span class="number">4</span>, <span class="number">14</span>, <span class="number">30</span>, <span class="number">35</span>, <span class="number">354395</span>, tzinfo=&lt;UTC&gt;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post.author</span><br><span class="line">&lt;User: ali1&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>post.author.email</span><br><span class="line"><span class="string">&#x27;annie.li1@dell.com&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>可以查看同一个user的 所有 Post</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.post_set</span><br><span class="line">&lt;django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.&lt;<span class="built_in">locals</span>&gt;.RelatedManager <span class="built_in">object</span> at <span class="number">0x7ff829552640</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.post_set.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;, &lt;Post: Blog <span class="number">2</span>&gt;]&gt;</span><br></pre></td></tr></table></figure>
+<ol start="30">
+<li>可以用 user 来create 第三个blog，并且，无需像调用Post那样 <code>调用save来保存</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.post_set.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;, &lt;Post: Blog <span class="number">2</span>&gt;]&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.post_set.create(title=<span class="string">&#x27;Blog 3&#x27;</span>, content=<span class="string">&#x27;Third Post Content!&#x27;</span>)</span><br><span class="line">&lt;Post: Blog <span class="number">3</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.post_set.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;, &lt;Post: Blog <span class="number">2</span>&gt;, &lt;Post: Blog <span class="number">3</span>&gt;]&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Post.objects.<span class="built_in">all</span>()</span><br><span class="line">&lt;QuerySet [&lt;Post: blog <span class="number">1</span>&gt;, &lt;Post: Blog <span class="number">2</span>&gt;, &lt;Post: Blog <span class="number">3</span>&gt;]&gt;</span><br></pre></td></tr></table></figure>
+<ol start="31">
+<li>回到views里改代码，把dummy data 换成 DB中的Post， 然后傻眼了哈哈哈<br>因为，我之前dummy data 用的字段是工作中的， 和templates 里的 html 兼容<br>现在要回到， home 中，把  for post in posts_parameters_key 下的字段都换成与Post表一致的内容</li>
+</ol>
+<p><strong>views.py</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>(<span class="params">request</span>):</span><br><span class="line">    context = &#123;</span><br><span class="line">        <span class="comment"># 把 嵌套在views.py中的dummy data posts 换成了DB data Post.objects.all()</span></span><br><span class="line">        <span class="comment">#&#x27;posts_parameters_key&#x27;: posts</span></span><br><span class="line">        <span class="string">&#x27;posts_parameters_key&#x27;</span>: Post.objects.<span class="built_in">all</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;multicorn/home.html&#x27;</span>, context)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="31">
+<li>重新启动网站， python manage.py runserver 9999<br>![](_v_images/20201004231145556_2081382756.png =300x)</li>
+</ol>
+<p>31.1 </p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">&quot;text-muted&quot;</span>&gt;</span>&#123;&#123; post.date_posted | date:&quot;F d, Y&quot; &#125;&#125;<span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>![](_v_images/20201004231458499_7661096.png =200x)</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">&quot;text-muted&quot;</span>&gt;</span>&#123;&#123; post.date_posted &#125;&#125;<span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>![](_v_images/20201004231410304_1438854109.png =200x)</p>
+<ol start="32">
+<li> 进入admin.py 注册Post， 这样就可以在admin 页面看到Post的 blog了</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Post</span><br><span class="line"></span><br><span class="line">admin.site.register(Post)</span><br></pre></td></tr></table></figure>
+<p>![](_v_images/20201004233353387_2058505299.png =300x)</p>
+<p>变更一下 blog3的 author， 回到multicorn/home中，发现作者已变<br>![](_v_images/20201004233623918_1337007123.png =200x)</p>
+]]></content>
+      <categories>
+        <category>Teckknowledge</category>
+      </categories>
+      <tags>
+        <tag>django</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>es-suse</title>
+    <url>/2023/02/11/es-suse/</url>
+    <content><![CDATA[<h3 id="1-hostnamectl-set-hostname-ES-suse"><a href="#1-hostnamectl-set-hostname-ES-suse" class="headerlink" title="1. hostnamectl set-hostname ES-suse"></a>1. <code>hostnamectl set-hostname ES-suse</code></h3><h3 id="2-reboot"><a href="#2-reboot" class="headerlink" title="2. reboot"></a>2. <code>reboot</code></h3><h3 id="3-change-the-network-config-to-generate-ip"><a href="#3-change-the-network-config-to-generate-ip" class="headerlink" title="3. change the network config to generate ip"></a>3. change the network config to generate ip</h3><h4 id="3-1-vi-etc-sysconfig-network-ifcfg-eth0"><a href="#3-1-vi-etc-sysconfig-network-ifcfg-eth0" class="headerlink" title="3.1 vi /etc/sysconfig/network/ifcfg-eth0"></a>3.1 <code>vi /etc/sysconfig/network/ifcfg-eth0</code></h4><h4 id="3-2-add-one-line-ZONE-public"><a href="#3-2-add-one-line-ZONE-public" class="headerlink" title="3.2 add one line ZONE=public"></a>3.2 add one line <code>ZONE=public</code></h4>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;/etc/sysconfig/network/ifcfg-eth0&quot; 3L, 46B                                                                                        3,11         </span><br><span class="line">BOOTPROTO=&#x27;dhcp&#x27;</span><br><span class="line">STARTMODE=&#x27;auto&#x27;</span><br><span class="line">ZONE=public</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-zypper-update"><a href="#4-zypper-update" class="headerlink" title="4. zypper update"></a>4. <code>zypper update</code></h3><h3 id="5-zypper-install-net-tools-deprecated"><a href="#5-zypper-install-net-tools-deprecated" class="headerlink" title="5. zypper install net-tools-deprecated"></a>5. <code>zypper install net-tools-deprecated</code></h3><h3 id="6-zypper-install-cnf"><a href="#6-zypper-install-cnf" class="headerlink" title="6. zypper install cnf"></a>6. <code>zypper install cnf</code></h3><h3 id="7-cnf-yum"><a href="#7-cnf-yum" class="headerlink" title="7. cnf yum"></a>7. <code>cnf yum</code></h3>]]></content>
+      <categories>
+        <category>Teckknowledge</category>
+      </categories>
+      <tags>
+        <tag>ES</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/11/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>metadata</title>
+    <url>/2023/02/11/metadata/</url>
+    <content><![CDATA[<h4 id="ask-Pytest-to-automatically-provision-the-environment"><a href="#ask-Pytest-to-automatically-provision-the-environment" class="headerlink" title="ask Pytest to automatically provision the environment"></a>ask Pytest to automatically provision the environment</h4><p><code>pytest --provision</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ali1@remotedev-ali1-rdu:~$ pytest --provision</span><br><span class="line">logdir &#x27;log/helix&#x27; does not exist; fallback to &#x27;/ifs/home/ali1/.cache/helix/log&#x27;</span><br><span class="line">============================================================================== test session starts ===============================================================================</span><br><span class="line">platform linux -- Python 3.6.9, pytest-6.2.4, py-1.10.0, pluggy-0.13.1</span><br><span class="line">rootdir: /ifs/home/ali1</span><br><span class="line">plugins: timeout-1.4.2, helix-3.0.25, isilon-marks-0.3.3, isilon-accountant-0.4.2</span><br><span class="line">collected 0 items / 1 error</span><br><span class="line">Password:</span><br><span class="line">[2022-12-14 11:11:32.605863+00:00] QUEUED_FOR_ALLOCATION... waiting 30 seconds</span><br><span class="line">[2022-12-14 11:12:02.887701+00:00] QUEUED_FOR_ALLOCATION... waiting 30 seconds</span><br><span class="line">[2022-12-14 11:12:33.175448+00:00] READY</span><br><span class="line">[2022-12-14 11:12:33.499574+00:00] QUEUED_FOR_DELETION... waiting 30 seconds</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Teckknowledge</category>
+      </categories>
+      <tags>
+        <tag>metadata</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>flask</title>
+    <url>/2023/02/11/flask/</url>
+    <content><![CDATA[<h1 id="flask"><a href="#flask" class="headerlink" title="flask"></a>flask</h1><p>FLASK_APP=/usr/local/devcodes/powerload-web FLASK_ENV=development python3 -m flask run –host=10.219.61.224  –port=2222</p>
+<p><font color=#063060 size=2>1. 命令行启动 flask：先export FLASK_APP指向启动file.py；再flask run;<br>2. 命令行启动debug模式，export FLASK_DEBUG=1； 此模式可changes reloaded authmatically.<br>3. python 启动 flask,  if <strong>name</strong> == ‘<strong>main</strong>‘，可在其中设置debug模式<br><strong>4. 用装饰器 app.route(“/“)  route decorators 来管理页面路径 what we type into the browsing to go to different pages.</strong></font></p>
+<ol start="17">
+<li>login logout, 验证注册是否使用存在了的username 或者email。 登录后不再显示login 和 注册按钮，<br>只显示logout按钮。 logout之后，不可以再访问account页面。  首次登陆直接展示account页面，再次登录直接展示home页面。</li>
+</ol>
+<h5 id="先做点简单的"><a href="#先做点简单的" class="headerlink" title="先做点简单的"></a>先做点简单的</h5><p><code>pip install flask</code><br><code>mkdir Flask_blog</code><br><code>touch flasklog.py</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello, World!&#x27;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="增加venv"><a href="#增加venv" class="headerlink" title="增加venv"></a>增加venv</h5><ol>
+<li><code>export FLASK_APP=flaskblog.py</code></li>
+<li>flask run</li>
+</ol>
+<p><strong>只要做了改动，就要restart flask，才能生效</strong><br>3. 开启debug模式： <code>export FLASK_DEBUG=1</code>，就可以实时更新改动:thoes changes reload automatically.</p>
+<ol start="4">
+<li>增加  main 之后，用python来run<ol>
+<li><code>python flaskblog.py</code></li>
+</ol>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page, two routes are handled by the same function</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/home&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;Hello, World!&lt;/h1&gt;&#x27;</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/about&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">about</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;About Page!&lt;/h1&gt;&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol start="5">
+<li>在layout.html中，包含网站主要css样式，其中，body中添加 block模块，可以用来让<br>the block section that the child templates can override. 调用它的其他html可以重写覆盖。</li>
+</ol>
+<ol start="6">
+<li>mkdir static 来存放 css样式， main.css</li>
+<li>从 snippets中复制过来的navigation.html样式，放在了body标签里面；<br><code>https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/snippets/navigation.html</code></li>
+<li>添加main.html 到layout.html的 body中 head下面：</li>
+<li>在layout.html的head中，title前面，添加link，来引用static中的css样式<ol>
+<li>注意 flaskblog.py 中 import ulr_for: <code>from flask import Flask, render_template, url_for</code></li>
+<li>改写layout.html，增加如下：<br><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&#123;&#123; url_for('static', filename='main.css') &#125;&#125;&quot;&gt;</code></li>
+</ol>
+</li>
+</ol>
+<hr>
+<ol start="10">
+<li>安装flask-wtf： <code>pip install flask-wtf</code></li>
+</ol>
+<ol start="11">
+<li><p>register.html中 各种div 之内的 form.username/password/confirm_password都来自于 forms.py中 class 中定义的变量名字</p>
+</li>
+<li><p>但是最后一个div中， 指的是flaskblog.py中的fun name:<br>@app.route(‘/login’)<br>def <font color=#FF0000>login():</font></p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;border-top pt-3&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">&quot;text-muted&quot;</span>&gt;</span></span><br><span class="line">        Already Have An Account? <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;ml-2&quot;</span>  <span class="attr">href</span>=<span class="string">&quot;&#123;&#123; url_for(&#x27;login&#x27;) &#125;&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li>flash :  redirect  — flasklog.py<br>在register中，添加，如果submit验证成功，就返回到home page ，这个home，<br>调用的是 flasklog.py中的 home fun<br>flash message 是一次性的，当再次刷新时，因为未触发到那个条件，所以flash message不再出现，除非再次注册。</li>
+</ol>
+<p>加入flash 和 redirect 来控制，做了注册之后，页面的刷新跳转；</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page, two routes are handled by the same function</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/home&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;home.html&#x27;</span>, posts=posts)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/about&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">about</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;about.html&#x27;</span>, title=<span class="string">&#x27;About&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    form = RegistrationForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        flash(<span class="string">f&#x27;Account created for <span class="subst">&#123;form.username.data&#125;</span>!&#x27;</span>, <span class="string">&#x27;success&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;home&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>, title=<span class="string">&#x27;Register&#x27;</span>, form=form)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>13.2  但是当register 失败后，并无feedback 来告诉用户  why it was invalid</p>
+<p>添加了一些验证在 register.html， 用的是如果拿到error信息就展示出来</p>
+<p>![](_v_images/20201019234332261_1025641223.png =300x)</p>
+<ol start="14">
+<li>在login 加了 flash信息 ，hardcode写了 用户名和密码<br>![](_v_images/20201020002527262_100800492.png =300x)</li>
+</ol>
+<hr>
+<ol start="15">
+<li><code>pip install flask-sqlalchemy</code></li>
+</ol>
+<p><del>export  PIP_DEFAULT_TIMEOUT=100</del>  无效<br>sudo pip install –default-timeout=100 future<br>pip install –default-timeout=220 future<br>因为sudo 调用的pip 是3.6</p>
+<p>![](_v_images/20201021220751159_1841048205.png =600x)</p>
+<p>python</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flaskblog <span class="keyword">import</span> db</span><br><span class="line">db.create_all()    ---&gt; site.db file</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flaskblog <span class="keyword">import</span> User, Post</span><br><span class="line">user_1 = User(username=<span class="string">&#x27;Corey&#x27;</span>, email=<span class="string">&#x27;C@demo.com&#x27;</span>, password=<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(user_1)</span><br><span class="line">user_2 = User(username=<span class="string">&#x27;johnDone&#x27;</span>, email=<span class="string">&#x27;jd@demo.com&#x27;</span>, password=<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(user_2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">User.query.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">User.query.first()</span><br><span class="line"></span><br><span class="line">User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).first()</span><br><span class="line"></span><br><span class="line">user = User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).first()</span><br><span class="line"></span><br><span class="line">user.<span class="built_in">id</span></span><br><span class="line">user = User.query.get(<span class="number">1</span>)</span><br><span class="line">user</span><br><span class="line"></span><br><span class="line">user.posts</span><br><span class="line"></span><br><span class="line">post_1 = Post(title=<span class="string">&#x27;Blog 1 &#x27;</span>, content = <span class="string">&#x27;first post content!&#x27;</span>, user_id = user.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">post_2 = Post(title=<span class="string">&#x27;Blog 2 &#x27;</span>, content = <span class="string">&#x27;Second post content!&#x27;</span>, user_id = user.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(post_1)</span><br><span class="line"></span><br><span class="line">db.session.add(post_2)</span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">user.posts</span><br><span class="line"><span class="keyword">for</span> post <span class="keyword">in</span> user.posts:</span><br><span class="line">    <span class="built_in">print</span>(post.title)</span><br><span class="line"></span><br><span class="line">post = Post.query.first()</span><br><span class="line"></span><br><span class="line">post.user_id</span><br><span class="line">post.author</span><br><span class="line"></span><br><span class="line">db.drop_all()</span><br><span class="line">db.create_all()</span><br><span class="line">User.query.<span class="built_in">all</span>()</span><br><span class="line">Post.query.<span class="built_in">all</span>()</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<ol start="16">
+<li><code>pip install flask-bcrypt</code><br>用bcrypt 来生成hash 加密，每次生成都不一样，<br>但是反之check却可以验证真伪。<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">~ 🔥» python                      vivi@vivideMacBook-Pro</span><br><span class="line">Python <span class="number">3.8</span><span class="number">.5</span> (v3<span class="number">.8</span><span class="number">.5</span>:580fbb018f, Jul <span class="number">20</span> <span class="number">2020</span>, <span class="number">12</span>:<span class="number">11</span>:<span class="number">27</span>)</span><br><span class="line">[Clang <span class="number">6.0</span> (clang-<span class="number">600.0</span><span class="number">.57</span>)] on darwin</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flask_bcrypt <span class="keyword">import</span> Bcrypt</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt = Bcrypt()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>)</span><br><span class="line"><span class="string">b&#x27;$2b$12$mwleE8U2426VUFW1ZfjI0OsrWatmzYla/hCHhiH5t/xsLxQl/ob6i&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;$2b$12$6kcDKHgJJDhlwaZZV9l0f.DPEqxcJFx01axApkdAVm/v5uoiQKyHe&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;$2b$12$8LMjQhBOdUqT.ZLF08SreOf7CrOYCtgOaEEXHal5okuXclqgviR1e&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hashed_pw = bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.check_password_hash(hashed_pw,<span class="string">&quot;password&quot;</span>)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.check_password_hash(hashed_pw,<span class="string">&quot;testing&quot;</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>添加了一些校验之后，在首页注册成功</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">~/Desktop/Flask_Blog 🔥» python   vivi@vivideMacBook-Pro</span><br><span class="line">Python <span class="number">3.8</span><span class="number">.5</span> (v3<span class="number">.8</span><span class="number">.5</span>:580fbb018f, Jul <span class="number">20</span> <span class="number">2020</span>, <span class="number">12</span>:<span class="number">11</span>:<span class="number">27</span>)</span><br><span class="line">[Clang <span class="number">6.0</span> (clang-<span class="number">600.0</span><span class="number">.57</span>)] on darwin</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flaskblog <span class="keyword">import</span> db</span><br><span class="line">/Library/Frameworks/Python.framework/Versions/<span class="number">3.8</span>/lib/python3<span class="number">.8</span>/site-packages/flask_sqlalchemy/__init__.py:<span class="number">833</span>: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead <span class="keyword">and</span> will be disabled by default <span class="keyword">in</span> the future.  <span class="type">Set</span> it to <span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span> to suppress this warning.</span><br><span class="line">  warnings.warn(FSADeprecationWarning(</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flaskblog.models <span class="keyword">import</span> User</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user = User.query.first()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user</span><br><span class="line">User(<span class="string">&#x27;ali1&#x27;</span>, <span class="string">&#x27;ali1@flask.com&#x27;</span>, <span class="string">&#x27;default.jpg&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.password</span><br><span class="line"><span class="string">&#x27;$2b$12$JM7NPMUz6329UQmMtj8p7uDFWtKRHmpQujnffwW0U/W1WNOfWHThG&#x27;</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 用已经存在的用户来注册，页面报错</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sqlalchemy.exc.IntegrityError</span><br><span class="line">sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email</span><br><span class="line">[SQL: INSERT INTO user (username, email, image_file, password) VALUES (?, ?, ?, ?)]</span><br><span class="line">[parameters: (<span class="string">&#x27;ali1&#x27;</span>, <span class="string">&#x27;ali1@flask.com&#x27;</span>, <span class="string">&#x27;default.jpg&#x27;</span>, <span class="string">&#x27;$2b$12$HjaXxkdNbmjhLSLTu7CSsO9Nx/HLJG8.1cUrBL9TwS79/Zui9wvSm&#x27;</span>)]</span><br><span class="line">(Background on this error at: http://sqlalche.me/e/<span class="number">13</span>/gkpj)</span><br></pre></td></tr></table></figure>
+
+
+<p>在浏览器页面，到某个地方想执行，输入pin码即可调用python生成各种信息<br>所以，不可以生产环境使用debug模式，暴露的信息太多。<br>![](_v_images/20201022210758556_1552795459.png =500x)![](_v_images/20201022210936423_1612001069.png =500x)</p>
+<p>添加了一些验证之后：<br>![](_v_images/20201022212003059_248276131.png =500x)</p>
+<ol start="17">
+<li><code>pip install flask-login</code>  安装login 模块</li>
+</ol>
+<hr>
+<p>User Account and Profile Picture</p>
+]]></content>
+      <categories>
+        <category>Teckknowledge</category>
+      </categories>
+      <tags>
+        <tag>flask</tag>
+      </tags>
+  </entry>
+</search>
