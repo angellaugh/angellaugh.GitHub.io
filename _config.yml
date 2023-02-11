@@ -118,4 +118,4 @@ search:
 deploy:
   type: git
   repo: git@github.com:angellaugh/angellaugh.GitHub.io.git
-  branch:  autodep
+  branch: gh-pages
