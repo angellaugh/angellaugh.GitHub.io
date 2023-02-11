@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest # 构建使用的系统，支持 linux/mac/windows
     timeout-minutes: 5 # job超时时间，超过后job会被停止运行
 
-    steps: # 一个job由多个 step 组成，本博的由7个step组成
+    steps:
       - name: Checkout Hexo repo
       	# 检出项目，如果不指定名称，默认使用运行Github Action 的仓库，即hexo.git
         uses: actions/checkout@v2
