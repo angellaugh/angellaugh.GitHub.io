@@ -17,59 +17,36 @@ jobs:
   build: # job_id，其它job可以引用，比如两个job有先后顺序
     name: Build Github Page And Deploy On Aliyun # job名称
     runs-on: ubuntu-latest # 构建使用的系统，支持 linux/mac/windows
-    timeout-minutes: 5 # job超时时间，超过后job会被停止运行
-
+    timeout-minutes: 5
     steps:
       - name: Checkout Hexo repo
-      	# 检出项目，如果不指定名称，默认使用运行Github Action 的仓库，即hexo.git
         uses: actions/checkout@v2
-
-    	# 2. Checkout next.git 主题内容到 theme目录
       - name: Checkout Theme repo
-      	# actions/checkout 就是Acton工具，实现checkout项目，每个action也是一个git仓库
-      	# 可以直接通过 github.com/工具名称进行访问，即github.com/actions/checkout
         uses: actions/checkout@v2
         with:
           repository: ${{ env.THEME_REPO }} # 要checkout的仓库地址
           ref: ${{ env.THEME_BRANCH }}
           path: themes/next # 要checkout到的路径
-
-    	# 3. 安装 node.js 环境
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v2 # 使用actions/setup-node安装nodejs
         with:
           node-version: ${{ matrix.node }}
-
-    	# 4. 安装Heox
       - name: Install Hexo
         run: | # 运行command命令
           npm install -g hexo-cli
           npm install
-
-    	# 5. 使用Hexo生成静态页面
       - name: Generate Blog
         run: |
           hexo generate
-
-    	# 6. 发布静态页面到 gagahappy.github.io
-			# 使用 peaceiris/actions-gh-pages 第三方Action工具，发布静态内容到 github pages
-			# 重要:
-			# 如果你的源码文件与Html文件在两个仓库，请在源码文件仓库设置
-			# secrets 的 ACTIONS_DEPLOY_KEY 值为密钥内容，
-			# 在html文件仓库即youname.github.io中设置 Deploy keys 的值设置为公钥内容，
-			# 在构建过程中会使用密钥对youname.github.io进行操作
       - name: Deploy Github Page
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # 在 hexo.git 上设置的私钥
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # ACTIONS_DEPLOY_KEY 不能修改
           external_repository: ${{ env.DEPLOY_REPO }} # Hexo.git 的仓库地址
           publish_branch: ${{ env.DEPLOY_BRANCH }}
           publish_dir: ./public # 使用Hexo/hugo等生成静态页面的目录
           user_name: ${{ env.GIT_USER }}
           user_email: ${{ env.GIT_EMAIL }}
-
-    	# 7. 同步静态页到Aliyun服务器
       - name: Deploy Github Page on Aliyun
         uses: easingthemes/ssh-deploy@main
         env:
