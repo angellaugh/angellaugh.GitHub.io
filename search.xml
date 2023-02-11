@@ -378,4 +378,13 @@
         <tag>flask</tag>
       </tags>
   </entry>
+  <entry>
+    <title>trytheauto.md</title>
+    <url>/2023/02/11/trytheauto-md/</url>
+    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line">c = a+b</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
 </search>
