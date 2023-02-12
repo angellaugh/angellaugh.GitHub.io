@@ -40,8 +40,8 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /source/uploads/favicon-16x16.png
-  medium: /source/uploads/favicon-32x32.png
+  small: /uploads/favicon-16x16.png
+  medium: /uploads/favicon-32x32.png
   #apple_touch_icon: /images/apple-touch-icon.png
   #apple_touch_icon: /images/apple-touch-icon-next.png
   #safari_pinned_tab: /images/favicon.ico
@@ -166,7 +166,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: /source/uploads/avatar.jpg
+  url: /uploads/avatar.jpg
   # If true, the avatar will be dispalyed in circle.
   rounded: true 
   # If true, the avatar will be rotated with the cursor.
