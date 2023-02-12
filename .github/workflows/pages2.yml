@@ -2,8 +2,8 @@ name: Auto Deploy hugo
 
 on: 
     push:
-    branches:
-      - autodep
+      branches:
+        - autodep
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
