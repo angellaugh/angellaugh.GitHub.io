@@ -14,15 +14,31 @@ jobs:
           submodules: true  
           fetch-depth: 0    
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - name: 安装 Node
+        uses: actions/setup-node@v1
         with:
-          hugo-version: latest
-          extended: true
+          node-version: '16.x'
 
-      - name: Build 
-        run: hugo --minify
+      - name: 安装 Hexo
+        run: |
+          export TZ='Asia/Shanghai'
+          npm install hexo-cli -g
 
+      - name: 缓存 Hexo
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+
+      - name: 安装依赖
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install --save
+
+      - name: 生成静态文件
+        run: |
+          hexo clean && hexo generate -g -c 2
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
