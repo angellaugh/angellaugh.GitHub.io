@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - autodep 
-  pull_request:
 
 jobs:
   deploy:
-    runs-on: macos-latest 
+    runs-on: ubuntu-latest 
     permissions:
       contents: write
     concurrency:
