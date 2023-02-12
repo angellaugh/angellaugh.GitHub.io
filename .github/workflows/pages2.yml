@@ -1,59 +1,40 @@
+name: GitHub Pages
+
 on:
   push:
-    branches: [autodep] # 在master分支push时触发部署
-    paths-ignore: # 以下文件的变更不触发部署
-      - README.md
-  workflow_dispatch:
-
-env: # 统一设置环境变量
-  GIT_USER: annie 
-  GIT_EMAIL: annie.li1@dell.com
-  THEME_REPO: theme-next/hexo-theme-next.git   # 你使用的主题仓库地址
-  THEME_BRANCH: master
-  DEPLOY_REPO: angellaugh/angellaugh.github.io # 你用来发布github pages的仓库地址
-  DEPLOY_BRANCH: gh-pages
+    branches:
+      - autodep 
+  pull_request:
 
 jobs:
-  build: # job_id，其它job可以引用，比如两个job有先后顺序
-    name: Build Github Page And Deploy On Aliyun # job名称
-    runs-on: ubuntu-latest # 构建使用的系统，支持 linux/mac/windows
-    timeout-minutes: 5
+  deploy:
+    runs-on: macos-latest 
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Checkout Hexo repo
-        uses: actions/checkout@v2
-      - name: Checkout Theme repo
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.THEME_REPO }} # 要checkout的仓库地址
-          ref: ${{ env.THEME_BRANCH }}
-          path: themes/next # 要checkout到的路径
-      - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v2 # 使用actions/setup-node安装nodejs
-        with:
-          node-version: ${{ matrix.node }}
-      - name: Install Hexo
-        run: | # 运行command命令
-          npm install -g hexo-cli
-          npm install
-      - name: Generate Blog
-        run: |
-          hexo generate
-      - name: Deploy Github Page
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # ACTIONS_DEPLOY_KEY 不能修改
-          external_repository: ${{ env.DEPLOY_REPO }} # Hexo.git 的仓库地址
-          publish_branch: ${{ env.DEPLOY_BRANCH }}
-          publish_dir: ./public # 使用Hexo/hugo等生成静态页面的目录
-          user_name: ${{ env.GIT_USER }}
-          user_email: ${{ env.GIT_EMAIL }}
-      - name: Deploy Github Page on Aliyun
-        uses: easingthemes/ssh-deploy@main
-        env:
-            SSH_PRIVATE_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-            ARGS: "-rltgoDzvO --delete"
-            SOURCE: "public/" # 使用Hexo/hugo等生成静态页面的目录
-            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-            REMOTE_USER: ${{ secrets.REMOTE_USER }}
-            TARGET: ${{ secrets.REMOTE_TARGET }}
+      - uses: actions/checkout@v3
 
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.14.0'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
