@@ -12,10 +12,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           ref: autodep 
-      - name: Use Node.js ${{ matrix.node_version }}
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          version: ${{ matrix.node_version }}
+          node-version: "18.14.0"
       - name: Setup hexo
         env:
           ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
@@ -31,5 +31,6 @@ jobs:
       - name: Hexo deploy
         run: |
           hexo clean
+          hexo g
           hexo d
 
