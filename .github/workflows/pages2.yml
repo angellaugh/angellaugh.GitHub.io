@@ -18,7 +18,7 @@ jobs:
           node-version: "18.14.0"
       - name: Setup hexo
         env:
-          ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
+          ACTION_DEPLOY_KEY: ${{ secrets.HEXO_ASUNA_PRI }}
         run: |
           mkdir -p ~/.ssh/
           echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
