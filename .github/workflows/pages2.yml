@@ -1,36 +1,33 @@
-name: CI
-on:
-  push:
-    branches:
-      - autodep 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+name: Auto Deploy hugo
 
+on: 
+    push:
+    branches:
+      - autodep
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v1
+      - name: Check out repository code
+        uses: actions/checkout@v2
         with:
-          ref: autodep 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+          submodules: true  
+          fetch-depth: 0    
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          node-version: "18.14.0"
-      - name: Setup hexo
-        env:
-          ACTION_DEPLOY_KEY: ${{ secrets.HEXO_ASUNA_PRI }}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.email "asuna211218@gmail.com"
-          git config --global user.name "angellaugh"
-          npm install hexo-cli -g
-          npm install
-      - name: Hexo deploy
-        run: |
-          hexo clean
-          hexo g
-          hexo d
+          hugo-version: latest
+          extended: true
+
+      - name: Build 
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.HEXO_ASUNA_PRI }} # secret 中设置好私钥，名称和上面设置的一样
+          publish_branch: gh-pages  # Page 仓库的分支
+          publish_dir: ./public # 静态网页路径
+          commit_message: ${{ github.event.head_commit.message }}
 
