@@ -29,20 +29,20 @@ categories: Teckknowledge
 
 ![](/uploads/315430821585906.png)
 
-![](/uploads/149184710911054.png =800x)
+![](/uploads/149184710911054.png)
 
 
 
 ### 2 ways of session init
 
-![](/uploads/288243668946728.png =800x)
+![](/uploads/288243668946728.png)
 
 
-![](/uploads/409973578816914.png =800x)
+![](/uploads/409973578816914.png)
 
 
 
 ### The saml assertion's context
 
 
-![](/uploads/589974006532594.png =800x)
+![](/uploads/589974006532594.png)
