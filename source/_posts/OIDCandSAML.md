@@ -68,7 +68,7 @@ Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段。
 Claim 指终端用户信息字段。
 ```
 
-![](vx_images/528803599836013.png =800x)
+![](/uploads/528803599836013.png)
 
 
 
@@ -117,3 +117,14 @@ OIDC比SAML 更简单， is less complex than SAML
 
 
 > https://docs.authing.cn/v2/concepts/user-pool.html
+
+
+
+### saml
+
+> 允许 IdP 和 SP 彼此独立
+
+
+> SAML 使用 XML 元数据文档， 也就是 SAML 令牌进行断言，验证用户身份和访问权限。
+
+![](vx_images/24513571558970.png =800x)
