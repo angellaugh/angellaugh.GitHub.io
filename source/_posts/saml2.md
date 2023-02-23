@@ -27,22 +27,22 @@ categories: Teckknowledge
 2. this metadata exchange is establish the trust between IDP and SP like `Workflow point 1`
 3. this XML metadata file contains the form for the user identifier called `the name ID formats`, 
 
-![](vx_images/315430821585906.png)
+![](./uploads/315430821585906.png)
 
-![](vx_images/149184710911054.png =800x)
+![](./uploads/149184710911054.png =800x)
 
 
 
 ### 2 ways of session init
 
-![](vx_images/288243668946728.png =800x)
+![](./uploads/288243668946728.png =800x)
 
 
-![](vx_images/409973578816914.png =800x)
+![](./uploads/409973578816914.png =800x)
 
 
 
 ### The saml assertion's context
 
 
-![](vx_images/589974006532594.png =800x)
+![](./uploads/589974006532594.png =800x)
