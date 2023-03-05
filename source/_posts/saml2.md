@@ -1,7 +1,8 @@
 ---
 layout: posts
 title: SAML 2.0
-date: 2023-02-23 14:50:46
+date: {{ date }}
+updated: {{ date }}
 tags: cirrus
 categories: Teckknowledge
 ---
@@ -10,8 +11,21 @@ categories: Teckknowledge
 
 
 ### Conception
+> SAML, Security Assertion Markup Language
 > IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication
 > SP service provider, for instance, cluster, application,  access resources
+
+`access controll list`
+>**synthetic acl --> SACL**， from POSIX mode bits, converted into ACL, 说明如下acl部分是根据上面的mode bits转化生成的；
+
+> **discretionary acl  --> DACL**，则说明是真实的 identifies the users and groups that are allowed or denied access, ontains a list of paired ACEs(Account + Access Right) to the securable object = real ACL
+
+> **ACE --> access control entry** , identity + ace type + permissions & inheritance flags
+
+> **permissions:** std_read_dac, file_gen_all,file_read
+
+> **inheritance:** object_inherit, container_inherit, inherit_only, inherit_ace
+
 
 ###  Workflow
 1. IDP 和 SP establish trust
