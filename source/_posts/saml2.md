@@ -15,16 +15,18 @@ categories: Teckknowledge
 > IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication
 > SP service provider, for instance, cluster, application,  access resources
 
-`access controll list`
->**synthetic acl --> SACL**， from POSIX mode bits, converted into ACL, 说明如下acl部分是根据上面的mode bits转化生成的；
 
-> **discretionary acl  --> DACL**，则说明是真实的 identifies the users and groups that are allowed or denied access, ontains a list of paired ACEs(Account + Access Right) to the securable object = real ACL
 
-> **ACE --> access control entry** , identity + ace type + permissions & inheritance flags
-
-> **permissions:** std_read_dac, file_gen_all,file_read
-
-> **inheritance:** object_inherit, container_inherit, inherit_only, inherit_ace
+* is the link between the authentication of a user’s identity and the authorization to use a service.
+* simplifies federated authentication and authorization processes for users, Identity providers, and service providers
+* enable sso, users can log in once, and those same credentials can be reused to log into other service providers
+* SAML authentication is the process of verifying the user’s identity and credentials (password, two-factor authentication, etc.). SAML authorization tells the service provider what access to grant the authenticated user.
+* authentication = verify identity + verify credential  验证身份和凭证， <font bgcolor=##FF7F50>不理解这个credential 是啥</font>
+* SAML 做身份和凭证/资格的验证， SAML授权告诉SP 分配什么样的access 给通过验证的user
+* SAML 同时做了authentication and authorization
+* manage one login per user > manage seperate logins to email, customer relationships management **CRM**, ADs.
+* 简化了users, idp，sp之间的认证和授权流程。 authentication and authorization processes for users, Identity providers, and service providers.
+* 
 
 
 ###  Workflow
