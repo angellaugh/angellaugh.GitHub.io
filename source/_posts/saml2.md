@@ -26,7 +26,9 @@ categories: Teckknowledge
 * SAML 同时做了authentication and authorization
 * manage one login per user > manage seperate logins to email, customer relationships management **CRM**, ADs.
 * 简化了users, idp，sp之间的认证和授权流程。 authentication and authorization processes for users, Identity providers, and service providers.
-* 
+
+
+
 
 
 ###  Workflow
