@@ -11,11 +11,14 @@ categories: Teckknowledge
 
 
 ### Conception
-> SAML, Security Assertion Markup Language
-> IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication
-> SP service provider, for instance, cluster, application,  access resources
+>  **SAML**, Security Assertion Markup Language
 
-
+>  **IDP identity provider**， for instance, AD,  ADFS, LDAP, 身份认证authentication
+    * Performs authentication and passes the user's identity and authorization level to the service provider
+    
+> **SP service provider**, for instance, cluster, application,  access resources
+    * Trusts the identity provider and authorizes the given user to access the requested resource.
+`credential 是啥？ idp authorization的是啥？`
 
 * is the link between the authentication of a user’s identity and the authorization to use a service.
 * simplifies federated authentication and authorization processes for users, Identity providers, and service providers
@@ -58,9 +61,47 @@ categories: Teckknowledge
 
 ![](/uploads/409973578816914.png)
 
+ 
+### A SAML REQ, is generated from SP, request the authentication from the IDP
 
+### A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,
+such as group, role, depending on what the Service Provider can support.
+
+### note
+1. SP 从不直接与IDP交流never directly interacts with IDP，browser 充当acts了执行carry out所有重定向的代理agent，acts as the agent to carry out all the redirections.
+2. SP 知道要去找哪个 IDP；
+3. SP在拿到 IDP返回的saml assertion之前是不知道 谁在要资源的，也就是说用户输入的用户名和密码，只传递到IDP，until the SAML assertion comes back from the Identity Provider.
+4. 可以直接从IDP认证，然后去访问SP，无需必须从SP发起请求；
+5. SAML 身份验证流是异步的。SP不会维护生成的任何身份验证请求的任何状态。当 SP 收到来自 IDP 的响应时，响应必须包含所有必要的信息。
+
+### IdP-initiated SSO with SAML Authentication
+
+`IDP 用之前和SP建立互信时产生的私钥来sign assertion， 然后通过user's browser 发给SP， 或者发送对assertion的引用。a reference to the assertion`
+
+`SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP`
+
+`然后 SP 从 assertion中提取 extract identity和其他它需要的信息。`
+
+### SP determine which IDP
+1. 通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  prithviraj.gaikwad@dell.com
+2. SP display a list of IDP,  user choose one 
+3. The resource URL may be specific to one IdP. 
+4. The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.
 
 ### The saml assertion's context
 
 
 ![](/uploads/589974006532594.png)
+
+
+
+
+### SAML IdP Providers:
+
+1. Active Directory Federation Services (ADFS)
+2. Auth0
+3. Azure AD (Microsoft Azure Active Directory)
+4. Okta
+5. OneLogin
+6. Ping Identity
+7. Salesforce
