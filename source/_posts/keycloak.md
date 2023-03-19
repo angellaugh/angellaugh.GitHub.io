@@ -1,3 +1,13 @@
+---
+layout: posts
+title: KeyCloak
+date: {{ date }}
+updated: {{ date }}
+tags: cirrus
+categories: Teckknowledge
+---
+
+
 # keycloak
 
 
@@ -95,7 +105,6 @@ javac 17.0.6
 
 
 ![](/uploads/203023010625203.png)
-
 
 
 

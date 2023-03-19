@@ -8,3 +8,4 @@ public/
 _multiconfig.yml
 github-deploy-key.pub
 github-deploy-key
+.idea/
