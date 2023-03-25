@@ -34,7 +34,7 @@ OpenSSL整个软件包大概可以分成三个主要的功能部分：
 > .DER - Distinguished Encoding Rules，是二进制格式，不可读。Java 和 Windows 服务器偏向于使用这种编码格式。
 
 
-## 1. 自签证书， CA、证书链、证书的撤销
+## 1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists 
 
 ### 1.1. For instances:
 
@@ -63,8 +63,108 @@ XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==
 
 
 
-# -x509生成一个CA
+# 用私钥自签，生成一个x509 的 公钥CA
 openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com" -extensions v3_ca -config openssl.cnf
+CIAM-ali1:~/certification # tree
+.
+├── certs
+│   └── ca.pem
+├── crl
+├── csr
+├── index.txt
+├── index.txt.attr
+├── intermediate
+├── openssl.cnf
+├── private
+│   └── ca.key
+└── serial
+5 directories, 6 files
+CIAM-ali1:~/certification # cat certs/ca.pem
+-----BEGIN CERTIFICATE-----
+MIID0DCCArigAwIBAgIUNq7/2QHSt6dhvy5XVEIlx2bqJ1AwDQYJKoZIhvcNAQEL
+dR2qFJjutlz/ExPDqhRMzSGzsMH47uH2j/rEsIW+4K0vU6G9HIIWpa4xoET+TQJI
+p5DKgza5t0QBuULe9YTMJTlHl2E=
+-----END CERTIFICATE-----
+
+
+# newkey:生成一个证书请求，加一个私钥，-nodes:不加密私钥，生成server certificate and use CA to issue it 
+openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com"  -config openssl.cnf -extensions v3_server
+CIAM-ali1:~/certification # openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com"  -config openssl.cnf -extensions v3_server
+Generating a RSA private key
+............................+++++
+..................................................+++++
+writing new private key to 'private/server.key'
+-----
+CIAM-ali1:~/certification # tree
+.
+├── certs
+│   └── ca.pem
+├── crl
+├── csr
+│   └── server.csr
+├── index.txt
+├── index.txt.attr
+├── intermediate
+├── openssl.cnf
+├── private
+│   ├── ca.key
+│   └── server.key
+└── serial
+
+5 directories, 8 files
+CIAM-ali1:~/certification # cat csr/server.csr
+-----BEGIN CERTIFICATE REQUEST-----
+MIIDJjCCAg4CAQAwcDELMAkGA1UEBhMCQ04xETAPBgNVBAgMCFNoYW5naGFpMREw
+CIAM-ali1:~/certification # cat private/server.key
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpCNWLNTNCFf0K
+
+
+# ca:可以sign certificate req， 签名证书请求， 并且生成 CRLs证书吊销列表: certificate revocation lists
+# batch: 所有证书will be certified automatically.  notext:不要把证书文本形式输出到文件，意思是二进制？
+# extensions: default x509, 如果没有extension section，那么输出V1 certificate，否则输出V3 certificate.x509v3.cnf
+openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server
+CIAM-ali1:~/certification # openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server
+Using configuration from openssl.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+countryName           :PRINTABLE:'CN'
+stateOrProvinceName   :ASN.1 12:'Shanghai'
+localityName          :ASN.1 12:'Shanghai'
+organizationName      :ASN.1 12:'Dell'
+organizationalUnitName:ASN.1 12:'Dell'
+commonName            :ASN.1 12:'ciam.west.isilon.com'
+Certificate is to be certified until Mar 24 15:11:50 2024 GMT (365 days)
+
+Write out database with 1 new entries
+Data Base Updated
+CIAM-ali1:~/certification # tree
+.
+├── certs
+│   ├── 1000.pem
+│   ├── ca.pem
+│   └── server.pem
+├── crl
+├── csr
+│   └── server.csr
+├── index.txt
+├── index.txt.attr
+├── index.txt.attr.old
+├── index.txt.old
+├── intermediate
+├── openssl.cnf
+├── private
+│   ├── ca.key
+│   └── server.key
+├── serial
+└── serial.old
+
+5 directories, 13 files
+CIAM-ali1:~/certification # cat certs/server.pem
+-----BEGIN CERTIFICATE-----
+MIIDpjCCAo6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQ04x
+
 ```
 
 #### 1.1.1. 字段解释
