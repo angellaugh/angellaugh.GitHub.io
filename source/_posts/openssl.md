@@ -49,6 +49,20 @@ python3 manage.py runserver_plus --cert-file ./server.crt --key-file ./server.ke
 ```bash Generate Root CA
 openssl genrsa -out private/ca.key 2048 #先生成一个私钥
 
+CIAM-ali1:~/certification # openssl genrsa -out private/ca.key 2048
+Generating RSA private key, 2048 bit long modulus (2 primes)
+.....................+++++
+.............+++++
+e is 65537 (0x010001)
+CIAM-ali1:~/certification # cat private/ca.key
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEArPbCOb9to
+……
+XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==
+-----END RSA PRIVATE KEY-----
+
+
+
 # -x509生成一个CA
 openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com" -extensions v3_ca -config openssl.cnf
 ```
