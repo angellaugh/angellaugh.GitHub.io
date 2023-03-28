@@ -543,6 +543,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hexo-blog-encrypt@^3.1.6:
+  version "3.1.6"
+  resolved "https://registry.npmmirror.com/hexo-blog-encrypt/-/hexo-blog-encrypt-3.1.6.tgz"
+  integrity sha512-aq/KiuwoHLTMOOw0WiVtoTpPfx5x5mjkGJAJgKOp7gH0fjW4Pt1uT2n2MOVWBwY2q3qLtWq60na8RL5qmzZL1w==
+
 hexo-cli@^4.0.0:
   version "4.3.0"
   resolved "https://registry.npmmirror.com/hexo-cli/-/hexo-cli-4.3.0.tgz"
