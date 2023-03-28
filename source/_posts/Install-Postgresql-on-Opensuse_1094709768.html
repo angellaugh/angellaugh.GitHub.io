@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Annie Li : Install Postgresql on Opensuse</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Annie Li</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Annie-Li1_282255268.html">Annie Li1</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Install-Keycloak-On-Opensuse_1094699429.html">Install Keycloak On Opensuse</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Annie Li : Install Postgresql on Opensuse
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+    
+        
+    
+        
+        
+            Created by <span class='author'> Annie Li</span>, last modified on Mar 21, 2023
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p class="auto-cursor-target"><style type="text/css">/*<![CDATA[*/
+div.rbtoc1680015043721 {padding: 0px;}
+div.rbtoc1680015043721 ul {margin-left: 0px;}
+div.rbtoc1680015043721 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style></p><div class="toc-macro rbtoc1680015043721">
+<ul class="toc-indentation">
+<li><a href="#InstallPostgresqlonOpensuse-InstallPostgresql">1. Install Postgresql</a></li>
+<li><a href="#InstallPostgresqlonOpensuse-Basicuse:">2. Basic use:</a>
+<ul class="toc-indentation">
+<li><a href="#InstallPostgresqlonOpensuse-Checkcurrentinformation:">2.1. Check current information:</a></li>
+<li><a href="#InstallPostgresqlonOpensuse-Changepassword:alteruserpostgreswithpassword'a';">2.2. Change password: alter user postgres with password 'a';</a></li>
+<li><a href="#InstallPostgresqlonOpensuse-Showdatabases:">2.3. Show databases:</a></li>
+<li><a href="#InstallPostgresqlonOpensuse-Adddatabase:createDATABASEdatabase_name;">2.4. Add database: create DATABASE database_name;</a></li>
+<li><a href="#InstallPostgresqlonOpensuse-Remoteconnectconfig:">2.5. Remote connect config:</a></li>
+</ul>
+</li>
+</ul>
+</div><p></p><h1 class="auto-cursor-target" id="InstallPostgresqlonOpensuse-InstallPostgresql"><span class="nh-number">1. </span>Install Postgresql</h1><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">CIAM-ali1:~/ciam # sudo zypper install postgresql
+Loading repository data...
+Reading installed packages...
+Resolving package dependencies...
+
+The following recommended package was automatically selected:
+  postgresql14
+
+The following 3 NEW packages are going to be installed:
+  libpq5 postgresql postgresql14
+
+3 new packages to install.
+Overall download size: 1.8 MiB. Already cached: 0 B. After the operation, additional 7.6 MiB will be used.
+Continue? [y/n/v/...? shows all options] (y): y
+Retrieving package libpq5-15.2-150200.5.6.1.x86_64                                                             (1/3), 184.0 KiB (731.6 KiB unpacked)Retrieving: libpq5-15.2-150200.5.6.1.x86_64.rpm ..............................................................................................[done]Retrieving package postgresql-15-150400.4.6.2.noarch                                                           (2/3),  15.5 KiB (  713   B unpacked)Retrieving: postgresql-15-150400.4.6.2.noarch.rpm ............................................................................................[done]Retrieving package postgresql14-14.7-150200.5.23.1.x86_64                                                      (3/3),   1.6 MiB (  6.9 MiB unpacked)Retrieving: postgresql14-14.7-150200.5.23.1.x86_64.rpm .......................................................................................[done]
+Checking for file conflicts: .................................................................................................................[done](1/3) Installing: libpq5-15.2-150200.5.6.1.x86_64 ............................................................................................[done](2/3) Installing: postgresql-15-150400.4.6.2.noarch ..........................................................................................[done](3/3) Installing: postgresql14-14.7-150200.5.23.1.x86_64 .....................................................................................[done]
+
+
+zypper refresh
+CIAM-ali1:~/ciam # sudo zypper install postgresql-server
+Loading repository data...
+Reading installed packages...
+Resolving package dependencies...
+
+The following 2 recommended packages were automatically selected:
+  postgresql14-llvmjit postgresql14-server
+
+The following 5 NEW packages are going to be installed:
+  libLLVM7 postgresql-llvmjit postgresql-server postgresql14-llvmjit postgresql14-server
+
+5 new packages to install.
+Overall download size: 26.7 MiB. Already cached: 0 B. After the operation, additional 100.5 MiB will be used.
+Continue? [y/n/v/...? shows all options] (y): y
+Retrieving package libLLVM7-7.0.1-150100.3.22.2.x86_64                                                         (1/5),  12.5 MiB ( 58.0 MiB unpacked)Retrieving: libLLVM7-7.0.1-150100.3.22.2.x86_64.rpm ..........................................................................................[done]Retrieving package postgresql-server-15-150400.4.6.2.noarch                                                    (2/5),  22.9 KiB (  4.7 KiB unpacked)Retrieving: postgresql-server-15-150400.4.6.2.noarch.rpm .....................................................................................[done]Retrieving package postgresql14-server-14.7-150200.5.23.1.x86_64                                               (3/5),   4.7 MiB ( 21.1 MiB unpacked)Retrieving: postgresql14-server-14.7-150200.5.23.1.x86_64.rpm ....................................................................[done (5.7 MiB/s)]Retrieving package postgresql14-llvmjit-14.7-150200.5.23.1.x86_64                                              (4/5),   9.5 MiB ( 21.4 MiB unpacked)Retrieving: postgresql14-llvmjit-14.7-150200.5.23.1.x86_64.rpm ...............................................................................[done]Retrieving package postgresql-llvmjit-15-150400.4.6.2.noarch                                                   (5/5),  14.4 KiB (   83   B unpacked)Retrieving: postgresql-llvmjit-15-150400.4.6.2.noarch.rpm ....................................................................................[done]
+Checking for file conflicts: .................................................................................................................[done](1/5) Installing: libLLVM7-7.0.1-150100.3.22.2.x86_64 ........................................................................................[done]/usr/sbin/useradd -r -c PostgreSQL Server -d /var/lib/pgsql -U postgres -s /bin/bash
+Updating /etc/sysconfig/postgresql ...
+(2/5) Installing: postgresql-server-15-150400.4.6.2.noarch ...................................................................................[done](3/5) Installing: postgresql14-server-14.7-150200.5.23.1.x86_64 ..............................................................................[done](4/5) Installing: postgresql14-llvmjit-14.7-150200.5.23.1.x86_64 .............................................................................[done](5/5) Installing: postgresql-llvmjit-15-150400.4.6.2.noarch ..................................................................................[done]Executing %posttrans scripts .................................................................................................................[done]CIAM-ali1:~/ciam # </pre>
+</div></div><p><br></p><h1 id="InstallPostgresqlonOpensuse-Basicuse:"><span class="nh-number">2. </span>Basic use:</h1><h2 id="InstallPostgresqlonOpensuse-Checkcurrentinformation:"><span class="nh-number">2.1. </span>Check current information:&#xa0;</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">CIAM-ali1:~/ciam # sudo -u postgres psql
+could not change directory to "/root/ciam": Permission denied
+psql (14.7)
+Type "help" for help.
+
+postgres=#
+
+postgres=# \conninfo
+You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".</pre>
+</div></div><p><br></p><h2 id="InstallPostgresqlonOpensuse-Changepassword:alteruserpostgreswithpassword'a';"><span class="nh-number">2.2. </span>&#xa0;Change password:&#xa0; &#xa0; &#xa0; &#xa0;<span style="color: rgb(0,128,0);">alter user postgres with password 'a';</span></h2><h2 id="InstallPostgresqlonOpensuse-Showdatabases:"><span class="nh-number">2.3. </span><span style="color: rgb(36,41,47);">&#xa0; Show databases:&#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</span></h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)</pre>
+</div></div><h2 id="InstallPostgresqlonOpensuse-Adddatabase:createDATABASEdatabase_name;"><span class="nh-number">2.4. </span><span style="color: rgb(36,41,47);">Add database:&#xa0; &#xa0; &#xa0; create DATABASE database_name;</span></h2><h2 id="InstallPostgresqlonOpensuse-Remoteconnectconfig:"><span class="nh-number">2.5. </span><span style="color: rgb(36,41,47);">&#xa0;Remote connect config:</span></h2><p><br></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">remote connect refused:
+
+postgres@keycloak-ali1:~&gt; psql -h 10.224.67.88 -p 5432 -U postgres -W
+Password:
+psql: error: connection to server at "10.224.67.88", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+cat config, change localhost to *
+
+postgres@keycloak-ali1:~/data&gt; grep listen_addresses  postgresql.conf
+#listen_addresses = 'localhost'		# what IP address(es) to listen on;
+postgres@keycloak-ali1:~/data&gt; pwd
+/var/lib/pgsql/data
+postgres@keycloak-ali1:~/data&gt; vi postgresql.conf
+Then restart the postgres
+
+postgres@keycloak-ali1:~/data&gt; systemctl restart postgresql
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ====
+Authentication is required to restart 'postgresql.service'.
+Authenticating as: root
+Password:
+==== AUTHENTICATION COMPLETE ====
+postgres@keycloak-ali1:~/data&gt; systemctl status postgresql
+● postgresql.service - PostgreSQL database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; enabled; vendor preset: disabled)
+     Active: active (running) since Tue 2023-03-21 06:18:42 GMT; 4s ago
+Check the listen port:
+
+postgres@keycloak-ali1:~/data&gt; grep listen_addresses  postgresql.conf
+listen_addresses = '*'		# what IP address(es) to listen on;
+Add one entry into the pg_hba.conf
+
+host    all             all             0.0.0.0/0               md5
+Restart the postgresql, and try again:
+
+postgres@keycloak-ali1:~/data&gt; psql -h 10.224.67.88 -p 5432 -U postgres -d postgres -W
+Password:
+psql (14.7)
+Type "help" for help.
+
+postgres=# \q</pre>
+</div></div><p><br></p><p><br></p><p><br></p><p><br></p>
+                    </div>
+
+                                        
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Mar 28, 2023 10:50</p>
+                    <div id="footer-logo"><a href="https://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
