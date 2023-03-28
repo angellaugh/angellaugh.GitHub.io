@@ -1,8 +1,9 @@
 ---
 layout: posts
-title: Hello World
-date: 2023-03-28 21:18:02
-tags: cirrus
+title: tryyyyy
+date: {{ date }}
+updated: {{ date }} 
+tags: draft 
 categories: Teckknowledge
 ————————————————
 
