@@ -3,11 +3,13 @@ layout: posts
 title: OpenSSL2:self-signed certificate as root CA
 date: 2023-03-28 22:41:02
 updated: {{ date }}
-tags: cirrus, openssl
+tags: 
+- cirrus
+- openssl
 categories: Teckknowledge
 password: BAIYUN01++
 ---
-
+@[TOC]
 # openssl_2 self-signed certificate as root CA
  
 ## 1. Generate rootCA
