@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+<script>
+(function(){
+    if(''){
+        if (prompt('请输入文章密码') !== ''){
+            alert('密码错误！');
+            history.back();
+        }
+    }
+})();
+</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="技术，生活，艺术，旅行，都记录下来">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Angellaugh&#39;s blog">
+<meta property="og:url" content="https://angellaugh.github.io/page/2/index.html">
+<meta property="og:site_name" content="Angellaugh&#39;s blog">
+<meta property="og:description" content="技术，生活，艺术，旅行，都记录下来">
+<meta property="og:locale">
+<meta property="article:author" content="Angellaugh">
+<meta property="article:tag" content="java, python, javascript, linux, storage, db, performance">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://angellaugh.github.io/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Angellaugh's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Angellaugh's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Angellaugh's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录琐碎</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/23/dailyEng/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/23/dailyEng/" class="post-title-link" itemprop="url">DailyEng Context.md</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-02-23 22:39:46 / Modified: 22:50:22" itemprop="dateCreated datePublished" datetime="2023-02-23T22:39:46+08:00">2023-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Eng/" itemprop="url" rel="index"><span itemprop="name">Eng</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>the intended audience 目标受众</p>
+</blockquote>
+<blockquote>
+<p>the issuer 发行人</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The result of each system activation/login 激活/登录 is a set of access and refresh tokens issued by the Application.</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>SAML Tracer   —&gt; browser tool</p>
+</blockquote>
+<blockquote>
+<p>Time zone      —&gt; 不同时区application, idp, sp 之间可能会有问题</p>
+</blockquote>
+<blockquote>
+<p>Token expired  —&gt; need to refresh</p>
+</blockquote>
+<blockquote>
+<p>bearer 持票人 token</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Using a SAML bearer subject confirmation token to propagate a user&#x27;s identity.</span><br><span class="line">使用SAML不记名主体确认令牌来传播用户身份。</span><br><span class="line"></span><br><span class="line">Are you exchange your SAML token for your own bearer token?</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>SAML assertion</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use the saml assertion to get/pull the actual token which is a JWT token</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>individual cluster</p>
+</blockquote>
+<blockquote>
+<p>establish trust session</p>
+</blockquote>
+<blockquote>
+<p>for instance/example</p>
+</blockquote>
+<blockquote>
+<p>obviously assuming 这俩怎么会凑一起？</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/23/saml2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/23/saml2/" class="post-title-link" itemprop="url">SAML 2.0</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-23 22:38:19" itemprop="dateCreated datePublished" datetime="2023-02-23T22:38:19+08:00">2023-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-05 17:34:55" itemprop="dateModified" datetime="2023-03-05T17:34:55+08:00">2023-03-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SAML2-0"><a href="#SAML2-0" class="headerlink" title="SAML2.0"></a>SAML2.0</h1><h3 id="Conception"><a href="#Conception" class="headerlink" title="Conception"></a>Conception</h3><blockquote>
+<p> <strong>SAML</strong>, Security Assertion Markup Language</p>
+</blockquote>
+<blockquote>
+<p> <strong>IDP identity provider</strong>， for instance, AD,  ADFS, LDAP, 身份认证authentication<br>    * Performs authentication and passes the user’s identity and authorization level to the service provider</p>
+</blockquote>
+<blockquote>
+<p><strong>SP service provider</strong>, for instance, cluster, application,  access resources<br>    * Trusts the identity provider and authorizes the given user to access the requested resource.<br><code>credential 是啥？ idp authorization的是啥？</code></p>
+</blockquote>
+<ul>
+<li>is the link between the authentication of a user’s identity and the authorization to use a service.</li>
+<li>simplifies federated authentication and authorization processes for users, Identity providers, and service providers</li>
+<li>enable sso, users can log in once, and those same credentials can be reused to log into other service providers</li>
+<li>SAML authentication is the process of verifying the user’s identity and credentials (password, two-factor authentication, etc.). SAML authorization tells the service provider what access to grant the authenticated user.</li>
+<li>authentication = verify identity + verify credential  验证身份和凭证， <font bgcolor=##FF7F50>不理解这个credential 是啥</font></li>
+<li>SAML 做身份和凭证/资格的验证， SAML授权告诉SP 分配什么样的access 给通过验证的user</li>
+<li>SAML 同时做了authentication and authorization</li>
+<li>manage one login per user &gt; manage seperate logins to email, customer relationships management <strong>CRM</strong>, ADs.</li>
+<li>简化了users, idp，sp之间的认证和授权流程。 authentication and authorization processes for users, Identity providers, and service providers.</li>
+</ul>
+<h3 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h3><ol>
+<li>IDP 和 SP establish trust</li>
+<li>user 在IDP 和 SP中都存在</li>
+<li>user login from IDP, IDP验证通过后，生成SAML assertion，返回给user，</li>
+<li>user拿着SAML assertion 到SP验证，如果通过，user就可以访问SP；<ol>
+<li>SP 把SAML assertion中的user信息和 local的 user 对比验证，</li>
+</ol>
+</li>
+<li>IDP 拿着SAML assertion 到另一个SP 去验证，也通过的话，user也可以SSO 访问 another application；</li>
+</ol>
+<h3 id="IDP-和-SP-的交流"><a href="#IDP-和-SP-的交流" class="headerlink" title="IDP 和 SP 的交流"></a>IDP 和 SP 的交流</h3><ol>
+<li>IDP 和 SP 都config xml， contains settings and certificate of the system</li>
+<li>this metadata exchange is establish the trust between IDP and SP like <code>Workflow point 1</code></li>
+<li>this XML metadata file contains the form for the user identifier called <code>the name ID formats</code>, </li>
+</ol>
+<p><img src="/uploads/315430821585906.png"></p>
+<p><img src="/uploads/149184710911054.png"></p>
+<h3 id="2-ways-of-session-init"><a href="#2-ways-of-session-init" class="headerlink" title="2 ways of session init"></a>2 ways of session init</h3><p><img src="/uploads/288243668946728.png"></p>
+<p><img src="/uploads/409973578816914.png"></p>
+<h3 id="A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP"><a href="#A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP" class="headerlink" title="A SAML REQ, is generated from SP, request the authentication from the IDP"></a>A SAML REQ, is generated from SP, request the authentication from the IDP</h3><h3 id="A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile"><a href="#A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile" class="headerlink" title="A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,"></a>A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,</h3><p>such as group, role, depending on what the Service Provider can support.</p>
+<h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><ol>
+<li>SP 从不直接与IDP交流never directly interacts with IDP，browser 充当acts了执行carry out所有重定向的代理agent，acts as the agent to carry out all the redirections.</li>
+<li>SP 知道要去找哪个 IDP；</li>
+<li>SP在拿到 IDP返回的saml assertion之前是不知道 谁在要资源的，也就是说用户输入的用户名和密码，只传递到IDP，until the SAML assertion comes back from the Identity Provider.</li>
+<li>可以直接从IDP认证，然后去访问SP，无需必须从SP发起请求；</li>
+<li>SAML 身份验证流是异步的。SP不会维护生成的任何身份验证请求的任何状态。当 SP 收到来自 IDP 的响应时，响应必须包含所有必要的信息。</li>
+</ol>
+<h3 id="IdP-initiated-SSO-with-SAML-Authentication"><a href="#IdP-initiated-SSO-with-SAML-Authentication" class="headerlink" title="IdP-initiated SSO with SAML Authentication"></a>IdP-initiated SSO with SAML Authentication</h3><p><code>IDP 用之前和SP建立互信时产生的私钥来sign assertion， 然后通过user&#39;s browser 发给SP， 或者发送对assertion的引用。a reference to the assertion</code></p>
+<p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
+<p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
+<h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
+<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#114;&#x69;&#116;&#104;&#118;&#105;&#x72;&#x61;&#106;&#x2e;&#103;&#97;&#x69;&#x6b;&#119;&#x61;&#x64;&#64;&#100;&#101;&#108;&#108;&#46;&#x63;&#111;&#109;">&#x70;&#114;&#x69;&#116;&#104;&#118;&#105;&#x72;&#x61;&#106;&#x2e;&#103;&#97;&#x69;&#x6b;&#119;&#x61;&#x64;&#64;&#100;&#101;&#108;&#108;&#46;&#x63;&#111;&#109;</a></li>
+<li>SP display a list of IDP,  user choose one </li>
+<li>The resource URL may be specific to one IdP. </li>
+<li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
+</ol>
+<h3 id="The-saml-assertion’s-context"><a href="#The-saml-assertion’s-context" class="headerlink" title="The saml assertion’s context"></a>The saml assertion’s context</h3><p><img src="/uploads/589974006532594.png"></p>
+<h3 id="SAML-IdP-Providers"><a href="#SAML-IdP-Providers" class="headerlink" title="SAML IdP Providers:"></a>SAML IdP Providers:</h3><ol>
+<li>Active Directory Federation Services (ADFS)</li>
+<li>Auth0</li>
+<li>Azure AD (Microsoft Azure Active Directory)</li>
+<li>Okta</li>
+<li>OneLogin</li>
+<li>Ping Identity</li>
+<li>Salesforce</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/19/OIDCandSAML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/19/OIDCandSAML/" class="post-title-link" itemprop="url">OIDC and SAML</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-19 17:59:46" itemprop="dateCreated datePublished" datetime="2023-02-19T17:59:46+08:00">2023-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-02-23 22:52:40" itemprop="dateModified" datetime="2023-02-23T22:52:40+08:00">2023-02-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="OIDC-and-SAML"><a href="#OIDC-and-SAML" class="headerlink" title="OIDC and SAML"></a>OIDC and SAML</h1><h3 id="OIDC-OpenID-Connect"><a href="#OIDC-OpenID-Connect" class="headerlink" title="OIDC  OpenID Connect"></a>OIDC  OpenID Connect</h3><h4 id="an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework"><a href="#an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework" class="headerlink" title="an open authentication protocol that works on top of the OAuth 2.0 framework"></a>an open authentication protocol that works on top of the OAuth 2.0 framework</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OIDC 允许个人使用单点登录(SSO)的方式，访问那些用OPs验证身份的网站。</span><br><span class="line">OIDC 为应用程序或服务提供有关用户、其身份验证上下文以及访问其配置文件信息的信息。</span><br><span class="line"></span><br><span class="line">OIDC 是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</span><br></pre></td></tr></table></figure>
+
+<h4 id="OIDC-的目的"><a href="#OIDC-的目的" class="headerlink" title="OIDC 的目的"></a>OIDC 的目的</h4><blockquote>
+<p>为用户提供一组认证信息来访问多个sites. for users to provide one set of credentials and access multiple sites.</p>
+</blockquote>
+<blockquote>
+<p>当用户登录网站或者应用程序时，先redirect to OPs, 在OPs 先进行身份认证，然后再 redirect back to 网站或应用程序 site or application</p>
+</blockquote>
+<blockquote>
+<p>旨在保护基于浏览器的应用程序、API 和 移动原生应用程序 mobile native applications</p>
+</blockquote>
+<blockquote>
+<p>它将用户身份验证委托给 “托管用户帐户” 的服务提供商，并授权第三方应用程序访问用户帐户。It delegates user authentication to the service provider that hosts the user account and authorizes third-party applications to access the user’s account.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For example, there are currently two ways of creating a Spotify account. You can register with Spotify or you can sign on through Facebook. Facebook sends your name and email address to Spotify, <span class="built_in">which</span> uses that information to authenticate you.</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）"><a href="#Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）" class="headerlink" title="Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）"></a>Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）</h4><blockquote>
+<p>be read by client<br>prove that users were authenticated and are JSON Web Tokens (JWTs),<br>标识令牌（旨在由客户端读取）证明用户已经过身份验证，并且是 JSON Web 令牌 （JWT），发音为“jots”。这些文件包含有关用户的信息，例如其用户名、尝试登录到应用程序或服务时以及允许他们访问联机资源的时间长度。</p>
+</blockquote>
+<blockquote>
+<p>是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</p>
+</blockquote>
+<h4 id="Access-tokens-访问被保护的资源"><a href="#Access-tokens-访问被保护的资源" class="headerlink" title="Access tokens: 访问被保护的资源"></a>Access tokens: 访问被保护的资源</h4><blockquote>
+<p>be read and validated by the API.<br>are used to access protected resources<br>目的是通知API，此令牌的持有者已被授权访问API并执行特定操作(由已授予的范围指定)</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Their purpose is to inform the API that the bearer of this token has been authorized to access the API and perform specific actions (as specified by the scope that has been granted).</span><br></pre></td></tr></table></figure>
+
+<h4 id="ID-tokens"><a href="#ID-tokens" class="headerlink" title="ID tokens"></a>ID tokens</h4><blockquote>
+<p>Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段</p>
+</blockquote>
+<h4 id="OpenID-Providers-OPs"><a href="#OpenID-Providers-OPs" class="headerlink" title="OpenID Providers (OPs)"></a>OpenID Providers (OPs)</h4><blockquote>
+<p>OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。<br>Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段</p>
+</blockquote>
+<h4 id="JSON-Web-Tokens-JWTs-pronounced-“jots-”"><a href="#JSON-Web-Tokens-JWTs-pronounced-“jots-”" class="headerlink" title="JSON Web Tokens (JWTs)  pronounced “jots.”"></a>JSON Web Tokens (JWTs)  pronounced “jots.”</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。</span><br><span class="line">终端用户，Id Token 的信息中会包含终端用户的信息。</span><br><span class="line">调用方，请求 Id Token 的应用。</span><br><span class="line">Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段。</span><br><span class="line">Claim 指终端用户信息字段。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/528803599836013.png"></p>
+<h3 id="Differences-between-SAML-OAuth-OpenID-Connect"><a href="#Differences-between-SAML-OAuth-OpenID-Connect" class="headerlink" title="Differences between SAML, OAuth, OpenID Connect"></a>Differences between SAML, OAuth, OpenID Connect</h3><h4 id="侧重点"><a href="#侧重点" class="headerlink" title="侧重点"></a>侧重点</h4><ul>
+<li><p>OAuth 是framework, 用于保护特定资源（如应用程序或文件集）的授权框架，</p>
+</li>
+<li><p>Oauth2.0, 主要用于资源授权。<br>OAuth is an authorization framework used to protect specific resources</p>
+</li>
+<li><p>SAML 和 OIDC 是 身份验证标准，authentication standards, 用于创建安全登录体验的身份验证标准。<br>SAML and OIDC are authentication standards used to create secure sign-on experiences. </p>
+</li>
+<li><p>OIDC 能够认证用户并完成资源授权。 侧重于身份认定，他/她是谁， 而OAuth侧重于允许/限制他们能做什么。<br>who someone is，  what they are allowed to do<br>如果你希望实现单点登录或先鉴权用户再返回资源，建议使用 OIDC 协议。</p>
+</li>
+</ul>
+<h4 id="广泛性"><a href="#广泛性" class="headerlink" title="广泛性"></a>广泛性</h4><p>SAML 不支持移动设备的单点登录或API访问。does not support SSO for mobile devices or provide API access<br>OIDC 都支持。</p>
+<h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><ol>
+<li>SAML： tokens written in XML</li>
+<li>OIDC： JWTs， 它们是可移植的，并支持一系列签名和加密算法。</li>
+</ol>
+<h4 id="易用性"><a href="#易用性" class="headerlink" title="易用性"></a>易用性</h4><p>OIDC比SAML 更简单， is less complex than SAML</p>
+<h3 id="常见的-OAuth-2-0-授权流程如下："><a href="#常见的-OAuth-2-0-授权流程如下：" class="headerlink" title="常见的 OAuth 2.0 授权流程如下："></a>常见的 OAuth 2.0 授权流程如下：</h3><p>在你的应用中，让用户访问登录链接，浏览器跳转到 Authing，用户在 Authing 完成认证。<br>浏览器接收到一个从 Authing 服务器发来的授权码。<br>浏览器通过重定向将授权码发送到你的应用后端。<br>你的应用服务将授权码发送到 Authing 获取 AccessToken，如果需要，还会返回 refresh token。<br>你的应用后端现在知道了用户的身份，后续可以保存用户信息，重定向到前端其他页面，使用 AccessToken 调用资源方的其他 API 等等。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.authing.cn/v2/concepts/user-pool.html">https://docs.authing.cn/v2/concepts/user-pool.html</a></p>
+</blockquote>
+<h3 id="saml"><a href="#saml" class="headerlink" title="saml"></a>saml</h3><blockquote>
+<p>允许 IdP 和 SP 彼此独立</p>
+</blockquote>
+<blockquote>
+<p>SAML 使用 XML 元数据文档， 也就是 SAML 令牌进行断言，验证用户身份和访问权限。</p>
+</blockquote>
+<p>![](vx_images/24513571558970.png =800x)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/202202112324/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/11/202202112324/" class="post-title-link" itemprop="url">202202112324</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-11 23:24:19" itemprop="dateCreated datePublished" datetime="2023-02-11T23:24:19+08:00">2023-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-02-12 19:21:03" itemprop="dateModified" datetime="2023-02-12T19:21:03+08:00">2023-02-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>哈利路亚</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/metadata/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/11/metadata/" class="post-title-link" itemprop="url">metadata</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-11 20:42:46" itemprop="dateCreated datePublished" datetime="2023-02-11T20:42:46+08:00">2023-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-02-12 19:21:03" itemprop="dateModified" datetime="2023-02-12T19:21:03+08:00">2023-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="ask-Pytest-to-automatically-provision-the-environment"><a href="#ask-Pytest-to-automatically-provision-the-environment" class="headerlink" title="ask Pytest to automatically provision the environment"></a>ask Pytest to automatically provision the environment</h4><p><code>pytest --provision</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ali1@remotedev-ali1-rdu:~$ pytest --provision</span><br><span class="line">logdir &#x27;log/helix&#x27; does not exist; fallback to &#x27;/ifs/home/ali1/.cache/helix/log&#x27;</span><br><span class="line">============================================================================== test session starts ===============================================================================</span><br><span class="line">platform linux -- Python 3.6.9, pytest-6.2.4, py-1.10.0, pluggy-0.13.1</span><br><span class="line">rootdir: /ifs/home/ali1</span><br><span class="line">plugins: timeout-1.4.2, helix-3.0.25, isilon-marks-0.3.3, isilon-accountant-0.4.2</span><br><span class="line">collected 0 items / 1 error</span><br><span class="line">Password:</span><br><span class="line">[2022-12-14 11:11:32.605863+00:00] QUEUED_FOR_ALLOCATION... waiting 30 seconds</span><br><span class="line">[2022-12-14 11:12:02.887701+00:00] QUEUED_FOR_ALLOCATION... waiting 30 seconds</span><br><span class="line">[2022-12-14 11:12:33.175448+00:00] READY</span><br><span class="line">[2022-12-14 11:12:33.499574+00:00] QUEUED_FOR_DELETION... waiting 30 seconds</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/es-suse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/11/es-suse/" class="post-title-link" itemprop="url">es-suse</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-11 20:39:46" itemprop="dateCreated datePublished" datetime="2023-02-11T20:39:46+08:00">2023-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-05 14:50:01" itemprop="dateModified" datetime="2023-03-05T14:50:01+08:00">2023-03-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-hostnamectl-set-hostname-ES-suse"><a href="#1-hostnamectl-set-hostname-ES-suse" class="headerlink" title="1. hostnamectl set-hostname ES-suse"></a>1. <code>hostnamectl set-hostname ES-suse</code></h3><h3 id="2-reboot"><a href="#2-reboot" class="headerlink" title="2. reboot"></a>2. <code>reboot</code></h3><h3 id="3-change-the-network-config-to-generate-ip"><a href="#3-change-the-network-config-to-generate-ip" class="headerlink" title="3. change the network config to generate ip"></a>3. change the network config to generate ip</h3><h4 id="3-1-vi-etc-sysconfig-network-ifcfg-eth0"><a href="#3-1-vi-etc-sysconfig-network-ifcfg-eth0" class="headerlink" title="3.1 vi /etc/sysconfig/network/ifcfg-eth0"></a>3.1 <code>vi /etc/sysconfig/network/ifcfg-eth0</code></h4><h4 id="3-2-add-one-line-ZONE-public"><a href="#3-2-add-one-line-ZONE-public" class="headerlink" title="3.2 add one line ZONE=public"></a>3.2 add one line <code>ZONE=public</code></h4>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;/etc/sysconfig/network/ifcfg-eth0&quot; 3L, 46B                                                                                        3,11         </span><br><span class="line">BOOTPROTO=&#x27;dhcp&#x27;</span><br><span class="line">STARTMODE=&#x27;auto&#x27;</span><br><span class="line">ZONE=public</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-zypper-update"><a href="#4-zypper-update" class="headerlink" title="4. zypper update"></a>4. <code>zypper update</code></h3><h3 id="5-zypper-install-net-tools-deprecated"><a href="#5-zypper-install-net-tools-deprecated" class="headerlink" title="5. zypper install net-tools-deprecated"></a>5. <code>zypper install net-tools-deprecated</code></h3><h3 id="6-zypper-install-cnf"><a href="#6-zypper-install-cnf" class="headerlink" title="6. zypper install cnf"></a>6. <code>zypper install cnf</code></h3><h3 id="7-cnf-yum"><a href="#7-cnf-yum" class="headerlink" title="7. cnf yum"></a>7. <code>cnf yum</code></h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/ES/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/11/ES/" class="post-title-link" itemprop="url">ES</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-11 20:37:46" itemprop="dateCreated datePublished" datetime="2023-02-11T20:37:46+08:00">2023-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-02-12 19:21:03" itemprop="dateModified" datetime="2023-02-12T19:21:03+08:00">2023-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>sudo zypper refresh<br>sudo zypper update -y<br>sudo zypper install yum</p>
+<h3 id="Import-the-Elasticsearch-GPG-Key"><a href="#Import-the-Elasticsearch-GPG-Key" class="headerlink" title="Import the Elasticsearch GPG Key"></a>Import the Elasticsearch GPG Key</h3><p><code>sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch</code></p>
+<h3 id="Install-Elasticsearch-from-the-RPM-repository"><a href="#Install-Elasticsearch-from-the-RPM-repository" class="headerlink" title="Install Elasticsearch from the RPM repository"></a>Install Elasticsearch from the RPM repository</h3><p>create elasticsearch.repo and config the es install repo</p>
+<p><code>sudo vim /etc/zypp/repos.d/elasticsearch.repo</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/11/ES/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/11/django/" class="post-title-link" itemprop="url">diango</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-02-11 13:43:46" itemprop="dateCreated datePublished" datetime="2023-02-11T13:43:46+08:00">2023-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-02-12 19:21:03" itemprop="dateModified" datetime="2023-02-12T19:21:03+08:00">2023-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/11/django/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/flask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/11/flask/" class="post-title-link" itemprop="url">flask</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-02-11 13:30:46 / Modified: 13:31:43" itemprop="dateCreated datePublished" datetime="2023-02-11T13:30:46+08:00">2023-02-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="flask"><a href="#flask" class="headerlink" title="flask"></a>flask</h1><p>FLASK_APP=/usr/local/devcodes/powerload-web FLASK_ENV=development python3 -m flask run –host=10.219.61.224  –port=2222</p>
+<p><font color=#063060 size=2>1. 命令行启动 flask：先export FLASK_APP指向启动file.py；再flask run;<br>2. 命令行启动debug模式，export FLASK_DEBUG=1； 此模式可changes reloaded authmatically.<br>3. python 启动 flask,  if <strong>name</strong> == ‘<strong>main</strong>‘，可在其中设置debug模式<br><strong>4. 用装饰器 app.route(“/“)  route decorators 来管理页面路径 what we type into the browsing to go to different pages.</strong></font></p>
+<ol start="17">
+<li>login logout, 验证注册是否使用存在了的username 或者email。 登录后不再显示login 和 注册按钮，<br>只显示logout按钮。 logout之后，不可以再访问account页面。  首次登陆直接展示account页面，再次登录直接展示home页面。</li>
+</ol>
+<h5 id="先做点简单的"><a href="#先做点简单的" class="headerlink" title="先做点简单的"></a>先做点简单的</h5><p><code>pip install flask</code><br><code>mkdir Flask_blog</code><br><code>touch flasklog.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello, World!&#x27;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="增加venv"><a href="#增加venv" class="headerlink" title="增加venv"></a>增加venv</h5><ol>
+<li><code>export FLASK_APP=flaskblog.py</code></li>
+<li>flask run</li>
+</ol>
+<p><strong>只要做了改动，就要restart flask，才能生效</strong><br>3. 开启debug模式： <code>export FLASK_DEBUG=1</code>，就可以实时更新改动:thoes changes reload automatically.</p>
+<ol start="4">
+<li>增加  main 之后，用python来run<ol>
+<li><code>python flaskblog.py</code></li>
+</ol>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page, two routes are handled by the same function</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/home&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;Hello, World!&lt;/h1&gt;&#x27;</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/about&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">about</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;About Page!&lt;/h1&gt;&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol start="5">
+<li>在layout.html中，包含网站主要css样式，其中，body中添加 block模块，可以用来让<br>the block section that the child templates can override. 调用它的其他html可以重写覆盖。</li>
+</ol>
+<ol start="6">
+<li>mkdir static 来存放 css样式， main.css</li>
+<li>从 snippets中复制过来的navigation.html样式，放在了body标签里面；<br><code>https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/snippets/navigation.html</code></li>
+<li>添加main.html 到layout.html的 body中 head下面：</li>
+<li>在layout.html的head中，title前面，添加link，来引用static中的css样式<ol>
+<li>注意 flaskblog.py 中 import ulr_for: <code>from flask import Flask, render_template, url_for</code></li>
+<li>改写layout.html，增加如下：<br><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&#123;&#123; url_for('static', filename='main.css') &#125;&#125;&quot;&gt;</code></li>
+</ol>
+</li>
+</ol>
+<hr>
+<ol start="10">
+<li>安装flask-wtf： <code>pip install flask-wtf</code></li>
+</ol>
+<ol start="11">
+<li><p>register.html中 各种div 之内的 form.username/password/confirm_password都来自于 forms.py中 class 中定义的变量名字</p>
+</li>
+<li><p>但是最后一个div中， 指的是flaskblog.py中的fun name:<br>@app.route(‘/login’)<br>def <font color=#FF0000>login():</font></p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;border-top pt-3&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">&quot;text-muted&quot;</span>&gt;</span></span><br><span class="line">        Already Have An Account? <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;ml-2&quot;</span>  <span class="attr">href</span>=<span class="string">&quot;&#123;&#123; url_for(&#x27;login&#x27;) &#125;&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li>flash :  redirect  — flasklog.py<br>在register中，添加，如果submit验证成功，就返回到home page ，这个home，<br>调用的是 flasklog.py中的 home fun<br>flash message 是一次性的，当再次刷新时，因为未触发到那个条件，所以flash message不再出现，除非再次注册。</li>
+</ol>
+<p>加入flash 和 redirect 来控制，做了注册之后，页面的刷新跳转；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page, two routes are handled by the same function</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/home&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;home.html&#x27;</span>, posts=posts)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/about&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">about</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;about.html&#x27;</span>, title=<span class="string">&#x27;About&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    form = RegistrationForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        flash(<span class="string">f&#x27;Account created for <span class="subst">&#123;form.username.data&#125;</span>!&#x27;</span>, <span class="string">&#x27;success&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;home&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>, title=<span class="string">&#x27;Register&#x27;</span>, form=form)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>13.2  但是当register 失败后，并无feedback 来告诉用户  why it was invalid</p>
+<p>添加了一些验证在 register.html， 用的是如果拿到error信息就展示出来</p>
+<p>![](_v_images/20201019234332261_1025641223.png =300x)</p>
+<ol start="14">
+<li>在login 加了 flash信息 ，hardcode写了 用户名和密码<br>![](_v_images/20201020002527262_100800492.png =300x)</li>
+</ol>
+<hr>
+<ol start="15">
+<li><code>pip install flask-sqlalchemy</code></li>
+</ol>
+<p><del>export  PIP_DEFAULT_TIMEOUT=100</del>  无效<br>sudo pip install –default-timeout=100 future<br>pip install –default-timeout=220 future<br>因为sudo 调用的pip 是3.6</p>
+<p>![](_v_images/20201021220751159_1841048205.png =600x)</p>
+<p>python</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flaskblog <span class="keyword">import</span> db</span><br><span class="line">db.create_all()    ---&gt; site.db file</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flaskblog <span class="keyword">import</span> User, Post</span><br><span class="line">user_1 = User(username=<span class="string">&#x27;Corey&#x27;</span>, email=<span class="string">&#x27;C@demo.com&#x27;</span>, password=<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(user_1)</span><br><span class="line">user_2 = User(username=<span class="string">&#x27;johnDone&#x27;</span>, email=<span class="string">&#x27;jd@demo.com&#x27;</span>, password=<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(user_2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">User.query.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">User.query.first()</span><br><span class="line"></span><br><span class="line">User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).first()</span><br><span class="line"></span><br><span class="line">user = User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).first()</span><br><span class="line"></span><br><span class="line">user.<span class="built_in">id</span></span><br><span class="line">user = User.query.get(<span class="number">1</span>)</span><br><span class="line">user</span><br><span class="line"></span><br><span class="line">user.posts</span><br><span class="line"></span><br><span class="line">post_1 = Post(title=<span class="string">&#x27;Blog 1 &#x27;</span>, content = <span class="string">&#x27;first post content!&#x27;</span>, user_id = user.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">post_2 = Post(title=<span class="string">&#x27;Blog 2 &#x27;</span>, content = <span class="string">&#x27;Second post content!&#x27;</span>, user_id = user.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(post_1)</span><br><span class="line"></span><br><span class="line">db.session.add(post_2)</span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">user.posts</span><br><span class="line"><span class="keyword">for</span> post <span class="keyword">in</span> user.posts:</span><br><span class="line">    <span class="built_in">print</span>(post.title)</span><br><span class="line"></span><br><span class="line">post = Post.query.first()</span><br><span class="line"></span><br><span class="line">post.user_id</span><br><span class="line">post.author</span><br><span class="line"></span><br><span class="line">db.drop_all()</span><br><span class="line">db.create_all()</span><br><span class="line">User.query.<span class="built_in">all</span>()</span><br><span class="line">Post.query.<span class="built_in">all</span>()</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<ol start="16">
+<li><code>pip install flask-bcrypt</code><br>用bcrypt 来生成hash 加密，每次生成都不一样，<br>但是反之check却可以验证真伪。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">~ 🔥» python                      vivi@vivideMacBook-Pro</span><br><span class="line">Python <span class="number">3.8</span><span class="number">.5</span> (v3<span class="number">.8</span><span class="number">.5</span>:580fbb018f, Jul <span class="number">20</span> <span class="number">2020</span>, <span class="number">12</span>:<span class="number">11</span>:<span class="number">27</span>)</span><br><span class="line">[Clang <span class="number">6.0</span> (clang-<span class="number">600.0</span><span class="number">.57</span>)] on darwin</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flask_bcrypt <span class="keyword">import</span> Bcrypt</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt = Bcrypt()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>)</span><br><span class="line"><span class="string">b&#x27;$2b$12$mwleE8U2426VUFW1ZfjI0OsrWatmzYla/hCHhiH5t/xsLxQl/ob6i&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;$2b$12$6kcDKHgJJDhlwaZZV9l0f.DPEqxcJFx01axApkdAVm/v5uoiQKyHe&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;$2b$12$8LMjQhBOdUqT.ZLF08SreOf7CrOYCtgOaEEXHal5okuXclqgviR1e&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hashed_pw = bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.check_password_hash(hashed_pw,<span class="string">&quot;password&quot;</span>)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.check_password_hash(hashed_pw,<span class="string">&quot;testing&quot;</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>添加了一些校验之后，在首页注册成功</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~/Desktop/Flask_Blog 🔥» python   vivi@vivideMacBook-Pro</span><br><span class="line">Python <span class="number">3.8</span><span class="number">.5</span> (v3<span class="number">.8</span><span class="number">.5</span>:580fbb018f, Jul <span class="number">20</span> <span class="number">2020</span>, <span class="number">12</span>:<span class="number">11</span>:<span class="number">27</span>)</span><br><span class="line">[Clang <span class="number">6.0</span> (clang-<span class="number">600.0</span><span class="number">.57</span>)] on darwin</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flaskblog <span class="keyword">import</span> db</span><br><span class="line">/Library/Frameworks/Python.framework/Versions/<span class="number">3.8</span>/lib/python3<span class="number">.8</span>/site-packages/flask_sqlalchemy/__init__.py:<span class="number">833</span>: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead <span class="keyword">and</span> will be disabled by default <span class="keyword">in</span> the future.  <span class="type">Set</span> it to <span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span> to suppress this warning.</span><br><span class="line">  warnings.warn(FSADeprecationWarning(</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flaskblog.models <span class="keyword">import</span> User</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user = User.query.first()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user</span><br><span class="line">User(<span class="string">&#x27;ali1&#x27;</span>, <span class="string">&#x27;ali1@flask.com&#x27;</span>, <span class="string">&#x27;default.jpg&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.password</span><br><span class="line"><span class="string">&#x27;$2b$12$JM7NPMUz6329UQmMtj8p7uDFWtKRHmpQujnffwW0U/W1WNOfWHThG&#x27;</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 用已经存在的用户来注册，页面报错</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlalchemy.exc.IntegrityError</span><br><span class="line">sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email</span><br><span class="line">[SQL: INSERT INTO user (username, email, image_file, password) VALUES (?, ?, ?, ?)]</span><br><span class="line">[parameters: (<span class="string">&#x27;ali1&#x27;</span>, <span class="string">&#x27;ali1@flask.com&#x27;</span>, <span class="string">&#x27;default.jpg&#x27;</span>, <span class="string">&#x27;$2b$12$HjaXxkdNbmjhLSLTu7CSsO9Nx/HLJG8.1cUrBL9TwS79/Zui9wvSm&#x27;</span>)]</span><br><span class="line">(Background on this error at: http://sqlalche.me/e/<span class="number">13</span>/gkpj)</span><br></pre></td></tr></table></figure>
+
+
+<p>在浏览器页面，到某个地方想执行，输入pin码即可调用python生成各种信息<br>所以，不可以生产环境使用debug模式，暴露的信息太多。<br>![](_v_images/20201022210758556_1552795459.png =500x)![](_v_images/20201022210936423_1612001069.png =500x)</p>
+<p>添加了一些验证之后：<br>![](_v_images/20201022212003059_248276131.png =500x)</p>
+<ol start="17">
+<li><code>pip install flask-login</code>  安装login 模块</li>
+</ol>
+<hr>
+<p>User Account and Profile Picture</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Angellaugh"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Angellaugh</p>
+  <div class="site-description" itemprop="description">技术，生活，艺术，旅行，都记录下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angellaugh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+<script>
+(function(){
+    if(''){
+        if (prompt('请输入文章密码') !== ''){
+            alert('密码错误！');
+            history.back();
+        }
+    }
+})();
+</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Table of Contents    12from Crypto import Randomfrom Crypto.PublicKey import RSA   123456# 伪随机数生成器random_generator &#x3D; Random.new().read# rsa算法生成实例rsa &#x3D; RSA.generate(2048, random_generator)print(rsa)pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA">
+<meta property="og:url" content="https://angellaugh.github.io/2023/03/24/RSA/index.html">
+<meta property="og:site_name" content="Angellaugh&#39;s blog">
+<meta property="og:description" content="Table of Contents    12from Crypto import Randomfrom Crypto.PublicKey import RSA   123456# 伪随机数生成器random_generator &#x3D; Random.new().read# rsa算法生成实例rsa &#x3D; RSA.generate(2048, random_generator)print(rsa)pri">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-03-24T13:39:49.583Z">
+<meta property="article:modified_time" content="2023-03-24T13:43:19.500Z">
+<meta property="article:author" content="Angellaugh">
+<meta property="article:tag" content="cirrus">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://angellaugh.github.io/2023/03/24/RSA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>RSA | Angellaugh's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Angellaugh's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Angellaugh's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录琐碎</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/24/RSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RSA
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-24 21:39:49 / Modified: 21:43:19" itemprop="dateCreated datePublished" datetime="2023-03-24T21:39:49+08:00">2023-03-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1> <p>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪随机数生成器</span></span><br><span class="line">random_generator = Random.new().read</span><br><span class="line"><span class="comment"># rsa算法生成实例</span></span><br><span class="line">rsa = RSA.generate(<span class="number">2048</span>, random_generator)</span><br><span class="line"><span class="built_in">print</span>(rsa)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(rsa))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Private RSA key at 0x10C4B8EB0
+[&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;, &#39;_d&#39;, &#39;_decrypt&#39;, &#39;_dp&#39;, &#39;_dq&#39;, &#39;_e&#39;, &#39;_encrypt&#39;, &#39;_invq&#39;, &#39;_n&#39;, &#39;_p&#39;, &#39;_q&#39;, &#39;_u&#39;, &#39;blind&#39;, &#39;can_encrypt&#39;, &#39;can_sign&#39;, &#39;d&#39;, &#39;decrypt&#39;, &#39;dp&#39;, &#39;dq&#39;, &#39;e&#39;, &#39;encrypt&#39;, &#39;exportKey&#39;, &#39;export_key&#39;, &#39;has_private&#39;, &#39;invp&#39;, &#39;invq&#39;, &#39;n&#39;, &#39;p&#39;, &#39;public_key&#39;, &#39;publickey&#39;, &#39;q&#39;, &#39;sign&#39;, &#39;size&#39;, &#39;size_in_bits&#39;, &#39;size_in_bytes&#39;, &#39;u&#39;, &#39;unblind&#39;, &#39;verify&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 私钥的生成</span></span><br><span class="line">private_pem = rsa.exportKey()</span><br><span class="line"><span class="built_in">print</span>(private_pem)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"><span class="comment"># 公钥的生成</span></span><br><span class="line">public_pem = rsa.publickey().exportKey()</span><br><span class="line"><span class="built_in">print</span>(public_pem)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
+
+<pre><code>b&#39;-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAviJUuLHbi5CByimMRxCqFhQ7B+zga/Tk1k0D06+Lrm6Kb0HO\nvhIcmWIMCW1eeBV0Aa2PniH+qLjRhQMqz7tDhe6O6ZBc046p0CToOlaPyjFFrNvA\nP+jwqeaFFFcDNo0J9lXuv5TH4q4JvQennna/pQUQQg+pTPmC74ampQkq7p7vOb3Z\nvdRmU6IKDUKIIG/3JrWNQJ4lcmNymA9pt/QiduNik33EIRNf+5cHkD3hScrWqKOW\naQYnMdOfCet7/ItfKOIAucuV2GMetuGto+HETm0ZN8Lr05V+otqn0SsU4Wo6xTlL\nxFMIAS698RkZkqbDC0+86dHbT/fiW1MpYGcKVwIDAQABAoIBABEsaambCwECpu57\nLTv4Adznq+NN3oFxx7+hijBzITM6sc9VytY5LZMfG4Y4djlzepxyMFAwst9LfkU8\n4X+M4w70Wr02+GN1ddoik0U9r1QseiYgXS+Im0BFXYzWRSiGubkhzuRIDHvpi2Cj\nEd1KzYmauPq2jmyw9sYqy9+JQfL2iQ9f4mkTu9fN5H+h0Mkx4imFVbBG0cHlxBg+\noI5QAccrLlbVsHoFrykqtilu4kUPQ6u5KnK3xyrIS6QVoA2zsEf01ikua5DDY3UR\naFNNn0IM6U0T6nZiUkvV4ySXSxCsG8Kf0Kr26ly+10HUYniwcGgygtW/cijjjDaZ\nYWAwu0UCgYEAyRvz35KNZrOfQyn2d25QQp8HRKnL9wY8rzL0XojSPzK9T/yvctWa\n4HBxPuzd6oaUOJH9EGmR+/P6S/mfU3Qik7MOQJt7yVD7MWjpBcq0NFtjOD5lwYOV\n82tf7EG45hBIG+IDhFrzxWefQn1axhQeMeGc1U+1V3tq6TIKH8s/umMCgYEA8geE\n69WZWBW9hokSDZThsgETMO2jicAiyO4aKm6+71ibNNyP2wbq21Hk67oOThSaP5g0\nIMMMujEMqW7S3c9H0drCpCiUUB8Nni+uxd/MCbQbZnTCcqFEuyYsOAadmJQlzK/O\n0SxeZxfgOV0N6Lbo36v2SC7INYn2Yhfwcn8dWH0CgYB30i64KzISWbzvIGZXfCNX\nvjZvY5dBo7auT/anCG/z9YAz0wKZscjoJjZi3m/N1sci+WBE0hGHgzLC54RVDaG4\nTHuWZM0ZAiXXp4EG0WISu8xe61ZnOMYz1Oq+8d1/PX4pFr0vs50AJaAO1m8qCzx+\nTcTKlwYdjEwDiqvbi5Z5rwKBgQDWZ9TXuuRaRQAdk4X7pB2APDWNDafnWt810sA5\nQNxCWeM8o/uIU4tweQ7ryGntv5CZr7LWJxQ6SUNnQXbp6js8a6gsFoq0o53DuYgB\nYO121yfCzsKHG9gwVnOruiiYRv1pY4E6iiyi9WK8TnQI6ShJJSRK866Gx04NvhlS\nxMrxXQKBgGzb7nen/DoOhoasJLwTtFqUQI+xs09pkabi4oP0vYYXlYFdbhPoRNdZ\nzaxqSlPN4c/IqEpwv/gCplYrwdkb2+RfPbtIFtsEZIbhjR7qJSME+mqfrd3X4qlK\ngEeJ3howUYPd0y6ppepDQiAxcE4el8FDeV9OHPCfuQGzw0uB+QUe\n-----END RSA PRIVATE KEY-----&#39;
+b&#39;-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAviJUuLHbi5CByimMRxCq\nFhQ7B+zga/Tk1k0D06+Lrm6Kb0HOvhIcmWIMCW1eeBV0Aa2PniH+qLjRhQMqz7tD\nhe6O6ZBc046p0CToOlaPyjFFrNvAP+jwqeaFFFcDNo0J9lXuv5TH4q4JvQennna/\npQUQQg+pTPmC74ampQkq7p7vOb3ZvdRmU6IKDUKIIG/3JrWNQJ4lcmNymA9pt/Qi\nduNik33EIRNf+5cHkD3hScrWqKOWaQYnMdOfCet7/ItfKOIAucuV2GMetuGto+HE\nTm0ZN8Lr05V+otqn0SsU4Wo6xTlLxFMIAS698RkZkqbDC0+86dHbT/fiW1MpYGcK\nVwIDAQAB\n-----END PUBLIC KEY-----&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Cipher_pkcs1_v1_5</span><br><span class="line"><span class="keyword">import</span> base64</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密  注意每次加密后的字符串都不一样，跟对数据的padding 有关。</span></span><br><span class="line"><span class="comment"># 加密时支持的最大字节数：证书位数/8 -11（比如：2048位的证书，支持的最大加密字节数：2048/8 - 11 = 245）</span></span><br><span class="line"><span class="comment"># 1024位的证书，加密时最大支持117个字节，解密时为128；</span></span><br><span class="line"><span class="comment"># 2048位的证书，加密时最大支持245个字节，解密时为256。</span></span><br><span class="line"><span class="comment"># 如果需要加密的字节数超出证书能加密的最大字节数，此时就需要进行分段加密。</span></span><br><span class="line">message = <span class="string">&quot;Hello,This is RSA加密&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拿到公钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is RSA 读取到的公钥:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rsakey)</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过公钥，创建用于执行pkcs1_v1_5加密或解密的密码</span></span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Here is 用公钥生成的密码:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"><span class="comment"># 用公钥创建的密码来加密message</span></span><br><span class="line">message_enc = cipher.encrypt(message.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用公钥创建的密码来加密的message:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(message_enc)</span><br><span class="line"><span class="comment"># base64 将二进制加密过的message转成文本</span></span><br><span class="line">cipher_text = base64.b64encode(message_enc)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;base64 将二进制转成文本的message&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher_text.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Here is RSA 读取到的公钥:
+Public RSA key at 0x10C4BDE50
+Here is 用公钥生成的密码:
+&lt;Crypto.Cipher.PKCS1_v1_5.PKCS115_Cipher object at 0x10c4bd370&gt;
+Here is 用公钥创建的密码来加密的message:
+b&#39;&lt;\xaf\xe3\xc1\x95MmL\x7f\x0b\xe6=J#ba\x98z\xb5\xb2\x9a\xb4\xbc\x9fC\x1c\xc0-\xfd\x80\xfc\xb3\x9c\xe4\x96\xa5\x8b?\xaa)\x84n9\x0c\x8f\x99?uXTp\xf3\xd6\x07lV\xe3\t\xbf\x8b\xea\xa5Dn\x80\xf5\x89\xeag\xa8J\xbc\x08\xabB\x1e\xc9\xbb\xe7m\xf8\t\xc6@\xc7[\x16,2\r\x1d=y?\xa0\x95\xcd\x8bxs\x8d@\x97R-\xea\xa3\xb1\xcc\x0f\x89\xb5\xe0:QPwj\xc0zY\xe9\xeb\x17\xf6\xd0\xef&gt;\xd7*\x7f\x97\x8f\x0f=\x06\xb0&lt;G\xe4\x00 pv\x8f&lt;\xb5\xb4f\x0f\xbd\x06J8\x7f\x84M\xa4js\xc7\x1a\xa6\xaf\xe9:@\x88\x18\xed\x8f\x96fvI\xfd\xe2i\x0e\x87\xa1RR\xaaF\x15\x11\x99~NTLc\x12k\xa4\x86&lt;\x11\xef\x05\xbe64\xf3\x84\xcb\x93\xd9\xf9\xa8R\xb6\xe7%\x95V\xb5\x80:\x81\xb4\xc0\xeaGC\xd1\xba\x90\xf2\x95#\x99&gt;\xe5\xb1\xae\xabo[1\x1f\xed\x10\xd8\xac\x1d\xe6\x1e;\xe8\xd6\x1c\xc4r\x16&#39;
+base64 将二进制转成文本的message
+SVJVsq5On4uFJo8OZdzuVtT/9NQexOoDiKUgeQr8v7j4PktuejMq4Ghoh6AufYwNJXSAyw1Oz6MFHfBxtSQeJU6jHN0ZlIhcv1DteMvv3VAOJRkhf93am7b97bg2KGoP/ux0W5RIKxKGTw0n8dsjhNt1X4lAFJSl3kA6n8RDaBWEzVhIzCq0fKjIZbYam/mB0WNB79/jezBj4Snv4DXX/dNSKmU6IAmV0FdTikX5lLj4xTGnUehSwzOxZzaKwhHEvUNq24W1WiIdvScFU3ycmK8OKvpTf7iEQYpyX9Hwqn5Qk+JHQAxpByOxG+TvI5pd4CPXxyQnkq2eWDOc1hhayw==
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解密</span></span><br><span class="line">cipher_text = <span class="string">&quot;SVJVsq5On4uFJo8OZdzuVtT/9NQexOoDiKUgeQr8v7j4PktuejMq4Ghoh6AufYwNJXSAyw1Oz6MFHfBxtSQeJU6jHN0ZlIhcv1DteMvv3VAOJRkhf93am7b97bg2KGoP/ux0W5RIKxKGTw0n8dsjhNt1X4lAFJSl3kA6n8RDaBWEzVhIzCq0fKjIZbYam/mB0WNB79/jezBj4Snv4DXX/dNSKmU6IAmV0FdTikX5lLj4xTGnUehSwzOxZzaKwhHEvUNq24W1WiIdvScFU3ycmK8OKvpTf7iEQYpyX9Hwqn5Qk+JHQAxpByOxG+TvI5pd4CPXxyQnkq2eWDOc1hhayw==&quot;</span></span><br><span class="line">encrypt_text = cipher_text.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="comment"># 拿到私钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is RSA 读取到的私钥:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rsakey)</span><br><span class="line"><span class="comment">#创建用于执行pkcs1_v1_5加密或解密的密码</span></span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(rsakey)      </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Here is 用私钥生成的密码:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"><span class="comment"># base64 将文本string 转回二进制</span></span><br><span class="line">message_dec = base64.b64decode(encrypt_text)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用base64将string转回二进制:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(message_enc)</span><br><span class="line"><span class="comment"># 用私钥生成的密码来解密 二进制message</span></span><br><span class="line">text = cipher.decrypt(message_dec, <span class="string">&quot;解密失败&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用私钥生成的密码来接二进制的message&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(text.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Here is RSA 读取到的私钥:
+Private RSA key at 0x10C0D16D0
+Here is 用私钥生成的密码:
+&lt;Crypto.Cipher.PKCS1_v1_5.PKCS115_Cipher object at 0x10c19f340&gt;
+Here is 用base64将string转回二进制:
+b&#39;&lt;\xaf\xe3\xc1\x95MmL\x7f\x0b\xe6=J#ba\x98z\xb5\xb2\x9a\xb4\xbc\x9fC\x1c\xc0-\xfd\x80\xfc\xb3\x9c\xe4\x96\xa5\x8b?\xaa)\x84n9\x0c\x8f\x99?uXTp\xf3\xd6\x07lV\xe3\t\xbf\x8b\xea\xa5Dn\x80\xf5\x89\xeag\xa8J\xbc\x08\xabB\x1e\xc9\xbb\xe7m\xf8\t\xc6@\xc7[\x16,2\r\x1d=y?\xa0\x95\xcd\x8bxs\x8d@\x97R-\xea\xa3\xb1\xcc\x0f\x89\xb5\xe0:QPwj\xc0zY\xe9\xeb\x17\xf6\xd0\xef&gt;\xd7*\x7f\x97\x8f\x0f=\x06\xb0&lt;G\xe4\x00 pv\x8f&lt;\xb5\xb4f\x0f\xbd\x06J8\x7f\x84M\xa4js\xc7\x1a\xa6\xaf\xe9:@\x88\x18\xed\x8f\x96fvI\xfd\xe2i\x0e\x87\xa1RR\xaaF\x15\x11\x99~NTLc\x12k\xa4\x86&lt;\x11\xef\x05\xbe64\xf3\x84\xcb\x93\xd9\xf9\xa8R\xb6\xe7%\x95V\xb5\x80:\x81\xb4\xc0\xeaGC\xd1\xba\x90\xf2\x95#\x99&gt;\xe5\xb1\xae\xabo[1\x1f\xed\x10\xd8\xac\x1d\xe6\x1e;\xe8\xd6\x1c\xc4r\x16&#39;
+Here is 用私钥生成的密码来接二进制的message
+Hello,This is RSA加密
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加签名，用私钥，私钥加签名后，可以用公钥验证签名有无被篡改</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Signature <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Signature_pkcs1_v1_5</span><br><span class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加签 使用私钥加签名，每次签名是一致的</span></span><br><span class="line">message = <span class="string">&quot;This is a request message...&quot;</span></span><br><span class="line"><span class="comment"># 拿到私钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;私钥：&quot;</span>+<span class="string">f&quot;<span class="subst">&#123;rsakey&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用私钥拿到一个新的签名密码</span></span><br><span class="line">signer = Signature_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;使用私钥生成新的签名密码：<span class="subst">&#123;signer&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 摘要认证 digest authentication</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">摘要访问认证是一种协议规定的Web服务器用来同网页浏览器进行认证信息协商的方法。它在密码发出前，先对其应用哈希函数，这相对于HTTP基本认证发送明文而言，更安全。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">从技术上讲，摘要认证是使用随机数来阻止进行密码分析的MD5加密哈希函数应用。它使用HTTP协议。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">digest = SHA.new()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;digest:&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(digest))</span><br><span class="line"><span class="comment"># 用digest方式加密message</span></span><br><span class="line">digest.update(message.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加签，使用私钥生成的signature密码来加密 digest哈希过的message</span></span><br><span class="line">sign = signer.sign(digest)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;使用私钥生成的signature密码来加密 digest哈希过的message： <span class="subst">&#123;sign&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用base64 将二进制转化为string存储</span></span><br><span class="line">signature = base64.b64encode(sign)</span><br><span class="line"><span class="built_in">print</span>(signature.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>私钥：Private RSA key at 0x10C4BD670
+使用私钥生成新的签名密码：&lt;Crypto.Signature.pkcs1_15.PKCS115_SigScheme object at 0x10c198d90&gt;
+digest:&lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c4bd700&gt;
+使用私钥生成的signature密码来加密 digest哈希过的message： b&#39;&amp;\xe7\x8b\xd1\xb5\xd2\xb3\x12\xccq\xf7\xf9\xb3\x94\\\xaaw\x8dJ\xc8\x9c\x89\xe5\xd3]\x16F\x91\xa1\x11\xff&#125;\xe9=C+\x1c\xd0\x83\xdb\x13\x12&lt;:\xd0\xcd&gt;\x99uM\xf9\xf3\xbf\x8ax\xab\xac\x87\xca%\xc6\t\xef\xcb\xfb\xbc\xba\x1f\&#39;\x19\xf0\xf9\xef\xdd\xb5N\xf4H\xca#\xe4\x9c\xa3\xee\x95\xa52Cq\x9bj\x91\xa6\xcf\x15\xcdt\xd2\xed\x10\xfe\xf7\xce\xde\xcc Y\xd3f\xe3.R\xf9\xe1@\xfc\x80\xd4\x9f\x9a\xa1\xf8\x8f\xc8\x8e\xbf\xd3w\xad\x1c\xcb\xb39\x83\x92UW\x17\x92,\xd3&#123;$\xb2~\t\xb0\x1c\xa2\xaf\xe2\x91\xc1\x98\xd9;\x18\xeb\x1aW\\\x9e\n\xe5\xa3\xdd\x07\xacr\x1c\x9e\x18^\xe0xR\x8c\xafp\x938\xcc3&lt;\xed-\xdb\x04\x9c\xa2\xdb\xb6\xecRn\xf7\xb5=\xcb\xdf\x8aP\x06\x82\xe65\xfa\xd2q:\x04\x8c\xea\x05\x1a +\x9d,&amp;\x9e\x86\xc2\xa7\xf3\x8b\t\x9d\xa7\xd2\x93LO\n\xd3\xd9V\xa97R\t%\x8e\xde\xb7ZD\xdc\xb8\xc5\x9c&quot;5\xe8\x14\xc5&#39;
+JueL0bXSsxLMcff5s5RcqneNSsicieXTXRZGkaER/33pPUMrHNCD2xMSPDrQzT6ZdU3587+KeKush8olxgnvy/u8uh8nGfD57921TvRIyiPknKPulaUyQ3GbapGmzxXNdNLtEP73zt7MIFnTZuMuUvnhQPyA1J+aofiPyI6/03etHMuzOYOSVVcXkizTeySyfgmwHKKv4pHBmNk7GOsaV1yeCuWj3QeschyeGF7geFKMr3CTOMwzPO0t2wScotu27FJu97U9y9+KUAaC5jX60nE6BIzqBRogK50sJp6Gwqfziwmdp9KTTE8K09lWqTdSCSWO3rdaRNy4xZwiNegUxQ==
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验签，使用公钥验签</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">用公钥生成的新签名密码来验证：</span></span><br><span class="line"><span class="string">哈希过的message ，  和  私钥生成的新签名密码加密了的（哈希过的message）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">message = <span class="string">&quot;This is a request message...&quot;</span></span><br><span class="line"><span class="comment"># step1， 拿到公钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Get public key: <span class="subst">&#123;rsakey&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># step2, 用公钥生成一个新签名密码</span></span><br><span class="line">verifier = Signature_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;generate a signature key via public key: <span class="subst">&#123;verifier&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step3, 生成个哈希值</span></span><br><span class="line">hsmsg = SHA.new()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Hashi: <span class="subst">&#123;hsmsg&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step4, 用哈希加密message</span></span><br><span class="line">hsmsg.update(message.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;哈希加密message: &quot;</span> + <span class="string">f&quot;<span class="subst">&#123;hsmsg&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step5, 用base64 将string 的signature解密为二进制</span></span><br><span class="line"><span class="comment"># 就变成了加密阶段的那个 用私钥生成的signature密码来加密 digest哈希过的message</span></span><br><span class="line">sign = base64.b64decode(signature)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;base64 decode sig: <span class="subst">&#123;sign&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># 用 公钥生成的新签名密码来验证，哈希过的message， 和 签过名的sign二进制</span></span><br><span class="line">is_verify = verifier.verify(hsmsg, sign)</span><br><span class="line"><span class="built_in">print</span>(is_verify)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Get public key: Public RSA key at 0x10C3B8880
+generate a signature key via public key: &lt;Crypto.Signature.pkcs1_15.PKCS115_SigScheme object at 0x10c3b8a30&gt;
+Hashi: &lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c663160&gt;
+哈希加密message: &lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c663160&gt;
+base64 decode sig: b&#39;&amp;\xe7\x8b\xd1\xb5\xd2\xb3\x12\xccq\xf7\xf9\xb3\x94\\\xaaw\x8dJ\xc8\x9c\x89\xe5\xd3]\x16F\x91\xa1\x11\xff&#125;\xe9=C+\x1c\xd0\x83\xdb\x13\x12&lt;:\xd0\xcd&gt;\x99uM\xf9\xf3\xbf\x8ax\xab\xac\x87\xca%\xc6\t\xef\xcb\xfb\xbc\xba\x1f\&#39;\x19\xf0\xf9\xef\xdd\xb5N\xf4H\xca#\xe4\x9c\xa3\xee\x95\xa52Cq\x9bj\x91\xa6\xcf\x15\xcdt\xd2\xed\x10\xfe\xf7\xce\xde\xcc Y\xd3f\xe3.R\xf9\xe1@\xfc\x80\xd4\x9f\x9a\xa1\xf8\x8f\xc8\x8e\xbf\xd3w\xad\x1c\xcb\xb39\x83\x92UW\x17\x92,\xd3&#123;$\xb2~\t\xb0\x1c\xa2\xaf\xe2\x91\xc1\x98\xd9;\x18\xeb\x1aW\\\x9e\n\xe5\xa3\xdd\x07\xacr\x1c\x9e\x18^\xe0xR\x8c\xafp\x938\xcc3&lt;\xed-\xdb\x04\x9c\xa2\xdb\xb6\xecRn\xf7\xb5=\xcb\xdf\x8aP\x06\x82\xe65\xfa\xd2q:\x04\x8c\xea\x05\x1a +\x9d,&amp;\x9e\x86\xc2\xa7\xf3\x8b\t\x9d\xa7\xd2\x93LO\n\xd3\xd9V\xa97R\t%\x8e\xde\xb7ZD\xdc\xb8\xc5\x9c&quot;5\xe8\x14\xc5&#39;
+True
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_OAEP</span><br><span class="line"><span class="keyword">import</span> binascii</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成了个 private RSA KEY?????</span></span><br><span class="line">keyPair = RSA.generate(<span class="number">3072</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;keyPair: <span class="subst">&#123;keyPair&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>keyPair: Private RSA key at 0x10C663940
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pubKey = keyPair.publickey()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Public key:  (n=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.n)&#125;</span>, e=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.e)&#125;</span>)&quot;</span>)</span><br><span class="line">pubKeyPEM = pubKey.exportKey()</span><br><span class="line"><span class="built_in">print</span>(pubKeyPEM.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Public key:  (n=0xa1ed1f3d0be71914eee28da05492820df0f21666e64a68ba698f93933d2b2ffe71fa3a8221da24354dbb5b756dd64d70696fe650dd607d2a255fbbae4f668a2115ca22b172a0d9d694adc160713b8508f0ffe403c89b7dcf6a388e2bfb58c57c920841945e13edbd0c8baf6c921b7af4647b545ed5e404776fb0e2374ef4e343f32b1cfbba3b76ff57957fc6f67924472485c3bd96ef67ce79e05f0229621257fd803e3fdcfa026b481bd61c6e202821d4b829e0393bc7137c444180b81fc6bccc34f327da2dbd5daa750d60cdca3a5a026e11c25e2d74c5ea43b54640a93c0daf94f5e5eece42fbc9ae0efb65af7503ab3ab5415dd87d4a49c6de79ffb4a1c3682108456c514822cc11d6f849eb88f083292b5128995bf77594448946af5fba1be4d7612fc79cf8f37e8b692c151500441d5d47c989cbadd7f3dee4ad188faf1e4b52fcab8ab483c6324356994215ed080f23451c700e3c89d12ea608a7b96728a025b4a657f0f25f82dc0a27ea852c3294cee81cff2a692df08c7833cd1fd5, e=0x10001)
+-----BEGIN PUBLIC KEY-----
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAoe0fPQvnGRTu4o2gVJKC
+DfDyFmbmSmi6aY+Tkz0rL/5x+jqCIdokNU27W3Vt1k1waW/mUN1gfSolX7uuT2aK
+IRXKIrFyoNnWlK3BYHE7hQjw/+QDyJt9z2o4jiv7WMV8kghBlF4T7b0Mi69skht6
+9GR7VF7V5AR3b7DiN07040PzKxz7ujt2/1eVf8b2eSRHJIXDvZbvZ8554F8CKWIS
+V/2APj/c+gJrSBvWHG4gKCHUuCngOTvHE3xEQYC4H8a8zDTzJ9otvV2qdQ1gzco6
+WgJuEcJeLXTF6kO1RkCpPA2vlPXl7s5C+8muDvtlr3UDqzq1QV3YfUpJxt55/7Sh
+w2ghCEVsUUgizBHW+EnriPCDKStRKJlb93WURIlGr1+6G+TXYS/HnPjzfotpLBUV
+AEQdXUfJicut1/Pe5K0Yj68eS1L8q4q0g8YyQ1aZQhXtCA8jRRxwDjyJ0S6mCKe5
+ZyigJbSmV/DyX4LcCifqhSwylM7oHP8qaS3wjHgzzR/VAgMBAAE=
+-----END PUBLIC KEY-----
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Private key: (n=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.n)&#125;</span>, d=<span class="subst">&#123;<span class="built_in">hex</span>(keyPair.d)&#125;</span>)&quot;</span>)</span><br><span class="line">privKeyPEM = keyPair.exportKey()</span><br><span class="line"><span class="built_in">print</span>(privKeyPEM.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Private key: (n=0xa1ed1f3d0be71914eee28da05492820df0f21666e64a68ba698f93933d2b2ffe71fa3a8221da24354dbb5b756dd64d70696fe650dd607d2a255fbbae4f668a2115ca22b172a0d9d694adc160713b8508f0ffe403c89b7dcf6a388e2bfb58c57c920841945e13edbd0c8baf6c921b7af4647b545ed5e404776fb0e2374ef4e343f32b1cfbba3b76ff57957fc6f67924472485c3bd96ef67ce79e05f0229621257fd803e3fdcfa026b481bd61c6e202821d4b829e0393bc7137c444180b81fc6bccc34f327da2dbd5daa750d60cdca3a5a026e11c25e2d74c5ea43b54640a93c0daf94f5e5eece42fbc9ae0efb65af7503ab3ab5415dd87d4a49c6de79ffb4a1c3682108456c514822cc11d6f849eb88f083292b5128995bf77594448946af5fba1be4d7612fc79cf8f37e8b692c151500441d5d47c989cbadd7f3dee4ad188faf1e4b52fcab8ab483c6324356994215ed080f23451c700e3c89d12ea608a7b96728a025b4a657f0f25f82dc0a27ea852c3294cee81cff2a692df08c7833cd1fd5, d=0x1b6c1223947b1e9447a061110b41847a37ee723cc58df463c80763469c254ee0c30ca2bbf1b504f76ca2936a8a4a05f348e7da694cbefa736e163857dcba7b74a996ac7ec09adcf3ff59d855d781eceb06baa48814d66b07fa9a794e997cff1f89863c6a3e99c163dd56b543fdba5efd8f1c13bdbbc5fc6652fe9c50cc33a209453517ee1ed67de08aef41246b63e3463e63d387ad4d5341c9acbb14f2a283d8c2e58fa5366c60872a9461938efd8323b7928e04f05709efbd8111ac158276cab2457512d111abba989e2ef5c0cc8309a32173c206eee8a10102bb20f19c76c1182759052e34a120bb87c220df920f11019b3ebda111c634ccc94937acb0ef23d7114cd13a8a154c909efe9700fae3fabae91529d4bf6dc70aea942ba5128c4d61eef66a857fbfd47cd30b20595c3a609a0348a3cfeca5c5bd3c5e6174e042c16a6262fcac07604536d1a1037ee4c88d6df0713347957e9a1185b30c25c4842a9b184eff70533e799cfb8519c414ea84a5936f4e16d5841175f3bd0d0436705)
+-----BEGIN RSA PRIVATE KEY-----
+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
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encryption</span></span><br><span class="line">msg = <span class="string">&#x27;A message for encryption&#x27;</span></span><br><span class="line">encryptor = PKCS1_OAEP.new(pubKey)</span><br><span class="line">encrypted = encryptor.encrypt(msg.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encrypted:&quot;</span>, binascii.hexlify(encrypted))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Encrypted: b&#39;7afbfdb44b4b507b4e000a0b16ff3b64e9b570f932b3467b06b69d2071f92886f62f612f57caa9d1a46189759f51f46784388f7e52ee08f2434a8f7918e5e92a639f32bcf8c5ec36ce5cb5328279b793e33c1a9dc4af373875b9b230772d51f9818292b178153f172ca8ce5aea84396032b4ab26f29ba7808ef335d072cfaca61cc311e1542cc404c11fed5db0349ee4f56568e702bfc3a2203f521a282b1cd5b22a8f6d0c731589da8169b078c9be5d00b8df31b40a26f4e92d8d049dd3b9f5bd43d9c1680688cb81af3bca4bb44c8a8227941f5a874c7fb043e7dd9351117e1d286b6ac26486514681805c66b8bab5ebad7d7f9556a14678342c6278268bab1e98867ece9c253b48e4ca71411bc9728b7844b1ec1c007c6006701b3951f4e7b5b4558b140121422960a7fb1e1f8a9be1cb499be33517602d7a231d69741d0a50318e0bd3ce771f62b6161c0f945da9bfe28a05ccebfabedc38821f7048a5c6c6288435757d632192386ba0f607a6f96fe41fafbbf26dd6aafe46ddeb313de9&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rsa</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">publicKey, privateKey = rsa.newkeys(<span class="number">2024</span>)</span><br><span class="line">message = <span class="string">&quot;hello geeks&quot;</span></span><br><span class="line"></span><br><span class="line">encMessage = rsa.encrypt(message.encode(<span class="string">&quot;utf-8&quot;</span>), publicKey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;original string: &quot;</span>, message)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;encrypted string: &quot;</span>, encMessage)</span><br><span class="line"></span><br><span class="line"><span class="comment"># the encrypted message can be decrypted</span></span><br><span class="line"><span class="comment"># with ras.decrypt method and private key</span></span><br><span class="line"><span class="comment"># decrypt method returns encoded byte string,</span></span><br><span class="line"><span class="comment"># use decode method to convert it to string</span></span><br><span class="line"><span class="comment"># public key cannot be used for decryption</span></span><br><span class="line">decMessage = rsa.decrypt(encMessage, privateKey).decode()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;decrypted string: &quot;</span>, decMessage)</span><br></pre></td></tr></table></figure>
+
+<pre><code>original string:  hello geeks
+encrypted string:  b&quot;\x1f~m\x87\xe0_\x8f\x89w1B$|l\x04t$\xa8j\xd4\xc7\xbdr&gt;y\xfa\xd1c\xc2\nm\x88\xd02\x05\x999\xae\x96O\xf8s\x83\xe3\xccw\xcc\xc5c\x97\xec\xdc\xefpe\xe9xkg\xdan\x83\xafzYJv\xdb\xf8\x8a\xa3\x1c\t\xb0\x96\xa6\xbci\xeb`&#39;\xe9\x15\x15\x97\x10\xca\x867\xa1\xb2d\xfc\xc4~:\xc5Q\xa1\xbe\x1aq-6\xc8\xd3&gt;&#39;!H\x15\x03F\x94V\xb5e\xaaBp\x13Nx\\\xac\xe1\x96\xf2\xde2\x98\xe1\xe0;_|\xefa\x17b\x9a\x1b@\x0f\xe9%\xd9\xfe@g\xecDxA\x8cS\x12\x8fI#\xf6\xa04qN\xe9g\x1f4Y\x19\x06\xff\xa1\xa0\xad\xec\x983Y\xd8%\xb1L\xa2r\xd8wr3\xbb\xa5\x06\xd7o\xed\xc4\xb5:JGr\xc2\xdb\x8bz\xb3$-\x89Xj\\2\xc5\x1f\xac\xa1\xfdm\xf5\x02m=\x9a\x0b\xd7\xb3\xc1\x80\xffY\\\x06V\x868\x81\xe54\t\x81\xaf\xae\xf7\xdd\x18\xb2&#123;\xec\xb7\x9e`&quot;
+decrypted string:  hello geeks
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cirrus/" rel="tag"># cirrus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/19/keycloak/" rel="prev" title="KeyCloak">
+      <i class="fa fa-chevron-left"></i> KeyCloak
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/25/vx/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Table-of-Contents"><span class="nav-text">Table of Contents</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Angellaugh"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Angellaugh</p>
+  <div class="site-description" itemprop="description">技术，生活，艺术，旅行，都记录下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angellaugh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

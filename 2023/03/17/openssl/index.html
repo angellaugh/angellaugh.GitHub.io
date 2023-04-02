@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+<script>
+(function(){
+    if(''){
+        if (prompt('请输入文章密码') !== ''){
+            alert('密码错误！');
+            history.back();
+        }
+    }
+})();
+</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="openssl在SSL&#x2F;TLS&#x2F;HTTPS通信中，证书虽然不是TLS&#x2F;SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS&#x2F;SSL协议，效果会更好。 啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证 OpenSSL 是一个安全套接字层密码库，囊括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenSSL">
+<meta property="og:url" content="https://angellaugh.github.io/2023/03/17/openssl/index.html">
+<meta property="og:site_name" content="Angellaugh&#39;s blog">
+<meta property="og:description" content="openssl在SSL&#x2F;TLS&#x2F;HTTPS通信中，证书虽然不是TLS&#x2F;SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS&#x2F;SSL协议，效果会更好。 啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证 OpenSSL 是一个安全套接字层密码库，囊括">
+<meta property="og:locale">
+<meta property="og:image" content="https://angellaugh.github.io/uploads/69094374817016.png">
+<meta property="og:image" content="https://angellaugh.github.io/2023/03/17/openssl/vx_images/69094374817016.png">
+<meta property="article:published_time" content="2023-03-17T07:51:50.039Z">
+<meta property="article:modified_time" content="2023-03-25T15:13:22.062Z">
+<meta property="article:author" content="Angellaugh">
+<meta property="article:tag" content="cirrus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://angellaugh.github.io/uploads/69094374817016.png">
+
+<link rel="canonical" href="https://angellaugh.github.io/2023/03/17/openssl/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>OpenSSL | Angellaugh's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Angellaugh's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Angellaugh's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录琐碎</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/17/openssl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenSSL
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-17 15:51:50" itemprop="dateCreated datePublished" datetime="2023-03-17T15:51:50+08:00">2023-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-25 23:13:22" itemprop="dateModified" datetime="2023-03-25T23:13:22+08:00">2023-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h1><p>在SSL/TLS/HTTPS通信中，证书虽然不是TLS/SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS/SSL协议，效果会更好。</p>
+<p>啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证</p>
+<p>OpenSSL 是一个安全套接字层密码库，囊括主要的密码算法、常用密钥、证书封装管理功能及实现ssl协议。<br>OpenSSL整个软件包大概可以分成三个主要的功能部分：</p>
+<ol>
+<li>SSL协议库libssl</li>
+<li>应用程序命令工具</li>
+<li>密码算法库libcrypto</li>
+</ol>
+<p>.KEY 私钥。</p>
+<p><strong>.CSR</strong> 是 Certificate Signing Request 的缩写，即证书签名请求，这不是证书，只是包含申请证书的基本信息。生成证书时要把这个提交给权威的证书颁发机构，颁发机构审核通过之后，再根据这些申请信息生成相应的证书。</p>
+<p>.CRT 即 certificate的缩写，即证书。</p>
+<p><strong>X.509</strong> 定义公钥证书格式， structure， 不同的密钥有不同的结构体。</p>
+<blockquote>
+<p>X.509的证书文件，一般以.crt结尾，根据该文件的内容编码格式，可以分为以下二种格式：</p>
+</blockquote>
+<blockquote>
+<p>.PEM - Privacy Enhanced Mail，以base64编码，将二进制文件转为文本，打开看文本格式，以”—–BEGIN…“开头，”—–END…”结尾，Apache 和 *NIX 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<blockquote>
+<p>.DER - Distinguished Encoding Rules，是二进制格式，不可读。Java 和 Windows 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<h2 id="1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists"><a href="#1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists" class="headerlink" title="1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists"></a>1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists</h2><h3 id="1-1-For-instances"><a href="#1-1-For-instances" class="headerlink" title="1.1. For instances:"></a>1.1. For instances:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out server.key 2048  <span class="comment"># 先生成一个私钥                 </span></span><br><span class="line">openssl req -new -key server.key -out server.csr <span class="comment"># 用这个私钥加密证书请求信息，生成一个证书请求</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -out server.crt -signkey server.key -days 3650 <span class="comment"># 用证书请求 和 私钥自签名来申请一个x509公钥</span></span><br><span class="line"><span class="comment"># 用x509公钥 和 私钥自签名来发请求</span></span><br><span class="line">python3 manage.py runserver_plus --cert-file ./server.crt --key-file ./server.key 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><figcaption><span>Generate Root CA</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private/ca.key 2048 <span class="comment">#先生成一个私钥</span></span><br><span class="line"></span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl genrsa -out private/ca.key 2048</span></span><br><span class="line">Generating RSA private key, 2048 bit long modulus (2 primes)</span><br><span class="line">.....................+++++</span><br><span class="line">.............+++++</span><br><span class="line">e is 65537 (0x010001)</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/ca.key</span></span><br><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEpAIBAAKCAQEArPbCOb9to</span><br><span class="line">……</span><br><span class="line">XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用私钥自签，生成一个x509 的 公钥CA</span></span><br><span class="line">openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com&quot;</span> -extensions v3_ca -config openssl.cnf</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   └── ca.key</span><br><span class="line">└── serial</span><br><span class="line">5 directories, 6 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat certs/ca.pem</span></span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIID0DCCArigAwIBAgIUNq7/2QHSt6dhvy5XVEIlx2bqJ1AwDQYJKoZIhvcNAQEL</span><br><span class="line">dR2qFJjutlz/ExPDqhRMzSGzsMH47uH2j/rEsIW+4K0vU6G9HIIWpa4xoET+TQJI</span><br><span class="line">p5DKgza5t0QBuULe9YTMJTlHl2E=</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># newkey:生成一个证书请求，加一个私钥，-nodes:不加密私钥，生成server certificate and use CA to issue it </span></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;</span>  -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj &quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;  -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............................+++++</span><br><span class="line">..................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;private/server.key&#x27;</span></span><br><span class="line">-----</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">│   └── server.csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   ├── ca.key</span><br><span class="line">│   └── server.key</span><br><span class="line">└── serial</span><br><span class="line"></span><br><span class="line">5 directories, 8 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat csr/server.csr</span></span><br><span class="line">-----BEGIN CERTIFICATE REQUEST-----</span><br><span class="line">MIIDJjCCAg4CAQAwcDELMAkGA1UEBhMCQ04xETAPBgNVBAgMCFNoYW5naGFpMREw</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/server.key</span></span><br><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpCNWLNTNCFf0K</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ca:可以sign certificate req， 签名证书请求， 并且生成 CRLs证书吊销列表: certificate revocation lists</span></span><br><span class="line"><span class="comment"># batch: 所有证书will be certified automatically.  notext:不要把证书文本形式输出到文件，意思是二进制？</span></span><br><span class="line"><span class="comment"># extensions: default x509, 如果没有extension section，那么输出V1 certificate，否则输出V3 certificate.x509v3.cnf</span></span><br><span class="line">openssl ca -batch -notext -<span class="keyword">in</span> csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Using configuration from openssl.cnf</span><br><span class="line">Check that the request matches the signature</span><br><span class="line">Signature ok</span><br><span class="line">The Subject<span class="string">&#x27;s Distinguished Name is as follows</span></span><br><span class="line"><span class="string">countryName           :PRINTABLE:&#x27;</span>CN<span class="string">&#x27;</span></span><br><span class="line"><span class="string">stateOrProvinceName   :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">localityName          :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationName      :ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationalUnitName:ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">commonName            :ASN.1 12:&#x27;</span>ciam.west.isilon.com<span class="string">&#x27;</span></span><br><span class="line"><span class="string">Certificate is to be certified until Mar 24 15:11:50 2024 GMT (365 days)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Write out database with 1 new entries</span></span><br><span class="line"><span class="string">Data Base Updated</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── certs</span></span><br><span class="line"><span class="string">│   ├── 1000.pem</span></span><br><span class="line"><span class="string">│   ├── ca.pem</span></span><br><span class="line"><span class="string">│   └── server.pem</span></span><br><span class="line"><span class="string">├── crl</span></span><br><span class="line"><span class="string">├── csr</span></span><br><span class="line"><span class="string">│   └── server.csr</span></span><br><span class="line"><span class="string">├── index.txt</span></span><br><span class="line"><span class="string">├── index.txt.attr</span></span><br><span class="line"><span class="string">├── index.txt.attr.old</span></span><br><span class="line"><span class="string">├── index.txt.old</span></span><br><span class="line"><span class="string">├── intermediate</span></span><br><span class="line"><span class="string">├── openssl.cnf</span></span><br><span class="line"><span class="string">├── private</span></span><br><span class="line"><span class="string">│   ├── ca.key</span></span><br><span class="line"><span class="string">│   └── server.key</span></span><br><span class="line"><span class="string">├── serial</span></span><br><span class="line"><span class="string">└── serial.old</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">5 directories, 13 files</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # cat certs/server.pem</span></span><br><span class="line"><span class="string">-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">MIIDpjCCAo6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQ04x</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-1-字段解释"><a href="#1-1-1-字段解释" class="headerlink" title="1.1.1. 字段解释"></a>1.1.1. 字段解释</h4><p><mark>openssl genrsa -out ca.key 2048</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">genrsa:  生成RSA加密的私钥。 generates an RSA private key, <span class="built_in">which</span> essentially involves the generation of two prime numbers.</span><br><span class="line">  -out: The output file to write to</span><br><span class="line">  numbits: the size of the private key to generate <span class="keyword">in</span> bits, default:2048</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">不加密的RSA私钥。</span><br><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line"></span><br><span class="line">加密的RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048</span><br><span class="line"></span><br><span class="line">指定随机数创建RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -seed abc</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -rand file:hello.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -key server.key -out server.csr</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">req: 创建和处理PKCS\<span class="comment">#10格式的证书请求。 creates and processes certificate requests in PKCS#10 format</span></span><br><span class="line">     还可以添加额外信息来创建自签名CA证书。  也就是拿私钥签名之后当做 CA。上一步已经创建了私钥。可以拿私钥来创CA。</span><br><span class="line">-new -key： 生成一个新的 certificate req， 如果不指定-key, 那么就读取configfile中的配置项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PKCS\<span class="comment">#10: 证书请求文件，类似于CSR文件，一般是一个base64文件。</span></span><br><span class="line">          是一段可以向CA申请证书的P10请求。</span><br><span class="line">          该请求一般是通过硬件生成密钥对后，将私钥单独存放，但是将公钥放入p10中，</span><br><span class="line">          CA受到该p10请求后，可以校验，并根据p10中的信息制作一张没有私钥的公钥证书。</span><br><span class="line">意思是PKCS10 --&gt; 本地会有一对公私钥  --&gt; CA 拿到P10带来的公钥 --&gt; CA generate --&gt; 一张没有私钥的公钥。</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj “/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com” -extensions v3_ca -config openssl.cnf</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用原有的RSA密钥生成证书请求文件，指定-batch选项，不询问申请者的信息。主体信息由命令行subj指定，且输出公钥</span><br><span class="line">-config openssl.cnf</span><br><span class="line">-days  默认30天，与-x509一起使用</span><br><span class="line">-extensions 指定可选sections 从configfile中， 与-x509一起使用</span><br><span class="line">-subj Replaces the subject field of an input request, /type0=value0/type1=value1/type2=</span><br><span class="line">-x509  输出自签名证书，而不是证书请求， 在这里就是CA。</span><br><span class="line"><span class="comment">#This is typically used to generate a test certificate or a self-signed root CA.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><mark>openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x509: 是个公钥证书，主要有个sign certificate requests like a mini CA</span><br><span class="line">-req: 期望有个证书请求csr（而不是证书本身）在input中，</span><br><span class="line">-signkey: 使用提供的私钥对文件进行自签名</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ol>
+<li>Create a Certificate Authority private key (this is your most important key):</li>
+</ol>
+<p><code>openssl req -new -newkey rsa:1024 -nodes -out ca.csr -keyout ca.key</code></p>
+<ol start="2">
+<li>Create your CA self-signed certificate:</li>
+</ol>
+<p><code>openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem</code></p>
+<ol start="3">
+<li>Issue a client certificate by first generating the key, then request (or use one provided by external system) then sign the certificate using private key of your CA:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out client.key 1024</span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.cer</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="1-1-2-Manually-stopping-Pacific-keycloak"><a href="#1-1-2-Manually-stopping-Pacific-keycloak" class="headerlink" title="1.1.2. Manually stopping Pacific keycloak"></a>1.1.2. Manually stopping Pacific keycloak</h4><p><code>ps -ef | grep &quot;/opt/keycloak&quot; | awk &#39;&#123;print $2&#125;&#39; | xargs kill</code></p>
+<h3 id="1-2-了解CA，-root-CA，-以及自签名，CA签名"><a href="#1-2-了解CA，-root-CA，-以及自签名，CA签名" class="headerlink" title="1.2. 了解CA， root CA， 以及自签名，CA签名"></a>1.2. 了解CA， root CA， 以及自签名，CA签名</h3><p>只有root 是自签名，其他都是CA签名<br>ROOT证书是用来签发和验证CA证书的，防止在不知道签名者私钥的情况下恶意篡改证书的内容<br>Root CA -&gt; Server CA -&gt; Server(最终用户)</p>
+<p><mark>其实就是一个使用私钥签发（issue）的关系。</mark></p>
+<ol>
+<li><pre><code> ROOT 证书
+</code></pre>
+</li>
+<li><pre><code>               的私钥
+</code></pre>
+</li>
+<li><pre><code>                       签发   `用私钥加过密的sign签名`, `签名算法，通常是Sha256WithHash`
+</code></pre>
+</li>
+<li><pre><code>                            CA 证书
+</code></pre>
+</li>
+<li><pre><code>                                      签发
+</code></pre>
+</li>
+<li><pre><code>                                            x.509证书（公钥证书), 以.cert, .crt后缀，是ASN.1编码 Abstract syntax notation dot one 抽象语法标记
+</code></pre>
+<blockquote>
+<p>秘钥和证书都是 SEQUENCE 类型，<br>而 SEQUENCE 的 type 是 0x30，且长度是大于 127 的，因此第2 个字节是 0x82.<br>ASN.1 编码表示的数据是二进制数据，通常通过 BASE64 转化成字符串保存在 pem 文件中，<br>而 0x3082 经过 BASE64 编码后，就是字符串 MI，<mark>因此所有 PEM 文件存储的秘钥开始的前两个字符是 MI</mark>。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pkcs<span class="comment">#1 用于定义 RSA 公钥、私钥结构</span></span><br><span class="line">pkcs<span class="comment">#7 用于定义证书链</span></span><br><span class="line">pkcs<span class="comment">#8 用于定义任何算法公私钥</span></span><br><span class="line">pkcs<span class="comment">#12 用于定义私钥证书</span></span><br><span class="line">X.509 定义公钥证书</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/uploads/69094374817016.png"><br><img src="vx_images/69094374817016.png"></p>
+<h4 id="1-2-1-看个keytool生成证书的范例"><a href="#1-2-1-看个keytool生成证书的范例" class="headerlink" title="1.2.1. 看个keytool生成证书的范例"></a>1.2.1. 看个keytool生成证书的范例</h4><p><code>keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname &quot;CN=server&quot; -alias server -ext &quot;SAN:c=DNS:localhost,IP:127.0.0.1&quot; -keystore conf/server.keystore</code></p>
+<p>-genkeypair  生成密钥对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Generates a key pair (a public key and associated private key).</span><br><span class="line">              Wraps the public key into an X.509 v3 self-signed certificate,</span><br><span class="line">              which is stored as a single-element certificate chain. This</span><br><span class="line">              certificate chain and the private key are stored in a new</span><br><span class="line">              keystore entry identified by alias.</span><br></pre></td></tr></table></figure>
+<p>-storepass 更改密钥库的存储口令,<br>-storetype   PKCS12 私钥证书<br>-keyalg      RSA, DSA, EC, DES, DESede<br>-keysize<br>-dname</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The dname value specifies the X.500 Distinguished Name to be</span><br><span class="line">    associated with the value of alias, and is used as the issuer</span><br><span class="line">    and subject fields in the self-signed certificate. If no</span><br><span class="line">    distinguished name is provided at the command line, then the</span><br><span class="line">    user is prompted for one.</span><br></pre></td></tr></table></figure>
+<p>-ext<br>-keystore<br>-validity<br>-keypass</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SAN or SubjectAlternativeName</span><br><span class="line">            Values: type:value(,type:value)*, where type can be EMAIL, URI,</span><br><span class="line">            DNS, IP, or OID. The value argument is the string format value</span><br><span class="line">            for the type.</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-genkeypair-keyalg-keysize"><a href="#2-genkeypair-keyalg-keysize" class="headerlink" title="2. genkeypair keyalg keysize"></a>2. genkeypair keyalg keysize</h2><p>OpenSSL一共实现了4种非对称加密算法，<br>DH算法一般用户密钥交换。RSA 算法既可以用于密钥交换，也可以用于数字签名，DSA算法则一般只用于数字签名<br>DH、<br>RSA、<br>DSA<br>椭圆曲线算法（EC）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-genkeypair 生成密钥对      -keyalg算法   RSA             -keysize   2048  </span><br><span class="line">                                         DSA                        1024 </span><br><span class="line">                                         EC                         256</span><br><span class="line">-genseckey 生成密钥          -keyalg      DES                        56   </span><br><span class="line">                                         DESede                     168</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-1-1-1-ROOT证书"><a href="#2-1-1-1-ROOT证书" class="headerlink" title="2.1.1.1. ROOT证书"></a>2.1.1.1. ROOT证书</h5><h5 id="2-1-1-2-CA证书和"><a href="#2-1-1-2-CA证书和" class="headerlink" title="2.1.1.2. CA证书和"></a>2.1.1.2. CA证书和</h5><h5 id="2-1-1-3-使用CA证签发的X-509证书"><a href="#2-1-1-3-使用CA证签发的X-509证书" class="headerlink" title="2.1.1.3. 使用CA证签发的X.509证书"></a>2.1.1.3. 使用CA证签发的X.509证书</h5>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cirrus/" rel="tag"># cirrus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/05/vx_images/vx/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/19/keycloak/" rel="next" title="KeyCloak">
+      KeyCloak <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#openssl"><span class="nav-text">openssl</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6%EF%BC%8C-CA%E3%80%81%E8%AF%81%E4%B9%A6%E9%93%BE%E3%80%81%E8%AF%81%E4%B9%A6%E7%9A%84%E6%92%A4%E9%94%80-CRLs%E8%AF%81%E4%B9%A6%E5%90%8A%E9%94%80%E5%88%97%E8%A1%A8-certificate-revocation-lists"><span class="nav-text">1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-For-instances"><span class="nav-text">1.1. For instances:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-%E5%AD%97%E6%AE%B5%E8%A7%A3%E9%87%8A"><span class="nav-text">1.1.1. 字段解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-Manually-stopping-Pacific-keycloak"><span class="nav-text">1.1.2. Manually stopping Pacific keycloak</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E4%BA%86%E8%A7%A3CA%EF%BC%8C-root-CA%EF%BC%8C-%E4%BB%A5%E5%8F%8A%E8%87%AA%E7%AD%BE%E5%90%8D%EF%BC%8CCA%E7%AD%BE%E5%90%8D"><span class="nav-text">1.2. 了解CA， root CA， 以及自签名，CA签名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E7%9C%8B%E4%B8%AAkeytool%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E7%9A%84%E8%8C%83%E4%BE%8B"><span class="nav-text">1.2.1. 看个keytool生成证书的范例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-genkeypair-keyalg-keysize"><span class="nav-text">2. genkeypair keyalg keysize</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-1-ROOT%E8%AF%81%E4%B9%A6"><span class="nav-text">2.1.1.1. ROOT证书</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-2-CA%E8%AF%81%E4%B9%A6%E5%92%8C"><span class="nav-text">2.1.1.2. CA证书和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-3-%E4%BD%BF%E7%94%A8CA%E8%AF%81%E7%AD%BE%E5%8F%91%E7%9A%84X-509%E8%AF%81%E4%B9%A6"><span class="nav-text">2.1.1.3. 使用CA证签发的X.509证书</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Angellaugh"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Angellaugh</p>
+  <div class="site-description" itemprop="description">技术，生活，艺术，旅行，都记录下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angellaugh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Angellaugh&#39;s blog</title>
+  
+  <subtitle>记录琐碎</subtitle>
+  <link href="https://angellaugh.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://angellaugh.github.io/"/>
+  <updated>2023-04-02T06:48:37.857Z</updated>
+  <id>https://angellaugh.github.io/</id>
+  
+  <author>
+    <name>Angellaugh</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>openssl_ca2</title>
+    <link href="https://angellaugh.github.io/2023/04/02/openssl_ca2/"/>
+    <id>https://angellaugh.github.io/2023/04/02/openssl_ca2/</id>
+    <published>2023-04-02T03:11:02.000Z</published>
+    <updated>2023-04-02T06:48:37.857Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;1-CA-简介-amp-范例&quot;&gt;&lt;a href=&quot;#1-CA-简介-amp-范例&quot; class=&quot;headerlink&quot; title=&quot;1. CA 简介 &amp;amp; 范例&quot;&gt;&lt;/a&gt;1. CA 简介 &amp;amp; 范例&lt;/h2&gt;&lt;p&gt;**CA **= certificate authority签证机构&lt;br&gt;提供证书（服务器证书，由域名、公司信息、序列号和签名信息组成）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SSL:&lt;/strong&gt; Secure Sockets Layer（安全套接层协议), 与HTTPS一起诞生&lt;br&gt;&lt;strong&gt;TLS:&lt;/strong&gt; TLS，Transport Layer Security（传输层安全性协议）， 是SSL 标准化&lt;br&gt;&lt;mark&gt;&lt;strong&gt;SSL &amp;amp; TLS： 本质是同一个东东&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;证书包含：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;public key、&lt;/li&gt;
+&lt;li&gt;名称、 &lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;CA的数字签名&lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;有效时间，&lt;/li&gt;
+&lt;li&gt;签证机关的名称，&lt;/li&gt;
+&lt;li&gt;该证书的序列号等信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;59&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;60&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;61&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;62&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;63&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;64&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;65&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;66&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;### 2.4. View the issued CA&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;```bash&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CIAM-ali1:~/CAcerts &lt;span class=&quot;comment&quot;&gt;# openssl x509 -text -noout -in server.pem&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Certificate:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Data:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Version: 3 (0x2)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Serial Number: 4096 (0x1000)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Signature Algorithm: sha256WithRSAEncryption&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;# 签证机构&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Issuer: C = CN, ST = Shanghai, L = Shanghai, O = Dell, OU = Dell&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;#有效期&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Validity&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            Not Before: Mar 27 08:22:59 2023 GMT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            Not After : Mar 26 08:22:59 2024 GMT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;# 名字    &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Subject: C = CN, ST = Shanghai, O = Dell, OU = Dell, CN = ciam-ali1.west.isilon.com&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;#public key&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Subject Public Key Info:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            Public Key Algorithm: rsaEncryption&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                RSA Public-Key: (2048 bit)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                Modulus:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    00:e8:53:ef:bd:b0:e9:99:2b:af:35:da:2e:b5:81:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    61:18:17:7a:7b:69:a0:46:c1:c2:ee:24:d7:36:52:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    e9:5c:3d:49:ea:be:31:54:e0:a5:ff:a9:e1:19:b3:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    81:8a:38:9e:a3:fa:62:23:b0:85:07:d1:35:3e:40:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    7c:1a:68:1d:a8:6b:08:01:c8:95:d3:85:09:b0:7c:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    60:85:dc:13:dc:91:a2:73:ee:f3:7e:42:80:99:24:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    4f:09:13:91:9b:da:87:ee:ae:f2:ec:d9:9e:a6:75:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    1d:e3:c6:cf:78:58:7d:2a:7e:8e:cf:65:30:60:ab:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    42:6b:6d:76:f8:f2:46:de:c3:b5:4b:c9:60:39:24:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    a0:5e:59:0c:b3:30:9e:3b:67:ae:d4:5f:53:6e:63:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    47:92:dc:0c:39:9f:a6:39:b0:45:82:5b:e1:4d:a8:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ed:75:96:8a:98:32:49:f6:9b:a3:6e:69:91:f0:18:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    2e:66:9e:ca:77:7e:b3:a6:96:d6:4a:e1:b1:51:a3:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    1f:7d:d2:5f:41:ce:1c:02:c2:42:aa:b5:3b:61:1c:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    9f:b9:45:70:fe:85:d0:d8:a3:6f:e5:e8:3d:9f:9e:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    6d:53:57:f9:0f:0a:56:a4:f5:77:bb:4a:ff:&lt;span class=&quot;built_in&quot;&gt;fc&lt;/span&gt;:8a:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    4a:67:e1:82:43:f1:7b:16:5a:80:1b:8f:da:f4:c4:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    25:0d&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                Exponent: 65537 (0x10001)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        X509v3 extensions:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            X509v3 Basic Constraints:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                CA:FALSE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            X509v3 Subject Key Identifier:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                D1:4F:3F:CD:DC:17:7E:50:38:A8:50:D6:EA:2C:BA:3D:6C:62:35:A1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            X509v3 Extended Key Usage:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                TLS Web Server Authentication&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            X509v3 Subject Alternative Name:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                DNS:ciam-ali1.west.isilon.com&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Signature Algorithm: sha256WithRSAEncryption&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         09:6b:25:4e:ca:a1:&lt;span class=&quot;built_in&quot;&gt;fc&lt;/span&gt;:2c:bb:35:5f:65:c8:47:92:7a:a1:53:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         b7:fd:6e:41:5a:39:32:35:87:b1:24:de:83:6e:23:6c:67:49:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         47:ba:91:de:7a:b1:81:f3:0a:3a:d3:25:35:13:6d:0f:d9:77:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         a4:6a:7e:a6:72:06:d9:b1:95:15:36:61:46:a4:b7:0f:16:c3:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         41:55:aa:e1:5c:93:28:4b:f0:9b:74:04:a1:08:59:97:23:c9:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         1b:17:d0:38:7d:74:e4:9a:42:e2:f7:0a:2d:01:8d:d3:7f:57:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         eb:b8:08:2e:fe:5f:b1:86:90:d2:97:64:9e:9a:61:51:06:9e:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         7c:25:a9:87:5c:63:e6:d5:18:9b:cb:0e:20:71:77:06:fd:2e:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         0f:c1:b9:21:75:34:ec:5a:11:4d:48:f8:4d:de:67:7a:f4:e6:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         3c:a1:4a:01:40:8f:ce:2c:c1:ae:5e:52:66:0d:6c:29:7b:f0:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         b3:ce:ae:b2:cf:13:d1:0e:ed:83:e3:15:16:5a:8c:ba:15:45:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         08:46:b6:63:92:66:ab:2c:2c:1c:f6:2c:34:d9:7d:9f:b6:d3:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         07:34:72:bb:89:81:27:d0:88:0f:b9:3e:e8:f2:3a:3c:7f:5c:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         88:88:1b:77:7a:41:a9:c9:99:2f:e5:76:87:8e:26:ec:85:c0:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         12:ac:02:25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CIAM-ali1:~/CAcerts &lt;span class=&quot;comment&quot;&gt;#&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;vx_images/116433111278673.png&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/116433111278673.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;个人或组织提交CRS 给 CA 机构， CA签发&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;2-SSL-amp-TLS-安全套接协议&quot;&gt;&lt;a href=&quot;#2-SSL-amp-TLS-安全套接协议&quot; class=&quot;headerlink&quot; title=&quot;2. SSL&amp;amp;TLS  安全套接协议&quot;&gt;&lt;/a&gt;2. SSL&amp;amp;TLS  安全套接协议&lt;/h2&gt;&lt;p&gt;&lt;MARK&gt;SSL: Secure Sockets Layer（安全套接层协议), 与HTTPS一起诞生&lt;br&gt;TLS: TLS，Transport Layer Security（传输层安全性协议）， 是SSL 标准化&lt;br&gt;SSL &amp;amp; TLS： 本质是同一个东东&lt;/MARK&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SSL是 Secure Sockets Layer（安全套接层协议）的缩写。由网景公司再1994年随HTTPS一起推出。&lt;br&gt;后交由IETF将SSL进行标准化，并改名为 TLS，Transport Layer Security（传输层安全性协议）。&lt;br&gt;所以 TLS 是 SSL 改个名而已，其实是一个东西。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;2-1-SSL-分两层：-record-layer记录层-和-传输层&quot;&gt;&lt;a href=&quot;#2-1-SSL-分两层：-record-layer记录层-和-传输层&quot; class=&quot;headerlink&quot; title=&quot;2.1. SSL 分两层： record layer记录层 和 传输层&quot;&gt;&lt;/a&gt;2.1. SSL 分两层： record layer记录层 和 传输层&lt;/h3&gt;&lt;p&gt;记录层： 确定传输层的封装格式&lt;br&gt;传输层： 使用x509认证&lt;br&gt;然后，用非对称加密算法来对双方进行身份认证&lt;br&gt;再然后，&lt;mark&gt;交换对称密钥，作为session key，&lt;/mark&gt; 给通信双方的data做加密&lt;/p&gt;
+&lt;h3 id=&quot;2-2-SSL-证书有三种：-DV-OV-EV&quot;&gt;&lt;a href=&quot;#2-2-SSL-证书有三种：-DV-OV-EV&quot; class=&quot;headerlink&quot; title=&quot;2.2. SSL 证书有三种： DV, OV, EV&quot;&gt;&lt;/a&gt;2.2. SSL 证书有三种： DV, OV, EV&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;DV（Domain Validation）域名验证型证书，面向个体用户，可以通过邮箱验证、DNS验证或者文件验证&lt;/li&gt;
+&lt;li&gt;OV（Organization Validation）企业验证型证书，面向企业用户，CA 通过拨打信息库中公司的电话来确认；&lt;/li&gt;
+&lt;li&gt;EV（Extended Validation）增强验证型证书，证书审核级别为所有类型最严格验证方式， 银行，金融。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;3-openssl-安全套接字层密码库，实现自签名证书&quot;&gt;&lt;a href=&quot;#3-openssl-安全套接字层密码库，实现自签名证书&quot; class=&quot;headerlink&quot; title=&quot;3. openssl 安全套接字层密码库，实现自签名证书&quot;&gt;&lt;/a&gt;3. openssl 安全套接字层密码库，实现自签名证书&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;可参考系列文章：&lt;br&gt;&lt;a href=&quot;https://angellaugh.github.io/2023/04/01/openssl/&quot;&gt;openssl&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://angellaugh.github.io/2023/03/28/openssl_2_signed/&quot;&gt;openssl2:self-signed certificate&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+    <category term="openssl" scheme="https://angellaugh.github.io/tags/openssl/"/>
+    
+    <category term="ca" scheme="https://angellaugh.github.io/tags/ca/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Multiprocess_1 tasks</title>
+    <link href="https://angellaugh.github.io/2023/04/01/multiprotocol/"/>
+    <id>https://angellaugh.github.io/2023/04/01/multiprotocol/</id>
+    <published>2023-04-01T07:37:02.000Z</published>
+    <updated>2023-04-01T09:39:16.547Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+    <category term="multiprocess" scheme="https://angellaugh.github.io/tags/multiprocess/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenSSL2 self-signed certificate as root CA</title>
+    <link href="https://angellaugh.github.io/2023/03/28/openssl_2_signed/"/>
+    <id>https://angellaugh.github.io/2023/03/28/openssl_2_signed/</id>
+    <published>2023-03-28T14:41:02.000Z</published>
+    <updated>2023-04-02T12:19:24.356Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+    <category term="openssl" scheme="https://angellaugh.github.io/tags/openssl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://angellaugh.github.io/2023/03/28/trypassword/"/>
+    <id>https://angellaugh.github.io/2023/03/28/trypassword/</id>
+    <published>2023-03-28T14:18:02.000Z</published>
+    <updated>2023-03-28T14:25:05.620Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://angellaugh.github.io/2023/03/25/vx/"/>
+    <id>https://angellaugh.github.io/2023/03/25/vx/</id>
+    <published>2023-03-25T14:40:22.032Z</published>
+    <updated>2023-03-25T15:13:22.064Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">{&quot;created_time&quot;:&quot;2023-03-05T06:40:59Z&quot;,&quot;files&quot;:[{&quot;attachment_folder&quot;:&quot;&quot;,&quot;created_time&quot;:&quot;2023-03-05T06:40:59Z&quot;,&quot;id&quot;:&quot;2&quot;,&quot;modified_time&quot;:&quot;2023</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>RSA</title>
+    <link href="https://angellaugh.github.io/2023/03/24/RSA/"/>
+    <id>https://angellaugh.github.io/2023/03/24/RSA/</id>
+    <published>2023-03-24T13:39:49.583Z</published>
+    <updated>2023-03-24T13:43:19.500Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Table-of-Contents&quot;&gt;&lt;a href=&quot;#Table-of-Contents&quot; class=&quot;headerlink&quot; title=&quot;Table of Contents&quot;&gt;&lt;/a&gt;Table of Contents&lt;/h1&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KeyCloak</title>
+    <link href="https://angellaugh.github.io/2023/03/19/keycloak/"/>
+    <id>https://angellaugh.github.io/2023/03/19/keycloak/</id>
+    <published>2023-03-19T14:28:23.863Z</published>
+    <updated>2023-03-19T14:41:45.790Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;keycloak&quot;&gt;&lt;a href=&quot;#keycloak&quot; class=&quot;headerlink&quot; title=&quot;keycloak&quot;&gt;&lt;/a&gt;keycloak&lt;/h1&gt;&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenSSL</title>
+    <link href="https://angellaugh.github.io/2023/03/17/openssl/"/>
+    <id>https://angellaugh.github.io/2023/03/17/openssl/</id>
+    <published>2023-03-17T07:51:50.039Z</published>
+    <updated>2023-03-25T15:13:22.062Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;openssl&quot;&gt;&lt;a href=&quot;#openssl&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://angellaugh.github.io/2023/03/05/vx_images/vx/"/>
+    <id>https://angellaugh.github.io/2023/03/05/vx_images/vx/</id>
+    <published>2023-03-05T06:40:59.303Z</published>
+    <updated>2023-03-25T13:10:26.759Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">{&quot;created_time&quot;:&quot;2023-03-05T06:40:59Z&quot;,&quot;files&quot;:[{&quot;attachment_folder&quot;:&quot;&quot;,&quot;created_time&quot;:&quot;2023-03-05T06:40:59Z&quot;,&quot;id&quot;:&quot;2&quot;,&quot;modified_time&quot;:&quot;2023</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Suse</title>
+    <link href="https://angellaugh.github.io/2023/03/02/suse/"/>
+    <id>https://angellaugh.github.io/2023/03/02/suse/</id>
+    <published>2023-03-02T03:22:46.000Z</published>
+    <updated>2023-03-02T03:21:42.075Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;suse&quot;&gt;&lt;a href=&quot;#suse&quot; class=&quot;headerlink&quot; title=&quot;suse&quot;&gt;&lt;/a&gt;suse&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;zypper</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="SUSE" scheme="https://angellaugh.github.io/tags/SUSE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DailyEng Context.md</title>
+    <link href="https://angellaugh.github.io/2023/02/23/dailyEng/"/>
+    <id>https://angellaugh.github.io/2023/02/23/dailyEng/</id>
+    <published>2023-02-23T14:39:46.000Z</published>
+    <updated>2023-02-23T14:50:22.924Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;the intended audience 目标受众&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;the issuer 发行人&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    <category term="Eng" scheme="https://angellaugh.github.io/categories/Eng/"/>
+    
+    
+    <category term="DailyEng" scheme="https://angellaugh.github.io/tags/DailyEng/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SAML 2.0</title>
+    <link href="https://angellaugh.github.io/2023/02/23/saml2/"/>
+    <id>https://angellaugh.github.io/2023/02/23/saml2/</id>
+    <published>2023-02-23T14:38:19.215Z</published>
+    <updated>2023-03-05T09:34:55.052Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SAML2-0&quot;&gt;&lt;a href=&quot;#SAML2-0&quot; class=&quot;headerlink&quot; title=&quot;SAML2.0&quot;&gt;&lt;/a&gt;SAML2.0&lt;/h1&gt;&lt;h3 id=&quot;Conception&quot;&gt;&lt;a href=&quot;#Conception&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OIDC and SAML</title>
+    <link href="https://angellaugh.github.io/2023/02/19/OIDCandSAML/"/>
+    <id>https://angellaugh.github.io/2023/02/19/OIDCandSAML/</id>
+    <published>2023-02-19T09:59:46.000Z</published>
+    <updated>2023-02-23T14:52:40.815Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;OIDC-and-SAML&quot;&gt;&lt;a href=&quot;#OIDC-and-SAML&quot; class=&quot;headerlink&quot; title=&quot;OIDC and SAML&quot;&gt;&lt;/a&gt;OIDC and SAML&lt;/h1&gt;&lt;h3</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="cirrus" scheme="https://angellaugh.github.io/tags/cirrus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>202202112324</title>
+    <link href="https://angellaugh.github.io/2023/02/11/202202112324/"/>
+    <id>https://angellaugh.github.io/2023/02/11/202202112324/</id>
+    <published>2023-02-11T15:24:19.000Z</published>
+    <updated>2023-02-12T11:21:03.569Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;哈利路亚&lt;/p&gt;
+</summary>
+        
+      
+    
+    
+    
+    
+    <category term="test" scheme="https://angellaugh.github.io/tags/test/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>metadata</title>
+    <link href="https://angellaugh.github.io/2023/02/11/metadata/"/>
+    <id>https://angellaugh.github.io/2023/02/11/metadata/</id>
+    <published>2023-02-11T12:42:46.000Z</published>
+    <updated>2023-02-12T11:21:03.571Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;ask-Pytest-to-automatically-provision-the-environment&quot;&gt;&lt;a href=&quot;#ask-Pytest-to-automatically-provision-the-environment&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="metadata" scheme="https://angellaugh.github.io/tags/metadata/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>es-suse</title>
+    <link href="https://angellaugh.github.io/2023/02/11/es-suse/"/>
+    <id>https://angellaugh.github.io/2023/02/11/es-suse/</id>
+    <published>2023-02-11T12:39:46.000Z</published>
+    <updated>2023-03-05T06:50:01.964Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;1-hostnamectl-set-hostname-ES-suse&quot;&gt;&lt;a href=&quot;#1-hostnamectl-set-hostname-ES-suse&quot; class=&quot;headerlink&quot; title=&quot;1. hostnamectl</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="ES" scheme="https://angellaugh.github.io/tags/ES/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES</title>
+    <link href="https://angellaugh.github.io/2023/02/11/ES/"/>
+    <id>https://angellaugh.github.io/2023/02/11/ES/</id>
+    <published>2023-02-11T12:37:46.000Z</published>
+    <updated>2023-02-12T11:21:03.570Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;sudo zypper refresh&lt;br&gt;sudo zypper update -y&lt;br&gt;sudo zypper install yum&lt;/p&gt;
+&lt;h3 id=&quot;Import-the-Elasticsearch-GPG-Key&quot;&gt;&lt;a href=&quot;#Import-the-Elasticsearch-GPG-Key&quot; class=&quot;headerlink&quot; title=&quot;Import the Elasticsearch GPG Key&quot;&gt;&lt;/a&gt;Import the Elasticsearch GPG Key&lt;/h3&gt;&lt;p&gt;&lt;code&gt;sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Install-Elasticsearch-from-the-RPM-repository&quot;&gt;&lt;a href=&quot;#Install-Elasticsearch-from-the-RPM-repository&quot; class=&quot;headerlink&quot; title=&quot;Install Elasticsearch from the RPM repository&quot;&gt;&lt;/a&gt;Install Elasticsearch from the RPM repository&lt;/h3&gt;&lt;p&gt;create elasticsearch.repo and config the es install repo&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo vim /etc/zypp/repos.d/elasticsearch.repo&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="ES" scheme="https://angellaugh.github.io/tags/ES/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>diango</title>
+    <link href="https://angellaugh.github.io/2023/02/11/django/"/>
+    <id>https://angellaugh.github.io/2023/02/11/django/</id>
+    <published>2023-02-11T05:43:46.000Z</published>
+    <updated>2023-02-12T11:21:03.571Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="django" scheme="https://angellaugh.github.io/tags/django/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flask</title>
+    <link href="https://angellaugh.github.io/2023/02/11/flask/"/>
+    <id>https://angellaugh.github.io/2023/02/11/flask/</id>
+    <published>2023-02-11T05:30:46.000Z</published>
+    <updated>2023-02-11T05:31:43.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;flask&quot;&gt;&lt;a href=&quot;#flask&quot; class=&quot;headerlink&quot; title=&quot;flask&quot;&gt;&lt;/a&gt;flask&lt;/h1&gt;&lt;p&gt;FLASK_APP=/usr/local/devcodes/powerload-web</summary>
+        
+      
+    
+    
+    
+    <category term="Teckknowledge" scheme="https://angellaugh.github.io/categories/Teckknowledge/"/>
+    
+    
+    <category term="flask" scheme="https://angellaugh.github.io/tags/flask/"/>
+    
+  </entry>
+  
+</feed>

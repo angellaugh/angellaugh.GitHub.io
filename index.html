@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+<script>
+(function(){
+    if(''){
+        if (prompt('请输入文章密码') !== ''){
+            alert('密码错误！');
+            history.back();
+        }
+    }
+})();
+</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="技术，生活，艺术，旅行，都记录下来">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Angellaugh&#39;s blog">
+<meta property="og:url" content="https://angellaugh.github.io/index.html">
+<meta property="og:site_name" content="Angellaugh&#39;s blog">
+<meta property="og:description" content="技术，生活，艺术，旅行，都记录下来">
+<meta property="og:locale">
+<meta property="article:author" content="Angellaugh">
+<meta property="article:tag" content="java, python, javascript, linux, storage, db, performance">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://angellaugh.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Angellaugh's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Angellaugh's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Angellaugh's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录琐碎</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/02/openssl_ca2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/02/openssl_ca2/" class="post-title-link" itemprop="url">openssl_ca2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-04-02 11:11:02 / Modified: 14:48:37" itemprop="dateCreated datePublished" datetime="2023-04-02T11:11:02+08:00">2023-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-CA-简介-amp-范例"><a href="#1-CA-简介-amp-范例" class="headerlink" title="1. CA 简介 &amp; 范例"></a>1. CA 简介 &amp; 范例</h2><p>**CA **= certificate authority签证机构<br>提供证书（服务器证书，由域名、公司信息、序列号和签名信息组成）</p>
+<p><strong>SSL:</strong> Secure Sockets Layer（安全套接层协议), 与HTTPS一起诞生<br><strong>TLS:</strong> TLS，Transport Layer Security（传输层安全性协议）， 是SSL 标准化<br><mark><strong>SSL &amp; TLS： 本质是同一个东东</strong></mark></p>
+<p><strong>证书包含：</strong></p>
+<ol>
+<li>public key、</li>
+<li>名称、 </li>
+<li><mark>CA的数字签名</mark></li>
+<li>有效时间，</li>
+<li>签证机关的名称，</li>
+<li>该证书的序列号等信息</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 2.4. View the issued CA</span></span><br><span class="line">```bash</span><br><span class="line">CIAM-ali1:~/CAcerts <span class="comment"># openssl x509 -text -noout -in server.pem</span></span><br><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: 3 (0x2)</span><br><span class="line">        Serial Number: 4096 (0x1000)</span><br><span class="line">        Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">        <span class="comment"># 签证机构</span></span><br><span class="line">        Issuer: C = CN, ST = Shanghai, L = Shanghai, O = Dell, OU = Dell</span><br><span class="line">        <span class="comment">#有效期</span></span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Mar 27 08:22:59 2023 GMT</span><br><span class="line">            Not After : Mar 26 08:22:59 2024 GMT</span><br><span class="line">        <span class="comment"># 名字    </span></span><br><span class="line">        Subject: C = CN, ST = Shanghai, O = Dell, OU = Dell, CN = ciam-ali1.west.isilon.com</span><br><span class="line">        <span class="comment">#public key</span></span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: rsaEncryption</span><br><span class="line">                RSA Public-Key: (2048 bit)</span><br><span class="line">                Modulus:</span><br><span class="line">                    00:e8:53:ef:bd:b0:e9:99:2b:af:35:da:2e:b5:81:</span><br><span class="line">                    61:18:17:7a:7b:69:a0:46:c1:c2:ee:24:d7:36:52:</span><br><span class="line">                    e9:5c:3d:49:ea:be:31:54:e0:a5:ff:a9:e1:19:b3:</span><br><span class="line">                    81:8a:38:9e:a3:fa:62:23:b0:85:07:d1:35:3e:40:</span><br><span class="line">                    7c:1a:68:1d:a8:6b:08:01:c8:95:d3:85:09:b0:7c:</span><br><span class="line">                    60:85:dc:13:dc:91:a2:73:ee:f3:7e:42:80:99:24:</span><br><span class="line">                    4f:09:13:91:9b:da:87:ee:ae:f2:ec:d9:9e:a6:75:</span><br><span class="line">                    1d:e3:c6:cf:78:58:7d:2a:7e:8e:cf:65:30:60:ab:</span><br><span class="line">                    42:6b:6d:76:f8:f2:46:de:c3:b5:4b:c9:60:39:24:</span><br><span class="line">                    a0:5e:59:0c:b3:30:9e:3b:67:ae:d4:5f:53:6e:63:</span><br><span class="line">                    47:92:dc:0c:39:9f:a6:39:b0:45:82:5b:e1:4d:a8:</span><br><span class="line">                    ed:75:96:8a:98:32:49:f6:9b:a3:6e:69:91:f0:18:</span><br><span class="line">                    2e:66:9e:ca:77:7e:b3:a6:96:d6:4a:e1:b1:51:a3:</span><br><span class="line">                    1f:7d:d2:5f:41:ce:1c:02:c2:42:aa:b5:3b:61:1c:</span><br><span class="line">                    9f:b9:45:70:fe:85:d0:d8:a3:6f:e5:e8:3d:9f:9e:</span><br><span class="line">                    6d:53:57:f9:0f:0a:56:a4:f5:77:bb:4a:ff:<span class="built_in">fc</span>:8a:</span><br><span class="line">                    4a:67:e1:82:43:f1:7b:16:5a:80:1b:8f:da:f4:c4:</span><br><span class="line">                    25:0d</span><br><span class="line">                Exponent: 65537 (0x10001)</span><br><span class="line">        X509v3 extensions:</span><br><span class="line">            X509v3 Basic Constraints:</span><br><span class="line">                CA:FALSE</span><br><span class="line">            X509v3 Subject Key Identifier:</span><br><span class="line">                D1:4F:3F:CD:DC:17:7E:50:38:A8:50:D6:EA:2C:BA:3D:6C:62:35:A1</span><br><span class="line">            X509v3 Extended Key Usage:</span><br><span class="line">                TLS Web Server Authentication</span><br><span class="line">            X509v3 Subject Alternative Name:</span><br><span class="line">                DNS:ciam-ali1.west.isilon.com</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">         09:6b:25:4e:ca:a1:<span class="built_in">fc</span>:2c:bb:35:5f:65:c8:47:92:7a:a1:53:</span><br><span class="line">         b7:fd:6e:41:5a:39:32:35:87:b1:24:de:83:6e:23:6c:67:49:</span><br><span class="line">         47:ba:91:de:7a:b1:81:f3:0a:3a:d3:25:35:13:6d:0f:d9:77:</span><br><span class="line">         a4:6a:7e:a6:72:06:d9:b1:95:15:36:61:46:a4:b7:0f:16:c3:</span><br><span class="line">         41:55:aa:e1:5c:93:28:4b:f0:9b:74:04:a1:08:59:97:23:c9:</span><br><span class="line">         1b:17:d0:38:7d:74:e4:9a:42:e2:f7:0a:2d:01:8d:d3:7f:57:</span><br><span class="line">         eb:b8:08:2e:fe:5f:b1:86:90:d2:97:64:9e:9a:61:51:06:9e:</span><br><span class="line">         7c:25:a9:87:5c:63:e6:d5:18:9b:cb:0e:20:71:77:06:fd:2e:</span><br><span class="line">         0f:c1:b9:21:75:34:ec:5a:11:4d:48:f8:4d:de:67:7a:f4:e6:</span><br><span class="line">         3c:a1:4a:01:40:8f:ce:2c:c1:ae:5e:52:66:0d:6c:29:7b:f0:</span><br><span class="line">         b3:ce:ae:b2:cf:13:d1:0e:ed:83:e3:15:16:5a:8c:ba:15:45:</span><br><span class="line">         08:46:b6:63:92:66:ab:2c:2c:1c:f6:2c:34:d9:7d:9f:b6:d3:</span><br><span class="line">         07:34:72:bb:89:81:27:d0:88:0f:b9:3e:e8:f2:3a:3c:7f:5c:</span><br><span class="line">         88:88:1b:77:7a:41:a9:c9:99:2f:e5:76:87:8e:26:ec:85:c0:</span><br><span class="line">         12:ac:02:25</span><br><span class="line">CIAM-ali1:~/CAcerts <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="vx_images/116433111278673.png"><br><img src="/uploads/116433111278673.png"></p>
+<p><strong>个人或组织提交CRS 给 CA 机构， CA签发</strong></p>
+<h2 id="2-SSL-amp-TLS-安全套接协议"><a href="#2-SSL-amp-TLS-安全套接协议" class="headerlink" title="2. SSL&amp;TLS  安全套接协议"></a>2. SSL&amp;TLS  安全套接协议</h2><p><MARK>SSL: Secure Sockets Layer（安全套接层协议), 与HTTPS一起诞生<br>TLS: TLS，Transport Layer Security（传输层安全性协议）， 是SSL 标准化<br>SSL &amp; TLS： 本质是同一个东东</MARK></p>
+<blockquote>
+<p>SSL是 Secure Sockets Layer（安全套接层协议）的缩写。由网景公司再1994年随HTTPS一起推出。<br>后交由IETF将SSL进行标准化，并改名为 TLS，Transport Layer Security（传输层安全性协议）。<br>所以 TLS 是 SSL 改个名而已，其实是一个东西。</p>
+</blockquote>
+<h3 id="2-1-SSL-分两层：-record-layer记录层-和-传输层"><a href="#2-1-SSL-分两层：-record-layer记录层-和-传输层" class="headerlink" title="2.1. SSL 分两层： record layer记录层 和 传输层"></a>2.1. SSL 分两层： record layer记录层 和 传输层</h3><p>记录层： 确定传输层的封装格式<br>传输层： 使用x509认证<br>然后，用非对称加密算法来对双方进行身份认证<br>再然后，<mark>交换对称密钥，作为session key，</mark> 给通信双方的data做加密</p>
+<h3 id="2-2-SSL-证书有三种：-DV-OV-EV"><a href="#2-2-SSL-证书有三种：-DV-OV-EV" class="headerlink" title="2.2. SSL 证书有三种： DV, OV, EV"></a>2.2. SSL 证书有三种： DV, OV, EV</h3><ul>
+<li>DV（Domain Validation）域名验证型证书，面向个体用户，可以通过邮箱验证、DNS验证或者文件验证</li>
+<li>OV（Organization Validation）企业验证型证书，面向企业用户，CA 通过拨打信息库中公司的电话来确认；</li>
+<li>EV（Extended Validation）增强验证型证书，证书审核级别为所有类型最严格验证方式， 银行，金融。</li>
+</ul>
+<h2 id="3-openssl-安全套接字层密码库，实现自签名证书"><a href="#3-openssl-安全套接字层密码库，实现自签名证书" class="headerlink" title="3. openssl 安全套接字层密码库，实现自签名证书"></a>3. openssl 安全套接字层密码库，实现自签名证书</h2><blockquote>
+<p>可参考系列文章：<br><a href="https://angellaugh.github.io/2023/04/01/openssl/">openssl</a><br><a href="https://angellaugh.github.io/2023/03/28/openssl_2_signed/">openssl2:self-signed certificate</a></p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/02/openssl_ca2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/01/multiprotocol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/01/multiprotocol/" class="post-title-link" itemprop="url">Multiprocess_1 tasks</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-04-01 15:37:02 / Modified: 17:39:16" itemprop="dateCreated datePublished" datetime="2023-04-01T15:37:02+08:00">2023-04-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">core_num = multiprocessing.cpu_count()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;corenum: <span class="subst">&#123;core_num&#125;</span>&quot;</span>)</span><br><span class="line">clients = [<span class="string">&quot;eb380adf-8fe8-45dd-825f-4e7da940eca9&quot;</span>,<span class="string">&quot;990f5d3c-5e5f-4af8-b68b-1329272ac3b4&quot;</span>,</span><br><span class="line">           <span class="string">&quot;15cc0813-8a2e-4a90-9ba6-7a8ddf3bd32d&quot;</span>,<span class="string">&quot;5bf8729e-fb28-476e-b054-5a0656dc4fed&quot;</span>,</span><br><span class="line">           <span class="string">&quot;27a1e6bb-439b-475e-bbcf-9744622992cd&quot;</span>,<span class="string">&quot;6491b68c-5360-4638-8194-da9f5431c4eb&quot;</span>,</span><br><span class="line">           <span class="string">&quot;da2fd513-acdc-48e9-b9fe-c0de13e90eb0&quot;</span>,<span class="string">&quot;f75d48b0-74ab-4d96-b8a7-4357985e78bc&quot;</span>,</span><br><span class="line">           <span class="string">&quot;d76c8dbe-0821-4736-a4fa-9b60dc331fec&quot;</span>,<span class="string">&quot;354f9ef4-1481-469a-9e6a-9cef076b4ac0&quot;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">将clients_list 按core_num 随机分布client数量，这里core=4，</span></span><br><span class="line"><span class="string">那么会将 clients 分成四组，for 循环每次调用 chunks，都取一组给 for clients_，</span></span><br><span class="line"><span class="string">然后 for clients_ 可以拿去做事。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">chunks</span>(<span class="params">clients_list, num</span>):</span><br><span class="line">    d, r = <span class="built_in">divmod</span>(<span class="built_in">len</span>(clients_list), num)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;d and r: <span class="subst">&#123;d&#125;</span>, <span class="subst">&#123;r&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">        si = (d + <span class="number">1</span>) * (i <span class="keyword">if</span> i &lt; r <span class="keyword">else</span> r) + d * (<span class="number">0</span> <span class="keyword">if</span> i &lt; r <span class="keyword">else</span> i - r)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;si: <span class="subst">&#123;si&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">yield</span> clients_list[si:si + (d + <span class="number">1</span> <span class="keyword">if</span> i &lt; r <span class="keyword">else</span> d)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> clients_ <span class="keyword">in</span> chunks(clients, core_num):</span><br><span class="line">    <span class="keyword">from</span> pdb <span class="keyword">import</span> set_trace</span><br><span class="line">    set_trace()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;clients_: <span class="subst">&#123;clients_&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;chunks: <span class="subst">&#123;chunks&#125;</span>&quot;</span>)</span><br><span class="line">```    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">```bash</span><br><span class="line"></span><br><span class="line">    corenum: <span class="number">8</span></span><br><span class="line">    d <span class="keyword">and</span> r: <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">    si: <span class="number">0</span></span><br><span class="line">    ipdb&gt; l</span><br><span class="line">    ipdb&gt; clients_</span><br><span class="line">    [<span class="string">&#x27;eb380adf-8fe8-45dd-825f-4e7da940eca9&#x27;</span>, <span class="string">&#x27;990f5d3c-5e5f-4af8-b68b-1329272ac3b4&#x27;</span>]</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    clients_: [<span class="string">&#x27;eb380adf-8fe8-45dd-825f-4e7da940eca9&#x27;</span>, <span class="string">&#x27;990f5d3c-5e5f-4af8-b68b-1329272ac3b4&#x27;</span>]</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    chunks: &lt;function chunks at <span class="number">0x10c2f6310</span>&gt;</span><br><span class="line">    ipdb&gt; s</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; i</span><br><span class="line">    <span class="number">1</span></span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    si: <span class="number">2</span></span><br><span class="line">    ipdb&gt; si=<span class="number">2</span>,  i1&lt;r2所以返回d+<span class="number">1</span>=<span class="number">3</span>, 也就是返回clients_list[<span class="number">2</span>:<span class="number">2</span>+<span class="number">3</span>],即第<span class="number">3</span>，<span class="number">4</span>，<span class="number">5</span>个元素]</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    &gt; [<span class="number">0</span>;32m&lt;ipython-<span class="built_in">input</span>-<span class="number">1</span>-fca5ddbf22de&gt;[0m(<span class="number">30</span>)[<span class="number">0</span>;36m&lt;module&gt;[<span class="number">0</span>;34m()[0m</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    clients_: [<span class="string">&#x27;15cc0813-8a2e-4a90-9ba6-7a8ddf3bd32d&#x27;</span>, <span class="string">&#x27;5bf8729e-fb28-476e-b054-5a0656dc4fed&#x27;</span>]</span><br><span class="line">    ipdb&gt; s</span><br><span class="line">     ipdb&gt; n</span><br><span class="line">    si: <span class="number">4</span></span><br><span class="line"> </span><br><span class="line">    ipdb&gt; i</span><br><span class="line">    <span class="number">2</span></span><br><span class="line">    ipdb&gt; si=<span class="number">4</span>, i=<span class="number">2</span>不小于r=<span class="number">2</span>,于是返回d，[<span class="number">4</span>,<span class="number">6</span>] 第<span class="number">5</span>，<span class="number">6</span>个元素</span><br><span class="line">    *** SyntaxError: cannot assign to literal</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    clients_: [<span class="string">&#x27;27a1e6bb-439b-475e-bbcf-9744622992cd&#x27;</span>]   </span><br><span class="line">    ipdb&gt; 哦 上一步应该是[<span class="number">4</span>,<span class="number">5</span>] d=<span class="number">1</span>记错了</span><br><span class="line">    *** SyntaxError: invalid syntax</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    chunks: &lt;function chunks at <span class="number">0x10c2f6310</span>&gt;</span><br><span class="line">    ipdb&gt; s</span><br><span class="line">    --Call--</span><br><span class="line">    &gt; [<span class="number">0</span>;32m&lt;ipython-<span class="built_in">input</span>-<span class="number">1</span>-fca5ddbf22de&gt;[0m(<span class="number">25</span>)[<span class="number">0</span>;36mchunks[<span class="number">0</span>;34m()[0m</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    si: <span class="number">5</span></span><br><span class="line">    &gt; [<span class="number">0</span>;32m&lt;ipython-<span class="built_in">input</span>-<span class="number">1</span>-fca5ddbf22de&gt;[0m(<span class="number">25</span>)[<span class="number">0</span>;36mchunks[<span class="number">0</span>;34m()[0m</span><br><span class="line">    ipdb&gt; i</span><br><span class="line">    <span class="number">3</span></span><br><span class="line">    ipdb&gt; d</span><br><span class="line">    *** Newest frame</span><br><span class="line">    ipdb&gt; si=<span class="number">5</span>, 返回 <span class="number">5</span>+<span class="number">1</span>，也就是[<span class="number">5</span>,<span class="number">6</span>] 一个元素</span><br><span class="line">    *** SyntaxError: invalid syntax</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    clients_: [<span class="string">&#x27;6491b68c-5360-4638-8194-da9f5431c4eb&#x27;</span>]</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    chunks: &lt;function chunks at <span class="number">0x10c2f6310</span>&gt;</span><br><span class="line">    ipdb&gt; s</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    si: <span class="number">6</span></span><br><span class="line">    ipdb&gt; i</span><br><span class="line">    <span class="number">4</span></span><br><span class="line">    ipdb&gt; [<span class="number">6</span>:<span class="number">6</span>+<span class="number">1</span>]</span><br><span class="line">    *** SyntaxError: invalid syntax</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    clients_: [<span class="string">&#x27;da2fd513-acdc-48e9-b9fe-c0de13e90eb0&#x27;</span>]</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    chunks: &lt;function chunks at <span class="number">0x10c2f6310</span>&gt;</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    si: <span class="number">7</span></span><br><span class="line">    ipdb&gt; [<span class="number">7</span>,<span class="number">8</span>]</span><br><span class="line">    [<span class="number">7</span>, <span class="number">8</span>]</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    chunks: &lt;function chunks at <span class="number">0x10c2f6310</span>&gt;</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    si: <span class="number">8</span></span><br><span class="line">    ipdb&gt; [<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">    [<span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">    clients_: [<span class="string">&#x27;d76c8dbe-0821-4736-a4fa-9b60dc331fec&#x27;</span>]</span><br><span class="line"> </span><br><span class="line">    [0m</span><br><span class="line">    ipdb&gt; [<span class="number">9</span>,<span class="number">10</span>] 到这一步就结束啦</span><br><span class="line">    *** SyntaxError: invalid syntax</span><br><span class="line">    ipdb&gt; n</span><br><span class="line">    clients_: [<span class="string">&#x27;354f9ef4-1481-469a-9e6a-9cef076b4ac0&#x27;</span>]</span><br><span class="line">    ipdb&gt; 分给了<span class="number">8</span>个进程，第一个进程有<span class="number">3</span>个client要执行，另外<span class="number">7</span>个进程每个执行一个client</span><br><span class="line">    *** SyntaxError: invalid character <span class="string">&#x27;，&#x27;</span> (U+FF0C)</span><br><span class="line">    ipdb&gt; n</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/28/openssl_2_signed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/28/openssl_2_signed/" class="post-title-link" itemprop="url">OpenSSL2 self-signed certificate as root CA</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-28 22:41:02" itemprop="dateCreated datePublished" datetime="2023-03-28T22:41:02+08:00">2023-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-04-02 20:19:24" itemprop="dateModified" datetime="2023-04-02T20:19:24+08:00">2023-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/28/openssl_2_signed/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/28/trypassword/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/28/trypassword/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-28 22:18:02 / Modified: 22:25:05" itemprop="dateCreated datePublished" datetime="2023-03-28T22:18:02+08:00">2023-03-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/28/trypassword/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/25/vx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/25/vx/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-25 22:40:22 / Modified: 23:13:22" itemprop="dateCreated datePublished" datetime="2023-03-25T22:40:22+08:00">2023-03-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          {"created_time":"2023-03-05T06:40:59Z","files":[{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"2","modified_time":"2023-03-05T06:40:59Z","name":"202202112324.md","signature":"4719715249442535803","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"3","modified_time":"2023-03-05T06:40:59Z","name":"dailyEng.md","signature":"8085520616389884283","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"4","modified_time":"2023-03-05T06:40:59Z","name":"django.md","signature":"9178034990821423483","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"5","modified_time":"2023-03-05T06:40:59Z","name":"es-suse.md","signature":"6698120998665075067","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"6","modified_time":"2023-03-05T06:40:59Z","name":"ES.md","signature":"8915416213325363579","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"7","modified_time":"2023-03-05T06:40:59Z","name":"flask.md","signature":"2740285223534344571","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"8","modified_time":"2023-03-05T06:40:59Z","name":"hello-world.md","signature":"3929625289147300219","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"9","modified_time":"2023-03-05T06:40:59Z","name":"metadata.md","signature":"8296401839881206139","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"10","modified_time":"2023-03-05T06:40:59Z","name":"OIDCandSAML.md","signature":"6022850194390137211","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"11","modified_time":"2023-03-05T09:34:55Z","name":"saml2.md","signature":"8315186124163398011","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"12","modified_time":"2023-03-05T06:40:59Z","name":"suse.md","signature":"8868577589212756347","tags":[]},{"attachment_folder":"","created_time":"2023-03-17T07:51:50Z","id":"13","modified_time":"2023-03-25T15:13:22Z","name":"openssl.md","signature":"207324045384726","tags":[]},{"attachment_folder":"","created_time":"2023-03-17T08:25:42Z","id":"14","modified_time":"2023-03-19T14:41:45Z","name":"keycloak.md","signature":"784285914969154566","tags":[]}],"folders":[],"id":"1","modified_time":"2023-03-05T06:40:59Z","signature":"5459487176784099707","version":3}
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/24/RSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/24/RSA/" class="post-title-link" itemprop="url">RSA</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-24 21:39:49 / Modified: 21:43:19" itemprop="dateCreated datePublished" datetime="2023-03-24T21:39:49+08:00">2023-03-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1> <p>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪随机数生成器</span></span><br><span class="line">random_generator = Random.new().read</span><br><span class="line"><span class="comment"># rsa算法生成实例</span></span><br><span class="line">rsa = RSA.generate(<span class="number">2048</span>, random_generator)</span><br><span class="line"><span class="built_in">print</span>(rsa)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(rsa))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Private RSA key at 0x10C4B8EB0
+[&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;, &#39;_d&#39;, &#39;_decrypt&#39;, &#39;_dp&#39;, &#39;_dq&#39;, &#39;_e&#39;, &#39;_encrypt&#39;, &#39;_invq&#39;, &#39;_n&#39;, &#39;_p&#39;, &#39;_q&#39;, &#39;_u&#39;, &#39;blind&#39;, &#39;can_encrypt&#39;, &#39;can_sign&#39;, &#39;d&#39;, &#39;decrypt&#39;, &#39;dp&#39;, &#39;dq&#39;, &#39;e&#39;, &#39;encrypt&#39;, &#39;exportKey&#39;, &#39;export_key&#39;, &#39;has_private&#39;, &#39;invp&#39;, &#39;invq&#39;, &#39;n&#39;, &#39;p&#39;, &#39;public_key&#39;, &#39;publickey&#39;, &#39;q&#39;, &#39;sign&#39;, &#39;size&#39;, &#39;size_in_bits&#39;, &#39;size_in_bytes&#39;, &#39;u&#39;, &#39;unblind&#39;, &#39;verify&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 私钥的生成</span></span><br><span class="line">private_pem = rsa.exportKey()</span><br><span class="line"><span class="built_in">print</span>(private_pem)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"><span class="comment"># 公钥的生成</span></span><br><span class="line">public_pem = rsa.publickey().exportKey()</span><br><span class="line"><span class="built_in">print</span>(public_pem)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
+
+<pre><code>b&#39;-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAviJUuLHbi5CByimMRxCqFhQ7B+zga/Tk1k0D06+Lrm6Kb0HO\nvhIcmWIMCW1eeBV0Aa2PniH+qLjRhQMqz7tDhe6O6ZBc046p0CToOlaPyjFFrNvA\nP+jwqeaFFFcDNo0J9lXuv5TH4q4JvQennna/pQUQQg+pTPmC74ampQkq7p7vOb3Z\nvdRmU6IKDUKIIG/3JrWNQJ4lcmNymA9pt/QiduNik33EIRNf+5cHkD3hScrWqKOW\naQYnMdOfCet7/ItfKOIAucuV2GMetuGto+HETm0ZN8Lr05V+otqn0SsU4Wo6xTlL\nxFMIAS698RkZkqbDC0+86dHbT/fiW1MpYGcKVwIDAQABAoIBABEsaambCwECpu57\nLTv4Adznq+NN3oFxx7+hijBzITM6sc9VytY5LZMfG4Y4djlzepxyMFAwst9LfkU8\n4X+M4w70Wr02+GN1ddoik0U9r1QseiYgXS+Im0BFXYzWRSiGubkhzuRIDHvpi2Cj\nEd1KzYmauPq2jmyw9sYqy9+JQfL2iQ9f4mkTu9fN5H+h0Mkx4imFVbBG0cHlxBg+\noI5QAccrLlbVsHoFrykqtilu4kUPQ6u5KnK3xyrIS6QVoA2zsEf01ikua5DDY3UR\naFNNn0IM6U0T6nZiUkvV4ySXSxCsG8Kf0Kr26ly+10HUYniwcGgygtW/cijjjDaZ\nYWAwu0UCgYEAyRvz35KNZrOfQyn2d25QQp8HRKnL9wY8rzL0XojSPzK9T/yvctWa\n4HBxPuzd6oaUOJH9EGmR+/P6S/mfU3Qik7MOQJt7yVD7MWjpBcq0NFtjOD5lwYOV\n82tf7EG45hBIG+IDhFrzxWefQn1axhQeMeGc1U+1V3tq6TIKH8s/umMCgYEA8geE\n69WZWBW9hokSDZThsgETMO2jicAiyO4aKm6+71ibNNyP2wbq21Hk67oOThSaP5g0\nIMMMujEMqW7S3c9H0drCpCiUUB8Nni+uxd/MCbQbZnTCcqFEuyYsOAadmJQlzK/O\n0SxeZxfgOV0N6Lbo36v2SC7INYn2Yhfwcn8dWH0CgYB30i64KzISWbzvIGZXfCNX\nvjZvY5dBo7auT/anCG/z9YAz0wKZscjoJjZi3m/N1sci+WBE0hGHgzLC54RVDaG4\nTHuWZM0ZAiXXp4EG0WISu8xe61ZnOMYz1Oq+8d1/PX4pFr0vs50AJaAO1m8qCzx+\nTcTKlwYdjEwDiqvbi5Z5rwKBgQDWZ9TXuuRaRQAdk4X7pB2APDWNDafnWt810sA5\nQNxCWeM8o/uIU4tweQ7ryGntv5CZr7LWJxQ6SUNnQXbp6js8a6gsFoq0o53DuYgB\nYO121yfCzsKHG9gwVnOruiiYRv1pY4E6iiyi9WK8TnQI6ShJJSRK866Gx04NvhlS\nxMrxXQKBgGzb7nen/DoOhoasJLwTtFqUQI+xs09pkabi4oP0vYYXlYFdbhPoRNdZ\nzaxqSlPN4c/IqEpwv/gCplYrwdkb2+RfPbtIFtsEZIbhjR7qJSME+mqfrd3X4qlK\ngEeJ3howUYPd0y6ppepDQiAxcE4el8FDeV9OHPCfuQGzw0uB+QUe\n-----END RSA PRIVATE KEY-----&#39;
+b&#39;-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAviJUuLHbi5CByimMRxCq\nFhQ7B+zga/Tk1k0D06+Lrm6Kb0HOvhIcmWIMCW1eeBV0Aa2PniH+qLjRhQMqz7tD\nhe6O6ZBc046p0CToOlaPyjFFrNvAP+jwqeaFFFcDNo0J9lXuv5TH4q4JvQennna/\npQUQQg+pTPmC74ampQkq7p7vOb3ZvdRmU6IKDUKIIG/3JrWNQJ4lcmNymA9pt/Qi\nduNik33EIRNf+5cHkD3hScrWqKOWaQYnMdOfCet7/ItfKOIAucuV2GMetuGto+HE\nTm0ZN8Lr05V+otqn0SsU4Wo6xTlLxFMIAS698RkZkqbDC0+86dHbT/fiW1MpYGcK\nVwIDAQAB\n-----END PUBLIC KEY-----&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Cipher_pkcs1_v1_5</span><br><span class="line"><span class="keyword">import</span> base64</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密  注意每次加密后的字符串都不一样，跟对数据的padding 有关。</span></span><br><span class="line"><span class="comment"># 加密时支持的最大字节数：证书位数/8 -11（比如：2048位的证书，支持的最大加密字节数：2048/8 - 11 = 245）</span></span><br><span class="line"><span class="comment"># 1024位的证书，加密时最大支持117个字节，解密时为128；</span></span><br><span class="line"><span class="comment"># 2048位的证书，加密时最大支持245个字节，解密时为256。</span></span><br><span class="line"><span class="comment"># 如果需要加密的字节数超出证书能加密的最大字节数，此时就需要进行分段加密。</span></span><br><span class="line">message = <span class="string">&quot;Hello,This is RSA加密&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拿到公钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is RSA 读取到的公钥:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rsakey)</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过公钥，创建用于执行pkcs1_v1_5加密或解密的密码</span></span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Here is 用公钥生成的密码:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"><span class="comment"># 用公钥创建的密码来加密message</span></span><br><span class="line">message_enc = cipher.encrypt(message.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用公钥创建的密码来加密的message:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(message_enc)</span><br><span class="line"><span class="comment"># base64 将二进制加密过的message转成文本</span></span><br><span class="line">cipher_text = base64.b64encode(message_enc)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;base64 将二进制转成文本的message&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher_text.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Here is RSA 读取到的公钥:
+Public RSA key at 0x10C4BDE50
+Here is 用公钥生成的密码:
+&lt;Crypto.Cipher.PKCS1_v1_5.PKCS115_Cipher object at 0x10c4bd370&gt;
+Here is 用公钥创建的密码来加密的message:
+b&#39;&lt;\xaf\xe3\xc1\x95MmL\x7f\x0b\xe6=J#ba\x98z\xb5\xb2\x9a\xb4\xbc\x9fC\x1c\xc0-\xfd\x80\xfc\xb3\x9c\xe4\x96\xa5\x8b?\xaa)\x84n9\x0c\x8f\x99?uXTp\xf3\xd6\x07lV\xe3\t\xbf\x8b\xea\xa5Dn\x80\xf5\x89\xeag\xa8J\xbc\x08\xabB\x1e\xc9\xbb\xe7m\xf8\t\xc6@\xc7[\x16,2\r\x1d=y?\xa0\x95\xcd\x8bxs\x8d@\x97R-\xea\xa3\xb1\xcc\x0f\x89\xb5\xe0:QPwj\xc0zY\xe9\xeb\x17\xf6\xd0\xef&gt;\xd7*\x7f\x97\x8f\x0f=\x06\xb0&lt;G\xe4\x00 pv\x8f&lt;\xb5\xb4f\x0f\xbd\x06J8\x7f\x84M\xa4js\xc7\x1a\xa6\xaf\xe9:@\x88\x18\xed\x8f\x96fvI\xfd\xe2i\x0e\x87\xa1RR\xaaF\x15\x11\x99~NTLc\x12k\xa4\x86&lt;\x11\xef\x05\xbe64\xf3\x84\xcb\x93\xd9\xf9\xa8R\xb6\xe7%\x95V\xb5\x80:\x81\xb4\xc0\xeaGC\xd1\xba\x90\xf2\x95#\x99&gt;\xe5\xb1\xae\xabo[1\x1f\xed\x10\xd8\xac\x1d\xe6\x1e;\xe8\xd6\x1c\xc4r\x16&#39;
+base64 将二进制转成文本的message
+SVJVsq5On4uFJo8OZdzuVtT/9NQexOoDiKUgeQr8v7j4PktuejMq4Ghoh6AufYwNJXSAyw1Oz6MFHfBxtSQeJU6jHN0ZlIhcv1DteMvv3VAOJRkhf93am7b97bg2KGoP/ux0W5RIKxKGTw0n8dsjhNt1X4lAFJSl3kA6n8RDaBWEzVhIzCq0fKjIZbYam/mB0WNB79/jezBj4Snv4DXX/dNSKmU6IAmV0FdTikX5lLj4xTGnUehSwzOxZzaKwhHEvUNq24W1WiIdvScFU3ycmK8OKvpTf7iEQYpyX9Hwqn5Qk+JHQAxpByOxG+TvI5pd4CPXxyQnkq2eWDOc1hhayw==
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解密</span></span><br><span class="line">cipher_text = <span class="string">&quot;SVJVsq5On4uFJo8OZdzuVtT/9NQexOoDiKUgeQr8v7j4PktuejMq4Ghoh6AufYwNJXSAyw1Oz6MFHfBxtSQeJU6jHN0ZlIhcv1DteMvv3VAOJRkhf93am7b97bg2KGoP/ux0W5RIKxKGTw0n8dsjhNt1X4lAFJSl3kA6n8RDaBWEzVhIzCq0fKjIZbYam/mB0WNB79/jezBj4Snv4DXX/dNSKmU6IAmV0FdTikX5lLj4xTGnUehSwzOxZzaKwhHEvUNq24W1WiIdvScFU3ycmK8OKvpTf7iEQYpyX9Hwqn5Qk+JHQAxpByOxG+TvI5pd4CPXxyQnkq2eWDOc1hhayw==&quot;</span></span><br><span class="line">encrypt_text = cipher_text.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="comment"># 拿到私钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is RSA 读取到的私钥:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rsakey)</span><br><span class="line"><span class="comment">#创建用于执行pkcs1_v1_5加密或解密的密码</span></span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(rsakey)      </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Here is 用私钥生成的密码:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"><span class="comment"># base64 将文本string 转回二进制</span></span><br><span class="line">message_dec = base64.b64decode(encrypt_text)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用base64将string转回二进制:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(message_enc)</span><br><span class="line"><span class="comment"># 用私钥生成的密码来解密 二进制message</span></span><br><span class="line">text = cipher.decrypt(message_dec, <span class="string">&quot;解密失败&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用私钥生成的密码来接二进制的message&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(text.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Here is RSA 读取到的私钥:
+Private RSA key at 0x10C0D16D0
+Here is 用私钥生成的密码:
+&lt;Crypto.Cipher.PKCS1_v1_5.PKCS115_Cipher object at 0x10c19f340&gt;
+Here is 用base64将string转回二进制:
+b&#39;&lt;\xaf\xe3\xc1\x95MmL\x7f\x0b\xe6=J#ba\x98z\xb5\xb2\x9a\xb4\xbc\x9fC\x1c\xc0-\xfd\x80\xfc\xb3\x9c\xe4\x96\xa5\x8b?\xaa)\x84n9\x0c\x8f\x99?uXTp\xf3\xd6\x07lV\xe3\t\xbf\x8b\xea\xa5Dn\x80\xf5\x89\xeag\xa8J\xbc\x08\xabB\x1e\xc9\xbb\xe7m\xf8\t\xc6@\xc7[\x16,2\r\x1d=y?\xa0\x95\xcd\x8bxs\x8d@\x97R-\xea\xa3\xb1\xcc\x0f\x89\xb5\xe0:QPwj\xc0zY\xe9\xeb\x17\xf6\xd0\xef&gt;\xd7*\x7f\x97\x8f\x0f=\x06\xb0&lt;G\xe4\x00 pv\x8f&lt;\xb5\xb4f\x0f\xbd\x06J8\x7f\x84M\xa4js\xc7\x1a\xa6\xaf\xe9:@\x88\x18\xed\x8f\x96fvI\xfd\xe2i\x0e\x87\xa1RR\xaaF\x15\x11\x99~NTLc\x12k\xa4\x86&lt;\x11\xef\x05\xbe64\xf3\x84\xcb\x93\xd9\xf9\xa8R\xb6\xe7%\x95V\xb5\x80:\x81\xb4\xc0\xeaGC\xd1\xba\x90\xf2\x95#\x99&gt;\xe5\xb1\xae\xabo[1\x1f\xed\x10\xd8\xac\x1d\xe6\x1e;\xe8\xd6\x1c\xc4r\x16&#39;
+Here is 用私钥生成的密码来接二进制的message
+Hello,This is RSA加密
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加签名，用私钥，私钥加签名后，可以用公钥验证签名有无被篡改</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Signature <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Signature_pkcs1_v1_5</span><br><span class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加签 使用私钥加签名，每次签名是一致的</span></span><br><span class="line">message = <span class="string">&quot;This is a request message...&quot;</span></span><br><span class="line"><span class="comment"># 拿到私钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;私钥：&quot;</span>+<span class="string">f&quot;<span class="subst">&#123;rsakey&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用私钥拿到一个新的签名密码</span></span><br><span class="line">signer = Signature_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;使用私钥生成新的签名密码：<span class="subst">&#123;signer&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 摘要认证 digest authentication</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">摘要访问认证是一种协议规定的Web服务器用来同网页浏览器进行认证信息协商的方法。它在密码发出前，先对其应用哈希函数，这相对于HTTP基本认证发送明文而言，更安全。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">从技术上讲，摘要认证是使用随机数来阻止进行密码分析的MD5加密哈希函数应用。它使用HTTP协议。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">digest = SHA.new()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;digest:&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(digest))</span><br><span class="line"><span class="comment"># 用digest方式加密message</span></span><br><span class="line">digest.update(message.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加签，使用私钥生成的signature密码来加密 digest哈希过的message</span></span><br><span class="line">sign = signer.sign(digest)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;使用私钥生成的signature密码来加密 digest哈希过的message： <span class="subst">&#123;sign&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用base64 将二进制转化为string存储</span></span><br><span class="line">signature = base64.b64encode(sign)</span><br><span class="line"><span class="built_in">print</span>(signature.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>私钥：Private RSA key at 0x10C4BD670
+使用私钥生成新的签名密码：&lt;Crypto.Signature.pkcs1_15.PKCS115_SigScheme object at 0x10c198d90&gt;
+digest:&lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c4bd700&gt;
+使用私钥生成的signature密码来加密 digest哈希过的message： b&#39;&amp;\xe7\x8b\xd1\xb5\xd2\xb3\x12\xccq\xf7\xf9\xb3\x94\\\xaaw\x8dJ\xc8\x9c\x89\xe5\xd3]\x16F\x91\xa1\x11\xff&#125;\xe9=C+\x1c\xd0\x83\xdb\x13\x12&lt;:\xd0\xcd&gt;\x99uM\xf9\xf3\xbf\x8ax\xab\xac\x87\xca%\xc6\t\xef\xcb\xfb\xbc\xba\x1f\&#39;\x19\xf0\xf9\xef\xdd\xb5N\xf4H\xca#\xe4\x9c\xa3\xee\x95\xa52Cq\x9bj\x91\xa6\xcf\x15\xcdt\xd2\xed\x10\xfe\xf7\xce\xde\xcc Y\xd3f\xe3.R\xf9\xe1@\xfc\x80\xd4\x9f\x9a\xa1\xf8\x8f\xc8\x8e\xbf\xd3w\xad\x1c\xcb\xb39\x83\x92UW\x17\x92,\xd3&#123;$\xb2~\t\xb0\x1c\xa2\xaf\xe2\x91\xc1\x98\xd9;\x18\xeb\x1aW\\\x9e\n\xe5\xa3\xdd\x07\xacr\x1c\x9e\x18^\xe0xR\x8c\xafp\x938\xcc3&lt;\xed-\xdb\x04\x9c\xa2\xdb\xb6\xecRn\xf7\xb5=\xcb\xdf\x8aP\x06\x82\xe65\xfa\xd2q:\x04\x8c\xea\x05\x1a +\x9d,&amp;\x9e\x86\xc2\xa7\xf3\x8b\t\x9d\xa7\xd2\x93LO\n\xd3\xd9V\xa97R\t%\x8e\xde\xb7ZD\xdc\xb8\xc5\x9c&quot;5\xe8\x14\xc5&#39;
+JueL0bXSsxLMcff5s5RcqneNSsicieXTXRZGkaER/33pPUMrHNCD2xMSPDrQzT6ZdU3587+KeKush8olxgnvy/u8uh8nGfD57921TvRIyiPknKPulaUyQ3GbapGmzxXNdNLtEP73zt7MIFnTZuMuUvnhQPyA1J+aofiPyI6/03etHMuzOYOSVVcXkizTeySyfgmwHKKv4pHBmNk7GOsaV1yeCuWj3QeschyeGF7geFKMr3CTOMwzPO0t2wScotu27FJu97U9y9+KUAaC5jX60nE6BIzqBRogK50sJp6Gwqfziwmdp9KTTE8K09lWqTdSCSWO3rdaRNy4xZwiNegUxQ==
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验签，使用公钥验签</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">用公钥生成的新签名密码来验证：</span></span><br><span class="line"><span class="string">哈希过的message ，  和  私钥生成的新签名密码加密了的（哈希过的message）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">message = <span class="string">&quot;This is a request message...&quot;</span></span><br><span class="line"><span class="comment"># step1， 拿到公钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Get public key: <span class="subst">&#123;rsakey&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># step2, 用公钥生成一个新签名密码</span></span><br><span class="line">verifier = Signature_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;generate a signature key via public key: <span class="subst">&#123;verifier&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step3, 生成个哈希值</span></span><br><span class="line">hsmsg = SHA.new()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Hashi: <span class="subst">&#123;hsmsg&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step4, 用哈希加密message</span></span><br><span class="line">hsmsg.update(message.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;哈希加密message: &quot;</span> + <span class="string">f&quot;<span class="subst">&#123;hsmsg&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step5, 用base64 将string 的signature解密为二进制</span></span><br><span class="line"><span class="comment"># 就变成了加密阶段的那个 用私钥生成的signature密码来加密 digest哈希过的message</span></span><br><span class="line">sign = base64.b64decode(signature)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;base64 decode sig: <span class="subst">&#123;sign&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># 用 公钥生成的新签名密码来验证，哈希过的message， 和 签过名的sign二进制</span></span><br><span class="line">is_verify = verifier.verify(hsmsg, sign)</span><br><span class="line"><span class="built_in">print</span>(is_verify)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Get public key: Public RSA key at 0x10C3B8880
+generate a signature key via public key: &lt;Crypto.Signature.pkcs1_15.PKCS115_SigScheme object at 0x10c3b8a30&gt;
+Hashi: &lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c663160&gt;
+哈希加密message: &lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c663160&gt;
+base64 decode sig: b&#39;&amp;\xe7\x8b\xd1\xb5\xd2\xb3\x12\xccq\xf7\xf9\xb3\x94\\\xaaw\x8dJ\xc8\x9c\x89\xe5\xd3]\x16F\x91\xa1\x11\xff&#125;\xe9=C+\x1c\xd0\x83\xdb\x13\x12&lt;:\xd0\xcd&gt;\x99uM\xf9\xf3\xbf\x8ax\xab\xac\x87\xca%\xc6\t\xef\xcb\xfb\xbc\xba\x1f\&#39;\x19\xf0\xf9\xef\xdd\xb5N\xf4H\xca#\xe4\x9c\xa3\xee\x95\xa52Cq\x9bj\x91\xa6\xcf\x15\xcdt\xd2\xed\x10\xfe\xf7\xce\xde\xcc Y\xd3f\xe3.R\xf9\xe1@\xfc\x80\xd4\x9f\x9a\xa1\xf8\x8f\xc8\x8e\xbf\xd3w\xad\x1c\xcb\xb39\x83\x92UW\x17\x92,\xd3&#123;$\xb2~\t\xb0\x1c\xa2\xaf\xe2\x91\xc1\x98\xd9;\x18\xeb\x1aW\\\x9e\n\xe5\xa3\xdd\x07\xacr\x1c\x9e\x18^\xe0xR\x8c\xafp\x938\xcc3&lt;\xed-\xdb\x04\x9c\xa2\xdb\xb6\xecRn\xf7\xb5=\xcb\xdf\x8aP\x06\x82\xe65\xfa\xd2q:\x04\x8c\xea\x05\x1a +\x9d,&amp;\x9e\x86\xc2\xa7\xf3\x8b\t\x9d\xa7\xd2\x93LO\n\xd3\xd9V\xa97R\t%\x8e\xde\xb7ZD\xdc\xb8\xc5\x9c&quot;5\xe8\x14\xc5&#39;
+True
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_OAEP</span><br><span class="line"><span class="keyword">import</span> binascii</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成了个 private RSA KEY?????</span></span><br><span class="line">keyPair = RSA.generate(<span class="number">3072</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;keyPair: <span class="subst">&#123;keyPair&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>keyPair: Private RSA key at 0x10C663940
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pubKey = keyPair.publickey()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Public key:  (n=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.n)&#125;</span>, e=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.e)&#125;</span>)&quot;</span>)</span><br><span class="line">pubKeyPEM = pubKey.exportKey()</span><br><span class="line"><span class="built_in">print</span>(pubKeyPEM.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Public key:  (n=0xa1ed1f3d0be71914eee28da05492820df0f21666e64a68ba698f93933d2b2ffe71fa3a8221da24354dbb5b756dd64d70696fe650dd607d2a255fbbae4f668a2115ca22b172a0d9d694adc160713b8508f0ffe403c89b7dcf6a388e2bfb58c57c920841945e13edbd0c8baf6c921b7af4647b545ed5e404776fb0e2374ef4e343f32b1cfbba3b76ff57957fc6f67924472485c3bd96ef67ce79e05f0229621257fd803e3fdcfa026b481bd61c6e202821d4b829e0393bc7137c444180b81fc6bccc34f327da2dbd5daa750d60cdca3a5a026e11c25e2d74c5ea43b54640a93c0daf94f5e5eece42fbc9ae0efb65af7503ab3ab5415dd87d4a49c6de79ffb4a1c3682108456c514822cc11d6f849eb88f083292b5128995bf77594448946af5fba1be4d7612fc79cf8f37e8b692c151500441d5d47c989cbadd7f3dee4ad188faf1e4b52fcab8ab483c6324356994215ed080f23451c700e3c89d12ea608a7b96728a025b4a657f0f25f82dc0a27ea852c3294cee81cff2a692df08c7833cd1fd5, e=0x10001)
+-----BEGIN PUBLIC KEY-----
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAoe0fPQvnGRTu4o2gVJKC
+DfDyFmbmSmi6aY+Tkz0rL/5x+jqCIdokNU27W3Vt1k1waW/mUN1gfSolX7uuT2aK
+IRXKIrFyoNnWlK3BYHE7hQjw/+QDyJt9z2o4jiv7WMV8kghBlF4T7b0Mi69skht6
+9GR7VF7V5AR3b7DiN07040PzKxz7ujt2/1eVf8b2eSRHJIXDvZbvZ8554F8CKWIS
+V/2APj/c+gJrSBvWHG4gKCHUuCngOTvHE3xEQYC4H8a8zDTzJ9otvV2qdQ1gzco6
+WgJuEcJeLXTF6kO1RkCpPA2vlPXl7s5C+8muDvtlr3UDqzq1QV3YfUpJxt55/7Sh
+w2ghCEVsUUgizBHW+EnriPCDKStRKJlb93WURIlGr1+6G+TXYS/HnPjzfotpLBUV
+AEQdXUfJicut1/Pe5K0Yj68eS1L8q4q0g8YyQ1aZQhXtCA8jRRxwDjyJ0S6mCKe5
+ZyigJbSmV/DyX4LcCifqhSwylM7oHP8qaS3wjHgzzR/VAgMBAAE=
+-----END PUBLIC KEY-----
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Private key: (n=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.n)&#125;</span>, d=<span class="subst">&#123;<span class="built_in">hex</span>(keyPair.d)&#125;</span>)&quot;</span>)</span><br><span class="line">privKeyPEM = keyPair.exportKey()</span><br><span class="line"><span class="built_in">print</span>(privKeyPEM.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Private key: (n=0xa1ed1f3d0be71914eee28da05492820df0f21666e64a68ba698f93933d2b2ffe71fa3a8221da24354dbb5b756dd64d70696fe650dd607d2a255fbbae4f668a2115ca22b172a0d9d694adc160713b8508f0ffe403c89b7dcf6a388e2bfb58c57c920841945e13edbd0c8baf6c921b7af4647b545ed5e404776fb0e2374ef4e343f32b1cfbba3b76ff57957fc6f67924472485c3bd96ef67ce79e05f0229621257fd803e3fdcfa026b481bd61c6e202821d4b829e0393bc7137c444180b81fc6bccc34f327da2dbd5daa750d60cdca3a5a026e11c25e2d74c5ea43b54640a93c0daf94f5e5eece42fbc9ae0efb65af7503ab3ab5415dd87d4a49c6de79ffb4a1c3682108456c514822cc11d6f849eb88f083292b5128995bf77594448946af5fba1be4d7612fc79cf8f37e8b692c151500441d5d47c989cbadd7f3dee4ad188faf1e4b52fcab8ab483c6324356994215ed080f23451c700e3c89d12ea608a7b96728a025b4a657f0f25f82dc0a27ea852c3294cee81cff2a692df08c7833cd1fd5, d=0x1b6c1223947b1e9447a061110b41847a37ee723cc58df463c80763469c254ee0c30ca2bbf1b504f76ca2936a8a4a05f348e7da694cbefa736e163857dcba7b74a996ac7ec09adcf3ff59d855d781eceb06baa48814d66b07fa9a794e997cff1f89863c6a3e99c163dd56b543fdba5efd8f1c13bdbbc5fc6652fe9c50cc33a209453517ee1ed67de08aef41246b63e3463e63d387ad4d5341c9acbb14f2a283d8c2e58fa5366c60872a9461938efd8323b7928e04f05709efbd8111ac158276cab2457512d111abba989e2ef5c0cc8309a32173c206eee8a10102bb20f19c76c1182759052e34a120bb87c220df920f11019b3ebda111c634ccc94937acb0ef23d7114cd13a8a154c909efe9700fae3fabae91529d4bf6dc70aea942ba5128c4d61eef66a857fbfd47cd30b20595c3a609a0348a3cfeca5c5bd3c5e6174e042c16a6262fcac07604536d1a1037ee4c88d6df0713347957e9a1185b30c25c4842a9b184eff70533e799cfb8519c414ea84a5936f4e16d5841175f3bd0d0436705)
+-----BEGIN RSA PRIVATE KEY-----
+MIIG4wIBAAKCAYEAoe0fPQvnGRTu4o2gVJKCDfDyFmbmSmi6aY+Tkz0rL/5x+jqC
+IdokNU27W3Vt1k1waW/mUN1gfSolX7uuT2aKIRXKIrFyoNnWlK3BYHE7hQjw/+QD
+yJt9z2o4jiv7WMV8kghBlF4T7b0Mi69skht69GR7VF7V5AR3b7DiN07040PzKxz7
+ujt2/1eVf8b2eSRHJIXDvZbvZ8554F8CKWISV/2APj/c+gJrSBvWHG4gKCHUuCng
+OTvHE3xEQYC4H8a8zDTzJ9otvV2qdQ1gzco6WgJuEcJeLXTF6kO1RkCpPA2vlPXl
+7s5C+8muDvtlr3UDqzq1QV3YfUpJxt55/7Shw2ghCEVsUUgizBHW+EnriPCDKStR
+KJlb93WURIlGr1+6G+TXYS/HnPjzfotpLBUVAEQdXUfJicut1/Pe5K0Yj68eS1L8
+q4q0g8YyQ1aZQhXtCA8jRRxwDjyJ0S6mCKe5ZyigJbSmV/DyX4LcCifqhSwylM7o
+HP8qaS3wjHgzzR/VAgMBAAECggGAAbbBIjlHselEegYRELQYR6N+5yPMWN9GPIB2
+NGnCVO4MMMorvxtQT3bKKTaopKBfNI59ppTL76c24WOFfcunt0qZasfsCa3PP/Wd
+hV14Hs6wa6pIgU1msH+pp5Tpl8/x+JhjxqPpnBY91WtUP9ul79jxwTvbvF/GZS/p
+xQzDOiCUU1F+4e1n3giu9BJGtj40Y+Y9OHrU1TQcmsuxTyooPYwuWPpTZsYIcqlG
+GTjv2DI7eSjgTwVwnvvYERrBWCdsqyRXUS0RGrupieLvXAzIMJoyFzwgbu6KEBAr
+sg8Zx2wRgnWQUuNKEgu4fCIN+SDxEBmz69oRHGNMzJSTessO8j1xFM0TqKFUyQnv
+6XAPrj+rrpFSnUv23HCuqUK6USjE1h7vZqhX+/1HzTCyBZXDpgmgNIo8/spcW9PF
+5hdOBCwWpiYvysB2BFNtGhA37kyI1t8HEzR5V+mhGFswwlxIQqmxhO/3BTPnmc+4
+UZxBTqhKWTb04W1YQRdfO9DQQ2cFAoHBALUKXxmsVeBjMpojUrD2ekDzOqKhYoQl
+oI5T6vbn8KtYsSh7ePrm9jE6MfOKwL3MJxy4Q2VKKS6s9ruDQtkYpPy/EzSWi5yS
+MroGEFBlqMCKIneVhOa4+qYyqdpNfQFJq9dOimIS+4pIuccE13fX7UC6OYtQ+1qx
+AuXo7tIVk/OHRBTh0FCGAFPzUKk3C0Nxt1o4Gkb2sdq/aKWKhr+eEf29l02UiocN
+EGZjJHKv7Zql14PmD/NGGNDz0wd6Xn+JhwKBwQDk+LWxxiijAAbYZvNM3/ay73Pc
+CtbbgrFBCFwf0Fqh/F6NTAFEvvcrk1k5YVnV45flsU54zlEH2ce1mPK9WoPcyI0P
+iNGPUSfoMwlwa6jlbOxanCCqOl70LrQP6v97AId7KxUsei1B1FjKKftF2Q47zu+x
+E+LXI1jSv2IJiVTTeZon3RThwKMqflVN22erEEqQu944QVe1KNwKMqg/LlSEnz/4
+LWkCXvkVDbVg4g9HLsPQVe0OsumTcbjx2EidMsMCgcAJy6fdob97xqJESMj+njd7
+MC3qAsVr1QVc7hl2hpI1EzVytUuUd862VynAva80Fcm/+hBbeKnFxsIK301MpdK3
+gjctzz96l0Z7XjyfvQBmepLm2YY5XaTiPTeHgk3TNgNAQRWnvNMzZj/3DsIB0AMc
+T3cxnI4dGBrKCdJyN4yrzpPWdWlqEfYOlMm2fi3z1kFPdl2lnU9+QIEPA/HKiGj8
+y7dWEUV1jTVn9NFSC0bV6UdB8b7HMPHCzI6Mhwh56h0CgcEAwRcoCkIElOj53NZ8
+yNB5943NE7wkUrsVBbWqEr4fIEl15ww4aaPtRtccwDHjk2c5+l6awW+jj85NB0xz
+L9G8L50EsBv+NTEISV140VBI/yjq7MKLHWLaHmugN2hCiJT6q5i6Y2ao8cHEGsBq
+gQ25XiB1q8wMWMcbKaZxY39nhGsg4Aslh/du4e/luiGTfAPiDcoQbTpVX5WUchkk
+HxvP9INja8PHsVMsFGAaHBinL601PmSn4+Rm64tUnsZ4/fAHAoHAUT1YY5uMjbr3
+EJ3c2HviYM7ExchdrByMbtxipp5z8JWMSxH6pfyVFK+kqiaTAwtmZPm9LNgUym7Z
+A4fSM/W0QvLu8qa/4rKLYgRebwPMj9oCEeciecINENqVHjNPOFRqTuqMV+aMrhDE
+xiboGbgoNWGxJGcAvsKTD1/49Rjtl7ZpEHMbV6jI3JPX161n7D20vRWHSgRBdTNn
+h1b97aHzKQlwEFFbAgQzfh3ATEJRJCkUoX+YK5TsVTUkfJOYPM5U
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encryption</span></span><br><span class="line">msg = <span class="string">&#x27;A message for encryption&#x27;</span></span><br><span class="line">encryptor = PKCS1_OAEP.new(pubKey)</span><br><span class="line">encrypted = encryptor.encrypt(msg.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encrypted:&quot;</span>, binascii.hexlify(encrypted))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Encrypted: b&#39;7afbfdb44b4b507b4e000a0b16ff3b64e9b570f932b3467b06b69d2071f92886f62f612f57caa9d1a46189759f51f46784388f7e52ee08f2434a8f7918e5e92a639f32bcf8c5ec36ce5cb5328279b793e33c1a9dc4af373875b9b230772d51f9818292b178153f172ca8ce5aea84396032b4ab26f29ba7808ef335d072cfaca61cc311e1542cc404c11fed5db0349ee4f56568e702bfc3a2203f521a282b1cd5b22a8f6d0c731589da8169b078c9be5d00b8df31b40a26f4e92d8d049dd3b9f5bd43d9c1680688cb81af3bca4bb44c8a8227941f5a874c7fb043e7dd9351117e1d286b6ac26486514681805c66b8bab5ebad7d7f9556a14678342c6278268bab1e98867ece9c253b48e4ca71411bc9728b7844b1ec1c007c6006701b3951f4e7b5b4558b140121422960a7fb1e1f8a9be1cb499be33517602d7a231d69741d0a50318e0bd3ce771f62b6161c0f945da9bfe28a05ccebfabedc38821f7048a5c6c6288435757d632192386ba0f607a6f96fe41fafbbf26dd6aafe46ddeb313de9&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rsa</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">publicKey, privateKey = rsa.newkeys(<span class="number">2024</span>)</span><br><span class="line">message = <span class="string">&quot;hello geeks&quot;</span></span><br><span class="line"></span><br><span class="line">encMessage = rsa.encrypt(message.encode(<span class="string">&quot;utf-8&quot;</span>), publicKey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;original string: &quot;</span>, message)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;encrypted string: &quot;</span>, encMessage)</span><br><span class="line"></span><br><span class="line"><span class="comment"># the encrypted message can be decrypted</span></span><br><span class="line"><span class="comment"># with ras.decrypt method and private key</span></span><br><span class="line"><span class="comment"># decrypt method returns encoded byte string,</span></span><br><span class="line"><span class="comment"># use decode method to convert it to string</span></span><br><span class="line"><span class="comment"># public key cannot be used for decryption</span></span><br><span class="line">decMessage = rsa.decrypt(encMessage, privateKey).decode()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;decrypted string: &quot;</span>, decMessage)</span><br></pre></td></tr></table></figure>
+
+<pre><code>original string:  hello geeks
+encrypted string:  b&quot;\x1f~m\x87\xe0_\x8f\x89w1B$|l\x04t$\xa8j\xd4\xc7\xbdr&gt;y\xfa\xd1c\xc2\nm\x88\xd02\x05\x999\xae\x96O\xf8s\x83\xe3\xccw\xcc\xc5c\x97\xec\xdc\xefpe\xe9xkg\xdan\x83\xafzYJv\xdb\xf8\x8a\xa3\x1c\t\xb0\x96\xa6\xbci\xeb`&#39;\xe9\x15\x15\x97\x10\xca\x867\xa1\xb2d\xfc\xc4~:\xc5Q\xa1\xbe\x1aq-6\xc8\xd3&gt;&#39;!H\x15\x03F\x94V\xb5e\xaaBp\x13Nx\\\xac\xe1\x96\xf2\xde2\x98\xe1\xe0;_|\xefa\x17b\x9a\x1b@\x0f\xe9%\xd9\xfe@g\xecDxA\x8cS\x12\x8fI#\xf6\xa04qN\xe9g\x1f4Y\x19\x06\xff\xa1\xa0\xad\xec\x983Y\xd8%\xb1L\xa2r\xd8wr3\xbb\xa5\x06\xd7o\xed\xc4\xb5:JGr\xc2\xdb\x8bz\xb3$-\x89Xj\\2\xc5\x1f\xac\xa1\xfdm\xf5\x02m=\x9a\x0b\xd7\xb3\xc1\x80\xffY\\\x06V\x868\x81\xe54\t\x81\xaf\xae\xf7\xdd\x18\xb2&#123;\xec\xb7\x9e`&quot;
+decrypted string:  hello geeks
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/19/keycloak/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/19/keycloak/" class="post-title-link" itemprop="url">KeyCloak</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-19 22:28:23 / Modified: 22:41:45" itemprop="dateCreated datePublished" datetime="2023-03-19T22:28:23+08:00">2023-03-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="keycloak"><a href="#keycloak" class="headerlink" title="keycloak"></a>keycloak</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # sudo zypper refresh</span><br><span class="line">Repository &#x27;Update repository of openSUSE Backports&#x27; is up to date.</span><br><span class="line">Repository &#x27;Non-OSS Repository&#x27; is up to date.</span><br><span class="line">Repository &#x27;Main Repository&#x27; is up to date.</span><br><span class="line">Repository &#x27;Update repository with updates from SUSE Linux Enterprise 15&#x27; is up to date.</span><br><span class="line">Repository &#x27;Main Update Repository&#x27; is up to date.</span><br><span class="line">Repository &#x27;Update Repository (Non-Oss)&#x27; is up to date.</span><br><span class="line">All repositories have been refreshed.</span><br><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # sudo zypper search openjdk-devel</span><br><span class="line">Loading repository data...</span><br><span class="line">Reading installed packages...</span><br><span class="line"></span><br><span class="line">S | Name                     | Summary                            | Type</span><br><span class="line">--+--------------------------+------------------------------------+--------</span><br><span class="line">  | java-1_8_0-openjdk-devel | OpenJDK 8 Development Environment  | package</span><br><span class="line">  | java-9-openjdk-devel     | OpenJDK 9 Development Environment  | package</span><br><span class="line">  | java-10-openjdk-devel    | OpenJDK 10 Development Environment | package</span><br><span class="line">  | java-11-openjdk-devel    | OpenJDK 11 Development Environment | package</span><br><span class="line">  | java-17-openjdk-devel    | OpenJDK 17 Development Environment | package</span><br><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # sudo zypper --non-interactive install java-17-openjdk-devel</span><br><span class="line">Loading repository data...</span><br><span class="line">Reading installed packages...</span><br><span class="line">Resolving package dependencies...</span><br><span class="line"></span><br><span class="line">The following 2 recommended packages were automatically selected:</span><br><span class="line">  pcsc-lite timezone-java</span><br><span class="line"></span><br><span class="line">The following 11 NEW packages are going to be installed:</span><br><span class="line">  java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless javapackages-filesystem javapackages-tools libXi6 libXtst6 libgif7 libpcsclite1</span><br><span class="line">  pcsc-lite timezone-java</span><br><span class="line"></span><br><span class="line">11 new packages to install.</span><br><span class="line">Overall download size: 43.9 MiB. Already cached: 0 B. After the operation, additional 189.6 MiB will be used.</span><br><span class="line">Continue? [y/n/v/...? shows all options] (y): y</span><br><span class="line">Retrieving package libXi6-1.7.9-3.2.1.x86_64                                                                  (1/11),  35.6 KiB ( 66.5 KiB unpacked)</span><br><span class="line">Retrieving: libXi6-1.7.9-3.2.1.x86_64.rpm ....................................................................................................[done]</span><br><span class="line">Retrieving package libXtst6-1.2.3-1.24.x86_64                                                                 (2/11),  17.2 KiB ( 22.4 KiB unpacked)</span><br><span class="line">Retrieving: libXtst6-1.2.3-1.24.x86_64.rpm ...................................................................................................[done]</span><br><span class="line">Retrieving package libgif7-5.2.1-150000.4.8.1.x86_64                                                          (3/11),  28.8 KiB ( 35.5 KiB unpacked)</span><br><span class="line">Retrieving: libgif7-5.2.1-150000.4.8.1.x86_64.rpm ............................................................................................[done]</span><br><span class="line">Retrieving package libpcsclite1-1.9.4-150400.1.9.x86_64                                                       (4/11),  32.8 KiB ( 38.4 KiB unpacked)</span><br><span class="line">Retrieving: libpcsclite1-1.9.4-150400.1.9.x86_64.rpm .........................................................................................[done]</span><br><span class="line">Retrieving package pcsc-lite-1.9.4-150400.1.9.x86_64                                                          (5/11),  82.2 KiB (140.4 KiB unpacked)</span><br><span class="line">Retrieving: pcsc-lite-1.9.4-150400.1.9.x86_64.rpm ............................................................................................[done]</span><br><span class="line">Retrieving package javapackages-filesystem-5.3.1-150200.3.4.4.x86_64                                          (6/11),  17.0 KiB (  1.9 KiB unpacked)</span><br><span class="line">Retrieving: javapackages-filesystem-5.3.1-150200.3.4.4.x86_64.rpm ................................................................[done (2.8 KiB/s)]</span><br><span class="line">Retrieving package timezone-java-2022g-150000.75.18.1.noarch                                                  (7/11), 155.0 KiB (341.2 KiB unpacked)</span><br><span class="line">Retrieving: timezone-java-2022g-150000.75.18.1.noarch.rpm ....................................................................................[done]</span><br><span class="line">Retrieving package javapackages-tools-5.3.1-150200.3.4.4.x86_64                                               (8/11),  37.7 KiB ( 71.6 KiB unpacked)</span><br><span class="line">Retrieving: javapackages-tools-5.3.1-150200.3.4.4.x86_64.rpm ...................................................................[done (129.7 KiB/s)]</span><br><span class="line">Retrieving package java-17-openjdk-headless-17.0.6.0-150400.3.12.1.x86_64                                     (9/11),  38.4 MiB (179.7 MiB unpacked)</span><br><span class="line">Retrieving: java-17-openjdk-headless-17.0.6.0-150400.3.12.1.x86_64.rpm ..........................................................[done (12.9 MiB/s)]</span><br><span class="line">Retrieving package java-17-openjdk-17.0.6.0-150400.3.12.1.x86_64                                             (10/11), 284.4 KiB (447.5 KiB unpacked)</span><br><span class="line">Retrieving: java-17-openjdk-17.0.6.0-150400.3.12.1.x86_64.rpm ..................................................................[done (869.5 KiB/s)]</span><br><span class="line">Retrieving package java-17-openjdk-devel-17.0.6.0-150400.3.12.1.x86_64                                       (11/11),   4.8 MiB (  8.8 MiB unpacked)</span><br><span class="line">Retrieving: java-17-openjdk-devel-17.0.6.0-150400.3.12.1.x86_64.rpm ..............................................................[done (7.8 MiB/s)]</span><br><span class="line"></span><br><span class="line">Checking for file conflicts: .................................................................................................................[done]</span><br><span class="line">( 1/11) Installing: libXi6-1.7.9-3.2.1.x86_64 ................................................................................................[done]</span><br><span class="line">( 2/11) Installing: libXtst6-1.2.3-1.24.x86_64 ...............................................................................................[done]</span><br><span class="line">( 3/11) Installing: libgif7-5.2.1-150000.4.8.1.x86_64 ........................................................................................[done]</span><br><span class="line">( 4/11) Installing: libpcsclite1-1.9.4-150400.1.9.x86_64 .....................................................................................[done]</span><br><span class="line">Created symlink /etc/systemd/system/sockets.target.wants/pcscd.socket -&gt; /usr/lib/systemd/system/pcscd.socket.</span><br><span class="line">Updating /etc/sysconfig/pcscd ...</span><br><span class="line">( 5/11) Installing: pcsc-lite-1.9.4-150400.1.9.x86_64 ........................................................................................[done]</span><br><span class="line">( 6/11) Installing: javapackages-filesystem-5.3.1-150200.3.4.4.x86_64 ........................................................................[done]</span><br><span class="line">( 7/11) Installing: timezone-java-2022g-150000.75.18.1.noarch ................................................................................[done]</span><br><span class="line">( 8/11) Installing: javapackages-tools-5.3.1-150200.3.4.4.x86_64 .............................................................................[done]</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/jre-17-openjdk/bin/java to provide /usr/bin/java (java) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/jre-17-openjdk to provide /usr/lib64/jvm/jre-openjdk (jre_openjdk) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/jre-17-openjdk to provide /usr/lib64/jvm/jre-17 (jre_17) in auto mode</span><br><span class="line">( 9/11) Installing: java-17-openjdk-headless-17.0.6.0-150400.3.12.1.x86_64 ...................................................................[done]</span><br><span class="line">(10/11) Installing: java-17-openjdk-17.0.6.0-150400.3.12.1.x86_64 ............................................................................[done]</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/java-17-openjdk/bin/javac to provide /usr/bin/javac (javac) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/java-17-openjdk to provide /usr/lib64/jvm/java-openjdk (java_sdk_openjdk) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/java-17-openjdk to provide /usr/lib64/jvm/java-17 (java_sdk_17) in auto mode</span><br><span class="line">(11/11) Installing: java-17-openjdk-devel-17.0.6.0-150400.3.12.1.x86_64 ......................................................................[done]</span><br><span class="line">Executing %posttrans scripts .................................................................................................................[done]</span><br><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # javac -version</span><br><span class="line">javac 17.0.6</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Realms"><a href="#Realms" class="headerlink" title="Realms"></a>Realms</h4><h5 id="Realms-are-isolated-from-one-another-and-can-only-manage-and-authenticate-the-users-that-they-control"><a href="#Realms-are-isolated-from-one-another-and-can-only-manage-and-authenticate-the-users-that-they-control" class="headerlink" title="Realms are isolated from one another and can only manage and authenticate the users that they control."></a>Realms are isolated from one another and can only manage and authenticate the users that they control.</h5><p><mark>You create a realm to provide a management space where you can create users and give them permissions to use applications.</mark></p>
+<p><img src="/uploads/203023010625203.png"></p>
+<h5 id="Set-Require-SSL-to-one-of-the-following-SSL-modes"><a href="#Set-Require-SSL-to-one-of-the-following-SSL-modes" class="headerlink" title="Set Require SSL to one of the following SSL modes:"></a>Set Require SSL to one of the following SSL modes:</h5><ul>
+<li><p>External requests Users can interact with Keycloak without SSL so long as they stick to private IP addresses such as localhost, 127.0.0.1, 10.x.x.x, 192.168.x.x, and 172.16.x.x. If you try to access Keycloak without SSL from a non-private IP address, you will get an error.</p>
+</li>
+<li><p>None Keycloak does not require SSL. This choice applies only in development when you are experimenting and do not plan to support this deployment.</p>
+</li>
+<li><p>All requests Keycloak requires SSL for all IP addresses.</p>
+</li>
+</ul>
+<p><img src="/uploads/354284833950954.png"></p>
+<h5 id="Configuring-realm-keys"><a href="#Configuring-realm-keys" class="headerlink" title="Configuring realm keys"></a>Configuring realm keys</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Keycloak has a single active keypair at a time, but can have several passive keys as well. </span><br><span class="line">The active keypair is used to create new signatures, while the passive keypair can be used to verify previous signatures. </span><br><span class="line">This makes it possible to regularly rotate the keys without any downtime or interruption to users.</span><br><span class="line">Keycloak 一次只有一个主动密钥对，但也可以有多个被动密钥。主动密钥对用于创建新签名，而被动密钥对可用于验证以前的签名。</span><br><span class="line">这样就可以定期轮换密钥，而不会对用户造成任何停机或干扰。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>虽然reaml setting 的key中，是active，但是到底有没有使用它，取决于第一个选中的 key provider</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A keypair can have the status Active, but still not be selected as the currently active keypair for the realm. </span><br><span class="line">The selected active pair which is used for signatures is selected based on the first key provider sorted by priority that is able to provide an active keypair.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><mark>Once new keys are available all new tokens and cookies will be signed with the new keys.</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. Once new keys are available all new tokens and cookies will be signed with the new keys.</span><br><span class="line"><span class="comment"># 一旦新的keys 生效，所有的token cookie都被signed with the new key.</span></span><br><span class="line">2. When a user authenticates to an application the SSO cookie is updated with the new signature.</span><br><span class="line"><span class="comment"># 当user authenticates login via sso，  那么 cookie 就随着 new signature update. </span></span><br><span class="line">3. When OpenID Connect tokens are refreshed new tokens are signed with the new keys. </span><br><span class="line"><span class="comment">#  当OpenID token 被refresh， 新的token 就被signed with new key.</span></span><br><span class="line">4. This means that over time all cookies and tokens will use the new keys and after a <span class="keyword">while</span> the old keys can be removed.</span><br><span class="line"><span class="comment"># 意味着 所有的cookie 和 token 都在使用 new keys， 并且，after a while old key 就被remove 了。</span></span><br><span class="line"></span><br><span class="line">这里的 after a <span class="keyword">while</span>：删除旧密钥的频率是安全性与确保所有 cookie 和令牌更新之间的权衡。</span><br><span class="line">The frequency of deleting old keys is a tradeoff between security and making sure all cookies and tokens are updated.</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> instance:  create new keys 3~6 months,  delete old keys 1~2 months. 如果user 在这期间old key 被删了，新key没有，那么重新登录认证即可。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h6 id="Adding-a-generated-keypair"><a href="#Adding-a-generated-keypair" class="headerlink" title="Adding a generated keypair"></a>Adding a generated keypair</h6><p>更改优先级不会生成新key，但是edit keysize 会触发生成新key<br><img src="/uploads/595696697899358.png"></p>
+<p>####### Compromised keys<br>keycloak has the signing keys stored just locally 将签名密钥存储在本地， 不会分享给其他user或者application<br>如果认为签名密钥已经泄露，可以立即生成新密钥对，并且删除旧密钥，甚至考虑删除provider。</p>
+<h5 id="Using-external-storage-正是需要的"><a href="#Using-external-storage-正是需要的" class="headerlink" title="Using external storage 正是需要的"></a>Using external storage 正是需要的</h5><p>一般不会把包含有信息，密码，其他凭证等的数据库迁移到keycloak去。<br>keycloak支持已经存在的外部用户数据库，比如LDAP, AD。<br>用户也可以通过keycloak user storage API 来为任何 custom user database 编写扩展代码。</p>
+<p>当用户尝试登陆时，keycloak 会检查该用户的存储以查找该用户，如果找不到的话，就会遍历当前realm的所有 user storage provider，直到直到匹配项。</p>
+<p>来自外部data storage 的user 会 映射map到keycloak运行时使用的标准用户模型。然后，这个标准用户模型映射到 OIDC token claims 令牌声明和 SAML assertion attributes。</p>
+<p>external user database 几乎不会完整支持keycloak的所有功能。<br>因此，User storage provider 可以选择性的存储items 到keycloak user data storage中。<br>User storage provider 可以在本地导入用户，并定期与外部数据存储同步。<br>但是这取决于external user database是否支持OTP， OTP可以通过Keycloak处理和存储。</p>
+<blockquote>
+<p>一次性密码（One Time Password，简称OTP），又称“一次性口令”，是指只能使用一次的密码。 一次性密码是根据专门算法、每隔60秒生成一个不可预测的随机数字组合  </p>
+</blockquote>
+<h6 id="Add-a-provider-kerberos-provider-or-LDAP-provicer"><a href="#Add-a-provider-kerberos-provider-or-LDAP-provicer" class="headerlink" title="Add a provider: kerberos provider or LDAP provicer"></a>Add a provider: kerberos provider or LDAP provicer</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user federation &gt; can choose kerberos provider or LDAP provicer</span><br></pre></td></tr></table></figure>
+
+<p>一个 keycloak realm 可以 federate multiple different LDAP servers. 并且把ldap user 映射成keycloak的通用user model。</p>
+<p>keycloak 默认映射username,  email， first/last name, 也可以configure additional mappings.<br>usermap: email</p>
+<p>fullname: firstname and lastname</p>
+<p>Hardcoded Attribute Mapper</p>
+<p>Role Mapper: 通常是group， 从LDAP map 到 keycloak对应的role group， 比如：</p>
+<ol>
+<li>from groups under <mark>ou=main</mark>,dc=example,dc=org map to <mark>realm role mappings</mark>, </li>
+<li>from groups under <mark>ou=finance</mark>,dc=example,dc=org map to <mark>client role mappings of client finance</mark>.</li>
+</ol>
+<p>Group Mapper</p>
+<p><mark>Certificate Mapper</mark></p>
+<p>此映射器映射 X.509 证书。Keycloak 将其与 X.509 身份验证和 PEM 格式的完整证书结合使用，作为身份源。此映射器的行为类似于用户属性映射器，但 Keycloak 可以过滤存储 PEM 或 DER 格式证书的 LDAP 属性。使用此映射器启用始终从 LDAP 读取值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This mapper maps X.509 certificates. Keycloak uses it in conjunction with X.509 authentication and Full certificate in PEM format as an identity source. This mapper behaves similarly to the User Attribute Mapper, but Keycloak can filter for an LDAP attribute storing a PEM or DER format certificate. Enable Always Read Value From LDAP with this mapper.</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="Dealing-with-provider-failures"><a href="#Dealing-with-provider-failures" class="headerlink" title="Dealing with provider failures"></a>Dealing with provider failures</h6><ul>
+<li><p>Keycloak 先查询本地数据库来解析user，然后才考虑LDAP 或者其他custom user storage provider.<br>最好在keycloak 本地建立admin account，以防连接到 LDAP 和后端时出现问题。</p>
+</li>
+<li><p>任何external user storage provider 在admin 控制台都有<code>一个enable 开关</code><br>external user storage provider(ldap or custom user storage provicer) <code>has an enable toggle</code> on </p>
+</li>
+<li><p>如果您的提供程序使用导入策略并被禁用，则导入的用户仍可在只读模式下进行查找。<br>If your provider uses an import strategy and is disabled, imported users are still available for lookup in read-only mode.</p>
+</li>
+<li><p>Duplicate usernames and emails can cause problems</p>
+</li>
+</ul>
+<h6 id="Storage-mode"><a href="#Storage-mode" class="headerlink" title="Storage mode"></a>Storage mode</h6><ul>
+<li><p>keycloak 将LDAP user 同步到本地（定期或后台），但是不会同步密码， <code>password validation 只会在LDAP server上执行。</code><br>Password validation always occurs on the LDAP server.</p>
+</li>
+<li><p> 用户第一次登录keycloak时候，keycloak都会将它写入本地database。 Keycloak performs a corresponding database insert.</p>
+</li>
+<li><p> 可以但非必要，同步LDAP。 can synchronize， but unnecessary.</p>
+</li>
+<li><p>您可以将 LDAP 与 Keycloak 一起使用，而无需将用户导入 Keycloak 用户数据库。LDAP 服务器备份 Keycloak 运行时使用的通用用户模型</p>
+</li>
+</ul>
+<p><mark>如果选择 disable import users, 就无法将 user profile attributes 用户配置文件属性保存到keycloak中。</mark><br><mark>user profile attributes metadata mapped to the ldap 可以保存到keycloak中， 但是 user metadata不能被保存，user metadata=[role mappings, group mappings, other metadata based on the ldap mappers.]</mark></p>
+<p><mark>如果禁用导入用户，则无法将用户配置文件属性保存到 Keycloak 数据库中。 此外，除了映射到 LDAP 的用户配置文件元数据之外，您无法保存元数据。 此元数据可以包括角色映射、组映射和其他基于 LDAP 映射器配置的元数据。</mark></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">If you disable Import Users, you cannot save user profile attributes into the Keycloak database. </span><br><span class="line">Also, you cannot save metadata except for user profile metadata mapped to the LDAP. </span><br><span class="line">This metadata can include role mappings, group mappings, and other metadata based on the LDAP mappers&#x27; configuration.</span><br></pre></td></tr></table></figure>
+
+<p><strong>UNSYNCED</strong><br>keycloak 会把 更改 username, email, password 的动作保存在local，这些信息需要同步回ldap， must synchronize this data back to LDAP</p>
+<p>当 Keycloak 创建 LDAP 提供程序时，Keycloak 还会创建一组初始 LDAP 映射器。Keycloak 根据供应商、编辑模式和导入用户开关的组合来配置这些映射器。<br>based on a combination of the Vendor, Edit Mode, and Import Users switches.</p>
+<p><strong>Sync Registrations</strong><br>Toggle this switch to ON if you want new users created by Keycloak added to LDAP</p>
+<ul>
+<li><p>当选择 import user， 用户第一次登录后，从keycloak admin那里查看all user，会看到验证过的user展示在这里，意思是已经导入了，keycloak只在user 第一次login时候导入，而不是一次性导入整个LDAP的所有user。</p>
+</li>
+<li><p>如果想一次性同步所有user，有2种方式</p>
+</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">If you want to sync all LDAP users into the Keycloak database, configure and enable the Sync Settings on the LDAP provider configuration page.</span><br><span class="line"></span><br><span class="line">1. Periodic Full sync</span><br><span class="line">此类型将所有 LDAP 用户同步到 Keycloak 数据库中。已经在Keycloak中但与LDAP不同的LDAP用户直接在Keycloak数据库中更新。</span><br><span class="line">2. Periodic Changed users sync</span><br><span class="line">同步时，Keycloak 仅创建或更新在上次同步后创建或更新的用户。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最佳同步策略： 在创建LDAP provider时，选择 <code>Synchronize all users</code>, 然后 <code>Synchronize all users</code><br>The best way to synchronize is to click Synchronize all users when you first create the LDAP provider, then set up Synchronize all usersSynchronize all users</li>
+</ul>
+<p><img src="/uploads/86293028586002.png"></p>
+<h6 id="Password-hashing"><a href="#Password-hashing" class="headerlink" title="Password hashing"></a>Password hashing</h6><p>当 Keycloak 更新密码时，Keycloak 以纯文本格式发送密码。<br>此操作不同于在内置 Keycloak 数据库中更新密码，Keycloak 在将密码发送到数据库之前对密码进行哈希处理和加盐处理。<br>对于 LDAP，Keycloak 依赖于 LDAP 服务器对密码进行散列和加盐。</p>
+<ol>
+<li>By default, LDAP servers such as MSAD, RHDS, or FreeIPA hash and salt passwords. </li>
+<li>Other LDAP servers such as OpenLDAP or ApacheDS store the passwords in plain-text unless you use the LDAPv3 Password Modify Extended Operation as described in RFC3062. </li>
+<li>Always verify that user passwords are properly hashed and not stored as plaintext by inspecting a changed directory entry using ldapsearch and base64 decode the userPassword attribute value.</li>
+</ol>
+<h4 id="Authentication-flow"><a href="#Authentication-flow" class="headerlink" title="Authentication flow"></a>Authentication flow</h4><p>flow是一个在登陆，注册或者其他workflow时候要进行的 身份验证，屏幕 和 操作。<br>An authentication flow is a container of<br>authentications, screens, and actions, during log in, registration, and other Keycloak workflows.<br>To view all the flows, actions, and checks, each flow requires:</p>
+<h5 id="browser-里面的-Forms："><a href="#browser-里面的-Forms：" class="headerlink" title="browser 里面的 Forms："></a><strong>browser 里面的 Forms：</strong></h5><p>先说cookie，user 首次登陆成功后，keycloak会 sets a session cookie.<br>如果这个cookie已经存在了，authentication type=success, cookie provider return success,<br>而同级其他验证方式都是alternative可选的， 那么keycloak不会再执行任何操作，这次请求会返回一个successful login.</p>
+<p>而这里的Forms， 是个可选的子flow alternative sub-flow，它能不能被执行，取决于它的parent status.<br>它包含了一个需要被执行的额外验证项目，因此如果想这个form被执行，就需要删掉cookie 验证。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Since this sub-flow is marked as alternative, it will not be executed if the Cookie authentication type passed. </span><br><span class="line">This sub-flow contains an additional authentication type that needs to be executed. Keycloak loads the executions for this sub-flow and processes them.</span><br></pre></td></tr></table></figure>
+
+<h5 id="验证步骤"><a href="#验证步骤" class="headerlink" title="验证步骤"></a>验证步骤</h5><ol>
+<li>Username Password Form, 在browser flow中，这个选项是required，并且不可更改， 需要用户输入uname+pwd</li>
+<li> Browser - Conditional OTP sub-flow， 它是based on the Condition-user configured</li>
+<li>Condition - User Configured. This authentication checks if Keycloak has configured other executions in the flow for the user</li>
+<li>OTP Form Keycloak 将此执行标记为必需，但仅当用户由于条件子流中的设置而设置了 OTP 凭据时，它才会运行。否则，用户不会看到 OTP 表单。</li>
+</ol>
+<p><mark>可以添加新的空白flow，也可以copy已经存在的flow， 里面的action有很多种， from sending a reset email to validating an OTP.</mark><br><mark>可以建立sub-flow, 可以拖动顺序</mark></p>
+<p><img src="/uploads/151286775946824.png"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.keycloak.org/docs/latest/server_admin/#configuring-authentication_server_administration_guide">https://www.keycloak.org/docs/latest/server_admin/#configuring-authentication_server_administration_guide</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/17/openssl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/17/openssl/" class="post-title-link" itemprop="url">OpenSSL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-17 15:51:50" itemprop="dateCreated datePublished" datetime="2023-03-17T15:51:50+08:00">2023-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-25 23:13:22" itemprop="dateModified" datetime="2023-03-25T23:13:22+08:00">2023-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h1><p>在SSL/TLS/HTTPS通信中，证书虽然不是TLS/SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS/SSL协议，效果会更好。</p>
+<p>啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证</p>
+<p>OpenSSL 是一个安全套接字层密码库，囊括主要的密码算法、常用密钥、证书封装管理功能及实现ssl协议。<br>OpenSSL整个软件包大概可以分成三个主要的功能部分：</p>
+<ol>
+<li>SSL协议库libssl</li>
+<li>应用程序命令工具</li>
+<li>密码算法库libcrypto</li>
+</ol>
+<p>.KEY 私钥。</p>
+<p><strong>.CSR</strong> 是 Certificate Signing Request 的缩写，即证书签名请求，这不是证书，只是包含申请证书的基本信息。生成证书时要把这个提交给权威的证书颁发机构，颁发机构审核通过之后，再根据这些申请信息生成相应的证书。</p>
+<p>.CRT 即 certificate的缩写，即证书。</p>
+<p><strong>X.509</strong> 定义公钥证书格式， structure， 不同的密钥有不同的结构体。</p>
+<blockquote>
+<p>X.509的证书文件，一般以.crt结尾，根据该文件的内容编码格式，可以分为以下二种格式：</p>
+</blockquote>
+<blockquote>
+<p>.PEM - Privacy Enhanced Mail，以base64编码，将二进制文件转为文本，打开看文本格式，以”—–BEGIN…“开头，”—–END…”结尾，Apache 和 *NIX 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<blockquote>
+<p>.DER - Distinguished Encoding Rules，是二进制格式，不可读。Java 和 Windows 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<h2 id="1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists"><a href="#1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists" class="headerlink" title="1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists"></a>1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists</h2><h3 id="1-1-For-instances"><a href="#1-1-For-instances" class="headerlink" title="1.1. For instances:"></a>1.1. For instances:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out server.key 2048  <span class="comment"># 先生成一个私钥                 </span></span><br><span class="line">openssl req -new -key server.key -out server.csr <span class="comment"># 用这个私钥加密证书请求信息，生成一个证书请求</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -out server.crt -signkey server.key -days 3650 <span class="comment"># 用证书请求 和 私钥自签名来申请一个x509公钥</span></span><br><span class="line"><span class="comment"># 用x509公钥 和 私钥自签名来发请求</span></span><br><span class="line">python3 manage.py runserver_plus --cert-file ./server.crt --key-file ./server.key 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><figcaption><span>Generate Root CA</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private/ca.key 2048 <span class="comment">#先生成一个私钥</span></span><br><span class="line"></span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl genrsa -out private/ca.key 2048</span></span><br><span class="line">Generating RSA private key, 2048 bit long modulus (2 primes)</span><br><span class="line">.....................+++++</span><br><span class="line">.............+++++</span><br><span class="line">e is 65537 (0x010001)</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/ca.key</span></span><br><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEpAIBAAKCAQEArPbCOb9to</span><br><span class="line">……</span><br><span class="line">XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用私钥自签，生成一个x509 的 公钥CA</span></span><br><span class="line">openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com&quot;</span> -extensions v3_ca -config openssl.cnf</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   └── ca.key</span><br><span class="line">└── serial</span><br><span class="line">5 directories, 6 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat certs/ca.pem</span></span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIID0DCCArigAwIBAgIUNq7/2QHSt6dhvy5XVEIlx2bqJ1AwDQYJKoZIhvcNAQEL</span><br><span class="line">dR2qFJjutlz/ExPDqhRMzSGzsMH47uH2j/rEsIW+4K0vU6G9HIIWpa4xoET+TQJI</span><br><span class="line">p5DKgza5t0QBuULe9YTMJTlHl2E=</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># newkey:生成一个证书请求，加一个私钥，-nodes:不加密私钥，生成server certificate and use CA to issue it </span></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;</span>  -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj &quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;  -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............................+++++</span><br><span class="line">..................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;private/server.key&#x27;</span></span><br><span class="line">-----</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">│   └── server.csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   ├── ca.key</span><br><span class="line">│   └── server.key</span><br><span class="line">└── serial</span><br><span class="line"></span><br><span class="line">5 directories, 8 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat csr/server.csr</span></span><br><span class="line">-----BEGIN CERTIFICATE REQUEST-----</span><br><span class="line">MIIDJjCCAg4CAQAwcDELMAkGA1UEBhMCQ04xETAPBgNVBAgMCFNoYW5naGFpMREw</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/server.key</span></span><br><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpCNWLNTNCFf0K</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ca:可以sign certificate req， 签名证书请求， 并且生成 CRLs证书吊销列表: certificate revocation lists</span></span><br><span class="line"><span class="comment"># batch: 所有证书will be certified automatically.  notext:不要把证书文本形式输出到文件，意思是二进制？</span></span><br><span class="line"><span class="comment"># extensions: default x509, 如果没有extension section，那么输出V1 certificate，否则输出V3 certificate.x509v3.cnf</span></span><br><span class="line">openssl ca -batch -notext -<span class="keyword">in</span> csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Using configuration from openssl.cnf</span><br><span class="line">Check that the request matches the signature</span><br><span class="line">Signature ok</span><br><span class="line">The Subject<span class="string">&#x27;s Distinguished Name is as follows</span></span><br><span class="line"><span class="string">countryName           :PRINTABLE:&#x27;</span>CN<span class="string">&#x27;</span></span><br><span class="line"><span class="string">stateOrProvinceName   :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">localityName          :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationName      :ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationalUnitName:ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">commonName            :ASN.1 12:&#x27;</span>ciam.west.isilon.com<span class="string">&#x27;</span></span><br><span class="line"><span class="string">Certificate is to be certified until Mar 24 15:11:50 2024 GMT (365 days)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Write out database with 1 new entries</span></span><br><span class="line"><span class="string">Data Base Updated</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── certs</span></span><br><span class="line"><span class="string">│   ├── 1000.pem</span></span><br><span class="line"><span class="string">│   ├── ca.pem</span></span><br><span class="line"><span class="string">│   └── server.pem</span></span><br><span class="line"><span class="string">├── crl</span></span><br><span class="line"><span class="string">├── csr</span></span><br><span class="line"><span class="string">│   └── server.csr</span></span><br><span class="line"><span class="string">├── index.txt</span></span><br><span class="line"><span class="string">├── index.txt.attr</span></span><br><span class="line"><span class="string">├── index.txt.attr.old</span></span><br><span class="line"><span class="string">├── index.txt.old</span></span><br><span class="line"><span class="string">├── intermediate</span></span><br><span class="line"><span class="string">├── openssl.cnf</span></span><br><span class="line"><span class="string">├── private</span></span><br><span class="line"><span class="string">│   ├── ca.key</span></span><br><span class="line"><span class="string">│   └── server.key</span></span><br><span class="line"><span class="string">├── serial</span></span><br><span class="line"><span class="string">└── serial.old</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">5 directories, 13 files</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # cat certs/server.pem</span></span><br><span class="line"><span class="string">-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">MIIDpjCCAo6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQ04x</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-1-字段解释"><a href="#1-1-1-字段解释" class="headerlink" title="1.1.1. 字段解释"></a>1.1.1. 字段解释</h4><p><mark>openssl genrsa -out ca.key 2048</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">genrsa:  生成RSA加密的私钥。 generates an RSA private key, <span class="built_in">which</span> essentially involves the generation of two prime numbers.</span><br><span class="line">  -out: The output file to write to</span><br><span class="line">  numbits: the size of the private key to generate <span class="keyword">in</span> bits, default:2048</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">不加密的RSA私钥。</span><br><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line"></span><br><span class="line">加密的RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048</span><br><span class="line"></span><br><span class="line">指定随机数创建RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -seed abc</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -rand file:hello.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -key server.key -out server.csr</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">req: 创建和处理PKCS\<span class="comment">#10格式的证书请求。 creates and processes certificate requests in PKCS#10 format</span></span><br><span class="line">     还可以添加额外信息来创建自签名CA证书。  也就是拿私钥签名之后当做 CA。上一步已经创建了私钥。可以拿私钥来创CA。</span><br><span class="line">-new -key： 生成一个新的 certificate req， 如果不指定-key, 那么就读取configfile中的配置项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PKCS\<span class="comment">#10: 证书请求文件，类似于CSR文件，一般是一个base64文件。</span></span><br><span class="line">          是一段可以向CA申请证书的P10请求。</span><br><span class="line">          该请求一般是通过硬件生成密钥对后，将私钥单独存放，但是将公钥放入p10中，</span><br><span class="line">          CA受到该p10请求后，可以校验，并根据p10中的信息制作一张没有私钥的公钥证书。</span><br><span class="line">意思是PKCS10 --&gt; 本地会有一对公私钥  --&gt; CA 拿到P10带来的公钥 --&gt; CA generate --&gt; 一张没有私钥的公钥。</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj “/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com” -extensions v3_ca -config openssl.cnf</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用原有的RSA密钥生成证书请求文件，指定-batch选项，不询问申请者的信息。主体信息由命令行subj指定，且输出公钥</span><br><span class="line">-config openssl.cnf</span><br><span class="line">-days  默认30天，与-x509一起使用</span><br><span class="line">-extensions 指定可选sections 从configfile中， 与-x509一起使用</span><br><span class="line">-subj Replaces the subject field of an input request, /type0=value0/type1=value1/type2=</span><br><span class="line">-x509  输出自签名证书，而不是证书请求， 在这里就是CA。</span><br><span class="line"><span class="comment">#This is typically used to generate a test certificate or a self-signed root CA.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><mark>openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x509: 是个公钥证书，主要有个sign certificate requests like a mini CA</span><br><span class="line">-req: 期望有个证书请求csr（而不是证书本身）在input中，</span><br><span class="line">-signkey: 使用提供的私钥对文件进行自签名</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ol>
+<li>Create a Certificate Authority private key (this is your most important key):</li>
+</ol>
+<p><code>openssl req -new -newkey rsa:1024 -nodes -out ca.csr -keyout ca.key</code></p>
+<ol start="2">
+<li>Create your CA self-signed certificate:</li>
+</ol>
+<p><code>openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem</code></p>
+<ol start="3">
+<li>Issue a client certificate by first generating the key, then request (or use one provided by external system) then sign the certificate using private key of your CA:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out client.key 1024</span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.cer</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="1-1-2-Manually-stopping-Pacific-keycloak"><a href="#1-1-2-Manually-stopping-Pacific-keycloak" class="headerlink" title="1.1.2. Manually stopping Pacific keycloak"></a>1.1.2. Manually stopping Pacific keycloak</h4><p><code>ps -ef | grep &quot;/opt/keycloak&quot; | awk &#39;&#123;print $2&#125;&#39; | xargs kill</code></p>
+<h3 id="1-2-了解CA，-root-CA，-以及自签名，CA签名"><a href="#1-2-了解CA，-root-CA，-以及自签名，CA签名" class="headerlink" title="1.2. 了解CA， root CA， 以及自签名，CA签名"></a>1.2. 了解CA， root CA， 以及自签名，CA签名</h3><p>只有root 是自签名，其他都是CA签名<br>ROOT证书是用来签发和验证CA证书的，防止在不知道签名者私钥的情况下恶意篡改证书的内容<br>Root CA -&gt; Server CA -&gt; Server(最终用户)</p>
+<p><mark>其实就是一个使用私钥签发（issue）的关系。</mark></p>
+<ol>
+<li><pre><code> ROOT 证书
+</code></pre>
+</li>
+<li><pre><code>               的私钥
+</code></pre>
+</li>
+<li><pre><code>                       签发   `用私钥加过密的sign签名`, `签名算法，通常是Sha256WithHash`
+</code></pre>
+</li>
+<li><pre><code>                            CA 证书
+</code></pre>
+</li>
+<li><pre><code>                                      签发
+</code></pre>
+</li>
+<li><pre><code>                                            x.509证书（公钥证书), 以.cert, .crt后缀，是ASN.1编码 Abstract syntax notation dot one 抽象语法标记
+</code></pre>
+<blockquote>
+<p>秘钥和证书都是 SEQUENCE 类型，<br>而 SEQUENCE 的 type 是 0x30，且长度是大于 127 的，因此第2 个字节是 0x82.<br>ASN.1 编码表示的数据是二进制数据，通常通过 BASE64 转化成字符串保存在 pem 文件中，<br>而 0x3082 经过 BASE64 编码后，就是字符串 MI，<mark>因此所有 PEM 文件存储的秘钥开始的前两个字符是 MI</mark>。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pkcs<span class="comment">#1 用于定义 RSA 公钥、私钥结构</span></span><br><span class="line">pkcs<span class="comment">#7 用于定义证书链</span></span><br><span class="line">pkcs<span class="comment">#8 用于定义任何算法公私钥</span></span><br><span class="line">pkcs<span class="comment">#12 用于定义私钥证书</span></span><br><span class="line">X.509 定义公钥证书</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/uploads/69094374817016.png"><br><img src="vx_images/69094374817016.png"></p>
+<h4 id="1-2-1-看个keytool生成证书的范例"><a href="#1-2-1-看个keytool生成证书的范例" class="headerlink" title="1.2.1. 看个keytool生成证书的范例"></a>1.2.1. 看个keytool生成证书的范例</h4><p><code>keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname &quot;CN=server&quot; -alias server -ext &quot;SAN:c=DNS:localhost,IP:127.0.0.1&quot; -keystore conf/server.keystore</code></p>
+<p>-genkeypair  生成密钥对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Generates a key pair (a public key and associated private key).</span><br><span class="line">              Wraps the public key into an X.509 v3 self-signed certificate,</span><br><span class="line">              which is stored as a single-element certificate chain. This</span><br><span class="line">              certificate chain and the private key are stored in a new</span><br><span class="line">              keystore entry identified by alias.</span><br></pre></td></tr></table></figure>
+<p>-storepass 更改密钥库的存储口令,<br>-storetype   PKCS12 私钥证书<br>-keyalg      RSA, DSA, EC, DES, DESede<br>-keysize<br>-dname</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The dname value specifies the X.500 Distinguished Name to be</span><br><span class="line">    associated with the value of alias, and is used as the issuer</span><br><span class="line">    and subject fields in the self-signed certificate. If no</span><br><span class="line">    distinguished name is provided at the command line, then the</span><br><span class="line">    user is prompted for one.</span><br></pre></td></tr></table></figure>
+<p>-ext<br>-keystore<br>-validity<br>-keypass</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SAN or SubjectAlternativeName</span><br><span class="line">            Values: type:value(,type:value)*, where type can be EMAIL, URI,</span><br><span class="line">            DNS, IP, or OID. The value argument is the string format value</span><br><span class="line">            for the type.</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-genkeypair-keyalg-keysize"><a href="#2-genkeypair-keyalg-keysize" class="headerlink" title="2. genkeypair keyalg keysize"></a>2. genkeypair keyalg keysize</h2><p>OpenSSL一共实现了4种非对称加密算法，<br>DH算法一般用户密钥交换。RSA 算法既可以用于密钥交换，也可以用于数字签名，DSA算法则一般只用于数字签名<br>DH、<br>RSA、<br>DSA<br>椭圆曲线算法（EC）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-genkeypair 生成密钥对      -keyalg算法   RSA             -keysize   2048  </span><br><span class="line">                                         DSA                        1024 </span><br><span class="line">                                         EC                         256</span><br><span class="line">-genseckey 生成密钥          -keyalg      DES                        56   </span><br><span class="line">                                         DESede                     168</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-1-1-1-ROOT证书"><a href="#2-1-1-1-ROOT证书" class="headerlink" title="2.1.1.1. ROOT证书"></a>2.1.1.1. ROOT证书</h5><h5 id="2-1-1-2-CA证书和"><a href="#2-1-1-2-CA证书和" class="headerlink" title="2.1.1.2. CA证书和"></a>2.1.1.2. CA证书和</h5><h5 id="2-1-1-3-使用CA证签发的X-509证书"><a href="#2-1-1-3-使用CA证签发的X-509证书" class="headerlink" title="2.1.1.3. 使用CA证签发的X.509证书"></a>2.1.1.3. 使用CA证签发的X.509证书</h5>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/05/vx_images/vx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/05/vx_images/vx/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-05 14:40:59" itemprop="dateCreated datePublished" datetime="2023-03-05T14:40:59+08:00">2023-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-25 21:10:26" itemprop="dateModified" datetime="2023-03-25T21:10:26+08:00">2023-03-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          {"created_time":"2023-03-05T06:40:59Z","files":[{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"2","modified_time":"2023-03-05T06:40:59Z","name":"202202112324.md","signature":"4719715249442535803","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"3","modified_time":"2023-03-05T06:40:59Z","name":"dailyEng.md","signature":"8085520616389884283","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"4","modified_time":"2023-03-05T06:40:59Z","name":"django.md","signature":"9178034990821423483","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"5","modified_time":"2023-03-05T06:40:59Z","name":"es-suse.md","signature":"6698120998665075067","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"6","modified_time":"2023-03-05T06:40:59Z","name":"ES.md","signature":"8915416213325363579","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"7","modified_time":"2023-03-05T06:40:59Z","name":"flask.md","signature":"2740285223534344571","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"8","modified_time":"2023-03-05T06:40:59Z","name":"hello-world.md","signature":"3929625289147300219","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"9","modified_time":"2023-03-05T06:40:59Z","name":"metadata.md","signature":"8296401839881206139","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"10","modified_time":"2023-03-05T06:40:59Z","name":"OIDCandSAML.md","signature":"6022850194390137211","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"11","modified_time":"2023-03-05T09:34:55Z","name":"saml2.md","signature":"8315186124163398011","tags":[]},{"attachment_folder":"","created_time":"2023-03-05T06:40:59Z","id":"12","modified_time":"2023-03-05T06:40:59Z","name":"suse.md","signature":"8868577589212756347","tags":[]},{"attachment_folder":"","created_time":"2023-03-17T07:51:50Z","id":"13","modified_time":"2023-03-25T13:10:26Z","name":"openssl.md","signature":"207324045384726","tags":[]},{"attachment_folder":"","created_time":"2023-03-17T08:25:42Z","id":"14","modified_time":"2023-03-19T14:41:45Z","name":"keycloak.md","signature":"784285914969154566","tags":[]}],"folders":[],"id":"1","modified_time":"2023-03-05T06:40:59Z","signature":"5459487176784099707","version":3}
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/02/suse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/02/suse/" class="post-title-link" itemprop="url">Suse</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-03-02 11:22:46 / Modified: 11:21:42" itemprop="dateCreated datePublished" datetime="2023-03-02T11:22:46+08:00">2023-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="suse"><a href="#suse" class="headerlink" title="suse"></a>suse</h1><blockquote>
+<p>zypper patch</p>
+</blockquote>
+<blockquote>
+<p>zypper update</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Angellaugh"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Angellaugh</p>
+  <div class="site-description" itemprop="description">技术，生活，艺术，旅行，都记录下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angellaugh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
