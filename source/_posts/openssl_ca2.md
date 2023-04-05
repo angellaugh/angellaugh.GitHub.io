@@ -11,7 +11,7 @@ categories: Teckknowledge
 ---
 
 ## 1. CA 简介 & 范例
-**CA **= certificate authority签证机构
+**CA**= certificate authority签证机构
 提供证书（服务器证书，由域名、公司信息、序列号和签名信息组成）
 
 **SSL:** Secure Sockets Layer（安全套接层协议), 与HTTPS一起诞生
@@ -26,6 +26,8 @@ categories: Teckknowledge
 1. 签证机关的名称，
 1. 该证书的序列号等信息
 
+
+{% note primary %}现在该说点什么呢{% endnote %}
 
 ```bash
 ### 2.4. View the issued CA
