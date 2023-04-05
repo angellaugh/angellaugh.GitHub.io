@@ -5,18 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.2">
-<script>
-(function(){
-    if(''){
-        if (prompt('请输入文章密码') !== ''){
-            alert('密码错误！');
-            history.back();
-        }
-    }
-})();
-</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -31,7 +23,7 @@
   <meta name="description" content="SAML2.0Conception  SAML, Security Assertion Markup Language    IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication    * Performs authentication and passes the user’s identity and">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SAML 2.0">
-<meta property="og:url" content="https://angellaugh.github.io/2023/02/23/saml2/index.html">
+<meta property="og:url" content="https://angellaugh.github.io/2023/04/05/saml2/index.html">
 <meta property="og:site_name" content="Angellaugh&#39;s blog">
 <meta property="og:description" content="SAML2.0Conception  SAML, Security Assertion Markup Language    IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication    * Performs authentication and passes the user’s identity and">
 <meta property="og:locale">
@@ -40,14 +32,14 @@
 <meta property="og:image" content="https://angellaugh.github.io/uploads/288243668946728.png">
 <meta property="og:image" content="https://angellaugh.github.io/uploads/409973578816914.png">
 <meta property="og:image" content="https://angellaugh.github.io/uploads/589974006532594.png">
-<meta property="article:published_time" content="2023-02-23T14:38:19.215Z">
-<meta property="article:modified_time" content="2023-03-05T09:34:55.052Z">
+<meta property="article:published_time" content="2023-04-05T15:16:09.115Z">
+<meta property="article:modified_time" content="2023-04-05T15:16:09.115Z">
 <meta property="article:author" content="Angellaugh">
 <meta property="article:tag" content="cirrus">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://angellaugh.github.io/uploads/315430821585906.png">
 
-<link rel="canonical" href="https://angellaugh.github.io/2023/02/23/saml2/">
+<link rel="canonical" href="https://angellaugh.github.io/2023/04/05/saml2/">
 
 
 <script id="page-configurations">
@@ -210,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/23/saml2/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/saml2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -233,15 +225,8 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-02-23 22:38:19" itemprop="dateCreated datePublished" datetime="2023-02-23T22:38:19+08:00">2023-02-23</time>
+              <time title="Created: 2023-04-05 15:16:09" itemprop="dateCreated datePublished" datetime="2023-04-05T15:16:09+00:00">2023-04-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-05 17:34:55" itemprop="dateModified" datetime="2023-03-05T17:34:55+08:00">2023-03-05</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -314,7 +299,7 @@
 <p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
 <p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
 <h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#114;&#x69;&#116;&#104;&#118;&#105;&#x72;&#x61;&#106;&#x2e;&#103;&#97;&#x69;&#x6b;&#119;&#x61;&#x64;&#64;&#100;&#101;&#108;&#108;&#46;&#x63;&#111;&#109;">&#x70;&#114;&#x69;&#116;&#104;&#118;&#105;&#x72;&#x61;&#106;&#x2e;&#103;&#97;&#x69;&#x6b;&#119;&#x61;&#x64;&#64;&#100;&#101;&#108;&#108;&#46;&#x63;&#111;&#109;</a></li>
+<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#112;&#x72;&#105;&#x74;&#104;&#118;&#105;&#x72;&#97;&#106;&#46;&#103;&#97;&#x69;&#x6b;&#119;&#x61;&#100;&#x40;&#x64;&#x65;&#108;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#112;&#x72;&#105;&#x74;&#104;&#118;&#105;&#x72;&#97;&#106;&#46;&#103;&#97;&#x69;&#x6b;&#119;&#x61;&#100;&#x40;&#x64;&#x65;&#108;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 <li>SP display a list of IDP,  user choose one </li>
 <li>The resource URL may be specific to one IdP. </li>
 <li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
@@ -366,12 +351,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/02/19/OIDCandSAML/" rel="prev" title="OIDC and SAML">
-      <i class="fa fa-chevron-left"></i> OIDC and SAML
+    <a href="/2023/04/05/RSA/" rel="prev" title="RSA">
+      <i class="fa fa-chevron-left"></i> RSA
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/02/23/dailyEng/" rel="next" title="DailyEng Context.md">
-      DailyEng Context.md <i class="fa fa-chevron-right"></i>
+    <a href="/2023/04/05/openssl/" rel="next" title="OpenSSL">
+      OpenSSL <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -447,7 +432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -460,7 +445,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -496,17 +481,6 @@
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
-<div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<span id="busuanzi_container_site_pv" style='display:none'>
-    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    <span class="post-meta-divider">|</span>
-</span>
-<span id="busuanzi_container_site_uv" style='display:none'>
-    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
-</span>
-</div>
-
         
 
 
@@ -534,7 +508,6 @@
 
 
 <script src="/js/next-boot.js"></script>
-
 
 
 
