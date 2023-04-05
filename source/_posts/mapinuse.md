@@ -10,7 +10,7 @@ categories: Teckknowledge
 ---
 
 
-## 1. map, reduce, filter 对序列操作
+## 1. map, reduce, zip, filter 对序列操作
 对指定序列做映射，返回值是迭代器
 
 
@@ -22,6 +22,20 @@ categories: Teckknowledge
 3. list: 可以遍历取多次迭代器，直到取到所有值，并且存到list中；
 4. list(map(func, list_)) 可以取代之前的旧写法，定义一个变量，type=list, 然后for循环取值append到这个变量list中；
 5. list[func(x) for x in list_]  也可以稍微简写一下for循环；
+
+**小补充： list还真是遍历多次迭代取值**
+```python
+nums = range(-5, 6)
+print(nums)
+print(type(nums))
+print(list(nums))
+"""
+range(-5, 6)
+<class 'range'>
+[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+"""
+
+```
 
 
 ### 2.1. map(func, iterables) 
@@ -120,10 +134,154 @@ print(b)
     25
     [4, 16, 36, 64, 25]
 
+### 2.4. map 组合lambda 小复习
+
+```python
+
+numbers = [2, 4, 6, 8, 5]
+def square(x):
+    return x * x
+print(list(map(square, numbers)))
+
+print(list(map(lambda x: x*x, numbers)))
+
+```
+    [4, 16, 36, 64, 25]
+    [4, 16, 36, 64, 25]
+
+
+```python
+numbers = [2, 4, 6, 8, 5]
+numbers_2 = [2, 4, 6, 8, 5]
+numbers_3 = [2, 4, 6, 8, 5]
+def add(x,y,z):
+    return x*y+z
+print(list(map(add, numbers, numbers_2, numbers_3)))
+
+print(list(map(lambda x, y, z: x*y+z, numbers, numbers_2, numbers_3)))
+```
+    [6, 20, 42, 72, 30]
+    [6, 20, 42, 72, 30]
+
+
+### 2.5. map 小应用
+
+```bash
+>>> list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+['1', '2', '3', '4', '5', '6', '7', '8', '9']
+```
+
 ## 3. reduce
 
-## 4. filter
+### 3.1. 对参数序列中的元素进行处理，返回一个值。看图理解
+
+```python
+from functools import reduce
+
+# func函数必须有2个参数， sequence是一个序列， initial指初始值，default=None
+reduce(function, sequence[, initial])
+
+#满足了函数必须有2个参数，满足了序列  但是，怎么计算呢？
+reduce(lambda x, y: x+y, [1, 2, 3, 4, 5])
+
+```
+![](/uploads/92494814625291.png)
+![](vx_images/92494814625291.png)
+
+
+### 3.2. reduce 小应用
+
+```
+>>> from functools import reduce
+>>> def fn(x, y):
+...     return x * 10 + y
+...
+>>> reduce(fn, [1, 3, 5, 7, 9])
+13579
+```
+
+## 4. zip
+4 zip(*iterable)
+
+zip的功能是映射多个容器的相似索引，可以方便用于来构造字典
+
+a=[1,2,3,4,5]b=["a","b","c","d","e"]c=dict(zip(b,a))print(c)
+
+执行结果为：
+
+{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+
 
 ## 5. yield
 
 ## 6. lambda
+
+6 lambda表达式通常和map，filter，zip，reduce等结合起来一起用非常方便
+
+下面看个例子
+
+a=[1,2,3,4,5,6]print(list(map(lambda x:x*x,a)))
+
+执行结果为：
+
+[1, 4, 9, 16, 25, 36]
+
+
+## 7. filter
+
+滤掉不符合条件的元素，返回值是迭代器
+
+    filter(function or None, iterable)
+
+
+
+```python
+nums = range(-5, 6)
+print(list(nums))
+# [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+
+# list 就等于 用for 遍历并存入list中，从nums中遍历取出每个元素来和None对比，-5是有值，为true，0 是false
+# 没看懂，0 是False， 1是true，其他都不是None
+print(list(filter(None, nums)))
+
+
+nums = range(-5, 6)
+print(list(nums))
+# [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+
+    
+for x in nums:
+    if x != None:
+        print(f"{x} is not None")
+    if x == None:
+        print(f"{x} is None")
+    if x == True:
+        print(f"{x} is True")
+    if x == False:
+        print(f"{x} is False")
+
+```
+    [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+    -5 is not None
+    -4 is not None
+    -3 is not None
+    -2 is not None
+    -1 is not None
+    0 is not None
+    0 is False
+    1 is not None
+    1 is True
+    2 is not None
+    3 is not None
+    4 is not None
+    5 is not None
+
+
+```python
+def demo_filter(x):
+    return x % 4 != 0
+
+#拿到 nums 中不能被 4 整除的整数
+print(list(filter(demo_filter, nums)))  # 输出：[-5, -3, -2, -1, 1, 2, 3, 5]
+```
+
