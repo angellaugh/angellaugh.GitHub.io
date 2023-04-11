@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/mapinuse/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/multiprocess_concurrent/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -207,7 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/04/05/mapinuse/" class="post-title-link" itemprop="url">mapinuse</a>
+            <a href="/2023/04/11/multiprocess_concurrent/" class="post-title-link" itemprop="url">Multiprocess_2 concurrent</a>
         </h2>
 
         <div class="post-meta">
@@ -218,7 +218,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-04-05 22:13:02 / Modified: 16:12:49" itemprop="dateCreated datePublished" datetime="2023-04-05T22:13:02+00:00">2023-04-05</time>
+              <time title="Created: 2023-04-11 23:17:02 / Modified: 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T23:17:02+00:00">2023-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,52 +241,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-map-reduce-zip-filter-对序列操作"><a href="#1-map-reduce-zip-filter-对序列操作" class="headerlink" title="1. map, reduce, zip, filter 对序列操作"></a>1. map, reduce, zip, filter 对序列操作</h2><p>对指定序列做映射，返回值是迭代器</p>
-<h2 id="2-map"><a href="#2-map" class="headerlink" title="2. map"></a>2. map</h2><p>收获：</p>
-<ol>
-<li>map(func, list_) 是一个迭代器，需要一个一个取，取一次运行一次，拿到一次值；</li>
-<li>next: 可以取一次迭代器的值；如果取到最后没值了会抛出一个错；</li>
-<li>list: 可以遍历取多次迭代器，直到取到所有值，并且存到list中；</li>
-<li>list(map(func, list_)) 可以取代之前的旧写法，定义一个变量，type=list, 然后for循环取值append到这个变量list中；</li>
-<li>list[func(x) for x in list_]  也可以稍微简写一下for循环；</li>
-</ol>
-<p><strong>小补充： list还真是遍历多次迭代取值</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nums = <span class="built_in">range</span>(-<span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(nums)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(nums))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(nums))</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">range(-5, 6)</span></span><br><span class="line"><span class="string">&lt;class &#x27;range&#x27;&gt;</span></span><br><span class="line"><span class="string">[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p><mark>1. time.perf_counter()  程序运行时间包括sleeping</mark>, 不用再 time.time()-starttime了。<br>2. time.process_counter() cpu运行时间，不包括sleeping<br><mark>3. concurrent.futures: 两个process 并行运行 </mark><br>4. 注意 python3.7以上才能打印出秒数<br>5. 注意不要用和包名相同的文件名<br><mark>6. Pool.map 可以取代 map(func, list)</mark></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> concurrent.futures</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sleep_for_a_bit</span>(<span class="params">secondes</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Sleeping <span class="subst">&#123;secondes&#125;</span> second(s)&quot;</span>)</span><br><span class="line">    time.sleep(secondes)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Done sleeping&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> concurrent.futures.ProcessPoolExecutor() <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">        f1 = executor.submit(sleep_for_a_bit, <span class="number">1</span>)</span><br><span class="line">        f2 = executor.submit(sleep_for_a_bit, <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(f1.result())</span><br><span class="line">        <span class="built_in">print</span>(f2.result())</span><br><span class="line">        </span><br><span class="line">finish = time.perf_counter()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Finished in time: &quot;</span>, finish)</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="2-1-map-func-iterables"><a href="#2-1-map-func-iterables" class="headerlink" title="2.1. map(func, iterables)"></a>2.1. map(func, iterables)</h3><p>map(function, *iterables)<br>对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple<br>map 取代for循环</p>
-<p>list(map(function, *iteratbles))  == [function(iterable) for iterable in iterables]</p>
-<h3 id="2-2-最常理解的实现是for循环，把结果收集到一个提前定义好的list中"><a href="#2-2-最常理解的实现是for循环，把结果收集到一个提前定义好的list中" class="headerlink" title="2.2. 最常理解的实现是for循环，把结果收集到一个提前定义好的list中"></a>2.2. 最常理解的实现是for循环，把结果收集到一个提前定义好的list中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line">a= []</span><br><span class="line"><span class="comment"># 只会这么写，或者next</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">    a.append(square(x))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;a: <span class="subst">&#123;a&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">b = [square(x) <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;a: <span class="subst">&#123;a&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">map(function, *iterables)</span></span><br><span class="line"><span class="string">对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple</span></span><br><span class="line"><span class="string">map 取代for循环</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-<pre><code>a: [4, 16, 36, 64, 25]
-b: [4, 16, 36, 64, 25]
+<pre><code>~/Desktop 🔥» python ccc.py                                      vivi@vivis-MBP
+Finished in time:  0.103320167
+Finished in time:  0.100869
+Sleeping 1 second(s)
+Sleeping 1 second(s)
+Finished in time:  0.099204041
+Finished in time:  0.095198
+Finished in time:  0.077157417
+Finished in time:  0.084327958
+Finished in time:  0.080791833
+Finished in time:  0.084751625
+Done sleeping
+Done sleeping
+Finished in time:  1.282027666
 </code></pre>
-<h3 id="2-3-进阶：-使用map-简化掉for循环以及提前定义list"><a href="#2-3-进阶：-使用map-简化掉for循环以及提前定义list" class="headerlink" title="2.3. 进阶： 使用map 简化掉for循环以及提前定义list"></a>2.3. 进阶： 使用map 简化掉for循环以及提前定义list</h3><mark>
-list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元素并且append到一个list中；
-
-<ol>
-<li>next 可以取出 map迭代器的值；</li>
-<li>for 语句等同于 next的效果，挨个取出map迭代器的值；</li>
-<li>list(map(func, list_)) 等于 point2 并且append到一个list中；</mark></li>
+<h2 id="Pool-map-func-list-来取代-list-map-func-list"><a href="#Pool-map-func-list-来取代-list-map-func-list" class="headerlink" title="Pool.map(func, list) 来取代 list(map(func, list))"></a>Pool.map(func, list) 来取代 list(map(func, list))</h2><ol>
+<li>但是看上去没发现节省时间</li>
 </ol>
-<h4 id="2-3-1-举例-next-效果，更深刻理解list-map-的效果"><a href="#2-3-1-举例-next-效果，更深刻理解list-map-的效果" class="headerlink" title="2.3.1. 举例 next 效果，更深刻理解list(map)的效果"></a>2.3.1. 举例 next 效果，更深刻理解list(map)的效果</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">numbers = [2, 4, 6, 8, 5]</span><br><span class="line">def square(x):</span><br><span class="line">    return x * x</span><br><span class="line"></span><br><span class="line"># type: class map, object</span><br><span class="line">square_num = map(square, numbers)</span><br><span class="line">print(type(square_num))</span><br><span class="line">print(square_num)</span><br><span class="line"># 在list的时候调用了square_num，迭代5次，并且把每次迭代的return 都append进list中。</span><br><span class="line"># 类似于next(square_num)了5次</span><br><span class="line"># 也类似于for循环把每个迭代元素调用一次，得到的值加入到list中。</span><br><span class="line">print(next(square_num))  #4</span><br><span class="line">print(list(square_num))  # 因为上面next已经取走了第一个值，所以list这里只剩下4个值</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;class &#39;map&#39;&gt;
-&lt;map object at 0x110a75c70&gt;
-4
-[16, 36, 64, 25] 
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = <span class="built_in">list</span>(<span class="built_in">map</span>(req_get, create_list.keys()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_get</span>():</span><br><span class="line">    <span class="keyword">with</span> Pool(core_num) <span class="keyword">as</span> p:</span><br><span class="line">        x = p.<span class="built_in">map</span>(req_get, create_list.keys())</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>If x equals get_list:369,  369
+[2023-04-11 14:08:28] [Line: 184] INFO - Total running time: 53.477982
+[2023-04-11 14:08:28] [Line: 185] INFO - Create clients number:369
+[2023-04-11 14:08:28] [Line: 186] INFO - Get clients number: 369
+[2023-04-11 14:08:28] [Line: 187] ERROR - Create clients fail number: 0
+[2023-04-11 14:08:28] [Line: 188] ERROR - Create clients fail information: []
+369
+369
+369
+369
 </code></pre>
-<h4 id="2-3-2-举例-for循环取出值append到list中，用list-map-来取代for循环。"><a href="#2-3-2-举例-for循环取出值append到list中，用list-map-来取代for循环。" class="headerlink" title="2.3.2. 举例 for循环取出值append到list中，用list(map)来取代for循环。"></a>2.3.2. 举例 for循环取出值append到list中，用list(map)来取代for循环。</h4><p><mark><del>其实精简了两次for循环</del> 其实是map+list 两个动作 一起取代了 for循环和list.append</p>
-<ol>
-<li>numbsers 和 square 用map来一一映射；</li>
-<li>list(map) 达到了 一个一个for 并且 append的效果；</li>
-<li>啊哈哈哈 意外之喜，理解了另一个写法：b = [square(x) for x in numbers]</mark>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/05/mapinuse/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+
       
     </div>
 
@@ -305,7 +293,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/saml2/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/openssl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -319,7 +307,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/04/05/saml2/" class="post-title-link" itemprop="url">SAML 2.0</a>
+            <a href="/2023/04/11/openssl/" class="post-title-link" itemprop="url">OpenSSL</a>
         </h2>
 
         <div class="post-meta">
@@ -329,7 +317,169 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-04-05 16:12:49" itemprop="dateCreated datePublished" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+              <time title="Created: 2023-04-11 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h1><p>在SSL/TLS/HTTPS通信中，证书虽然不是TLS/SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS/SSL协议，效果会更好。</p>
+<p>啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证</p>
+<p>OpenSSL 是一个安全套接字层密码库，囊括主要的密码算法、常用密钥、证书封装管理功能及实现ssl协议。<br>OpenSSL整个软件包大概可以分成三个主要的功能部分：</p>
+<ol>
+<li>SSL协议库libssl</li>
+<li>应用程序命令工具</li>
+<li>密码算法库libcrypto</li>
+</ol>
+<p>.KEY 私钥。</p>
+<p><strong>.CSR</strong> 是 Certificate Signing Request 的缩写，即证书签名请求，这不是证书，只是包含申请证书的基本信息。生成证书时要把这个提交给权威的证书颁发机构，颁发机构审核通过之后，再根据这些申请信息生成相应的证书。</p>
+<p>.CRT 即 certificate的缩写，即证书。</p>
+<p><strong>X.509</strong> 定义公钥证书格式， structure， 不同的密钥有不同的结构体。</p>
+<blockquote>
+<p>X.509的证书文件，一般以.crt结尾，根据该文件的内容编码格式，可以分为以下二种格式：</p>
+</blockquote>
+<blockquote>
+<p>.PEM - Privacy Enhanced Mail，以base64编码，将二进制文件转为文本，打开看文本格式，以”—–BEGIN…“开头，”—–END…”结尾，Apache 和 *NIX 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<blockquote>
+<p>.DER - Distinguished Encoding Rules，是二进制格式，不可读。Java 和 Windows 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<h2 id="1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists"><a href="#1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists" class="headerlink" title="1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists"></a>1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists</h2><h3 id="1-1-For-instances"><a href="#1-1-For-instances" class="headerlink" title="1.1. For instances:"></a>1.1. For instances:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out server.key 2048  <span class="comment"># 先生成一个私钥                 </span></span><br><span class="line">openssl req -new -key server.key -out server.csr <span class="comment"># 用这个私钥加密证书请求信息，生成一个证书请求</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -out server.crt -signkey server.key -days 3650 <span class="comment"># 用证书请求 和 私钥自签名来申请一个x509公钥</span></span><br><span class="line"><span class="comment"># 用x509公钥 和 私钥自签名来发请求</span></span><br><span class="line">python3 manage.py runserver_plus --cert-file ./server.crt --key-file ./server.key 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><figcaption><span>Generate Root CA</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private/ca.key 2048 <span class="comment">#先生成一个私钥</span></span><br><span class="line"></span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl genrsa -out private/ca.key 2048</span></span><br><span class="line">Generating RSA private key, 2048 bit long modulus (2 primes)</span><br><span class="line">.....................+++++</span><br><span class="line">.............+++++</span><br><span class="line">e is 65537 (0x010001)</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/ca.key</span></span><br><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEpAIBAAKCAQEArPbCOb9to</span><br><span class="line">……</span><br><span class="line">XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用私钥自签，生成一个x509 的 公钥CA</span></span><br><span class="line">openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com&quot;</span> -extensions v3_ca -config openssl.cnf</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   └── ca.key</span><br><span class="line">└── serial</span><br><span class="line">5 directories, 6 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat certs/ca.pem</span></span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIID0DCCArigAwIBAgIUNq7/2QHSt6dhvy5XVEIlx2bqJ1AwDQYJKoZIhvcNAQEL</span><br><span class="line">dR2qFJjutlz/ExPDqhRMzSGzsMH47uH2j/rEsIW+4K0vU6G9HIIWpa4xoET+TQJI</span><br><span class="line">p5DKgza5t0QBuULe9YTMJTlHl2E=</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># newkey:生成一个证书请求，加一个私钥，-nodes:不加密私钥，生成server certificate and use CA to issue it </span></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;</span>  -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj &quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;  -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............................+++++</span><br><span class="line">..................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;private/server.key&#x27;</span></span><br><span class="line">-----</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">│   └── server.csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   ├── ca.key</span><br><span class="line">│   └── server.key</span><br><span class="line">└── serial</span><br><span class="line"></span><br><span class="line">5 directories, 8 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat csr/server.csr</span></span><br><span class="line">-----BEGIN CERTIFICATE REQUEST-----</span><br><span class="line">MIIDJjCCAg4CAQAwcDELMAkGA1UEBhMCQ04xETAPBgNVBAgMCFNoYW5naGFpMREw</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/server.key</span></span><br><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpCNWLNTNCFf0K</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ca:可以sign certificate req， 签名证书请求， 并且生成 CRLs证书吊销列表: certificate revocation lists</span></span><br><span class="line"><span class="comment"># batch: 所有证书will be certified automatically.  notext:不要把证书文本形式输出到文件，意思是二进制？</span></span><br><span class="line"><span class="comment"># extensions: default x509, 如果没有extension section，那么输出V1 certificate，否则输出V3 certificate.x509v3.cnf</span></span><br><span class="line">openssl ca -batch -notext -<span class="keyword">in</span> csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Using configuration from openssl.cnf</span><br><span class="line">Check that the request matches the signature</span><br><span class="line">Signature ok</span><br><span class="line">The Subject<span class="string">&#x27;s Distinguished Name is as follows</span></span><br><span class="line"><span class="string">countryName           :PRINTABLE:&#x27;</span>CN<span class="string">&#x27;</span></span><br><span class="line"><span class="string">stateOrProvinceName   :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">localityName          :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationName      :ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationalUnitName:ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">commonName            :ASN.1 12:&#x27;</span>ciam.west.isilon.com<span class="string">&#x27;</span></span><br><span class="line"><span class="string">Certificate is to be certified until Mar 24 15:11:50 2024 GMT (365 days)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Write out database with 1 new entries</span></span><br><span class="line"><span class="string">Data Base Updated</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── certs</span></span><br><span class="line"><span class="string">│   ├── 1000.pem</span></span><br><span class="line"><span class="string">│   ├── ca.pem</span></span><br><span class="line"><span class="string">│   └── server.pem</span></span><br><span class="line"><span class="string">├── crl</span></span><br><span class="line"><span class="string">├── csr</span></span><br><span class="line"><span class="string">│   └── server.csr</span></span><br><span class="line"><span class="string">├── index.txt</span></span><br><span class="line"><span class="string">├── index.txt.attr</span></span><br><span class="line"><span class="string">├── index.txt.attr.old</span></span><br><span class="line"><span class="string">├── index.txt.old</span></span><br><span class="line"><span class="string">├── intermediate</span></span><br><span class="line"><span class="string">├── openssl.cnf</span></span><br><span class="line"><span class="string">├── private</span></span><br><span class="line"><span class="string">│   ├── ca.key</span></span><br><span class="line"><span class="string">│   └── server.key</span></span><br><span class="line"><span class="string">├── serial</span></span><br><span class="line"><span class="string">└── serial.old</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">5 directories, 13 files</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # cat certs/server.pem</span></span><br><span class="line"><span class="string">-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">MIIDpjCCAo6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQ04x</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-1-字段解释"><a href="#1-1-1-字段解释" class="headerlink" title="1.1.1. 字段解释"></a>1.1.1. 字段解释</h4><p><mark>openssl genrsa -out ca.key 2048</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">genrsa:  生成RSA加密的私钥。 generates an RSA private key, <span class="built_in">which</span> essentially involves the generation of two prime numbers.</span><br><span class="line">  -out: The output file to write to</span><br><span class="line">  numbits: the size of the private key to generate <span class="keyword">in</span> bits, default:2048</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">不加密的RSA私钥。</span><br><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line"></span><br><span class="line">加密的RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048</span><br><span class="line"></span><br><span class="line">指定随机数创建RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -seed abc</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -rand file:hello.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -key server.key -out server.csr</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">req: 创建和处理PKCS\<span class="comment">#10格式的证书请求。 creates and processes certificate requests in PKCS#10 format</span></span><br><span class="line">     还可以添加额外信息来创建自签名CA证书。  也就是拿私钥签名之后当做 CA。上一步已经创建了私钥。可以拿私钥来创CA。</span><br><span class="line">-new -key： 生成一个新的 certificate req， 如果不指定-key, 那么就读取configfile中的配置项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PKCS\<span class="comment">#10: 证书请求文件，类似于CSR文件，一般是一个base64文件。</span></span><br><span class="line">          是一段可以向CA申请证书的P10请求。</span><br><span class="line">          该请求一般是通过硬件生成密钥对后，将私钥单独存放，但是将公钥放入p10中，</span><br><span class="line">          CA受到该p10请求后，可以校验，并根据p10中的信息制作一张没有私钥的公钥证书。</span><br><span class="line">意思是PKCS10 --&gt; 本地会有一对公私钥  --&gt; CA 拿到P10带来的公钥 --&gt; CA generate --&gt; 一张没有私钥的公钥。</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj “/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com” -extensions v3_ca -config openssl.cnf</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用原有的RSA密钥生成证书请求文件，指定-batch选项，不询问申请者的信息。主体信息由命令行subj指定，且输出公钥</span><br><span class="line">-config openssl.cnf</span><br><span class="line">-days  默认30天，与-x509一起使用</span><br><span class="line">-extensions 指定可选sections 从configfile中， 与-x509一起使用</span><br><span class="line">-subj Replaces the subject field of an input request, /type0=value0/type1=value1/type2=</span><br><span class="line">-x509  输出自签名证书，而不是证书请求， 在这里就是CA。</span><br><span class="line"><span class="comment">#This is typically used to generate a test certificate or a self-signed root CA.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><mark>openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x509: 是个公钥证书，主要有个sign certificate requests like a mini CA</span><br><span class="line">-req: 期望有个证书请求csr（而不是证书本身）在input中，</span><br><span class="line">-signkey: 使用提供的私钥对文件进行自签名</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ol>
+<li>Create a Certificate Authority private key (this is your most important key):</li>
+</ol>
+<p><code>openssl req -new -newkey rsa:1024 -nodes -out ca.csr -keyout ca.key</code></p>
+<ol start="2">
+<li>Create your CA self-signed certificate:</li>
+</ol>
+<p><code>openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem</code></p>
+<ol start="3">
+<li>Issue a client certificate by first generating the key, then request (or use one provided by external system) then sign the certificate using private key of your CA:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out client.key 1024</span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.cer</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="1-1-2-Manually-stopping-Pacific-keycloak"><a href="#1-1-2-Manually-stopping-Pacific-keycloak" class="headerlink" title="1.1.2. Manually stopping Pacific keycloak"></a>1.1.2. Manually stopping Pacific keycloak</h4><p><code>ps -ef | grep &quot;/opt/keycloak&quot; | awk &#39;&#123;print $2&#125;&#39; | xargs kill</code></p>
+<h3 id="1-2-了解CA，-root-CA，-以及自签名，CA签名"><a href="#1-2-了解CA，-root-CA，-以及自签名，CA签名" class="headerlink" title="1.2. 了解CA， root CA， 以及自签名，CA签名"></a>1.2. 了解CA， root CA， 以及自签名，CA签名</h3><p>只有root 是自签名，其他都是CA签名<br>ROOT证书是用来签发和验证CA证书的，防止在不知道签名者私钥的情况下恶意篡改证书的内容<br>Root CA -&gt; Server CA -&gt; Server(最终用户)</p>
+<p><mark>其实就是一个使用私钥签发（issue）的关系。</mark></p>
+<ol>
+<li><pre><code> ROOT 证书
+</code></pre>
+</li>
+<li><pre><code>               的私钥
+</code></pre>
+</li>
+<li><pre><code>                       签发   `用私钥加过密的sign签名`, `签名算法，通常是Sha256WithHash`
+</code></pre>
+</li>
+<li><pre><code>                            CA 证书
+</code></pre>
+</li>
+<li><pre><code>                                      签发
+</code></pre>
+</li>
+<li><pre><code>                                            x.509证书（公钥证书), 以.cert, .crt后缀，是ASN.1编码 Abstract syntax notation dot one 抽象语法标记
+</code></pre>
+<blockquote>
+<p>秘钥和证书都是 SEQUENCE 类型，<br>而 SEQUENCE 的 type 是 0x30，且长度是大于 127 的，因此第2 个字节是 0x82.<br>ASN.1 编码表示的数据是二进制数据，通常通过 BASE64 转化成字符串保存在 pem 文件中，<br>而 0x3082 经过 BASE64 编码后，就是字符串 MI，<mark>因此所有 PEM 文件存储的秘钥开始的前两个字符是 MI</mark>。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pkcs<span class="comment">#1 用于定义 RSA 公钥、私钥结构</span></span><br><span class="line">pkcs<span class="comment">#7 用于定义证书链</span></span><br><span class="line">pkcs<span class="comment">#8 用于定义任何算法公私钥</span></span><br><span class="line">pkcs<span class="comment">#12 用于定义私钥证书</span></span><br><span class="line">X.509 定义公钥证书</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/uploads/69094374817016.png"><br><img src="vx_images/69094374817016.png"></p>
+<h4 id="1-2-1-看个keytool生成证书的范例"><a href="#1-2-1-看个keytool生成证书的范例" class="headerlink" title="1.2.1. 看个keytool生成证书的范例"></a>1.2.1. 看个keytool生成证书的范例</h4><p><code>keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname &quot;CN=server&quot; -alias server -ext &quot;SAN:c=DNS:localhost,IP:127.0.0.1&quot; -keystore conf/server.keystore</code></p>
+<p>-genkeypair  生成密钥对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Generates a key pair (a public key and associated private key).</span><br><span class="line">              Wraps the public key into an X.509 v3 self-signed certificate,</span><br><span class="line">              which is stored as a single-element certificate chain. This</span><br><span class="line">              certificate chain and the private key are stored in a new</span><br><span class="line">              keystore entry identified by alias.</span><br></pre></td></tr></table></figure>
+<p>-storepass 更改密钥库的存储口令,<br>-storetype   PKCS12 私钥证书<br>-keyalg      RSA, DSA, EC, DES, DESede<br>-keysize<br>-dname</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The dname value specifies the X.500 Distinguished Name to be</span><br><span class="line">    associated with the value of alias, and is used as the issuer</span><br><span class="line">    and subject fields in the self-signed certificate. If no</span><br><span class="line">    distinguished name is provided at the command line, then the</span><br><span class="line">    user is prompted for one.</span><br></pre></td></tr></table></figure>
+<p>-ext<br>-keystore<br>-validity<br>-keypass</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SAN or SubjectAlternativeName</span><br><span class="line">            Values: type:value(,type:value)*, where type can be EMAIL, URI,</span><br><span class="line">            DNS, IP, or OID. The value argument is the string format value</span><br><span class="line">            for the type.</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-genkeypair-keyalg-keysize"><a href="#2-genkeypair-keyalg-keysize" class="headerlink" title="2. genkeypair keyalg keysize"></a>2. genkeypair keyalg keysize</h2><p>OpenSSL一共实现了4种非对称加密算法，<br>DH算法一般用户密钥交换。RSA 算法既可以用于密钥交换，也可以用于数字签名，DSA算法则一般只用于数字签名<br>DH、<br>RSA、<br>DSA<br>椭圆曲线算法（EC）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-genkeypair 生成密钥对      -keyalg算法   RSA             -keysize   2048  </span><br><span class="line">                                         DSA                        1024 </span><br><span class="line">                                         EC                         256</span><br><span class="line">-genseckey 生成密钥          -keyalg      DES                        56   </span><br><span class="line">                                         DESede                     168</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-1-1-1-ROOT证书"><a href="#2-1-1-1-ROOT证书" class="headerlink" title="2.1.1.1. ROOT证书"></a>2.1.1.1. ROOT证书</h5><h5 id="2-1-1-2-CA证书和"><a href="#2-1-1-2-CA证书和" class="headerlink" title="2.1.1.2. CA证书和"></a>2.1.1.2. CA证书和</h5><h5 id="2-1-1-3-使用CA证签发的X-509证书"><a href="#2-1-1-3-使用CA证签发的X-509证书" class="headerlink" title="2.1.1.3. 使用CA证签发的X.509证书"></a>2.1.1.3. 使用CA证签发的X.509证书</h5>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/saml2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/11/saml2/" class="post-title-link" itemprop="url">SAML 2.0</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-11 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -403,7 +553,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
 <p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
 <p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
 <h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#112;&#114;&#x69;&#x74;&#104;&#x76;&#x69;&#114;&#x61;&#x6a;&#x2e;&#x67;&#x61;&#105;&#107;&#x77;&#97;&#x64;&#64;&#100;&#x65;&#108;&#108;&#46;&#99;&#x6f;&#109;">&#112;&#114;&#x69;&#x74;&#104;&#x76;&#x69;&#114;&#x61;&#x6a;&#x2e;&#x67;&#x61;&#105;&#107;&#x77;&#97;&#x64;&#64;&#100;&#x65;&#108;&#108;&#46;&#99;&#x6f;&#109;</a></li>
+<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#x72;&#105;&#x74;&#x68;&#x76;&#105;&#x72;&#x61;&#x6a;&#x2e;&#x67;&#x61;&#x69;&#x6b;&#119;&#97;&#100;&#64;&#x64;&#101;&#108;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x70;&#x72;&#105;&#x74;&#x68;&#x76;&#105;&#x72;&#x61;&#x6a;&#x2e;&#x67;&#x61;&#x69;&#x6b;&#119;&#97;&#100;&#64;&#x64;&#101;&#108;&#x6c;&#x2e;&#99;&#111;&#x6d;</a></li>
 <li>SP display a list of IDP,  user choose one </li>
 <li>The resource URL may be specific to one IdP. </li>
 <li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
@@ -437,7 +587,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/RSA/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/understandmapyieldlambda.py/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -451,7 +601,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/04/05/RSA/" class="post-title-link" itemprop="url">RSA</a>
+            <a href="/2023/04/11/understandmapyieldlambda.py/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -461,7 +611,75 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-04-05 16:12:49" itemprop="dateCreated datePublished" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+              <time title="Created: 2023-04-11 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1> <p>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">a= []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只会这么写，或者next</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">    a.append(square(x))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">map(function, *iterables)</span></span><br><span class="line"><span class="string">对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple</span></span><br><span class="line"><span class="string">map 取代for循环</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">square_num = <span class="built_in">map</span>(square, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(square_num))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(square_num)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在list的时候调用了square_num，迭代5次，并且把每次迭代的return 都append进list中。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(square_num))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>[4, 16, 36, 64, 25]
+&lt;class &#39;map&#39;&gt;
+&lt;map object at 0x1109a2c40&gt;
+[4, 16, 36, 64, 25]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 类似于</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">yield</span> square(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># my way</span></span><br><span class="line">a = testyield(numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;next <span class="subst">&#123;<span class="built_in">next</span>(a)&#125;</span>&quot;</span>)  <span class="comment"># list就是对每个元素next的动作</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> a:</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment"># list can call the generator list就是一个循环call 迭代器的动作， next       </span></span><br><span class="line">a = <span class="built_in">list</span>(testyield(numbers))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">#将传入list，改写成传入单个元素，去掉for循环，外面用map取代for</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment">#yield square(x) 这里不行。。 貌似yield必须要和for循环在一起</span></span><br><span class="line">    <span class="keyword">return</span> square(x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;testyield2 with map&quot;</span>)</span><br><span class="line">a = <span class="built_in">map</span>(testyield2, numbers)</span><br><span class="line"><span class="comment"># is a map object</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># is a generator</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(a))</span><br><span class="line"><span class="comment"># is a list gegerator</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield4</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;under testyield444&quot;</span>)</span><br><span class="line">    a =<span class="keyword">yield</span> square(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;aa&quot;</span>)</span><br><span class="line">g = testyield4(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(g)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;call the testyield4 <span class="subst">&#123;<span class="built_in">next</span>(g)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># for x in numbers:</span></span><br><span class="line"><span class="comment">#     g = testyield4(x)</span></span><br><span class="line"><span class="comment">#     print(next(g))</span></span><br><span class="line">    </span><br><span class="line">aa = [<span class="built_in">next</span>(testyield4(x)) <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(aa)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">return 和 list[map(func, parameters)]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">yield 和list[next(func(x)) for x in parameters]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/RSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/11/RSA/" class="post-title-link" itemprop="url">RSA</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-11 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -643,7 +861,7 @@ decrypted string:  hello geeks
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/keycloak/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/keycloak/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -657,7 +875,7 @@ decrypted string:  hello geeks
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/04/05/keycloak/" class="post-title-link" itemprop="url">KeyCloak</a>
+            <a href="/2023/04/11/keycloak/" class="post-title-link" itemprop="url">KeyCloak</a>
         </h2>
 
         <div class="post-meta">
@@ -667,7 +885,7 @@ decrypted string:  hello geeks
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-04-05 16:12:49" itemprop="dateCreated datePublished" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+              <time title="Created: 2023-04-11 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -820,7 +1038,7 @@ decrypted string:  hello geeks
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/openssl/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/mapinuse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -834,7 +1052,7 @@ decrypted string:  hello geeks
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/04/05/openssl/" class="post-title-link" itemprop="url">OpenSSL</a>
+            <a href="/2023/04/05/mapinuse/" class="post-title-link" itemprop="url">mapinuse</a>
         </h2>
 
         <div class="post-meta">
@@ -844,8 +1062,15 @@ decrypted string:  hello geeks
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-04-05 16:12:49" itemprop="dateCreated datePublished" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+              <time title="Created: 2023-04-05 22:13:02" itemprop="dateCreated datePublished" datetime="2023-04-05T22:13:02+00:00">2023-04-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -867,103 +1092,52 @@ decrypted string:  hello geeks
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h1><p>在SSL/TLS/HTTPS通信中，证书虽然不是TLS/SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS/SSL协议，效果会更好。</p>
-<p>啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证</p>
-<p>OpenSSL 是一个安全套接字层密码库，囊括主要的密码算法、常用密钥、证书封装管理功能及实现ssl协议。<br>OpenSSL整个软件包大概可以分成三个主要的功能部分：</p>
+          <h2 id="1-map-reduce-zip-filter-对序列操作"><a href="#1-map-reduce-zip-filter-对序列操作" class="headerlink" title="1. map, reduce, zip, filter 对序列操作"></a>1. map, reduce, zip, filter 对序列操作</h2><p>对指定序列做映射，返回值是迭代器</p>
+<h2 id="2-map"><a href="#2-map" class="headerlink" title="2. map"></a>2. map</h2><p>收获：</p>
 <ol>
-<li>SSL协议库libssl</li>
-<li>应用程序命令工具</li>
-<li>密码算法库libcrypto</li>
+<li>map(func, list_) 是一个迭代器，需要一个一个取，取一次运行一次，拿到一次值；</li>
+<li>next: 可以取一次迭代器的值；如果取到最后没值了会抛出一个错；</li>
+<li>list: 可以遍历取多次迭代器，直到取到所有值，并且存到list中；</li>
+<li>list(map(func, list_)) 可以取代之前的旧写法，定义一个变量，type=list, 然后for循环取值append到这个变量list中；</li>
+<li>list[func(x) for x in list_]  也可以稍微简写一下for循环；</li>
 </ol>
-<p>.KEY 私钥。</p>
-<p><strong>.CSR</strong> 是 Certificate Signing Request 的缩写，即证书签名请求，这不是证书，只是包含申请证书的基本信息。生成证书时要把这个提交给权威的证书颁发机构，颁发机构审核通过之后，再根据这些申请信息生成相应的证书。</p>
-<p>.CRT 即 certificate的缩写，即证书。</p>
-<p><strong>X.509</strong> 定义公钥证书格式， structure， 不同的密钥有不同的结构体。</p>
-<blockquote>
-<p>X.509的证书文件，一般以.crt结尾，根据该文件的内容编码格式，可以分为以下二种格式：</p>
-</blockquote>
-<blockquote>
-<p>.PEM - Privacy Enhanced Mail，以base64编码，将二进制文件转为文本，打开看文本格式，以”—–BEGIN…“开头，”—–END…”结尾，Apache 和 *NIX 服务器偏向于使用这种编码格式。</p>
-</blockquote>
-<blockquote>
-<p>.DER - Distinguished Encoding Rules，是二进制格式，不可读。Java 和 Windows 服务器偏向于使用这种编码格式。</p>
-</blockquote>
-<h2 id="1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists"><a href="#1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists" class="headerlink" title="1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists"></a>1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists</h2><h3 id="1-1-For-instances"><a href="#1-1-For-instances" class="headerlink" title="1.1. For instances:"></a>1.1. For instances:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out server.key 2048  <span class="comment"># 先生成一个私钥                 </span></span><br><span class="line">openssl req -new -key server.key -out server.csr <span class="comment"># 用这个私钥加密证书请求信息，生成一个证书请求</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -out server.crt -signkey server.key -days 3650 <span class="comment"># 用证书请求 和 私钥自签名来申请一个x509公钥</span></span><br><span class="line"><span class="comment"># 用x509公钥 和 私钥自签名来发请求</span></span><br><span class="line">python3 manage.py runserver_plus --cert-file ./server.crt --key-file ./server.key 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><figcaption><span>Generate Root CA</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private/ca.key 2048 <span class="comment">#先生成一个私钥</span></span><br><span class="line"></span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl genrsa -out private/ca.key 2048</span></span><br><span class="line">Generating RSA private key, 2048 bit long modulus (2 primes)</span><br><span class="line">.....................+++++</span><br><span class="line">.............+++++</span><br><span class="line">e is 65537 (0x010001)</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/ca.key</span></span><br><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEpAIBAAKCAQEArPbCOb9to</span><br><span class="line">……</span><br><span class="line">XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用私钥自签，生成一个x509 的 公钥CA</span></span><br><span class="line">openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com&quot;</span> -extensions v3_ca -config openssl.cnf</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   └── ca.key</span><br><span class="line">└── serial</span><br><span class="line">5 directories, 6 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat certs/ca.pem</span></span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIID0DCCArigAwIBAgIUNq7/2QHSt6dhvy5XVEIlx2bqJ1AwDQYJKoZIhvcNAQEL</span><br><span class="line">dR2qFJjutlz/ExPDqhRMzSGzsMH47uH2j/rEsIW+4K0vU6G9HIIWpa4xoET+TQJI</span><br><span class="line">p5DKgza5t0QBuULe9YTMJTlHl2E=</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># newkey:生成一个证书请求，加一个私钥，-nodes:不加密私钥，生成server certificate and use CA to issue it </span></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;</span>  -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj &quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;  -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............................+++++</span><br><span class="line">..................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;private/server.key&#x27;</span></span><br><span class="line">-----</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">│   └── server.csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   ├── ca.key</span><br><span class="line">│   └── server.key</span><br><span class="line">└── serial</span><br><span class="line"></span><br><span class="line">5 directories, 8 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat csr/server.csr</span></span><br><span class="line">-----BEGIN CERTIFICATE REQUEST-----</span><br><span class="line">MIIDJjCCAg4CAQAwcDELMAkGA1UEBhMCQ04xETAPBgNVBAgMCFNoYW5naGFpMREw</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/server.key</span></span><br><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpCNWLNTNCFf0K</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ca:可以sign certificate req， 签名证书请求， 并且生成 CRLs证书吊销列表: certificate revocation lists</span></span><br><span class="line"><span class="comment"># batch: 所有证书will be certified automatically.  notext:不要把证书文本形式输出到文件，意思是二进制？</span></span><br><span class="line"><span class="comment"># extensions: default x509, 如果没有extension section，那么输出V1 certificate，否则输出V3 certificate.x509v3.cnf</span></span><br><span class="line">openssl ca -batch -notext -<span class="keyword">in</span> csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Using configuration from openssl.cnf</span><br><span class="line">Check that the request matches the signature</span><br><span class="line">Signature ok</span><br><span class="line">The Subject<span class="string">&#x27;s Distinguished Name is as follows</span></span><br><span class="line"><span class="string">countryName           :PRINTABLE:&#x27;</span>CN<span class="string">&#x27;</span></span><br><span class="line"><span class="string">stateOrProvinceName   :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">localityName          :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationName      :ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationalUnitName:ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">commonName            :ASN.1 12:&#x27;</span>ciam.west.isilon.com<span class="string">&#x27;</span></span><br><span class="line"><span class="string">Certificate is to be certified until Mar 24 15:11:50 2024 GMT (365 days)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Write out database with 1 new entries</span></span><br><span class="line"><span class="string">Data Base Updated</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── certs</span></span><br><span class="line"><span class="string">│   ├── 1000.pem</span></span><br><span class="line"><span class="string">│   ├── ca.pem</span></span><br><span class="line"><span class="string">│   └── server.pem</span></span><br><span class="line"><span class="string">├── crl</span></span><br><span class="line"><span class="string">├── csr</span></span><br><span class="line"><span class="string">│   └── server.csr</span></span><br><span class="line"><span class="string">├── index.txt</span></span><br><span class="line"><span class="string">├── index.txt.attr</span></span><br><span class="line"><span class="string">├── index.txt.attr.old</span></span><br><span class="line"><span class="string">├── index.txt.old</span></span><br><span class="line"><span class="string">├── intermediate</span></span><br><span class="line"><span class="string">├── openssl.cnf</span></span><br><span class="line"><span class="string">├── private</span></span><br><span class="line"><span class="string">│   ├── ca.key</span></span><br><span class="line"><span class="string">│   └── server.key</span></span><br><span class="line"><span class="string">├── serial</span></span><br><span class="line"><span class="string">└── serial.old</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">5 directories, 13 files</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # cat certs/server.pem</span></span><br><span class="line"><span class="string">-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">MIIDpjCCAo6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQ04x</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-
-<h4 id="1-1-1-字段解释"><a href="#1-1-1-字段解释" class="headerlink" title="1.1.1. 字段解释"></a>1.1.1. 字段解释</h4><p><mark>openssl genrsa -out ca.key 2048</mark></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">genrsa:  生成RSA加密的私钥。 generates an RSA private key, <span class="built_in">which</span> essentially involves the generation of two prime numbers.</span><br><span class="line">  -out: The output file to write to</span><br><span class="line">  numbits: the size of the private key to generate <span class="keyword">in</span> bits, default:2048</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">不加密的RSA私钥。</span><br><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line"></span><br><span class="line">加密的RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048</span><br><span class="line"></span><br><span class="line">指定随机数创建RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -seed abc</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -rand file:hello.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><mark>openssl req -new -key server.key -out server.csr</mark></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">req: 创建和处理PKCS\<span class="comment">#10格式的证书请求。 creates and processes certificate requests in PKCS#10 format</span></span><br><span class="line">     还可以添加额外信息来创建自签名CA证书。  也就是拿私钥签名之后当做 CA。上一步已经创建了私钥。可以拿私钥来创CA。</span><br><span class="line">-new -key： 生成一个新的 certificate req， 如果不指定-key, 那么就读取configfile中的配置项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PKCS\<span class="comment">#10: 证书请求文件，类似于CSR文件，一般是一个base64文件。</span></span><br><span class="line">          是一段可以向CA申请证书的P10请求。</span><br><span class="line">          该请求一般是通过硬件生成密钥对后，将私钥单独存放，但是将公钥放入p10中，</span><br><span class="line">          CA受到该p10请求后，可以校验，并根据p10中的信息制作一张没有私钥的公钥证书。</span><br><span class="line">意思是PKCS10 --&gt; 本地会有一对公私钥  --&gt; CA 拿到P10带来的公钥 --&gt; CA generate --&gt; 一张没有私钥的公钥。</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
-
-<p><mark>openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj “/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com” -extensions v3_ca -config openssl.cnf</mark></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用原有的RSA密钥生成证书请求文件，指定-batch选项，不询问申请者的信息。主体信息由命令行subj指定，且输出公钥</span><br><span class="line">-config openssl.cnf</span><br><span class="line">-days  默认30天，与-x509一起使用</span><br><span class="line">-extensions 指定可选sections 从configfile中， 与-x509一起使用</span><br><span class="line">-subj Replaces the subject field of an input request, /type0=value0/type1=value1/type2=</span><br><span class="line">-x509  输出自签名证书，而不是证书请求， 在这里就是CA。</span><br><span class="line"><span class="comment">#This is typically used to generate a test certificate or a self-signed root CA.</span></span><br></pre></td></tr></table></figure>
+<p><strong>小补充： list还真是遍历多次迭代取值</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nums = <span class="built_in">range</span>(-<span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(nums)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(nums))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(nums))</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">range(-5, 6)</span></span><br><span class="line"><span class="string">&lt;class &#x27;range&#x27;&gt;</span></span><br><span class="line"><span class="string">[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-
-
-<p><mark>openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650</mark></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x509: 是个公钥证书，主要有个sign certificate requests like a mini CA</span><br><span class="line">-req: 期望有个证书请求csr（而不是证书本身）在input中，</span><br><span class="line">-signkey: 使用提供的私钥对文件进行自签名</span><br></pre></td></tr></table></figure>
-
-
-
+<h3 id="2-1-map-func-iterables"><a href="#2-1-map-func-iterables" class="headerlink" title="2.1. map(func, iterables)"></a>2.1. map(func, iterables)</h3><p>map(function, *iterables)<br>对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple<br>map 取代for循环</p>
+<p>list(map(function, *iteratbles))  == [function(iterable) for iterable in iterables]</p>
+<h3 id="2-2-最常理解的实现是for循环，把结果收集到一个提前定义好的list中"><a href="#2-2-最常理解的实现是for循环，把结果收集到一个提前定义好的list中" class="headerlink" title="2.2. 最常理解的实现是for循环，把结果收集到一个提前定义好的list中"></a>2.2. 最常理解的实现是for循环，把结果收集到一个提前定义好的list中</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line">a= []</span><br><span class="line"><span class="comment"># 只会这么写，或者next</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">    a.append(square(x))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;a: <span class="subst">&#123;a&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">b = [square(x) <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;a: <span class="subst">&#123;a&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">map(function, *iterables)</span></span><br><span class="line"><span class="string">对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple</span></span><br><span class="line"><span class="string">map 取代for循环</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<pre><code>a: [4, 16, 36, 64, 25]
+b: [4, 16, 36, 64, 25]
+</code></pre>
+<h3 id="2-3-进阶：-使用map-简化掉for循环以及提前定义list"><a href="#2-3-进阶：-使用map-简化掉for循环以及提前定义list" class="headerlink" title="2.3. 进阶： 使用map 简化掉for循环以及提前定义list"></a>2.3. 进阶： 使用map 简化掉for循环以及提前定义list</h3><mark>
+list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元素并且append到一个list中；
 
 <ol>
-<li>Create a Certificate Authority private key (this is your most important key):</li>
+<li>next 可以取出 map迭代器的值；</li>
+<li>for 语句等同于 next的效果，挨个取出map迭代器的值；</li>
+<li>list(map(func, list_)) 等于 point2 并且append到一个list中；</mark></li>
 </ol>
-<p><code>openssl req -new -newkey rsa:1024 -nodes -out ca.csr -keyout ca.key</code></p>
-<ol start="2">
-<li>Create your CA self-signed certificate:</li>
-</ol>
-<p><code>openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem</code></p>
-<ol start="3">
-<li>Issue a client certificate by first generating the key, then request (or use one provided by external system) then sign the certificate using private key of your CA:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out client.key 1024</span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.cer</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="1-1-2-Manually-stopping-Pacific-keycloak"><a href="#1-1-2-Manually-stopping-Pacific-keycloak" class="headerlink" title="1.1.2. Manually stopping Pacific keycloak"></a>1.1.2. Manually stopping Pacific keycloak</h4><p><code>ps -ef | grep &quot;/opt/keycloak&quot; | awk &#39;&#123;print $2&#125;&#39; | xargs kill</code></p>
-<h3 id="1-2-了解CA，-root-CA，-以及自签名，CA签名"><a href="#1-2-了解CA，-root-CA，-以及自签名，CA签名" class="headerlink" title="1.2. 了解CA， root CA， 以及自签名，CA签名"></a>1.2. 了解CA， root CA， 以及自签名，CA签名</h3><p>只有root 是自签名，其他都是CA签名<br>ROOT证书是用来签发和验证CA证书的，防止在不知道签名者私钥的情况下恶意篡改证书的内容<br>Root CA -&gt; Server CA -&gt; Server(最终用户)</p>
-<p><mark>其实就是一个使用私钥签发（issue）的关系。</mark></p>
+<h4 id="2-3-1-举例-next-效果，更深刻理解list-map-的效果"><a href="#2-3-1-举例-next-效果，更深刻理解list-map-的效果" class="headerlink" title="2.3.1. 举例 next 效果，更深刻理解list(map)的效果"></a>2.3.1. 举例 next 效果，更深刻理解list(map)的效果</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">numbers = [2, 4, 6, 8, 5]</span><br><span class="line">def square(x):</span><br><span class="line">    return x * x</span><br><span class="line"></span><br><span class="line"># type: class map, object</span><br><span class="line">square_num = map(square, numbers)</span><br><span class="line">print(type(square_num))</span><br><span class="line">print(square_num)</span><br><span class="line"># 在list的时候调用了square_num，迭代5次，并且把每次迭代的return 都append进list中。</span><br><span class="line"># 类似于next(square_num)了5次</span><br><span class="line"># 也类似于for循环把每个迭代元素调用一次，得到的值加入到list中。</span><br><span class="line">print(next(square_num))  #4</span><br><span class="line">print(list(square_num))  # 因为上面next已经取走了第一个值，所以list这里只剩下4个值</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &#39;map&#39;&gt;
+&lt;map object at 0x110a75c70&gt;
+4
+[16, 36, 64, 25] 
+</code></pre>
+<h4 id="2-3-2-举例-for循环取出值append到list中，用list-map-来取代for循环。"><a href="#2-3-2-举例-for循环取出值append到list中，用list-map-来取代for循环。" class="headerlink" title="2.3.2. 举例 for循环取出值append到list中，用list(map)来取代for循环。"></a>2.3.2. 举例 for循环取出值append到list中，用list(map)来取代for循环。</h4><p><mark><del>其实精简了两次for循环</del> 其实是map+list 两个动作 一起取代了 for循环和list.append</p>
 <ol>
-<li><pre><code> ROOT 证书
-</code></pre>
-</li>
-<li><pre><code>               的私钥
-</code></pre>
-</li>
-<li><pre><code>                       签发   `用私钥加过密的sign签名`, `签名算法，通常是Sha256WithHash`
-</code></pre>
-</li>
-<li><pre><code>                            CA 证书
-</code></pre>
-</li>
-<li><pre><code>                                      签发
-</code></pre>
-</li>
-<li><pre><code>                                            x.509证书（公钥证书), 以.cert, .crt后缀，是ASN.1编码 Abstract syntax notation dot one 抽象语法标记
-</code></pre>
-<blockquote>
-<p>秘钥和证书都是 SEQUENCE 类型，<br>而 SEQUENCE 的 type 是 0x30，且长度是大于 127 的，因此第2 个字节是 0x82.<br>ASN.1 编码表示的数据是二进制数据，通常通过 BASE64 转化成字符串保存在 pem 文件中，<br>而 0x3082 经过 BASE64 编码后，就是字符串 MI，<mark>因此所有 PEM 文件存储的秘钥开始的前两个字符是 MI</mark>。</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pkcs<span class="comment">#1 用于定义 RSA 公钥、私钥结构</span></span><br><span class="line">pkcs<span class="comment">#7 用于定义证书链</span></span><br><span class="line">pkcs<span class="comment">#8 用于定义任何算法公私钥</span></span><br><span class="line">pkcs<span class="comment">#12 用于定义私钥证书</span></span><br><span class="line">X.509 定义公钥证书</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/uploads/69094374817016.png"><br><img src="vx_images/69094374817016.png"></p>
-<h4 id="1-2-1-看个keytool生成证书的范例"><a href="#1-2-1-看个keytool生成证书的范例" class="headerlink" title="1.2.1. 看个keytool生成证书的范例"></a>1.2.1. 看个keytool生成证书的范例</h4><p><code>keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname &quot;CN=server&quot; -alias server -ext &quot;SAN:c=DNS:localhost,IP:127.0.0.1&quot; -keystore conf/server.keystore</code></p>
-<p>-genkeypair  生成密钥对</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Generates a key pair (a public key and associated private key).</span><br><span class="line">              Wraps the public key into an X.509 v3 self-signed certificate,</span><br><span class="line">              which is stored as a single-element certificate chain. This</span><br><span class="line">              certificate chain and the private key are stored in a new</span><br><span class="line">              keystore entry identified by alias.</span><br></pre></td></tr></table></figure>
-<p>-storepass 更改密钥库的存储口令,<br>-storetype   PKCS12 私钥证书<br>-keyalg      RSA, DSA, EC, DES, DESede<br>-keysize<br>-dname</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The dname value specifies the X.500 Distinguished Name to be</span><br><span class="line">    associated with the value of alias, and is used as the issuer</span><br><span class="line">    and subject fields in the self-signed certificate. If no</span><br><span class="line">    distinguished name is provided at the command line, then the</span><br><span class="line">    user is prompted for one.</span><br></pre></td></tr></table></figure>
-<p>-ext<br>-keystore<br>-validity<br>-keypass</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SAN or SubjectAlternativeName</span><br><span class="line">            Values: type:value(,type:value)*, where type can be EMAIL, URI,</span><br><span class="line">            DNS, IP, or OID. The value argument is the string format value</span><br><span class="line">            for the type.</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="2-genkeypair-keyalg-keysize"><a href="#2-genkeypair-keyalg-keysize" class="headerlink" title="2. genkeypair keyalg keysize"></a>2. genkeypair keyalg keysize</h2><p>OpenSSL一共实现了4种非对称加密算法，<br>DH算法一般用户密钥交换。RSA 算法既可以用于密钥交换，也可以用于数字签名，DSA算法则一般只用于数字签名<br>DH、<br>RSA、<br>DSA<br>椭圆曲线算法（EC）。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-genkeypair 生成密钥对      -keyalg算法   RSA             -keysize   2048  </span><br><span class="line">                                         DSA                        1024 </span><br><span class="line">                                         EC                         256</span><br><span class="line">-genseckey 生成密钥          -keyalg      DES                        56   </span><br><span class="line">                                         DESede                     168</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-1-1-1-ROOT证书"><a href="#2-1-1-1-ROOT证书" class="headerlink" title="2.1.1.1. ROOT证书"></a>2.1.1.1. ROOT证书</h5><h5 id="2-1-1-2-CA证书和"><a href="#2-1-1-2-CA证书和" class="headerlink" title="2.1.1.2. CA证书和"></a>2.1.1.2. CA证书和</h5><h5 id="2-1-1-3-使用CA证签发的X-509证书"><a href="#2-1-1-3-使用CA证签发的X-509证书" class="headerlink" title="2.1.1.3. 使用CA证签发的X.509证书"></a>2.1.1.3. 使用CA证签发的X.509证书</h5>
+<li>numbsers 和 square 用map来一一映射；</li>
+<li>list(map) 达到了 一个一个for 并且 append的效果；</li>
+<li>啊哈哈哈 意外之喜，理解了另一个写法：b = [square(x) for x in numbers]</mark>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/05/mapinuse/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1013,7 +1187,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-05 16:12:49" itemprop="dateModified" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1125,7 +1299,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-05 16:12:49" itemprop="dateModified" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1200,7 +1374,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-05 16:12:49" itemprop="dateModified" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1232,157 +1406,6 @@ decrypted string:  hello geeks
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/28/trypassword/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/28/trypassword/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-28 22:18:02" itemprop="dateCreated datePublished" datetime="2023-03-28T22:18:02+00:00">2023-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-05 16:12:49" itemprop="dateModified" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/28/trypassword/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/02/suse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/02/suse/" class="post-title-link" itemprop="url">Suse</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-02 11:22:46" itemprop="dateCreated datePublished" datetime="2023-03-02T11:22:46+00:00">2023-03-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-05 16:12:49" itemprop="dateModified" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="suse"><a href="#suse" class="headerlink" title="suse"></a>suse</h1><blockquote>
-<p>zypper patch</p>
-</blockquote>
-<blockquote>
-<p>zypper update</p>
-</blockquote>
-
       
     </div>
 
@@ -1468,7 +1491,7 @@ decrypted string:  hello geeks
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

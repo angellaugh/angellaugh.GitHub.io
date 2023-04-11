@@ -20,26 +20,21 @@
     var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="SAML2.0Conception  SAML, Security Assertion Markup Language    IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication    * Performs authentication and passes the user’s identity and">
+  <meta name="description" content="收获1. time.perf_counter()  程序运行时间包括sleeping, 不用再 time.time()-starttime了。2. time.process_counter() cpu运行时间，不包括sleeping3. concurrent.futures: 两个process 并行运行 4. 注意 python3.7以上才能打印出秒数5. 注意不要用和包名相同的文件名6. Po">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SAML 2.0">
-<meta property="og:url" content="https://angellaugh.github.io/2023/04/05/saml2/index.html">
+<meta property="og:title" content="Multiprocess_2 concurrent">
+<meta property="og:url" content="https://angellaugh.github.io/2023/04/11/multiprocess_concurrent/index.html">
 <meta property="og:site_name" content="Angellaugh&#39;s blog">
-<meta property="og:description" content="SAML2.0Conception  SAML, Security Assertion Markup Language    IDP identity provider， for instance, AD,  ADFS, LDAP, 身份认证authentication    * Performs authentication and passes the user’s identity and">
+<meta property="og:description" content="收获1. time.perf_counter()  程序运行时间包括sleeping, 不用再 time.time()-starttime了。2. time.process_counter() cpu运行时间，不包括sleeping3. concurrent.futures: 两个process 并行运行 4. 注意 python3.7以上才能打印出秒数5. 注意不要用和包名相同的文件名6. Po">
 <meta property="og:locale">
-<meta property="og:image" content="https://angellaugh.github.io/uploads/315430821585906.png">
-<meta property="og:image" content="https://angellaugh.github.io/uploads/149184710911054.png">
-<meta property="og:image" content="https://angellaugh.github.io/uploads/288243668946728.png">
-<meta property="og:image" content="https://angellaugh.github.io/uploads/409973578816914.png">
-<meta property="og:image" content="https://angellaugh.github.io/uploads/589974006532594.png">
-<meta property="article:published_time" content="2023-04-05T16:12:49.699Z">
-<meta property="article:modified_time" content="2023-04-05T16:12:49.699Z">
+<meta property="article:published_time" content="2023-04-11T23:17:02.000Z">
+<meta property="article:modified_time" content="2023-04-11T15:27:23.332Z">
 <meta property="article:author" content="Angellaugh">
 <meta property="article:tag" content="cirrus">
+<meta property="article:tag" content="multiprocess">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://angellaugh.github.io/uploads/315430821585906.png">
 
-<link rel="canonical" href="https://angellaugh.github.io/2023/04/05/saml2/">
+<link rel="canonical" href="https://angellaugh.github.io/2023/04/11/multiprocess_concurrent/">
 
 
 <script id="page-configurations">
@@ -52,7 +47,7 @@
   };
 </script>
 
-  <title>SAML 2.0 | Angellaugh's blog</title>
+  <title>Multiprocess_2 concurrent | Angellaugh's blog</title>
   
 
 
@@ -202,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/saml2/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/multiprocess_concurrent/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -215,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          SAML 2.0
+          Multiprocess_2 concurrent
         </h1>
 
         <div class="post-meta">
@@ -224,8 +219,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2023-04-05 16:12:49" itemprop="dateCreated datePublished" datetime="2023-04-05T16:12:49+00:00">2023-04-05</time>
+              <time title="Created: 2023-04-11 23:17:02 / Modified: 15:27:23" itemprop="dateCreated datePublished" datetime="2023-04-11T23:17:02+00:00">2023-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,72 +244,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="SAML2-0"><a href="#SAML2-0" class="headerlink" title="SAML2.0"></a>SAML2.0</h1><h3 id="Conception"><a href="#Conception" class="headerlink" title="Conception"></a>Conception</h3><blockquote>
-<p> <strong>SAML</strong>, Security Assertion Markup Language</p>
-</blockquote>
-<blockquote>
-<p> <strong>IDP identity provider</strong>， for instance, AD,  ADFS, LDAP, 身份认证authentication<br>    * Performs authentication and passes the user’s identity and authorization level to the service provider</p>
-</blockquote>
-<blockquote>
-<p><strong>SP service provider</strong>, for instance, cluster, application,  access resources<br>    * Trusts the identity provider and authorizes the given user to access the requested resource.<br><code>credential 是啥？ idp authorization的是啥？</code></p>
-</blockquote>
-<ul>
-<li>is the link between the authentication of a user’s identity and the authorization to use a service.</li>
-<li>simplifies federated authentication and authorization processes for users, Identity providers, and service providers</li>
-<li>enable sso, users can log in once, and those same credentials can be reused to log into other service providers</li>
-<li>SAML authentication is the process of verifying the user’s identity and credentials (password, two-factor authentication, etc.). SAML authorization tells the service provider what access to grant the authenticated user.</li>
-<li>authentication = verify identity + verify credential  验证身份和凭证， <font bgcolor=##FF7F50>不理解这个credential 是啥</font></li>
-<li>SAML 做身份和凭证/资格的验证， SAML授权告诉SP 分配什么样的access 给通过验证的user</li>
-<li>SAML 同时做了authentication and authorization</li>
-<li>manage one login per user &gt; manage seperate logins to email, customer relationships management <strong>CRM</strong>, ADs.</li>
-<li>简化了users, idp，sp之间的认证和授权流程。 authentication and authorization processes for users, Identity providers, and service providers.</li>
-</ul>
-<h3 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h3><ol>
-<li>IDP 和 SP establish trust</li>
-<li>user 在IDP 和 SP中都存在</li>
-<li>user login from IDP, IDP验证通过后，生成SAML assertion，返回给user，</li>
-<li>user拿着SAML assertion 到SP验证，如果通过，user就可以访问SP；<ol>
-<li>SP 把SAML assertion中的user信息和 local的 user 对比验证，</li>
+        <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p><mark>1. time.perf_counter()  程序运行时间包括sleeping</mark>, 不用再 time.time()-starttime了。<br>2. time.process_counter() cpu运行时间，不包括sleeping<br><mark>3. concurrent.futures: 两个process 并行运行 </mark><br>4. 注意 python3.7以上才能打印出秒数<br>5. 注意不要用和包名相同的文件名<br><mark>6. Pool.map 可以取代 map(func, list)</mark></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> concurrent.futures</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sleep_for_a_bit</span>(<span class="params">secondes</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Sleeping <span class="subst">&#123;secondes&#125;</span> second(s)&quot;</span>)</span><br><span class="line">    time.sleep(secondes)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Done sleeping&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> concurrent.futures.ProcessPoolExecutor() <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">        f1 = executor.submit(sleep_for_a_bit, <span class="number">1</span>)</span><br><span class="line">        f2 = executor.submit(sleep_for_a_bit, <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(f1.result())</span><br><span class="line">        <span class="built_in">print</span>(f2.result())</span><br><span class="line">        </span><br><span class="line">finish = time.perf_counter()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Finished in time: &quot;</span>, finish)</span><br></pre></td></tr></table></figure>
+
+<pre><code>~/Desktop 🔥» python ccc.py                                      vivi@vivis-MBP
+Finished in time:  0.103320167
+Finished in time:  0.100869
+Sleeping 1 second(s)
+Sleeping 1 second(s)
+Finished in time:  0.099204041
+Finished in time:  0.095198
+Finished in time:  0.077157417
+Finished in time:  0.084327958
+Finished in time:  0.080791833
+Finished in time:  0.084751625
+Done sleeping
+Done sleeping
+Finished in time:  1.282027666
+</code></pre>
+<h2 id="Pool-map-func-list-来取代-list-map-func-list"><a href="#Pool-map-func-list-来取代-list-map-func-list" class="headerlink" title="Pool.map(func, list) 来取代 list(map(func, list))"></a>Pool.map(func, list) 来取代 list(map(func, list))</h2><ol>
+<li>但是看上去没发现节省时间</li>
 </ol>
-</li>
-<li>IDP 拿着SAML assertion 到另一个SP 去验证，也通过的话，user也可以SSO 访问 another application；</li>
-</ol>
-<h3 id="IDP-和-SP-的交流"><a href="#IDP-和-SP-的交流" class="headerlink" title="IDP 和 SP 的交流"></a>IDP 和 SP 的交流</h3><ol>
-<li>IDP 和 SP 都config xml， contains settings and certificate of the system</li>
-<li>this metadata exchange is establish the trust between IDP and SP like <code>Workflow point 1</code></li>
-<li>this XML metadata file contains the form for the user identifier called <code>the name ID formats</code>, </li>
-</ol>
-<p><img src="/uploads/315430821585906.png"></p>
-<p><img src="/uploads/149184710911054.png"></p>
-<h3 id="2-ways-of-session-init"><a href="#2-ways-of-session-init" class="headerlink" title="2 ways of session init"></a>2 ways of session init</h3><p><img src="/uploads/288243668946728.png"></p>
-<p><img src="/uploads/409973578816914.png"></p>
-<h3 id="A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP"><a href="#A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP" class="headerlink" title="A SAML REQ, is generated from SP, request the authentication from the IDP"></a>A SAML REQ, is generated from SP, request the authentication from the IDP</h3><h3 id="A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile"><a href="#A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile" class="headerlink" title="A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,"></a>A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,</h3><p>such as group, role, depending on what the Service Provider can support.</p>
-<h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><ol>
-<li>SP 从不直接与IDP交流never directly interacts with IDP，browser 充当acts了执行carry out所有重定向的代理agent，acts as the agent to carry out all the redirections.</li>
-<li>SP 知道要去找哪个 IDP；</li>
-<li>SP在拿到 IDP返回的saml assertion之前是不知道 谁在要资源的，也就是说用户输入的用户名和密码，只传递到IDP，until the SAML assertion comes back from the Identity Provider.</li>
-<li>可以直接从IDP认证，然后去访问SP，无需必须从SP发起请求；</li>
-<li>SAML 身份验证流是异步的。SP不会维护生成的任何身份验证请求的任何状态。当 SP 收到来自 IDP 的响应时，响应必须包含所有必要的信息。</li>
-</ol>
-<h3 id="IdP-initiated-SSO-with-SAML-Authentication"><a href="#IdP-initiated-SSO-with-SAML-Authentication" class="headerlink" title="IdP-initiated SSO with SAML Authentication"></a>IdP-initiated SSO with SAML Authentication</h3><p><code>IDP 用之前和SP建立互信时产生的私钥来sign assertion， 然后通过user&#39;s browser 发给SP， 或者发送对assertion的引用。a reference to the assertion</code></p>
-<p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
-<p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
-<h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#112;&#114;&#x69;&#x74;&#104;&#x76;&#x69;&#114;&#x61;&#x6a;&#x2e;&#x67;&#x61;&#105;&#107;&#x77;&#97;&#x64;&#64;&#100;&#x65;&#108;&#108;&#46;&#99;&#x6f;&#109;">&#112;&#114;&#x69;&#x74;&#104;&#x76;&#x69;&#114;&#x61;&#x6a;&#x2e;&#x67;&#x61;&#105;&#107;&#x77;&#97;&#x64;&#64;&#100;&#x65;&#108;&#108;&#46;&#99;&#x6f;&#109;</a></li>
-<li>SP display a list of IDP,  user choose one </li>
-<li>The resource URL may be specific to one IdP. </li>
-<li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
-</ol>
-<h3 id="The-saml-assertion’s-context"><a href="#The-saml-assertion’s-context" class="headerlink" title="The saml assertion’s context"></a>The saml assertion’s context</h3><p><img src="/uploads/589974006532594.png"></p>
-<h3 id="SAML-IdP-Providers"><a href="#SAML-IdP-Providers" class="headerlink" title="SAML IdP Providers:"></a>SAML IdP Providers:</h3><ol>
-<li>Active Directory Federation Services (ADFS)</li>
-<li>Auth0</li>
-<li>Azure AD (Microsoft Azure Active Directory)</li>
-<li>Okta</li>
-<li>OneLogin</li>
-<li>Ping Identity</li>
-<li>Salesforce</li>
-</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = <span class="built_in">list</span>(<span class="built_in">map</span>(req_get, create_list.keys()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_get</span>():</span><br><span class="line">    <span class="keyword">with</span> Pool(core_num) <span class="keyword">as</span> p:</span><br><span class="line">        x = p.<span class="built_in">map</span>(req_get, create_list.keys())</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>If x equals get_list:369,  369
+[2023-04-11 14:08:28] [Line: 184] INFO - Total running time: 53.477982
+[2023-04-11 14:08:28] [Line: 185] INFO - Create clients number:369
+[2023-04-11 14:08:28] [Line: 186] INFO - Get clients number: 369
+[2023-04-11 14:08:28] [Line: 187] ERROR - Create clients fail number: 0
+[2023-04-11 14:08:28] [Line: 188] ERROR - Create clients fail information: []
+369
+369
+369
+369
+</code></pre>
 
     </div>
 
@@ -343,6 +306,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/cirrus/" rel="tag"># cirrus</a>
+              <a href="/tags/multiprocess/" rel="tag"># multiprocess</a>
           </div>
 
         
@@ -351,13 +315,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/04/05/RSA/" rel="prev" title="RSA">
-      <i class="fa fa-chevron-left"></i> RSA
+    <a href="/2023/04/11/openssl/" rel="prev" title="OpenSSL">
+      <i class="fa fa-chevron-left"></i> OpenSSL
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/04/05/mapinuse/" rel="next" title="mapinuse">
-      mapinuse <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -416,7 +377,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SAML2-0"><span class="nav-text">SAML2.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conception"><span class="nav-text">Conception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Workflow"><span class="nav-text">Workflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDP-%E5%92%8C-SP-%E7%9A%84%E4%BA%A4%E6%B5%81"><span class="nav-text">IDP 和 SP 的交流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ways-of-session-init"><span class="nav-text">2 ways of session init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP"><span class="nav-text">A SAML REQ, is generated from SP, request the authentication from the IDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile"><span class="nav-text">A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#note"><span class="nav-text">note</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IdP-initiated-SSO-with-SAML-Authentication"><span class="nav-text">IdP-initiated SSO with SAML Authentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SP-determine-which-IDP"><span class="nav-text">SP determine which IDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-saml-assertion%E2%80%99s-context"><span class="nav-text">The saml assertion’s context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAML-IdP-Providers"><span class="nav-text">SAML IdP Providers:</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E8%8E%B7"><span class="nav-text">收获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pool-map-func-list-%E6%9D%A5%E5%8F%96%E4%BB%A3-list-map-func-list"><span class="nav-text">Pool.map(func, list) 来取代 list(map(func, list))</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -432,7 +393,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
