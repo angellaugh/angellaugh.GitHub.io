@@ -1,7 +1,7 @@
 ---
 layout: posts
 title: KeyCloak
-date: {{ date }}
+date: 2023-03-14 23:34:02
 updated: {{ date }}
 tags: cirrus
 categories: Teckknowledge
