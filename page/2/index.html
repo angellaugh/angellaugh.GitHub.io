@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/28/trypassword/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/13/RSA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -207,7 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/03/28/trypassword/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/2023/03/13/RSA/" class="post-title-link" itemprop="url">RSA</a>
         </h2>
 
         <div class="post-meta">
@@ -217,15 +217,24 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-03-28 22:18:02" itemprop="dateCreated datePublished" datetime="2023-03-28T22:18:02+00:00">2023-03-28</time>
+              <time title="Created: 2023-03-13 23:34:02" itemprop="dateCreated datePublished" datetime="2023-03-13T23:34:02+00:00">2023-03-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
 
           
 
@@ -238,15 +247,316 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/28/trypassword/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1> <p>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto <span class="keyword">import</span> Random</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪随机数生成器</span></span><br><span class="line">random_generator = Random.new().read</span><br><span class="line"><span class="comment"># rsa算法生成实例</span></span><br><span class="line">rsa = RSA.generate(<span class="number">2048</span>, random_generator)</span><br><span class="line"><span class="built_in">print</span>(rsa)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dir</span>(rsa))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Private RSA key at 0x10C4B8EB0
+[&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getstate__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;, &#39;_d&#39;, &#39;_decrypt&#39;, &#39;_dp&#39;, &#39;_dq&#39;, &#39;_e&#39;, &#39;_encrypt&#39;, &#39;_invq&#39;, &#39;_n&#39;, &#39;_p&#39;, &#39;_q&#39;, &#39;_u&#39;, &#39;blind&#39;, &#39;can_encrypt&#39;, &#39;can_sign&#39;, &#39;d&#39;, &#39;decrypt&#39;, &#39;dp&#39;, &#39;dq&#39;, &#39;e&#39;, &#39;encrypt&#39;, &#39;exportKey&#39;, &#39;export_key&#39;, &#39;has_private&#39;, &#39;invp&#39;, &#39;invq&#39;, &#39;n&#39;, &#39;p&#39;, &#39;public_key&#39;, &#39;publickey&#39;, &#39;q&#39;, &#39;sign&#39;, &#39;size&#39;, &#39;size_in_bits&#39;, &#39;size_in_bytes&#39;, &#39;u&#39;, &#39;unblind&#39;, &#39;verify&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 私钥的生成</span></span><br><span class="line">private_pem = rsa.exportKey()</span><br><span class="line"><span class="built_in">print</span>(private_pem)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"><span class="comment"># 公钥的生成</span></span><br><span class="line">public_pem = rsa.publickey().exportKey()</span><br><span class="line"><span class="built_in">print</span>(public_pem)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
+
+<pre><code>b&#39;-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAviJUuLHbi5CByimMRxCqFhQ7B+zga/Tk1k0D06+Lrm6Kb0HO\nvhIcmWIMCW1eeBV0Aa2PniH+qLjRhQMqz7tDhe6O6ZBc046p0CToOlaPyjFFrNvA\nP+jwqeaFFFcDNo0J9lXuv5TH4q4JvQennna/pQUQQg+pTPmC74ampQkq7p7vOb3Z\nvdRmU6IKDUKIIG/3JrWNQJ4lcmNymA9pt/QiduNik33EIRNf+5cHkD3hScrWqKOW\naQYnMdOfCet7/ItfKOIAucuV2GMetuGto+HETm0ZN8Lr05V+otqn0SsU4Wo6xTlL\nxFMIAS698RkZkqbDC0+86dHbT/fiW1MpYGcKVwIDAQABAoIBABEsaambCwECpu57\nLTv4Adznq+NN3oFxx7+hijBzITM6sc9VytY5LZMfG4Y4djlzepxyMFAwst9LfkU8\n4X+M4w70Wr02+GN1ddoik0U9r1QseiYgXS+Im0BFXYzWRSiGubkhzuRIDHvpi2Cj\nEd1KzYmauPq2jmyw9sYqy9+JQfL2iQ9f4mkTu9fN5H+h0Mkx4imFVbBG0cHlxBg+\noI5QAccrLlbVsHoFrykqtilu4kUPQ6u5KnK3xyrIS6QVoA2zsEf01ikua5DDY3UR\naFNNn0IM6U0T6nZiUkvV4ySXSxCsG8Kf0Kr26ly+10HUYniwcGgygtW/cijjjDaZ\nYWAwu0UCgYEAyRvz35KNZrOfQyn2d25QQp8HRKnL9wY8rzL0XojSPzK9T/yvctWa\n4HBxPuzd6oaUOJH9EGmR+/P6S/mfU3Qik7MOQJt7yVD7MWjpBcq0NFtjOD5lwYOV\n82tf7EG45hBIG+IDhFrzxWefQn1axhQeMeGc1U+1V3tq6TIKH8s/umMCgYEA8geE\n69WZWBW9hokSDZThsgETMO2jicAiyO4aKm6+71ibNNyP2wbq21Hk67oOThSaP5g0\nIMMMujEMqW7S3c9H0drCpCiUUB8Nni+uxd/MCbQbZnTCcqFEuyYsOAadmJQlzK/O\n0SxeZxfgOV0N6Lbo36v2SC7INYn2Yhfwcn8dWH0CgYB30i64KzISWbzvIGZXfCNX\nvjZvY5dBo7auT/anCG/z9YAz0wKZscjoJjZi3m/N1sci+WBE0hGHgzLC54RVDaG4\nTHuWZM0ZAiXXp4EG0WISu8xe61ZnOMYz1Oq+8d1/PX4pFr0vs50AJaAO1m8qCzx+\nTcTKlwYdjEwDiqvbi5Z5rwKBgQDWZ9TXuuRaRQAdk4X7pB2APDWNDafnWt810sA5\nQNxCWeM8o/uIU4tweQ7ryGntv5CZr7LWJxQ6SUNnQXbp6js8a6gsFoq0o53DuYgB\nYO121yfCzsKHG9gwVnOruiiYRv1pY4E6iiyi9WK8TnQI6ShJJSRK866Gx04NvhlS\nxMrxXQKBgGzb7nen/DoOhoasJLwTtFqUQI+xs09pkabi4oP0vYYXlYFdbhPoRNdZ\nzaxqSlPN4c/IqEpwv/gCplYrwdkb2+RfPbtIFtsEZIbhjR7qJSME+mqfrd3X4qlK\ngEeJ3howUYPd0y6ppepDQiAxcE4el8FDeV9OHPCfuQGzw0uB+QUe\n-----END RSA PRIVATE KEY-----&#39;
+b&#39;-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAviJUuLHbi5CByimMRxCq\nFhQ7B+zga/Tk1k0D06+Lrm6Kb0HOvhIcmWIMCW1eeBV0Aa2PniH+qLjRhQMqz7tD\nhe6O6ZBc046p0CToOlaPyjFFrNvAP+jwqeaFFFcDNo0J9lXuv5TH4q4JvQennna/\npQUQQg+pTPmC74ampQkq7p7vOb3ZvdRmU6IKDUKIIG/3JrWNQJ4lcmNymA9pt/Qi\nduNik33EIRNf+5cHkD3hScrWqKOWaQYnMdOfCet7/ItfKOIAucuV2GMetuGto+HE\nTm0ZN8Lr05V+otqn0SsU4Wo6xTlLxFMIAS698RkZkqbDC0+86dHbT/fiW1MpYGcK\nVwIDAQAB\n-----END PUBLIC KEY-----&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Cipher_pkcs1_v1_5</span><br><span class="line"><span class="keyword">import</span> base64</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密  注意每次加密后的字符串都不一样，跟对数据的padding 有关。</span></span><br><span class="line"><span class="comment"># 加密时支持的最大字节数：证书位数/8 -11（比如：2048位的证书，支持的最大加密字节数：2048/8 - 11 = 245）</span></span><br><span class="line"><span class="comment"># 1024位的证书，加密时最大支持117个字节，解密时为128；</span></span><br><span class="line"><span class="comment"># 2048位的证书，加密时最大支持245个字节，解密时为256。</span></span><br><span class="line"><span class="comment"># 如果需要加密的字节数超出证书能加密的最大字节数，此时就需要进行分段加密。</span></span><br><span class="line">message = <span class="string">&quot;Hello,This is RSA加密&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拿到公钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is RSA 读取到的公钥:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rsakey)</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过公钥，创建用于执行pkcs1_v1_5加密或解密的密码</span></span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Here is 用公钥生成的密码:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"><span class="comment"># 用公钥创建的密码来加密message</span></span><br><span class="line">message_enc = cipher.encrypt(message.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用公钥创建的密码来加密的message:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(message_enc)</span><br><span class="line"><span class="comment"># base64 将二进制加密过的message转成文本</span></span><br><span class="line">cipher_text = base64.b64encode(message_enc)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;base64 将二进制转成文本的message&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher_text.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Here is RSA 读取到的公钥:
+Public RSA key at 0x10C4BDE50
+Here is 用公钥生成的密码:
+&lt;Crypto.Cipher.PKCS1_v1_5.PKCS115_Cipher object at 0x10c4bd370&gt;
+Here is 用公钥创建的密码来加密的message:
+b&#39;&lt;\xaf\xe3\xc1\x95MmL\x7f\x0b\xe6=J#ba\x98z\xb5\xb2\x9a\xb4\xbc\x9fC\x1c\xc0-\xfd\x80\xfc\xb3\x9c\xe4\x96\xa5\x8b?\xaa)\x84n9\x0c\x8f\x99?uXTp\xf3\xd6\x07lV\xe3\t\xbf\x8b\xea\xa5Dn\x80\xf5\x89\xeag\xa8J\xbc\x08\xabB\x1e\xc9\xbb\xe7m\xf8\t\xc6@\xc7[\x16,2\r\x1d=y?\xa0\x95\xcd\x8bxs\x8d@\x97R-\xea\xa3\xb1\xcc\x0f\x89\xb5\xe0:QPwj\xc0zY\xe9\xeb\x17\xf6\xd0\xef&gt;\xd7*\x7f\x97\x8f\x0f=\x06\xb0&lt;G\xe4\x00 pv\x8f&lt;\xb5\xb4f\x0f\xbd\x06J8\x7f\x84M\xa4js\xc7\x1a\xa6\xaf\xe9:@\x88\x18\xed\x8f\x96fvI\xfd\xe2i\x0e\x87\xa1RR\xaaF\x15\x11\x99~NTLc\x12k\xa4\x86&lt;\x11\xef\x05\xbe64\xf3\x84\xcb\x93\xd9\xf9\xa8R\xb6\xe7%\x95V\xb5\x80:\x81\xb4\xc0\xeaGC\xd1\xba\x90\xf2\x95#\x99&gt;\xe5\xb1\xae\xabo[1\x1f\xed\x10\xd8\xac\x1d\xe6\x1e;\xe8\xd6\x1c\xc4r\x16&#39;
+base64 将二进制转成文本的message
+SVJVsq5On4uFJo8OZdzuVtT/9NQexOoDiKUgeQr8v7j4PktuejMq4Ghoh6AufYwNJXSAyw1Oz6MFHfBxtSQeJU6jHN0ZlIhcv1DteMvv3VAOJRkhf93am7b97bg2KGoP/ux0W5RIKxKGTw0n8dsjhNt1X4lAFJSl3kA6n8RDaBWEzVhIzCq0fKjIZbYam/mB0WNB79/jezBj4Snv4DXX/dNSKmU6IAmV0FdTikX5lLj4xTGnUehSwzOxZzaKwhHEvUNq24W1WiIdvScFU3ycmK8OKvpTf7iEQYpyX9Hwqn5Qk+JHQAxpByOxG+TvI5pd4CPXxyQnkq2eWDOc1hhayw==
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解密</span></span><br><span class="line">cipher_text = <span class="string">&quot;SVJVsq5On4uFJo8OZdzuVtT/9NQexOoDiKUgeQr8v7j4PktuejMq4Ghoh6AufYwNJXSAyw1Oz6MFHfBxtSQeJU6jHN0ZlIhcv1DteMvv3VAOJRkhf93am7b97bg2KGoP/ux0W5RIKxKGTw0n8dsjhNt1X4lAFJSl3kA6n8RDaBWEzVhIzCq0fKjIZbYam/mB0WNB79/jezBj4Snv4DXX/dNSKmU6IAmV0FdTikX5lLj4xTGnUehSwzOxZzaKwhHEvUNq24W1WiIdvScFU3ycmK8OKvpTf7iEQYpyX9Hwqn5Qk+JHQAxpByOxG+TvI5pd4CPXxyQnkq2eWDOc1hhayw==&quot;</span></span><br><span class="line">encrypt_text = cipher_text.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="comment"># 拿到私钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is RSA 读取到的私钥:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(rsakey)</span><br><span class="line"><span class="comment">#创建用于执行pkcs1_v1_5加密或解密的密码</span></span><br><span class="line">cipher = Cipher_pkcs1_v1_5.new(rsakey)      </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Here is 用私钥生成的密码:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"><span class="comment"># base64 将文本string 转回二进制</span></span><br><span class="line">message_dec = base64.b64decode(encrypt_text)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用base64将string转回二进制:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(message_enc)</span><br><span class="line"><span class="comment"># 用私钥生成的密码来解密 二进制message</span></span><br><span class="line">text = cipher.decrypt(message_dec, <span class="string">&quot;解密失败&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Here is 用私钥生成的密码来接二进制的message&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(text.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Here is RSA 读取到的私钥:
+Private RSA key at 0x10C0D16D0
+Here is 用私钥生成的密码:
+&lt;Crypto.Cipher.PKCS1_v1_5.PKCS115_Cipher object at 0x10c19f340&gt;
+Here is 用base64将string转回二进制:
+b&#39;&lt;\xaf\xe3\xc1\x95MmL\x7f\x0b\xe6=J#ba\x98z\xb5\xb2\x9a\xb4\xbc\x9fC\x1c\xc0-\xfd\x80\xfc\xb3\x9c\xe4\x96\xa5\x8b?\xaa)\x84n9\x0c\x8f\x99?uXTp\xf3\xd6\x07lV\xe3\t\xbf\x8b\xea\xa5Dn\x80\xf5\x89\xeag\xa8J\xbc\x08\xabB\x1e\xc9\xbb\xe7m\xf8\t\xc6@\xc7[\x16,2\r\x1d=y?\xa0\x95\xcd\x8bxs\x8d@\x97R-\xea\xa3\xb1\xcc\x0f\x89\xb5\xe0:QPwj\xc0zY\xe9\xeb\x17\xf6\xd0\xef&gt;\xd7*\x7f\x97\x8f\x0f=\x06\xb0&lt;G\xe4\x00 pv\x8f&lt;\xb5\xb4f\x0f\xbd\x06J8\x7f\x84M\xa4js\xc7\x1a\xa6\xaf\xe9:@\x88\x18\xed\x8f\x96fvI\xfd\xe2i\x0e\x87\xa1RR\xaaF\x15\x11\x99~NTLc\x12k\xa4\x86&lt;\x11\xef\x05\xbe64\xf3\x84\xcb\x93\xd9\xf9\xa8R\xb6\xe7%\x95V\xb5\x80:\x81\xb4\xc0\xeaGC\xd1\xba\x90\xf2\x95#\x99&gt;\xe5\xb1\xae\xabo[1\x1f\xed\x10\xd8\xac\x1d\xe6\x1e;\xe8\xd6\x1c\xc4r\x16&#39;
+Here is 用私钥生成的密码来接二进制的message
+Hello,This is RSA加密
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加签名，用私钥，私钥加签名后，可以用公钥验证签名有无被篡改</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Signature <span class="keyword">import</span> PKCS1_v1_5 <span class="keyword">as</span> Signature_pkcs1_v1_5</span><br><span class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加签 使用私钥加签名，每次签名是一致的</span></span><br><span class="line">message = <span class="string">&quot;This is a request message...&quot;</span></span><br><span class="line"><span class="comment"># 拿到私钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;private.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;私钥：&quot;</span>+<span class="string">f&quot;<span class="subst">&#123;rsakey&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用私钥拿到一个新的签名密码</span></span><br><span class="line">signer = Signature_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;使用私钥生成新的签名密码：<span class="subst">&#123;signer&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 摘要认证 digest authentication</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">摘要访问认证是一种协议规定的Web服务器用来同网页浏览器进行认证信息协商的方法。它在密码发出前，先对其应用哈希函数，这相对于HTTP基本认证发送明文而言，更安全。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">从技术上讲，摘要认证是使用随机数来阻止进行密码分析的MD5加密哈希函数应用。它使用HTTP协议。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">digest = SHA.new()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;digest:&#123;0&#125;&quot;</span>.<span class="built_in">format</span>(digest))</span><br><span class="line"><span class="comment"># 用digest方式加密message</span></span><br><span class="line">digest.update(message.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加签，使用私钥生成的signature密码来加密 digest哈希过的message</span></span><br><span class="line">sign = signer.sign(digest)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;使用私钥生成的signature密码来加密 digest哈希过的message： <span class="subst">&#123;sign&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用base64 将二进制转化为string存储</span></span><br><span class="line">signature = base64.b64encode(sign)</span><br><span class="line"><span class="built_in">print</span>(signature.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>私钥：Private RSA key at 0x10C4BD670
+使用私钥生成新的签名密码：&lt;Crypto.Signature.pkcs1_15.PKCS115_SigScheme object at 0x10c198d90&gt;
+digest:&lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c4bd700&gt;
+使用私钥生成的signature密码来加密 digest哈希过的message： b&#39;&amp;\xe7\x8b\xd1\xb5\xd2\xb3\x12\xccq\xf7\xf9\xb3\x94\\\xaaw\x8dJ\xc8\x9c\x89\xe5\xd3]\x16F\x91\xa1\x11\xff&#125;\xe9=C+\x1c\xd0\x83\xdb\x13\x12&lt;:\xd0\xcd&gt;\x99uM\xf9\xf3\xbf\x8ax\xab\xac\x87\xca%\xc6\t\xef\xcb\xfb\xbc\xba\x1f\&#39;\x19\xf0\xf9\xef\xdd\xb5N\xf4H\xca#\xe4\x9c\xa3\xee\x95\xa52Cq\x9bj\x91\xa6\xcf\x15\xcdt\xd2\xed\x10\xfe\xf7\xce\xde\xcc Y\xd3f\xe3.R\xf9\xe1@\xfc\x80\xd4\x9f\x9a\xa1\xf8\x8f\xc8\x8e\xbf\xd3w\xad\x1c\xcb\xb39\x83\x92UW\x17\x92,\xd3&#123;$\xb2~\t\xb0\x1c\xa2\xaf\xe2\x91\xc1\x98\xd9;\x18\xeb\x1aW\\\x9e\n\xe5\xa3\xdd\x07\xacr\x1c\x9e\x18^\xe0xR\x8c\xafp\x938\xcc3&lt;\xed-\xdb\x04\x9c\xa2\xdb\xb6\xecRn\xf7\xb5=\xcb\xdf\x8aP\x06\x82\xe65\xfa\xd2q:\x04\x8c\xea\x05\x1a +\x9d,&amp;\x9e\x86\xc2\xa7\xf3\x8b\t\x9d\xa7\xd2\x93LO\n\xd3\xd9V\xa97R\t%\x8e\xde\xb7ZD\xdc\xb8\xc5\x9c&quot;5\xe8\x14\xc5&#39;
+JueL0bXSsxLMcff5s5RcqneNSsicieXTXRZGkaER/33pPUMrHNCD2xMSPDrQzT6ZdU3587+KeKush8olxgnvy/u8uh8nGfD57921TvRIyiPknKPulaUyQ3GbapGmzxXNdNLtEP73zt7MIFnTZuMuUvnhQPyA1J+aofiPyI6/03etHMuzOYOSVVcXkizTeySyfgmwHKKv4pHBmNk7GOsaV1yeCuWj3QeschyeGF7geFKMr3CTOMwzPO0t2wScotu27FJu97U9y9+KUAaC5jX60nE6BIzqBRogK50sJp6Gwqfziwmdp9KTTE8K09lWqTdSCSWO3rdaRNy4xZwiNegUxQ==
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 验签，使用公钥验签</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">用公钥生成的新签名密码来验证：</span></span><br><span class="line"><span class="string">哈希过的message ，  和  私钥生成的新签名密码加密了的（哈希过的message）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">message = <span class="string">&quot;This is a request message...&quot;</span></span><br><span class="line"><span class="comment"># step1， 拿到公钥</span></span><br><span class="line">rsakey = RSA.importKey(<span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>).read())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Get public key: <span class="subst">&#123;rsakey&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># step2, 用公钥生成一个新签名密码</span></span><br><span class="line">verifier = Signature_pkcs1_v1_5.new(rsakey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;generate a signature key via public key: <span class="subst">&#123;verifier&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step3, 生成个哈希值</span></span><br><span class="line">hsmsg = SHA.new()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Hashi: <span class="subst">&#123;hsmsg&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step4, 用哈希加密message</span></span><br><span class="line">hsmsg.update(message.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;哈希加密message: &quot;</span> + <span class="string">f&quot;<span class="subst">&#123;hsmsg&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step5, 用base64 将string 的signature解密为二进制</span></span><br><span class="line"><span class="comment"># 就变成了加密阶段的那个 用私钥生成的signature密码来加密 digest哈希过的message</span></span><br><span class="line">sign = base64.b64decode(signature)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;base64 decode sig: <span class="subst">&#123;sign&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># 用 公钥生成的新签名密码来验证，哈希过的message， 和 签过名的sign二进制</span></span><br><span class="line">is_verify = verifier.verify(hsmsg, sign)</span><br><span class="line"><span class="built_in">print</span>(is_verify)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Get public key: Public RSA key at 0x10C3B8880
+generate a signature key via public key: &lt;Crypto.Signature.pkcs1_15.PKCS115_SigScheme object at 0x10c3b8a30&gt;
+Hashi: &lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c663160&gt;
+哈希加密message: &lt;Crypto.Hash.SHA1.SHA1Hash object at 0x10c663160&gt;
+base64 decode sig: b&#39;&amp;\xe7\x8b\xd1\xb5\xd2\xb3\x12\xccq\xf7\xf9\xb3\x94\\\xaaw\x8dJ\xc8\x9c\x89\xe5\xd3]\x16F\x91\xa1\x11\xff&#125;\xe9=C+\x1c\xd0\x83\xdb\x13\x12&lt;:\xd0\xcd&gt;\x99uM\xf9\xf3\xbf\x8ax\xab\xac\x87\xca%\xc6\t\xef\xcb\xfb\xbc\xba\x1f\&#39;\x19\xf0\xf9\xef\xdd\xb5N\xf4H\xca#\xe4\x9c\xa3\xee\x95\xa52Cq\x9bj\x91\xa6\xcf\x15\xcdt\xd2\xed\x10\xfe\xf7\xce\xde\xcc Y\xd3f\xe3.R\xf9\xe1@\xfc\x80\xd4\x9f\x9a\xa1\xf8\x8f\xc8\x8e\xbf\xd3w\xad\x1c\xcb\xb39\x83\x92UW\x17\x92,\xd3&#123;$\xb2~\t\xb0\x1c\xa2\xaf\xe2\x91\xc1\x98\xd9;\x18\xeb\x1aW\\\x9e\n\xe5\xa3\xdd\x07\xacr\x1c\x9e\x18^\xe0xR\x8c\xafp\x938\xcc3&lt;\xed-\xdb\x04\x9c\xa2\xdb\xb6\xecRn\xf7\xb5=\xcb\xdf\x8aP\x06\x82\xe65\xfa\xd2q:\x04\x8c\xea\x05\x1a +\x9d,&amp;\x9e\x86\xc2\xa7\xf3\x8b\t\x9d\xa7\xd2\x93LO\n\xd3\xd9V\xa97R\t%\x8e\xde\xb7ZD\xdc\xb8\xc5\x9c&quot;5\xe8\x14\xc5&#39;
+True
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_OAEP</span><br><span class="line"><span class="keyword">import</span> binascii</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成了个 private RSA KEY?????</span></span><br><span class="line">keyPair = RSA.generate(<span class="number">3072</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;keyPair: <span class="subst">&#123;keyPair&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>keyPair: Private RSA key at 0x10C663940
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pubKey = keyPair.publickey()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Public key:  (n=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.n)&#125;</span>, e=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.e)&#125;</span>)&quot;</span>)</span><br><span class="line">pubKeyPEM = pubKey.exportKey()</span><br><span class="line"><span class="built_in">print</span>(pubKeyPEM.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Public key:  (n=0xa1ed1f3d0be71914eee28da05492820df0f21666e64a68ba698f93933d2b2ffe71fa3a8221da24354dbb5b756dd64d70696fe650dd607d2a255fbbae4f668a2115ca22b172a0d9d694adc160713b8508f0ffe403c89b7dcf6a388e2bfb58c57c920841945e13edbd0c8baf6c921b7af4647b545ed5e404776fb0e2374ef4e343f32b1cfbba3b76ff57957fc6f67924472485c3bd96ef67ce79e05f0229621257fd803e3fdcfa026b481bd61c6e202821d4b829e0393bc7137c444180b81fc6bccc34f327da2dbd5daa750d60cdca3a5a026e11c25e2d74c5ea43b54640a93c0daf94f5e5eece42fbc9ae0efb65af7503ab3ab5415dd87d4a49c6de79ffb4a1c3682108456c514822cc11d6f849eb88f083292b5128995bf77594448946af5fba1be4d7612fc79cf8f37e8b692c151500441d5d47c989cbadd7f3dee4ad188faf1e4b52fcab8ab483c6324356994215ed080f23451c700e3c89d12ea608a7b96728a025b4a657f0f25f82dc0a27ea852c3294cee81cff2a692df08c7833cd1fd5, e=0x10001)
+-----BEGIN PUBLIC KEY-----
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAoe0fPQvnGRTu4o2gVJKC
+DfDyFmbmSmi6aY+Tkz0rL/5x+jqCIdokNU27W3Vt1k1waW/mUN1gfSolX7uuT2aK
+IRXKIrFyoNnWlK3BYHE7hQjw/+QDyJt9z2o4jiv7WMV8kghBlF4T7b0Mi69skht6
+9GR7VF7V5AR3b7DiN07040PzKxz7ujt2/1eVf8b2eSRHJIXDvZbvZ8554F8CKWIS
+V/2APj/c+gJrSBvWHG4gKCHUuCngOTvHE3xEQYC4H8a8zDTzJ9otvV2qdQ1gzco6
+WgJuEcJeLXTF6kO1RkCpPA2vlPXl7s5C+8muDvtlr3UDqzq1QV3YfUpJxt55/7Sh
+w2ghCEVsUUgizBHW+EnriPCDKStRKJlb93WURIlGr1+6G+TXYS/HnPjzfotpLBUV
+AEQdXUfJicut1/Pe5K0Yj68eS1L8q4q0g8YyQ1aZQhXtCA8jRRxwDjyJ0S6mCKe5
+ZyigJbSmV/DyX4LcCifqhSwylM7oHP8qaS3wjHgzzR/VAgMBAAE=
+-----END PUBLIC KEY-----
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Private key: (n=<span class="subst">&#123;<span class="built_in">hex</span>(pubKey.n)&#125;</span>, d=<span class="subst">&#123;<span class="built_in">hex</span>(keyPair.d)&#125;</span>)&quot;</span>)</span><br><span class="line">privKeyPEM = keyPair.exportKey()</span><br><span class="line"><span class="built_in">print</span>(privKeyPEM.decode(<span class="string">&#x27;ascii&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Private key: (n=0xa1ed1f3d0be71914eee28da05492820df0f21666e64a68ba698f93933d2b2ffe71fa3a8221da24354dbb5b756dd64d70696fe650dd607d2a255fbbae4f668a2115ca22b172a0d9d694adc160713b8508f0ffe403c89b7dcf6a388e2bfb58c57c920841945e13edbd0c8baf6c921b7af4647b545ed5e404776fb0e2374ef4e343f32b1cfbba3b76ff57957fc6f67924472485c3bd96ef67ce79e05f0229621257fd803e3fdcfa026b481bd61c6e202821d4b829e0393bc7137c444180b81fc6bccc34f327da2dbd5daa750d60cdca3a5a026e11c25e2d74c5ea43b54640a93c0daf94f5e5eece42fbc9ae0efb65af7503ab3ab5415dd87d4a49c6de79ffb4a1c3682108456c514822cc11d6f849eb88f083292b5128995bf77594448946af5fba1be4d7612fc79cf8f37e8b692c151500441d5d47c989cbadd7f3dee4ad188faf1e4b52fcab8ab483c6324356994215ed080f23451c700e3c89d12ea608a7b96728a025b4a657f0f25f82dc0a27ea852c3294cee81cff2a692df08c7833cd1fd5, d=0x1b6c1223947b1e9447a061110b41847a37ee723cc58df463c80763469c254ee0c30ca2bbf1b504f76ca2936a8a4a05f348e7da694cbefa736e163857dcba7b74a996ac7ec09adcf3ff59d855d781eceb06baa48814d66b07fa9a794e997cff1f89863c6a3e99c163dd56b543fdba5efd8f1c13bdbbc5fc6652fe9c50cc33a209453517ee1ed67de08aef41246b63e3463e63d387ad4d5341c9acbb14f2a283d8c2e58fa5366c60872a9461938efd8323b7928e04f05709efbd8111ac158276cab2457512d111abba989e2ef5c0cc8309a32173c206eee8a10102bb20f19c76c1182759052e34a120bb87c220df920f11019b3ebda111c634ccc94937acb0ef23d7114cd13a8a154c909efe9700fae3fabae91529d4bf6dc70aea942ba5128c4d61eef66a857fbfd47cd30b20595c3a609a0348a3cfeca5c5bd3c5e6174e042c16a6262fcac07604536d1a1037ee4c88d6df0713347957e9a1185b30c25c4842a9b184eff70533e799cfb8519c414ea84a5936f4e16d5841175f3bd0d0436705)
+-----BEGIN RSA PRIVATE KEY-----
+MIIG4wIBAAKCAYEAoe0fPQvnGRTu4o2gVJKCDfDyFmbmSmi6aY+Tkz0rL/5x+jqC
+IdokNU27W3Vt1k1waW/mUN1gfSolX7uuT2aKIRXKIrFyoNnWlK3BYHE7hQjw/+QD
+yJt9z2o4jiv7WMV8kghBlF4T7b0Mi69skht69GR7VF7V5AR3b7DiN07040PzKxz7
+ujt2/1eVf8b2eSRHJIXDvZbvZ8554F8CKWISV/2APj/c+gJrSBvWHG4gKCHUuCng
+OTvHE3xEQYC4H8a8zDTzJ9otvV2qdQ1gzco6WgJuEcJeLXTF6kO1RkCpPA2vlPXl
+7s5C+8muDvtlr3UDqzq1QV3YfUpJxt55/7Shw2ghCEVsUUgizBHW+EnriPCDKStR
+KJlb93WURIlGr1+6G+TXYS/HnPjzfotpLBUVAEQdXUfJicut1/Pe5K0Yj68eS1L8
+q4q0g8YyQ1aZQhXtCA8jRRxwDjyJ0S6mCKe5ZyigJbSmV/DyX4LcCifqhSwylM7o
+HP8qaS3wjHgzzR/VAgMBAAECggGAAbbBIjlHselEegYRELQYR6N+5yPMWN9GPIB2
+NGnCVO4MMMorvxtQT3bKKTaopKBfNI59ppTL76c24WOFfcunt0qZasfsCa3PP/Wd
+hV14Hs6wa6pIgU1msH+pp5Tpl8/x+JhjxqPpnBY91WtUP9ul79jxwTvbvF/GZS/p
+xQzDOiCUU1F+4e1n3giu9BJGtj40Y+Y9OHrU1TQcmsuxTyooPYwuWPpTZsYIcqlG
+GTjv2DI7eSjgTwVwnvvYERrBWCdsqyRXUS0RGrupieLvXAzIMJoyFzwgbu6KEBAr
+sg8Zx2wRgnWQUuNKEgu4fCIN+SDxEBmz69oRHGNMzJSTessO8j1xFM0TqKFUyQnv
+6XAPrj+rrpFSnUv23HCuqUK6USjE1h7vZqhX+/1HzTCyBZXDpgmgNIo8/spcW9PF
+5hdOBCwWpiYvysB2BFNtGhA37kyI1t8HEzR5V+mhGFswwlxIQqmxhO/3BTPnmc+4
+UZxBTqhKWTb04W1YQRdfO9DQQ2cFAoHBALUKXxmsVeBjMpojUrD2ekDzOqKhYoQl
+oI5T6vbn8KtYsSh7ePrm9jE6MfOKwL3MJxy4Q2VKKS6s9ruDQtkYpPy/EzSWi5yS
+MroGEFBlqMCKIneVhOa4+qYyqdpNfQFJq9dOimIS+4pIuccE13fX7UC6OYtQ+1qx
+AuXo7tIVk/OHRBTh0FCGAFPzUKk3C0Nxt1o4Gkb2sdq/aKWKhr+eEf29l02UiocN
+EGZjJHKv7Zql14PmD/NGGNDz0wd6Xn+JhwKBwQDk+LWxxiijAAbYZvNM3/ay73Pc
+CtbbgrFBCFwf0Fqh/F6NTAFEvvcrk1k5YVnV45flsU54zlEH2ce1mPK9WoPcyI0P
+iNGPUSfoMwlwa6jlbOxanCCqOl70LrQP6v97AId7KxUsei1B1FjKKftF2Q47zu+x
+E+LXI1jSv2IJiVTTeZon3RThwKMqflVN22erEEqQu944QVe1KNwKMqg/LlSEnz/4
+LWkCXvkVDbVg4g9HLsPQVe0OsumTcbjx2EidMsMCgcAJy6fdob97xqJESMj+njd7
+MC3qAsVr1QVc7hl2hpI1EzVytUuUd862VynAva80Fcm/+hBbeKnFxsIK301MpdK3
+gjctzz96l0Z7XjyfvQBmepLm2YY5XaTiPTeHgk3TNgNAQRWnvNMzZj/3DsIB0AMc
+T3cxnI4dGBrKCdJyN4yrzpPWdWlqEfYOlMm2fi3z1kFPdl2lnU9+QIEPA/HKiGj8
+y7dWEUV1jTVn9NFSC0bV6UdB8b7HMPHCzI6Mhwh56h0CgcEAwRcoCkIElOj53NZ8
+yNB5943NE7wkUrsVBbWqEr4fIEl15ww4aaPtRtccwDHjk2c5+l6awW+jj85NB0xz
+L9G8L50EsBv+NTEISV140VBI/yjq7MKLHWLaHmugN2hCiJT6q5i6Y2ao8cHEGsBq
+gQ25XiB1q8wMWMcbKaZxY39nhGsg4Aslh/du4e/luiGTfAPiDcoQbTpVX5WUchkk
+HxvP9INja8PHsVMsFGAaHBinL601PmSn4+Rm64tUnsZ4/fAHAoHAUT1YY5uMjbr3
+EJ3c2HviYM7ExchdrByMbtxipp5z8JWMSxH6pfyVFK+kqiaTAwtmZPm9LNgUym7Z
+A4fSM/W0QvLu8qa/4rKLYgRebwPMj9oCEeciecINENqVHjNPOFRqTuqMV+aMrhDE
+xiboGbgoNWGxJGcAvsKTD1/49Rjtl7ZpEHMbV6jI3JPX161n7D20vRWHSgRBdTNn
+h1b97aHzKQlwEFFbAgQzfh3ATEJRJCkUoX+YK5TsVTUkfJOYPM5U
+-----END RSA PRIVATE KEY-----
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encryption</span></span><br><span class="line">msg = <span class="string">&#x27;A message for encryption&#x27;</span></span><br><span class="line">encryptor = PKCS1_OAEP.new(pubKey)</span><br><span class="line">encrypted = encryptor.encrypt(msg.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Encrypted:&quot;</span>, binascii.hexlify(encrypted))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Encrypted: b&#39;7afbfdb44b4b507b4e000a0b16ff3b64e9b570f932b3467b06b69d2071f92886f62f612f57caa9d1a46189759f51f46784388f7e52ee08f2434a8f7918e5e92a639f32bcf8c5ec36ce5cb5328279b793e33c1a9dc4af373875b9b230772d51f9818292b178153f172ca8ce5aea84396032b4ab26f29ba7808ef335d072cfaca61cc311e1542cc404c11fed5db0349ee4f56568e702bfc3a2203f521a282b1cd5b22a8f6d0c731589da8169b078c9be5d00b8df31b40a26f4e92d8d049dd3b9f5bd43d9c1680688cb81af3bca4bb44c8a8227941f5a874c7fb043e7dd9351117e1d286b6ac26486514681805c66b8bab5ebad7d7f9556a14678342c6278268bab1e98867ece9c253b48e4ca71411bc9728b7844b1ec1c007c6006701b3951f4e7b5b4558b140121422960a7fb1e1f8a9be1cb499be33517602d7a231d69741d0a50318e0bd3ce771f62b6161c0f945da9bfe28a05ccebfabedc38821f7048a5c6c6288435757d632192386ba0f607a6f96fe41fafbbf26dd6aafe46ddeb313de9&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rsa</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">publicKey, privateKey = rsa.newkeys(<span class="number">2024</span>)</span><br><span class="line">message = <span class="string">&quot;hello geeks&quot;</span></span><br><span class="line"></span><br><span class="line">encMessage = rsa.encrypt(message.encode(<span class="string">&quot;utf-8&quot;</span>), publicKey)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;original string: &quot;</span>, message)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;encrypted string: &quot;</span>, encMessage)</span><br><span class="line"></span><br><span class="line"><span class="comment"># the encrypted message can be decrypted</span></span><br><span class="line"><span class="comment"># with ras.decrypt method and private key</span></span><br><span class="line"><span class="comment"># decrypt method returns encoded byte string,</span></span><br><span class="line"><span class="comment"># use decode method to convert it to string</span></span><br><span class="line"><span class="comment"># public key cannot be used for decryption</span></span><br><span class="line">decMessage = rsa.decrypt(encMessage, privateKey).decode()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;decrypted string: &quot;</span>, decMessage)</span><br></pre></td></tr></table></figure>
+
+<pre><code>original string:  hello geeks
+encrypted string:  b&quot;\x1f~m\x87\xe0_\x8f\x89w1B$|l\x04t$\xa8j\xd4\xc7\xbdr&gt;y\xfa\xd1c\xc2\nm\x88\xd02\x05\x999\xae\x96O\xf8s\x83\xe3\xccw\xcc\xc5c\x97\xec\xdc\xefpe\xe9xkg\xdan\x83\xafzYJv\xdb\xf8\x8a\xa3\x1c\t\xb0\x96\xa6\xbci\xeb`&#39;\xe9\x15\x15\x97\x10\xca\x867\xa1\xb2d\xfc\xc4~:\xc5Q\xa1\xbe\x1aq-6\xc8\xd3&gt;&#39;!H\x15\x03F\x94V\xb5e\xaaBp\x13Nx\\\xac\xe1\x96\xf2\xde2\x98\xe1\xe0;_|\xefa\x17b\x9a\x1b@\x0f\xe9%\xd9\xfe@g\xecDxA\x8cS\x12\x8fI#\xf6\xa04qN\xe9g\x1f4Y\x19\x06\xff\xa1\xa0\xad\xec\x983Y\xd8%\xb1L\xa2r\xd8wr3\xbb\xa5\x06\xd7o\xed\xc4\xb5:JGr\xc2\xdb\x8bz\xb3$-\x89Xj\\2\xc5\x1f\xac\xa1\xfdm\xf5\x02m=\x9a\x0b\xd7\xb3\xc1\x80\xffY\\\x06V\x868\x81\xe54\t\x81\xaf\xae\xf7\xdd\x18\xb2&#123;\xec\xb7\x9e`&quot;
+decrypted string:  hello geeks
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/12/openssl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/12/openssl/" class="post-title-link" itemprop="url">OpenSSL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-12 23:34:02" itemprop="dateCreated datePublished" datetime="2023-03-12T23:34:02+00:00">2023-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h1><p>在SSL/TLS/HTTPS通信中，证书虽然不是TLS/SSL协议的一部分，却是HTTPS非常关键的一环，网站引入证书才能避免中间人攻击。证书涉及了很多密码学知识，理解证书后，再深入理解TLS/SSL协议，效果会更好。</p>
+<p>啥是TLS？？？Mutual TLS (mTLS) certificate authentication 双向证书认证</p>
+<p>OpenSSL 是一个安全套接字层密码库，囊括主要的密码算法、常用密钥、证书封装管理功能及实现ssl协议。<br>OpenSSL整个软件包大概可以分成三个主要的功能部分：</p>
+<ol>
+<li>SSL协议库libssl</li>
+<li>应用程序命令工具</li>
+<li>密码算法库libcrypto</li>
+</ol>
+<p>.KEY 私钥。</p>
+<p><strong>.CSR</strong> 是 Certificate Signing Request 的缩写，即证书签名请求，这不是证书，只是包含申请证书的基本信息。生成证书时要把这个提交给权威的证书颁发机构，颁发机构审核通过之后，再根据这些申请信息生成相应的证书。</p>
+<p>.CRT 即 certificate的缩写，即证书。</p>
+<p><strong>X.509</strong> 定义公钥证书格式， structure， 不同的密钥有不同的结构体。</p>
+<blockquote>
+<p>X.509的证书文件，一般以.crt结尾，根据该文件的内容编码格式，可以分为以下二种格式：</p>
+</blockquote>
+<blockquote>
+<p>.PEM - Privacy Enhanced Mail，以base64编码，将二进制文件转为文本，打开看文本格式，以”—–BEGIN…“开头，”—–END…”结尾，Apache 和 *NIX 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<blockquote>
+<p>.DER - Distinguished Encoding Rules，是二进制格式，不可读。Java 和 Windows 服务器偏向于使用这种编码格式。</p>
+</blockquote>
+<h2 id="1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists"><a href="#1-自签证书，-CA、证书链、证书的撤销-CRLs证书吊销列表-certificate-revocation-lists" class="headerlink" title="1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists"></a>1. 自签证书， CA、证书链、证书的撤销 CRLs证书吊销列表: certificate revocation lists</h2><h3 id="1-1-For-instances"><a href="#1-1-For-instances" class="headerlink" title="1.1. For instances:"></a>1.1. For instances:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out server.key 2048  <span class="comment"># 先生成一个私钥                 </span></span><br><span class="line">openssl req -new -key server.key -out server.csr <span class="comment"># 用这个私钥加密证书请求信息，生成一个证书请求</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -out server.crt -signkey server.key -days 3650 <span class="comment"># 用证书请求 和 私钥自签名来申请一个x509公钥</span></span><br><span class="line"><span class="comment"># 用x509公钥 和 私钥自签名来发请求</span></span><br><span class="line">python3 manage.py runserver_plus --cert-file ./server.crt --key-file ./server.key 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><figcaption><span>Generate Root CA</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private/ca.key 2048 <span class="comment">#先生成一个私钥</span></span><br><span class="line"></span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl genrsa -out private/ca.key 2048</span></span><br><span class="line">Generating RSA private key, 2048 bit long modulus (2 primes)</span><br><span class="line">.....................+++++</span><br><span class="line">.............+++++</span><br><span class="line">e is 65537 (0x010001)</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/ca.key</span></span><br><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEpAIBAAKCAQEArPbCOb9to</span><br><span class="line">……</span><br><span class="line">XfJxLjmrJIxzlAn5/3OI9sAuZW0ZQu3VhpMXow/d/IN4T3i5UNOjdA==</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用私钥自签，生成一个x509 的 公钥CA</span></span><br><span class="line">openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com&quot;</span> -extensions v3_ca -config openssl.cnf</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   └── ca.key</span><br><span class="line">└── serial</span><br><span class="line">5 directories, 6 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat certs/ca.pem</span></span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIID0DCCArigAwIBAgIUNq7/2QHSt6dhvy5XVEIlx2bqJ1AwDQYJKoZIhvcNAQEL</span><br><span class="line">dR2qFJjutlz/ExPDqhRMzSGzsMH47uH2j/rEsIW+4K0vU6G9HIIWpa4xoET+TQJI</span><br><span class="line">p5DKgza5t0QBuULe9YTMJTlHl2E=</span><br><span class="line">-----END CERTIFICATE-----</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># newkey:生成一个证书请求，加一个私钥，-nodes:不加密私钥，生成server certificate and use CA to issue it </span></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj <span class="string">&quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;</span>  -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl req -new -newkey rsa:2048 -nodes -out csr/server.csr -keyout private/server.key -subj &quot;/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=ciam.west.isilon.com&quot;  -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............................+++++</span><br><span class="line">..................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;private/server.key&#x27;</span></span><br><span class="line">-----</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── certs</span><br><span class="line">│   └── ca.pem</span><br><span class="line">├── crl</span><br><span class="line">├── csr</span><br><span class="line">│   └── server.csr</span><br><span class="line">├── index.txt</span><br><span class="line">├── index.txt.attr</span><br><span class="line">├── intermediate</span><br><span class="line">├── openssl.cnf</span><br><span class="line">├── private</span><br><span class="line">│   ├── ca.key</span><br><span class="line">│   └── server.key</span><br><span class="line">└── serial</span><br><span class="line"></span><br><span class="line">5 directories, 8 files</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat csr/server.csr</span></span><br><span class="line">-----BEGIN CERTIFICATE REQUEST-----</span><br><span class="line">MIIDJjCCAg4CAQAwcDELMAkGA1UEBhMCQ04xETAPBgNVBAgMCFNoYW5naGFpMREw</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># cat private/server.key</span></span><br><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDpCNWLNTNCFf0K</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ca:可以sign certificate req， 签名证书请求， 并且生成 CRLs证书吊销列表: certificate revocation lists</span></span><br><span class="line"><span class="comment"># batch: 所有证书will be certified automatically.  notext:不要把证书文本形式输出到文件，意思是二进制？</span></span><br><span class="line"><span class="comment"># extensions: default x509, 如果没有extension section，那么输出V1 certificate，否则输出V3 certificate.x509v3.cnf</span></span><br><span class="line">openssl ca -batch -notext -<span class="keyword">in</span> csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span><br><span class="line">CIAM-ali1:~/certification <span class="comment"># openssl ca -batch -notext -in csr/server.csr -out certs/server.pem -config openssl.cnf -extensions v3_server</span></span><br><span class="line">Using configuration from openssl.cnf</span><br><span class="line">Check that the request matches the signature</span><br><span class="line">Signature ok</span><br><span class="line">The Subject<span class="string">&#x27;s Distinguished Name is as follows</span></span><br><span class="line"><span class="string">countryName           :PRINTABLE:&#x27;</span>CN<span class="string">&#x27;</span></span><br><span class="line"><span class="string">stateOrProvinceName   :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">localityName          :ASN.1 12:&#x27;</span>Shanghai<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationName      :ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">organizationalUnitName:ASN.1 12:&#x27;</span>Dell<span class="string">&#x27;</span></span><br><span class="line"><span class="string">commonName            :ASN.1 12:&#x27;</span>ciam.west.isilon.com<span class="string">&#x27;</span></span><br><span class="line"><span class="string">Certificate is to be certified until Mar 24 15:11:50 2024 GMT (365 days)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Write out database with 1 new entries</span></span><br><span class="line"><span class="string">Data Base Updated</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # tree</span></span><br><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├── certs</span></span><br><span class="line"><span class="string">│   ├── 1000.pem</span></span><br><span class="line"><span class="string">│   ├── ca.pem</span></span><br><span class="line"><span class="string">│   └── server.pem</span></span><br><span class="line"><span class="string">├── crl</span></span><br><span class="line"><span class="string">├── csr</span></span><br><span class="line"><span class="string">│   └── server.csr</span></span><br><span class="line"><span class="string">├── index.txt</span></span><br><span class="line"><span class="string">├── index.txt.attr</span></span><br><span class="line"><span class="string">├── index.txt.attr.old</span></span><br><span class="line"><span class="string">├── index.txt.old</span></span><br><span class="line"><span class="string">├── intermediate</span></span><br><span class="line"><span class="string">├── openssl.cnf</span></span><br><span class="line"><span class="string">├── private</span></span><br><span class="line"><span class="string">│   ├── ca.key</span></span><br><span class="line"><span class="string">│   └── server.key</span></span><br><span class="line"><span class="string">├── serial</span></span><br><span class="line"><span class="string">└── serial.old</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">5 directories, 13 files</span></span><br><span class="line"><span class="string">CIAM-ali1:~/certification # cat certs/server.pem</span></span><br><span class="line"><span class="string">-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">MIIDpjCCAo6gAwIBAgICEAAwDQYJKoZIhvcNAQELBQAwazELMAkGA1UEBhMCQ04x</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-1-字段解释"><a href="#1-1-1-字段解释" class="headerlink" title="1.1.1. 字段解释"></a>1.1.1. 字段解释</h4><p><mark>openssl genrsa -out ca.key 2048</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">genrsa:  生成RSA加密的私钥。 generates an RSA private key, <span class="built_in">which</span> essentially involves the generation of two prime numbers.</span><br><span class="line">  -out: The output file to write to</span><br><span class="line">  numbits: the size of the private key to generate <span class="keyword">in</span> bits, default:2048</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">不加密的RSA私钥。</span><br><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line"></span><br><span class="line">加密的RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048</span><br><span class="line"></span><br><span class="line">指定随机数创建RSA私钥。</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -seed abc</span><br><span class="line">openssl genrsa -des3 -out ca.key 2048 -rand file:hello.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -key server.key -out server.csr</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">req: 创建和处理PKCS\<span class="comment">#10格式的证书请求。 creates and processes certificate requests in PKCS#10 format</span></span><br><span class="line">     还可以添加额外信息来创建自签名CA证书。  也就是拿私钥签名之后当做 CA。上一步已经创建了私钥。可以拿私钥来创CA。</span><br><span class="line">-new -key： 生成一个新的 certificate req， 如果不指定-key, 那么就读取configfile中的配置项。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PKCS\<span class="comment">#10: 证书请求文件，类似于CSR文件，一般是一个base64文件。</span></span><br><span class="line">          是一段可以向CA申请证书的P10请求。</span><br><span class="line">          该请求一般是通过硬件生成密钥对后，将私钥单独存放，但是将公钥放入p10中，</span><br><span class="line">          CA受到该p10请求后，可以校验，并根据p10中的信息制作一张没有私钥的公钥证书。</span><br><span class="line">意思是PKCS10 --&gt; 本地会有一对公私钥  --&gt; CA 拿到P10带来的公钥 --&gt; CA generate --&gt; 一张没有私钥的公钥。</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<p><mark>openssl req -new -x509 -days 365 -key private/ca.key -out certs/ca.pem -subj “/C=CN/ST=Shanghai/L=Shanghai/O=Dell/OU=Dell/CN=west.isilon.com” -extensions v3_ca -config openssl.cnf</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用原有的RSA密钥生成证书请求文件，指定-batch选项，不询问申请者的信息。主体信息由命令行subj指定，且输出公钥</span><br><span class="line">-config openssl.cnf</span><br><span class="line">-days  默认30天，与-x509一起使用</span><br><span class="line">-extensions 指定可选sections 从configfile中， 与-x509一起使用</span><br><span class="line">-subj Replaces the subject field of an input request, /type0=value0/type1=value1/type2=</span><br><span class="line">-x509  输出自签名证书，而不是证书请求， 在这里就是CA。</span><br><span class="line"><span class="comment">#This is typically used to generate a test certificate or a self-signed root CA.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><mark>openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650</mark></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x509: 是个公钥证书，主要有个sign certificate requests like a mini CA</span><br><span class="line">-req: 期望有个证书请求csr（而不是证书本身）在input中，</span><br><span class="line">-signkey: 使用提供的私钥对文件进行自签名</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ol>
+<li>Create a Certificate Authority private key (this is your most important key):</li>
+</ol>
+<p><code>openssl req -new -newkey rsa:1024 -nodes -out ca.csr -keyout ca.key</code></p>
+<ol start="2">
+<li>Create your CA self-signed certificate:</li>
+</ol>
+<p><code>openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem</code></p>
+<ol start="3">
+<li>Issue a client certificate by first generating the key, then request (or use one provided by external system) then sign the certificate using private key of your CA:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out client.key 1024</span><br><span class="line">openssl req -new -key client.key -out client.csr</span><br><span class="line">openssl ca -in client.csr -out client.cer</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="1-1-2-Manually-stopping-Pacific-keycloak"><a href="#1-1-2-Manually-stopping-Pacific-keycloak" class="headerlink" title="1.1.2. Manually stopping Pacific keycloak"></a>1.1.2. Manually stopping Pacific keycloak</h4><p><code>ps -ef | grep &quot;/opt/keycloak&quot; | awk &#39;&#123;print $2&#125;&#39; | xargs kill</code></p>
+<h3 id="1-2-了解CA，-root-CA，-以及自签名，CA签名"><a href="#1-2-了解CA，-root-CA，-以及自签名，CA签名" class="headerlink" title="1.2. 了解CA， root CA， 以及自签名，CA签名"></a>1.2. 了解CA， root CA， 以及自签名，CA签名</h3><p>只有root 是自签名，其他都是CA签名<br>ROOT证书是用来签发和验证CA证书的，防止在不知道签名者私钥的情况下恶意篡改证书的内容<br>Root CA -&gt; Server CA -&gt; Server(最终用户)</p>
+<p><mark>其实就是一个使用私钥签发（issue）的关系。</mark></p>
+<ol>
+<li><pre><code> ROOT 证书
+</code></pre>
+</li>
+<li><pre><code>               的私钥
+</code></pre>
+</li>
+<li><pre><code>                       签发   `用私钥加过密的sign签名`, `签名算法，通常是Sha256WithHash`
+</code></pre>
+</li>
+<li><pre><code>                            CA 证书
+</code></pre>
+</li>
+<li><pre><code>                                      签发
+</code></pre>
+</li>
+<li><pre><code>                                            x.509证书（公钥证书), 以.cert, .crt后缀，是ASN.1编码 Abstract syntax notation dot one 抽象语法标记
+</code></pre>
+<blockquote>
+<p>秘钥和证书都是 SEQUENCE 类型，<br>而 SEQUENCE 的 type 是 0x30，且长度是大于 127 的，因此第2 个字节是 0x82.<br>ASN.1 编码表示的数据是二进制数据，通常通过 BASE64 转化成字符串保存在 pem 文件中，<br>而 0x3082 经过 BASE64 编码后，就是字符串 MI，<mark>因此所有 PEM 文件存储的秘钥开始的前两个字符是 MI</mark>。</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pkcs<span class="comment">#1 用于定义 RSA 公钥、私钥结构</span></span><br><span class="line">pkcs<span class="comment">#7 用于定义证书链</span></span><br><span class="line">pkcs<span class="comment">#8 用于定义任何算法公私钥</span></span><br><span class="line">pkcs<span class="comment">#12 用于定义私钥证书</span></span><br><span class="line">X.509 定义公钥证书</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/uploads/69094374817016.png"><br><img src="vx_images/69094374817016.png"></p>
+<h4 id="1-2-1-看个keytool生成证书的范例"><a href="#1-2-1-看个keytool生成证书的范例" class="headerlink" title="1.2.1. 看个keytool生成证书的范例"></a>1.2.1. 看个keytool生成证书的范例</h4><p><code>keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname &quot;CN=server&quot; -alias server -ext &quot;SAN:c=DNS:localhost,IP:127.0.0.1&quot; -keystore conf/server.keystore</code></p>
+<p>-genkeypair  生成密钥对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Generates a key pair (a public key and associated private key).</span><br><span class="line">              Wraps the public key into an X.509 v3 self-signed certificate,</span><br><span class="line">              which is stored as a single-element certificate chain. This</span><br><span class="line">              certificate chain and the private key are stored in a new</span><br><span class="line">              keystore entry identified by alias.</span><br></pre></td></tr></table></figure>
+<p>-storepass 更改密钥库的存储口令,<br>-storetype   PKCS12 私钥证书<br>-keyalg      RSA, DSA, EC, DES, DESede<br>-keysize<br>-dname</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The dname value specifies the X.500 Distinguished Name to be</span><br><span class="line">    associated with the value of alias, and is used as the issuer</span><br><span class="line">    and subject fields in the self-signed certificate. If no</span><br><span class="line">    distinguished name is provided at the command line, then the</span><br><span class="line">    user is prompted for one.</span><br></pre></td></tr></table></figure>
+<p>-ext<br>-keystore<br>-validity<br>-keypass</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SAN or SubjectAlternativeName</span><br><span class="line">            Values: type:value(,type:value)*, where type can be EMAIL, URI,</span><br><span class="line">            DNS, IP, or OID. The value argument is the string format value</span><br><span class="line">            for the type.</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-genkeypair-keyalg-keysize"><a href="#2-genkeypair-keyalg-keysize" class="headerlink" title="2. genkeypair keyalg keysize"></a>2. genkeypair keyalg keysize</h2><p>OpenSSL一共实现了4种非对称加密算法，<br>DH算法一般用户密钥交换。RSA 算法既可以用于密钥交换，也可以用于数字签名，DSA算法则一般只用于数字签名<br>DH、<br>RSA、<br>DSA<br>椭圆曲线算法（EC）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-genkeypair 生成密钥对      -keyalg算法   RSA             -keysize   2048  </span><br><span class="line">                                         DSA                        1024 </span><br><span class="line">                                         EC                         256</span><br><span class="line">-genseckey 生成密钥          -keyalg      DES                        56   </span><br><span class="line">                                         DESede                     168</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-1-1-1-ROOT证书"><a href="#2-1-1-1-ROOT证书" class="headerlink" title="2.1.1.1. ROOT证书"></a>2.1.1.1. ROOT证书</h5><h5 id="2-1-1-2-CA证书和"><a href="#2-1-1-2-CA证书和" class="headerlink" title="2.1.1.2. CA证书和"></a>2.1.1.2. CA证书和</h5><h5 id="2-1-1-3-使用CA证签发的X-509证书"><a href="#2-1-1-3-使用CA证签发的X-509证书" class="headerlink" title="2.1.1.3. 使用CA证签发的X.509证书"></a>2.1.1.3. 使用CA证签发的X.509证书</h5>
       
     </div>
 
@@ -296,7 +606,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -375,7 +685,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -488,7 +798,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -625,7 +935,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
 
           
@@ -690,7 +1000,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -766,7 +1076,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -841,7 +1151,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -925,7 +1235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-11 15:27:23" itemprop="dateModified" datetime="2023-04-11T15:27:23+00:00">2023-04-11</time>
+                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -971,162 +1281,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/flask/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/11/flask/" class="post-title-link" itemprop="url">flask</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-02-11 13:30:46 / Modified: 13:31:43" itemprop="dateCreated datePublished" datetime="2023-02-11T13:30:46+00:00">2023-02-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="flask"><a href="#flask" class="headerlink" title="flask"></a>flask</h1><p>FLASK_APP=/usr/local/devcodes/powerload-web FLASK_ENV=development python3 -m flask run –host=10.219.61.224  –port=2222</p>
-<p><font color=#063060 size=2>1. 命令行启动 flask：先export FLASK_APP指向启动file.py；再flask run;<br>2. 命令行启动debug模式，export FLASK_DEBUG=1； 此模式可changes reloaded authmatically.<br>3. python 启动 flask,  if <strong>name</strong> == ‘<strong>main</strong>‘，可在其中设置debug模式<br><strong>4. 用装饰器 app.route(“/“)  route decorators 来管理页面路径 what we type into the browsing to go to different pages.</strong></font></p>
-<ol start="17">
-<li>login logout, 验证注册是否使用存在了的username 或者email。 登录后不再显示login 和 注册按钮，<br>只显示logout按钮。 logout之后，不可以再访问account页面。  首次登陆直接展示account页面，再次登录直接展示home页面。</li>
-</ol>
-<h5 id="先做点简单的"><a href="#先做点简单的" class="headerlink" title="先做点简单的"></a>先做点简单的</h5><p><code>pip install flask</code><br><code>mkdir Flask_blog</code><br><code>touch flasklog.py</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello, World!&#x27;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h5 id="增加venv"><a href="#增加venv" class="headerlink" title="增加venv"></a>增加venv</h5><ol>
-<li><code>export FLASK_APP=flaskblog.py</code></li>
-<li>flask run</li>
-</ol>
-<p><strong>只要做了改动，就要restart flask，才能生效</strong><br>3. 开启debug模式： <code>export FLASK_DEBUG=1</code>，就可以实时更新改动:thoes changes reload automatically.</p>
-<ol start="4">
-<li>增加  main 之后，用python来run<ol>
-<li><code>python flaskblog.py</code></li>
-</ol>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page, two routes are handled by the same function</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/home&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;Hello, World!&lt;/h1&gt;&#x27;</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/about&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">about</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;About Page!&lt;/h1&gt;&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<ol start="5">
-<li>在layout.html中，包含网站主要css样式，其中，body中添加 block模块，可以用来让<br>the block section that the child templates can override. 调用它的其他html可以重写覆盖。</li>
-</ol>
-<ol start="6">
-<li>mkdir static 来存放 css样式， main.css</li>
-<li>从 snippets中复制过来的navigation.html样式，放在了body标签里面；<br><code>https://github.com/CoreyMSchafer/code_snippets/blob/master/Python/Flask_Blog/snippets/navigation.html</code></li>
-<li>添加main.html 到layout.html的 body中 head下面：</li>
-<li>在layout.html的head中，title前面，添加link，来引用static中的css样式<ol>
-<li>注意 flaskblog.py 中 import ulr_for: <code>from flask import Flask, render_template, url_for</code></li>
-<li>改写layout.html，增加如下：<br><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&#123;&#123; url_for('static', filename='main.css') &#125;&#125;&quot;&gt;</code></li>
-</ol>
-</li>
-</ol>
-<hr>
-<ol start="10">
-<li>安装flask-wtf： <code>pip install flask-wtf</code></li>
-</ol>
-<ol start="11">
-<li><p>register.html中 各种div 之内的 form.username/password/confirm_password都来自于 forms.py中 class 中定义的变量名字</p>
-</li>
-<li><p>但是最后一个div中， 指的是flaskblog.py中的fun name:<br>@app.route(‘/login’)<br>def <font color=#FF0000>login():</font></p>
-</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;border-top pt-3&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">&quot;text-muted&quot;</span>&gt;</span></span><br><span class="line">        Already Have An Account? <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;ml-2&quot;</span>  <span class="attr">href</span>=<span class="string">&quot;&#123;&#123; url_for(&#x27;login&#x27;) &#125;&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="13">
-<li>flash :  redirect  — flasklog.py<br>在register中，添加，如果submit验证成功，就返回到home page ，这个home，<br>调用的是 flasklog.py中的 home fun<br>flash message 是一次性的，当再次刷新时，因为未触发到那个条件，所以flash message不再出现，除非再次注册。</li>
-</ol>
-<p>加入flash 和 redirect 来控制，做了注册之后，页面的刷新跳转；</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)  </span><span class="comment"># root page, two routes are handled by the same function</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/home&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;home.html&#x27;</span>, posts=posts)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/about&#x27;</span></span>)  </span><span class="comment"># root page</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">about</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;about.html&#x27;</span>, title=<span class="string">&#x27;About&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    form = RegistrationForm()</span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        flash(<span class="string">f&#x27;Account created for <span class="subst">&#123;form.username.data&#125;</span>!&#x27;</span>, <span class="string">&#x27;success&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;home&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>, title=<span class="string">&#x27;Register&#x27;</span>, form=form)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>13.2  但是当register 失败后，并无feedback 来告诉用户  why it was invalid</p>
-<p>添加了一些验证在 register.html， 用的是如果拿到error信息就展示出来</p>
-<p>![](_v_images/20201019234332261_1025641223.png =300x)</p>
-<ol start="14">
-<li>在login 加了 flash信息 ，hardcode写了 用户名和密码<br>![](_v_images/20201020002527262_100800492.png =300x)</li>
-</ol>
-<hr>
-<ol start="15">
-<li><code>pip install flask-sqlalchemy</code></li>
-</ol>
-<p><del>export  PIP_DEFAULT_TIMEOUT=100</del>  无效<br>sudo pip install –default-timeout=100 future<br>pip install –default-timeout=220 future<br>因为sudo 调用的pip 是3.6</p>
-<p>![](_v_images/20201021220751159_1841048205.png =600x)</p>
-<p>python</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flaskblog <span class="keyword">import</span> db</span><br><span class="line">db.create_all()    ---&gt; site.db file</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flaskblog <span class="keyword">import</span> User, Post</span><br><span class="line">user_1 = User(username=<span class="string">&#x27;Corey&#x27;</span>, email=<span class="string">&#x27;C@demo.com&#x27;</span>, password=<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(user_1)</span><br><span class="line">user_2 = User(username=<span class="string">&#x27;johnDone&#x27;</span>, email=<span class="string">&#x27;jd@demo.com&#x27;</span>, password=<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(user_2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">User.query.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">User.query.first()</span><br><span class="line"></span><br><span class="line">User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).first()</span><br><span class="line"></span><br><span class="line">user = User.query.filter_by(username=<span class="string">&#x27;Corey&#x27;</span>).first()</span><br><span class="line"></span><br><span class="line">user.<span class="built_in">id</span></span><br><span class="line">user = User.query.get(<span class="number">1</span>)</span><br><span class="line">user</span><br><span class="line"></span><br><span class="line">user.posts</span><br><span class="line"></span><br><span class="line">post_1 = Post(title=<span class="string">&#x27;Blog 1 &#x27;</span>, content = <span class="string">&#x27;first post content!&#x27;</span>, user_id = user.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">post_2 = Post(title=<span class="string">&#x27;Blog 2 &#x27;</span>, content = <span class="string">&#x27;Second post content!&#x27;</span>, user_id = user.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line">db.session.add(post_1)</span><br><span class="line"></span><br><span class="line">db.session.add(post_2)</span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">user.posts</span><br><span class="line"><span class="keyword">for</span> post <span class="keyword">in</span> user.posts:</span><br><span class="line">    <span class="built_in">print</span>(post.title)</span><br><span class="line"></span><br><span class="line">post = Post.query.first()</span><br><span class="line"></span><br><span class="line">post.user_id</span><br><span class="line">post.author</span><br><span class="line"></span><br><span class="line">db.drop_all()</span><br><span class="line">db.create_all()</span><br><span class="line">User.query.<span class="built_in">all</span>()</span><br><span class="line">Post.query.<span class="built_in">all</span>()</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<ol start="16">
-<li><code>pip install flask-bcrypt</code><br>用bcrypt 来生成hash 加密，每次生成都不一样，<br>但是反之check却可以验证真伪。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">~ 🔥» python                      vivi@vivideMacBook-Pro</span><br><span class="line">Python <span class="number">3.8</span><span class="number">.5</span> (v3<span class="number">.8</span><span class="number">.5</span>:580fbb018f, Jul <span class="number">20</span> <span class="number">2020</span>, <span class="number">12</span>:<span class="number">11</span>:<span class="number">27</span>)</span><br><span class="line">[Clang <span class="number">6.0</span> (clang-<span class="number">600.0</span><span class="number">.57</span>)] on darwin</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flask_bcrypt <span class="keyword">import</span> Bcrypt</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt = Bcrypt()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>)</span><br><span class="line"><span class="string">b&#x27;$2b$12$mwleE8U2426VUFW1ZfjI0OsrWatmzYla/hCHhiH5t/xsLxQl/ob6i&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;$2b$12$6kcDKHgJJDhlwaZZV9l0f.DPEqxcJFx01axApkdAVm/v5uoiQKyHe&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;$2b$12$8LMjQhBOdUqT.ZLF08SreOf7CrOYCtgOaEEXHal5okuXclqgviR1e&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hashed_pw = bcrypt.generate_password_hash(<span class="string">&#x27;testing&#x27;</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.check_password_hash(hashed_pw,<span class="string">&quot;password&quot;</span>)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bcrypt.check_password_hash(hashed_pw,<span class="string">&quot;testing&quot;</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>添加了一些校验之后，在首页注册成功</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~/Desktop/Flask_Blog 🔥» python   vivi@vivideMacBook-Pro</span><br><span class="line">Python <span class="number">3.8</span><span class="number">.5</span> (v3<span class="number">.8</span><span class="number">.5</span>:580fbb018f, Jul <span class="number">20</span> <span class="number">2020</span>, <span class="number">12</span>:<span class="number">11</span>:<span class="number">27</span>)</span><br><span class="line">[Clang <span class="number">6.0</span> (clang-<span class="number">600.0</span><span class="number">.57</span>)] on darwin</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flaskblog <span class="keyword">import</span> db</span><br><span class="line">/Library/Frameworks/Python.framework/Versions/<span class="number">3.8</span>/lib/python3<span class="number">.8</span>/site-packages/flask_sqlalchemy/__init__.py:<span class="number">833</span>: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead <span class="keyword">and</span> will be disabled by default <span class="keyword">in</span> the future.  <span class="type">Set</span> it to <span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span> to suppress this warning.</span><br><span class="line">  warnings.warn(FSADeprecationWarning(</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> flaskblog.models <span class="keyword">import</span> User</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user = User.query.first()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user</span><br><span class="line">User(<span class="string">&#x27;ali1&#x27;</span>, <span class="string">&#x27;ali1@flask.com&#x27;</span>, <span class="string">&#x27;default.jpg&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>user.password</span><br><span class="line"><span class="string">&#x27;$2b$12$JM7NPMUz6329UQmMtj8p7uDFWtKRHmpQujnffwW0U/W1WNOfWHThG&#x27;</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 用已经存在的用户来注册，页面报错</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlalchemy.exc.IntegrityError</span><br><span class="line">sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.email</span><br><span class="line">[SQL: INSERT INTO user (username, email, image_file, password) VALUES (?, ?, ?, ?)]</span><br><span class="line">[parameters: (<span class="string">&#x27;ali1&#x27;</span>, <span class="string">&#x27;ali1@flask.com&#x27;</span>, <span class="string">&#x27;default.jpg&#x27;</span>, <span class="string">&#x27;$2b$12$HjaXxkdNbmjhLSLTu7CSsO9Nx/HLJG8.1cUrBL9TwS79/Zui9wvSm&#x27;</span>)]</span><br><span class="line">(Background on this error at: http://sqlalche.me/e/<span class="number">13</span>/gkpj)</span><br></pre></td></tr></table></figure>
-
-
-<p>在浏览器页面，到某个地方想执行，输入pin码即可调用python生成各种信息<br>所以，不可以生产环境使用debug模式，暴露的信息太多。<br>![](_v_images/20201022210758556_1552795459.png =500x)![](_v_images/20201022210936423_1612001069.png =500x)</p>
-<p>添加了一些验证之后：<br>![](_v_images/20201022212003059_248276131.png =500x)</p>
-<ol start="17">
-<li><code>pip install flask-login</code>  安装login 模块</li>
-</ol>
-<hr>
-<p>User Account and Profile Picture</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1194,7 +1352,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
