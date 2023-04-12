@@ -218,7 +218,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-04-12 23:34:02 / Modified: 15:38:28" itemprop="dateCreated datePublished" datetime="2023-04-12T23:34:02+00:00">2023-04-12</time>
+              <time title="Created: 2023-04-12 23:34:02 / Modified: 15:52:49" itemprop="dateCreated datePublished" datetime="2023-04-12T23:34:02+00:00">2023-04-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,74 +242,6 @@
 
       
           <h2 id="1-return-坑死我了"><a href="#1-return-坑死我了" class="headerlink" title="1. return 坑死我了"></a>1. return 坑死我了</h2><p>return是表示从被调函数返回到主调函数继续执行, return后函数就结束了,后面的语句不再执行</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/12/understandmapyieldlambda.py/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/12/understandmapyieldlambda.py/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-04-12 15:38:28" itemprop="dateCreated datePublished" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1> <p>
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">a= []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只会这么写，或者next</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">    a.append(square(x))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">map(function, *iterables)</span></span><br><span class="line"><span class="string">对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple</span></span><br><span class="line"><span class="string">map 取代for循环</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">square_num = <span class="built_in">map</span>(square, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(square_num))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(square_num)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在list的时候调用了square_num，迭代5次，并且把每次迭代的return 都append进list中。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(square_num))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<pre><code>[4, 16, 36, 64, 25]
-&lt;class &#39;map&#39;&gt;
-&lt;map object at 0x1109a2c40&gt;
-[4, 16, 36, 64, 25]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 类似于</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">yield</span> square(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># my way</span></span><br><span class="line">a = testyield(numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;next <span class="subst">&#123;<span class="built_in">next</span>(a)&#125;</span>&quot;</span>)  <span class="comment"># list就是对每个元素next的动作</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> a:</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment"># list can call the generator list就是一个循环call 迭代器的动作， next       </span></span><br><span class="line">a = <span class="built_in">list</span>(testyield(numbers))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">#将传入list，改写成传入单个元素，去掉for循环，外面用map取代for</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment">#yield square(x) 这里不行。。 貌似yield必须要和for循环在一起</span></span><br><span class="line">    <span class="keyword">return</span> square(x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;testyield2 with map&quot;</span>)</span><br><span class="line">a = <span class="built_in">map</span>(testyield2, numbers)</span><br><span class="line"><span class="comment"># is a map object</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># is a generator</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(a))</span><br><span class="line"><span class="comment"># is a list gegerator</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield4</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;under testyield444&quot;</span>)</span><br><span class="line">    a =<span class="keyword">yield</span> square(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;aa&quot;</span>)</span><br><span class="line">g = testyield4(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(g)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;call the testyield4 <span class="subst">&#123;<span class="built_in">next</span>(g)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># for x in numbers:</span></span><br><span class="line"><span class="comment">#     g = testyield4(x)</span></span><br><span class="line"><span class="comment">#     print(next(g))</span></span><br><span class="line">    </span><br><span class="line">aa = [<span class="built_in">next</span>(testyield4(x)) <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(aa)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">return 和 list[map(func, parameters)]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">yield 和list[next(func(x)) for x in parameters]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -360,7 +292,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -435,6 +367,90 @@ Finished in time:  1.282027666
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/11/understandmapyieldlambda.py/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/11/understandmapyieldlambda.py/" class="post-title-link" itemprop="url">Understandmapyieldlambda</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-11 22:13:02" itemprop="dateCreated datePublished" datetime="2023-04-11T22:13:02+00:00">2023-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h1> <p>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">numbers = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line">a= []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只会这么写，或者next</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">    a.append(square(x))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">map(function, *iterables)</span></span><br><span class="line"><span class="string">对指定序列做映射，返回值是个迭代器，可迭代对象： list，set， tuple</span></span><br><span class="line"><span class="string">map 取代for循环</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">square_num = <span class="built_in">map</span>(square, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(square_num))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(square_num)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在list的时候调用了square_num，迭代5次，并且把每次迭代的return 都append进list中。</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(square_num))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>[4, 16, 36, 64, 25]
+&lt;class &#39;map&#39;&gt;
+&lt;map object at 0x1109a2c40&gt;
+[4, 16, 36, 64, 25]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 类似于</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">yield</span> square(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># my way</span></span><br><span class="line">a = testyield(numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;next <span class="subst">&#123;<span class="built_in">next</span>(a)&#125;</span>&quot;</span>)  <span class="comment"># list就是对每个元素next的动作</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> a:</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line"><span class="comment"># list can call the generator list就是一个循环call 迭代器的动作， next       </span></span><br><span class="line">a = <span class="built_in">list</span>(testyield(numbers))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">#将传入list，改写成传入单个元素，去掉for循环，外面用map取代for</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="comment">#yield square(x) 这里不行。。 貌似yield必须要和for循环在一起</span></span><br><span class="line">    <span class="keyword">return</span> square(x)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;testyield2 with map&quot;</span>)</span><br><span class="line">a = <span class="built_in">map</span>(testyield2, numbers)</span><br><span class="line"><span class="comment"># is a map object</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># is a generator</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(a))</span><br><span class="line"><span class="comment"># is a list gegerator</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testyield4</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;under testyield444&quot;</span>)</span><br><span class="line">    a =<span class="keyword">yield</span> square(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;aa&quot;</span>)</span><br><span class="line">g = testyield4(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(g)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;call the testyield4 <span class="subst">&#123;<span class="built_in">next</span>(g)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># for x in numbers:</span></span><br><span class="line"><span class="comment">#     g = testyield4(x)</span></span><br><span class="line"><span class="comment">#     print(next(g))</span></span><br><span class="line">    </span><br><span class="line">aa = [<span class="built_in">next</span>(testyield4(x)) <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</span><br><span class="line"><span class="built_in">print</span>(aa)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">return 和 list[map(func, parameters)]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">yield 和list[next(func(x)) for x in parameters]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/05/mapinuse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -466,7 +482,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -584,7 +600,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -696,7 +712,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -771,7 +787,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -852,7 +868,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
 
           
@@ -924,7 +940,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -998,7 +1014,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
 <p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
 <p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
 <h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#x72;&#105;&#x74;&#104;&#x76;&#105;&#114;&#x61;&#106;&#x2e;&#x67;&#x61;&#x69;&#107;&#x77;&#97;&#100;&#x40;&#x64;&#x65;&#x6c;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#x70;&#x72;&#105;&#x74;&#104;&#x76;&#105;&#114;&#x61;&#106;&#x2e;&#x67;&#x61;&#x69;&#107;&#x77;&#97;&#100;&#x40;&#x64;&#x65;&#x6c;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></li>
+<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#114;&#x69;&#x74;&#x68;&#118;&#x69;&#x72;&#97;&#x6a;&#46;&#x67;&#97;&#105;&#107;&#119;&#x61;&#x64;&#64;&#x64;&#101;&#108;&#108;&#46;&#x63;&#x6f;&#x6d;">&#x70;&#114;&#x69;&#x74;&#x68;&#118;&#x69;&#x72;&#97;&#x6a;&#46;&#x67;&#97;&#105;&#107;&#119;&#x61;&#x64;&#64;&#x64;&#101;&#108;&#108;&#46;&#x63;&#x6f;&#x6d;</a></li>
 <li>SP display a list of IDP,  user choose one </li>
 <li>The resource URL may be specific to one IdP. </li>
 <li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
@@ -1063,7 +1079,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-12 15:38:28" itemprop="dateModified" datetime="2023-04-12T15:38:28+00:00">2023-04-12</time>
+                <time title="Modified: 2023-04-12 15:52:49" itemprop="dateModified" datetime="2023-04-12T15:52:49+00:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
