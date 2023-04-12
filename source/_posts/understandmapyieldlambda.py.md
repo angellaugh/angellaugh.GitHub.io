@@ -1,3 +1,16 @@
+---
+layout: posts
+title: Understandmapyieldlambda
+date: 2023-04-011 22:13:02
+updated: {{ date }}
+tags: 
+- coding
+- multiprocess
+categories: Teckknowledge
+---
+
+
+
 # Table of Contents
  <p>
 
