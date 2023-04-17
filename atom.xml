@@ -6,7 +6,7 @@
   <link href="https://angellaugh.github.io/atom.xml" rel="self"/>
   
   <link href="https://angellaugh.github.io/"/>
-  <updated>2023-04-17T06:02:33.611Z</updated>
+  <updated>2023-04-17T09:11:31.919Z</updated>
   <id>https://angellaugh.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://angellaugh.github.io/2023/04/12/daily/"/>
     <id>https://angellaugh.github.io/2023/04/12/daily/</id>
     <published>2023-04-12T23:34:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -48,7 +48,7 @@
     <link href="https://angellaugh.github.io/2023/04/11/multiprocess_concurrent/"/>
     <id>https://angellaugh.github.io/2023/04/11/multiprocess_concurrent/</id>
     <published>2023-04-11T23:17:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -75,7 +75,7 @@
     <link href="https://angellaugh.github.io/2023/04/11/understandmapyieldlambda.py/"/>
     <id>https://angellaugh.github.io/2023/04/11/understandmapyieldlambda.py/</id>
     <published>2023-04-11T22:13:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -102,7 +102,7 @@
     <link href="https://angellaugh.github.io/2023/04/05/mapinuse/"/>
     <id>https://angellaugh.github.io/2023/04/05/mapinuse/</id>
     <published>2023-04-05T22:13:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;1-map-reduce-zip-filter-对序列操作&quot;&gt;&lt;a href=&quot;#1-map-reduce-zip-filter-对序列操作&quot; class=&quot;headerlink&quot; title=&quot;1. map, reduce, zip, filter 对序列操作&quot;&gt;&lt;/a&gt;1. map, reduce, zip, filter 对序列操作&lt;/h2&gt;&lt;p&gt;对指定序列做映射，返回值是迭代器&lt;/p&gt;
@@ -160,7 +160,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/04/02/openssl_ca2/"/>
     <id>https://angellaugh.github.io/2023/04/02/openssl_ca2/</id>
     <published>2023-04-02T11:11:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;1-CA-简介-amp-范例&quot;&gt;&lt;a href=&quot;#1-CA-简介-amp-范例&quot; class=&quot;headerlink&quot; title=&quot;1. CA 简介 &amp;amp; 范例&quot;&gt;&lt;/a&gt;1. CA 简介 &amp;amp; 范例&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;CA&lt;/strong&gt;= certificate authority签证机构&lt;br&gt;提供证书（服务器证书，由域名、公司信息、序列号和签名信息组成）&lt;/p&gt;
@@ -214,7 +214,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/04/01/multiprotocol/"/>
     <id>https://angellaugh.github.io/2023/04/01/multiprotocol/</id>
     <published>2023-04-01T15:37:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -241,7 +241,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/28/openssl_2_signed/"/>
     <id>https://angellaugh.github.io/2023/03/28/openssl_2_signed/</id>
     <published>2023-03-28T22:41:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -262,7 +262,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/28/trypassword/"/>
     <id>https://angellaugh.github.io/2023/03/28/trypassword/</id>
     <published>2023-03-28T22:18:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
@@ -277,7 +277,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/15/saml2/"/>
     <id>https://angellaugh.github.io/2023/03/15/saml2/</id>
     <published>2023-03-15T23:34:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -302,7 +302,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/14/keycloak/"/>
     <id>https://angellaugh.github.io/2023/03/14/keycloak/</id>
     <published>2023-03-14T23:34:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -327,7 +327,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/13/RSA/"/>
     <id>https://angellaugh.github.io/2023/03/13/RSA/</id>
     <published>2023-03-13T23:34:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -352,7 +352,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/12/openssl/"/>
     <id>https://angellaugh.github.io/2023/03/12/openssl/</id>
     <published>2023-03-12T23:34:02.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -377,7 +377,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/03/02/suse/"/>
     <id>https://angellaugh.github.io/2023/03/02/suse/</id>
     <published>2023-03-02T11:22:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -403,7 +403,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/23/dailyEng/"/>
     <id>https://angellaugh.github.io/2023/02/23/dailyEng/</id>
     <published>2023-02-23T22:39:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -434,7 +434,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/19/OIDCandSAML/"/>
     <id>https://angellaugh.github.io/2023/02/19/OIDCandSAML/</id>
     <published>2023-02-19T17:59:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -459,7 +459,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/11/202202112324/"/>
     <id>https://angellaugh.github.io/2023/02/11/202202112324/</id>
     <published>2023-02-11T23:24:19.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.915Z</updated>
     
     
       
@@ -483,7 +483,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/11/metadata/"/>
     <id>https://angellaugh.github.io/2023/02/11/metadata/</id>
     <published>2023-02-11T20:42:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -508,7 +508,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/11/es-suse/"/>
     <id>https://angellaugh.github.io/2023/02/11/es-suse/</id>
     <published>2023-02-11T20:39:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
       
@@ -533,7 +533,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/11/ES/"/>
     <id>https://angellaugh.github.io/2023/02/11/ES/</id>
     <published>2023-02-11T20:37:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.915Z</updated>
     
     
     <summary type="html">&lt;p&gt;sudo zypper refresh&lt;br&gt;sudo zypper update -y&lt;br&gt;sudo zypper install yum&lt;/p&gt;
@@ -555,7 +555,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
     <link href="https://angellaugh.github.io/2023/02/11/django/"/>
     <id>https://angellaugh.github.io/2023/02/11/django/</id>
     <published>2023-02-11T13:43:46.000Z</published>
-    <updated>2023-04-17T06:02:33.611Z</updated>
+    <updated>2023-04-17T09:11:31.919Z</updated>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
