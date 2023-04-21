@@ -1,7 +1,7 @@
 ---
 layout: posts
 title: OIDC and SAML
-date: 2023-02-19 17:59:46
+date: 2023-04-20 23:11
 updated: 2023-04-20 23:11
 tags: cirrus
 categories: Teckknowledge
