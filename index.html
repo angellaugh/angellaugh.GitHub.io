@@ -193,6 +193,157 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/20/OIDCandSAML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/20/OIDCandSAML/" class="post-title-link" itemprop="url">OIDC and SAML</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-20 23:11:00" itemprop="dateCreated datePublished" datetime="2023-04-20T23:11:00+00:00">2023-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-OIDC-实现的业务场景"><a href="#1-OIDC-实现的业务场景" class="headerlink" title="1. OIDC 实现的业务场景"></a>1. OIDC 实现的业务场景</h2><p>举例：常用办公场景，上班第一件事，登录github，登录confluence，登录office365，登录论坛。</p>
+<h3 id="1-1-需要SSO-来免登陆：去IDP-认证，拿到identity-token"><a href="#1-1-需要SSO-来免登陆：去IDP-认证，拿到identity-token" class="headerlink" title="1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token,"></a>1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token,</h3><ol>
+<li>带identity token 访问github,                 github        拿identity token去IDP 确认，         然后 允许/拒绝；</li>
+<li>带identity token 访问confluence,           confluence 拿identity token去IDP 确认，          然后 允许/拒绝；</li>
+<li>带identity token 访问office365,             office365   拿identity token去IDP 确认，          然后 允许/拒绝；</li>
+<li>带identity token 访问论坛,                    论坛           拿identity token去IDP 确认，          然后 允许/拒绝；</li>
+</ol>
+<h3 id="1-2-IDP-access-token-issuer-IDP-带-authorization-功能后，变成-user-去IDP认证，同时返回access-token"><a href="#1-2-IDP-access-token-issuer-IDP-带-authorization-功能后，变成-user-去IDP认证，同时返回access-token" class="headerlink" title="1.2. IDP access token issuer:  IDP 带 authorization 功能后，变成 user 去IDP认证，同时返回access token:"></a>1.2. IDP access token issuer:  IDP 带 authorization 功能后，变成 user 去IDP认证，同时返回access token:</h3><pre><code>1. 带access token 访问github,                 github         在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+2. 带access token 访问confluence,           confluence       在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+3. 带access token 访问office365,             office365       在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+4. 带access token 访问论坛,                    论坛           在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+</code></pre>
+<p>在这里，user 申请的时候，提供2元组 scope（也是OIDC login 需要的一个参数）： 1. resource 类型， 2. 执行的操作</p>
+<h3 id="1-3-Resource-access-token-issuer-由-resource-来-authorization-颁发-access-token"><a href="#1-3-Resource-access-token-issuer-由-resource-来-authorization-颁发-access-token" class="headerlink" title="1.3. Resource access token issuer: 由 resource 来 authorization 颁发 access token:"></a>1.3. Resource access token issuer: 由 resource 来 authorization 颁发 access token:</h3><pre><code>1. 带identity token 访问github,                 github        在 local 用签名验证token 真实性，有效性，           然后 颁发 access token；
+2. 带identity token 访问confluence,           confluence 在 local 用签名验证token 真实性，有效性 ，          然后 颁发 access token；
+3. 带identity token 访问office365,             office365   在 local 用签名验证token 真实性，有效性 ，          然后 颁发 access token；
+4. 带identity token 访问论坛,                    论坛           在 local 用签名验证token 真实性，有效性 ，          然后 颁发 access token；
+</code></pre>
+<p>token存储在 用户的cookie中（身份 &amp; signed）,   或者作为一个index key 指向 应用后端的来自IDP authentication的信息。</p>
+<p>access token: 短期有效<br>refresh token：</p>
+<p><img src="/uploads/136865505836214.png"><br>![](vx_images/136865505836214.png =1000x)</p>
+<h2 id="2-OIDC-and-SAML"><a href="#2-OIDC-and-SAML" class="headerlink" title="2. OIDC and SAML"></a>2. OIDC and SAML</h2><h3 id="2-1-OIDC-OpenID-Connect"><a href="#2-1-OIDC-OpenID-Connect" class="headerlink" title="2.1. OIDC  OpenID Connect"></a>2.1. OIDC  OpenID Connect</h3><h4 id="2-1-1-an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework"><a href="#2-1-1-an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework" class="headerlink" title="2.1.1. an open authentication protocol that works on top of the OAuth 2.0 framework"></a>2.1.1. an open authentication protocol that works on top of the OAuth 2.0 framework</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OIDC 允许个人使用单点登录(SSO)的方式，访问那些用OPs验证身份的网站。</span><br><span class="line">OIDC 为应用程序或服务提供有关用户、其身份验证上下文以及访问其配置文件信息的信息。</span><br><span class="line"></span><br><span class="line">OIDC 是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-2-OIDC-的目的"><a href="#2-1-2-OIDC-的目的" class="headerlink" title="2.1.2. OIDC 的目的"></a>2.1.2. OIDC 的目的</h4><blockquote>
+<p>为用户提供一组认证信息来访问多个sites. for users to provide one set of credentials and access multiple sites.</p>
+</blockquote>
+<blockquote>
+<p>当用户登录网站或者应用程序时，先redirect to OPs, 在OPs 先进行身份认证，然后再 redirect back to 网站或应用程序 site or application</p>
+</blockquote>
+<blockquote>
+<p>旨在保护基于浏览器的应用程序、API 和 移动原生应用程序 mobile native applications</p>
+</blockquote>
+<blockquote>
+<p>它将用户身份验证委托给 “托管用户帐户” 的服务提供商，并授权第三方应用程序访问用户帐户。It delegates user authentication to the service provider that hosts the user account and authorizes third-party applications to access the user’s account.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For example, there are currently two ways of creating a Spotify account. You can register with Spotify or you can sign on through Facebook. Facebook sends your name and email address to Spotify, <span class="built_in">which</span> uses that information to authenticate you.</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-1-3-Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）"><a href="#2-1-3-Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）" class="headerlink" title="2.1.3. Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）"></a>2.1.3. Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）</h4><blockquote>
+<p>be read by client<br>prove that users were authenticated and are JSON Web Tokens (JWTs),<br>标识令牌（旨在由客户端读取）证明用户已经过身份验证，并且是 JSON Web 令牌 （JWT），发音为“jots”。这些文件包含有关用户的信息，例如其用户名、尝试登录到应用程序或服务时以及允许他们访问联机资源的时间长度。</p>
+</blockquote>
+<blockquote>
+<p>是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</p>
+</blockquote>
+<h4 id="2-1-4-Access-tokens-访问被保护的资源"><a href="#2-1-4-Access-tokens-访问被保护的资源" class="headerlink" title="2.1.4. Access tokens: 访问被保护的资源"></a>2.1.4. Access tokens: 访问被保护的资源</h4><blockquote>
+<p>be read and validated by the API.<br>are used to access protected resources<br>目的是通知API，此令牌的持有者已被授权访问API并执行特定操作(由已授予的范围指定)</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Their purpose is to inform the API that the bearer of this token has been authorized to access the API and perform specific actions (as specified by the scope that has been granted).</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-5-ID-tokens"><a href="#2-1-5-ID-tokens" class="headerlink" title="2.1.5. ID tokens"></a>2.1.5. ID tokens</h4><blockquote>
+<p>Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段</p>
+</blockquote>
+<h4 id="2-1-6-OpenID-Providers-OPs"><a href="#2-1-6-OpenID-Providers-OPs" class="headerlink" title="2.1.6. OpenID Providers (OPs)"></a>2.1.6. OpenID Providers (OPs)</h4><blockquote>
+<p>OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。<br>Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段</p>
+</blockquote>
+<h4 id="2-1-7-JSON-Web-Tokens-JWTs-pronounced-“jots-”"><a href="#2-1-7-JSON-Web-Tokens-JWTs-pronounced-“jots-”" class="headerlink" title="2.1.7. JSON Web Tokens (JWTs)  pronounced “jots.”"></a>2.1.7. JSON Web Tokens (JWTs)  pronounced “jots.”</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。</span><br><span class="line">终端用户，Id Token 的信息中会包含终端用户的信息。</span><br><span class="line">调用方，请求 Id Token 的应用。</span><br><span class="line">Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段。</span><br><span class="line">Claim 指终端用户信息字段。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/528803599836013.png"></p>
+<h3 id="2-2-Differences-between-SAML-OAuth-OpenID-Connect"><a href="#2-2-Differences-between-SAML-OAuth-OpenID-Connect" class="headerlink" title="2.2. Differences between SAML, OAuth, OpenID Connect"></a>2.2. Differences between SAML, OAuth, OpenID Connect</h3><h4 id="2-2-1-侧重点"><a href="#2-2-1-侧重点" class="headerlink" title="2.2.1. 侧重点"></a>2.2.1. 侧重点</h4><ul>
+<li><p>OAuth 是framework, 用于保护特定资源（如应用程序或文件集）的授权框架，</p>
+</li>
+<li><p>Oauth2.0, 主要用于资源授权。<br>OAuth is an authorization framework used to protect specific resources</p>
+</li>
+<li><p>SAML 和 OIDC 是 身份验证标准，authentication standards, 用于创建安全登录体验的身份验证标准。<br>SAML and OIDC are authentication standards used to create secure sign-on experiences. </p>
+</li>
+<li><p>OIDC 能够认证用户并完成资源授权。 侧重于身份认定，他/她是谁， 而OAuth侧重于允许/限制他们能做什么。<br>who someone is，  what they are allowed to do<br>如果你希望实现单点登录或先鉴权用户再返回资源，建议使用 OIDC 协议。</p>
+</li>
+</ul>
+<h4 id="2-2-2-广泛性"><a href="#2-2-2-广泛性" class="headerlink" title="2.2.2. 广泛性"></a>2.2.2. 广泛性</h4><p>SAML 不支持移动设备的单点登录或API访问。does not support SSO for mobile devices or provide API access<br>OIDC 都支持。</p>
+<h4 id="2-2-3-格式"><a href="#2-2-3-格式" class="headerlink" title="2.2.3. 格式"></a>2.2.3. 格式</h4><ol>
+<li>SAML： tokens written in XML</li>
+<li>OIDC： JWTs， 它们是可移植的，并支持一系列签名和加密算法。</li>
+</ol>
+<h4 id="2-2-4-易用性"><a href="#2-2-4-易用性" class="headerlink" title="2.2.4. 易用性"></a>2.2.4. 易用性</h4><p>OIDC比SAML 更简单， is less complex than SAML</p>
+<h3 id="2-3-常见的-OAuth-2-0-授权流程如下："><a href="#2-3-常见的-OAuth-2-0-授权流程如下：" class="headerlink" title="2.3. 常见的 OAuth 2.0 授权流程如下："></a>2.3. 常见的 OAuth 2.0 授权流程如下：</h3><p>在你的应用中，让用户访问登录链接，浏览器跳转到 Authing，用户在 Authing 完成认证。<br>浏览器接收到一个从 Authing 服务器发来的授权码。<br>浏览器通过重定向将授权码发送到你的应用后端。<br>你的应用服务将授权码发送到 Authing 获取 AccessToken，如果需要，还会返回 refresh token。<br>你的应用后端现在知道了用户的身份，后续可以保存用户信息，重定向到前端其他页面，使用 AccessToken 调用资源方的其他 API 等等。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.authing.cn/v2/concepts/user-pool.html">https://docs.authing.cn/v2/concepts/user-pool.html</a></p>
+</blockquote>
+<h3 id="2-4-saml"><a href="#2-4-saml" class="headerlink" title="2.4. saml"></a>2.4. saml</h3><blockquote>
+<p>允许 IdP 和 SP 彼此独立</p>
+</blockquote>
+<blockquote>
+<p>SAML 使用 XML 元数据文档， 也就是 SAML 令牌进行断言，验证用户身份和访问权限。</p>
+</blockquote>
+<p>![](vx_images/24513571558970.png =800x)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/12/daily/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -224,7 +375,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,7 +449,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -404,7 +555,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -488,7 +639,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -606,7 +757,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -718,7 +869,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -793,7 +944,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -874,7 +1025,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
 
           
@@ -946,7 +1097,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
+                <time title="Modified: 2023-04-21 08:32:53" itemprop="dateModified" datetime="2023-04-21T08:32:53+00:00">2023-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1020,7 +1171,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
 <p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
 <p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
 <h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#x72;&#x69;&#116;&#x68;&#x76;&#x69;&#114;&#97;&#106;&#x2e;&#x67;&#97;&#105;&#x6b;&#119;&#97;&#100;&#64;&#x64;&#x65;&#x6c;&#108;&#46;&#x63;&#x6f;&#109;">&#x70;&#x72;&#x69;&#116;&#x68;&#x76;&#x69;&#114;&#97;&#106;&#x2e;&#x67;&#97;&#105;&#x6b;&#119;&#97;&#100;&#64;&#x64;&#x65;&#x6c;&#108;&#46;&#x63;&#x6f;&#109;</a></li>
+<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#x72;&#105;&#116;&#104;&#x76;&#x69;&#114;&#97;&#106;&#46;&#103;&#x61;&#105;&#107;&#119;&#97;&#100;&#x40;&#100;&#x65;&#x6c;&#108;&#x2e;&#99;&#111;&#x6d;">&#x70;&#x72;&#105;&#116;&#104;&#x76;&#x69;&#114;&#97;&#106;&#46;&#103;&#x61;&#105;&#107;&#119;&#97;&#100;&#x40;&#100;&#x65;&#x6c;&#108;&#x2e;&#99;&#111;&#x6d;</a></li>
 <li>SP display a list of IDP,  user choose one </li>
 <li>The resource URL may be specific to one IdP. </li>
 <li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
@@ -1035,190 +1186,6 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
 <li>Ping Identity</li>
 <li>Salesforce</li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/14/keycloak/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/14/keycloak/" class="post-title-link" itemprop="url">KeyCloak</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-14 23:34:02" itemprop="dateCreated datePublished" datetime="2023-03-14T23:34:02+00:00">2023-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="keycloak"><a href="#keycloak" class="headerlink" title="keycloak"></a>keycloak</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # sudo zypper refresh</span><br><span class="line">Repository &#x27;Update repository of openSUSE Backports&#x27; is up to date.</span><br><span class="line">Repository &#x27;Non-OSS Repository&#x27; is up to date.</span><br><span class="line">Repository &#x27;Main Repository&#x27; is up to date.</span><br><span class="line">Repository &#x27;Update repository with updates from SUSE Linux Enterprise 15&#x27; is up to date.</span><br><span class="line">Repository &#x27;Main Update Repository&#x27; is up to date.</span><br><span class="line">Repository &#x27;Update Repository (Non-Oss)&#x27; is up to date.</span><br><span class="line">All repositories have been refreshed.</span><br><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # sudo zypper search openjdk-devel</span><br><span class="line">Loading repository data...</span><br><span class="line">Reading installed packages...</span><br><span class="line"></span><br><span class="line">S | Name                     | Summary                            | Type</span><br><span class="line">--+--------------------------+------------------------------------+--------</span><br><span class="line">  | java-1_8_0-openjdk-devel | OpenJDK 8 Development Environment  | package</span><br><span class="line">  | java-9-openjdk-devel     | OpenJDK 9 Development Environment  | package</span><br><span class="line">  | java-10-openjdk-devel    | OpenJDK 10 Development Environment | package</span><br><span class="line">  | java-11-openjdk-devel    | OpenJDK 11 Development Environment | package</span><br><span class="line">  | java-17-openjdk-devel    | OpenJDK 17 Development Environment | package</span><br><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # sudo zypper --non-interactive install java-17-openjdk-devel</span><br><span class="line">Loading repository data...</span><br><span class="line">Reading installed packages...</span><br><span class="line">Resolving package dependencies...</span><br><span class="line"></span><br><span class="line">The following 2 recommended packages were automatically selected:</span><br><span class="line">  pcsc-lite timezone-java</span><br><span class="line"></span><br><span class="line">The following 11 NEW packages are going to be installed:</span><br><span class="line">  java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless javapackages-filesystem javapackages-tools libXi6 libXtst6 libgif7 libpcsclite1</span><br><span class="line">  pcsc-lite timezone-java</span><br><span class="line"></span><br><span class="line">11 new packages to install.</span><br><span class="line">Overall download size: 43.9 MiB. Already cached: 0 B. After the operation, additional 189.6 MiB will be used.</span><br><span class="line">Continue? [y/n/v/...? shows all options] (y): y</span><br><span class="line">Retrieving package libXi6-1.7.9-3.2.1.x86_64                                                                  (1/11),  35.6 KiB ( 66.5 KiB unpacked)</span><br><span class="line">Retrieving: libXi6-1.7.9-3.2.1.x86_64.rpm ....................................................................................................[done]</span><br><span class="line">Retrieving package libXtst6-1.2.3-1.24.x86_64                                                                 (2/11),  17.2 KiB ( 22.4 KiB unpacked)</span><br><span class="line">Retrieving: libXtst6-1.2.3-1.24.x86_64.rpm ...................................................................................................[done]</span><br><span class="line">Retrieving package libgif7-5.2.1-150000.4.8.1.x86_64                                                          (3/11),  28.8 KiB ( 35.5 KiB unpacked)</span><br><span class="line">Retrieving: libgif7-5.2.1-150000.4.8.1.x86_64.rpm ............................................................................................[done]</span><br><span class="line">Retrieving package libpcsclite1-1.9.4-150400.1.9.x86_64                                                       (4/11),  32.8 KiB ( 38.4 KiB unpacked)</span><br><span class="line">Retrieving: libpcsclite1-1.9.4-150400.1.9.x86_64.rpm .........................................................................................[done]</span><br><span class="line">Retrieving package pcsc-lite-1.9.4-150400.1.9.x86_64                                                          (5/11),  82.2 KiB (140.4 KiB unpacked)</span><br><span class="line">Retrieving: pcsc-lite-1.9.4-150400.1.9.x86_64.rpm ............................................................................................[done]</span><br><span class="line">Retrieving package javapackages-filesystem-5.3.1-150200.3.4.4.x86_64                                          (6/11),  17.0 KiB (  1.9 KiB unpacked)</span><br><span class="line">Retrieving: javapackages-filesystem-5.3.1-150200.3.4.4.x86_64.rpm ................................................................[done (2.8 KiB/s)]</span><br><span class="line">Retrieving package timezone-java-2022g-150000.75.18.1.noarch                                                  (7/11), 155.0 KiB (341.2 KiB unpacked)</span><br><span class="line">Retrieving: timezone-java-2022g-150000.75.18.1.noarch.rpm ....................................................................................[done]</span><br><span class="line">Retrieving package javapackages-tools-5.3.1-150200.3.4.4.x86_64                                               (8/11),  37.7 KiB ( 71.6 KiB unpacked)</span><br><span class="line">Retrieving: javapackages-tools-5.3.1-150200.3.4.4.x86_64.rpm ...................................................................[done (129.7 KiB/s)]</span><br><span class="line">Retrieving package java-17-openjdk-headless-17.0.6.0-150400.3.12.1.x86_64                                     (9/11),  38.4 MiB (179.7 MiB unpacked)</span><br><span class="line">Retrieving: java-17-openjdk-headless-17.0.6.0-150400.3.12.1.x86_64.rpm ..........................................................[done (12.9 MiB/s)]</span><br><span class="line">Retrieving package java-17-openjdk-17.0.6.0-150400.3.12.1.x86_64                                             (10/11), 284.4 KiB (447.5 KiB unpacked)</span><br><span class="line">Retrieving: java-17-openjdk-17.0.6.0-150400.3.12.1.x86_64.rpm ..................................................................[done (869.5 KiB/s)]</span><br><span class="line">Retrieving package java-17-openjdk-devel-17.0.6.0-150400.3.12.1.x86_64                                       (11/11),   4.8 MiB (  8.8 MiB unpacked)</span><br><span class="line">Retrieving: java-17-openjdk-devel-17.0.6.0-150400.3.12.1.x86_64.rpm ..............................................................[done (7.8 MiB/s)]</span><br><span class="line"></span><br><span class="line">Checking for file conflicts: .................................................................................................................[done]</span><br><span class="line">( 1/11) Installing: libXi6-1.7.9-3.2.1.x86_64 ................................................................................................[done]</span><br><span class="line">( 2/11) Installing: libXtst6-1.2.3-1.24.x86_64 ...............................................................................................[done]</span><br><span class="line">( 3/11) Installing: libgif7-5.2.1-150000.4.8.1.x86_64 ........................................................................................[done]</span><br><span class="line">( 4/11) Installing: libpcsclite1-1.9.4-150400.1.9.x86_64 .....................................................................................[done]</span><br><span class="line">Created symlink /etc/systemd/system/sockets.target.wants/pcscd.socket -&gt; /usr/lib/systemd/system/pcscd.socket.</span><br><span class="line">Updating /etc/sysconfig/pcscd ...</span><br><span class="line">( 5/11) Installing: pcsc-lite-1.9.4-150400.1.9.x86_64 ........................................................................................[done]</span><br><span class="line">( 6/11) Installing: javapackages-filesystem-5.3.1-150200.3.4.4.x86_64 ........................................................................[done]</span><br><span class="line">( 7/11) Installing: timezone-java-2022g-150000.75.18.1.noarch ................................................................................[done]</span><br><span class="line">( 8/11) Installing: javapackages-tools-5.3.1-150200.3.4.4.x86_64 .............................................................................[done]</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/jre-17-openjdk/bin/java to provide /usr/bin/java (java) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/jre-17-openjdk to provide /usr/lib64/jvm/jre-openjdk (jre_openjdk) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/jre-17-openjdk to provide /usr/lib64/jvm/jre-17 (jre_17) in auto mode</span><br><span class="line">( 9/11) Installing: java-17-openjdk-headless-17.0.6.0-150400.3.12.1.x86_64 ...................................................................[done]</span><br><span class="line">(10/11) Installing: java-17-openjdk-17.0.6.0-150400.3.12.1.x86_64 ............................................................................[done]</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/java-17-openjdk/bin/javac to provide /usr/bin/javac (javac) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/java-17-openjdk to provide /usr/lib64/jvm/java-openjdk (java_sdk_openjdk) in auto mode</span><br><span class="line">update-alternatives: using /usr/lib64/jvm/java-17-openjdk to provide /usr/lib64/jvm/java-17 (java_sdk_17) in auto mode</span><br><span class="line">(11/11) Installing: java-17-openjdk-devel-17.0.6.0-150400.3.12.1.x86_64 ......................................................................[done]</span><br><span class="line">Executing %posttrans scripts .................................................................................................................[done]</span><br><span class="line">keycloak-ali1:~/keycloak/keycloak-21.0.1/bin # javac -version</span><br><span class="line">javac 17.0.6</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Realms"><a href="#Realms" class="headerlink" title="Realms"></a>Realms</h4><h5 id="Realms-are-isolated-from-one-another-and-can-only-manage-and-authenticate-the-users-that-they-control"><a href="#Realms-are-isolated-from-one-another-and-can-only-manage-and-authenticate-the-users-that-they-control" class="headerlink" title="Realms are isolated from one another and can only manage and authenticate the users that they control."></a>Realms are isolated from one another and can only manage and authenticate the users that they control.</h5><p><mark>You create a realm to provide a management space where you can create users and give them permissions to use applications.</mark></p>
-<p><img src="/uploads/203023010625203.png"></p>
-<h5 id="Set-Require-SSL-to-one-of-the-following-SSL-modes"><a href="#Set-Require-SSL-to-one-of-the-following-SSL-modes" class="headerlink" title="Set Require SSL to one of the following SSL modes:"></a>Set Require SSL to one of the following SSL modes:</h5><ul>
-<li><p>External requests Users can interact with Keycloak without SSL so long as they stick to private IP addresses such as localhost, 127.0.0.1, 10.x.x.x, 192.168.x.x, and 172.16.x.x. If you try to access Keycloak without SSL from a non-private IP address, you will get an error.</p>
-</li>
-<li><p>None Keycloak does not require SSL. This choice applies only in development when you are experimenting and do not plan to support this deployment.</p>
-</li>
-<li><p>All requests Keycloak requires SSL for all IP addresses.</p>
-</li>
-</ul>
-<p><img src="/uploads/354284833950954.png"></p>
-<h5 id="Configuring-realm-keys"><a href="#Configuring-realm-keys" class="headerlink" title="Configuring realm keys"></a>Configuring realm keys</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Keycloak has a single active keypair at a time, but can have several passive keys as well. </span><br><span class="line">The active keypair is used to create new signatures, while the passive keypair can be used to verify previous signatures. </span><br><span class="line">This makes it possible to regularly rotate the keys without any downtime or interruption to users.</span><br><span class="line">Keycloak 一次只有一个主动密钥对，但也可以有多个被动密钥。主动密钥对用于创建新签名，而被动密钥对可用于验证以前的签名。</span><br><span class="line">这样就可以定期轮换密钥，而不会对用户造成任何停机或干扰。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>虽然reaml setting 的key中，是active，但是到底有没有使用它，取决于第一个选中的 key provider</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A keypair can have the status Active, but still not be selected as the currently active keypair for the realm. </span><br><span class="line">The selected active pair which is used for signatures is selected based on the first key provider sorted by priority that is able to provide an active keypair.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><mark>Once new keys are available all new tokens and cookies will be signed with the new keys.</mark></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. Once new keys are available all new tokens and cookies will be signed with the new keys.</span><br><span class="line"><span class="comment"># 一旦新的keys 生效，所有的token cookie都被signed with the new key.</span></span><br><span class="line">2. When a user authenticates to an application the SSO cookie is updated with the new signature.</span><br><span class="line"><span class="comment"># 当user authenticates login via sso，  那么 cookie 就随着 new signature update. </span></span><br><span class="line">3. When OpenID Connect tokens are refreshed new tokens are signed with the new keys. </span><br><span class="line"><span class="comment">#  当OpenID token 被refresh， 新的token 就被signed with new key.</span></span><br><span class="line">4. This means that over time all cookies and tokens will use the new keys and after a <span class="keyword">while</span> the old keys can be removed.</span><br><span class="line"><span class="comment"># 意味着 所有的cookie 和 token 都在使用 new keys， 并且，after a while old key 就被remove 了。</span></span><br><span class="line"></span><br><span class="line">这里的 after a <span class="keyword">while</span>：删除旧密钥的频率是安全性与确保所有 cookie 和令牌更新之间的权衡。</span><br><span class="line">The frequency of deleting old keys is a tradeoff between security and making sure all cookies and tokens are updated.</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> instance:  create new keys 3~6 months,  delete old keys 1~2 months. 如果user 在这期间old key 被删了，新key没有，那么重新登录认证即可。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h6 id="Adding-a-generated-keypair"><a href="#Adding-a-generated-keypair" class="headerlink" title="Adding a generated keypair"></a>Adding a generated keypair</h6><p>更改优先级不会生成新key，但是edit keysize 会触发生成新key<br><img src="/uploads/595696697899358.png"></p>
-<p>####### Compromised keys<br>keycloak has the signing keys stored just locally 将签名密钥存储在本地， 不会分享给其他user或者application<br>如果认为签名密钥已经泄露，可以立即生成新密钥对，并且删除旧密钥，甚至考虑删除provider。</p>
-<h5 id="Using-external-storage-正是需要的"><a href="#Using-external-storage-正是需要的" class="headerlink" title="Using external storage 正是需要的"></a>Using external storage 正是需要的</h5><p>一般不会把包含有信息，密码，其他凭证等的数据库迁移到keycloak去。<br>keycloak支持已经存在的外部用户数据库，比如LDAP, AD。<br>用户也可以通过keycloak user storage API 来为任何 custom user database 编写扩展代码。</p>
-<p>当用户尝试登陆时，keycloak 会检查该用户的存储以查找该用户，如果找不到的话，就会遍历当前realm的所有 user storage provider，直到直到匹配项。</p>
-<p>来自外部data storage 的user 会 映射map到keycloak运行时使用的标准用户模型。然后，这个标准用户模型映射到 OIDC token claims 令牌声明和 SAML assertion attributes。</p>
-<p>external user database 几乎不会完整支持keycloak的所有功能。<br>因此，User storage provider 可以选择性的存储items 到keycloak user data storage中。<br>User storage provider 可以在本地导入用户，并定期与外部数据存储同步。<br>但是这取决于external user database是否支持OTP， OTP可以通过Keycloak处理和存储。</p>
-<blockquote>
-<p>一次性密码（One Time Password，简称OTP），又称“一次性口令”，是指只能使用一次的密码。 一次性密码是根据专门算法、每隔60秒生成一个不可预测的随机数字组合  </p>
-</blockquote>
-<h6 id="Add-a-provider-kerberos-provider-or-LDAP-provicer"><a href="#Add-a-provider-kerberos-provider-or-LDAP-provicer" class="headerlink" title="Add a provider: kerberos provider or LDAP provicer"></a>Add a provider: kerberos provider or LDAP provicer</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user federation &gt; can choose kerberos provider or LDAP provicer</span><br></pre></td></tr></table></figure>
-
-<p>一个 keycloak realm 可以 federate multiple different LDAP servers. 并且把ldap user 映射成keycloak的通用user model。</p>
-<p>keycloak 默认映射username,  email， first/last name, 也可以configure additional mappings.<br>usermap: email</p>
-<p>fullname: firstname and lastname</p>
-<p>Hardcoded Attribute Mapper</p>
-<p>Role Mapper: 通常是group， 从LDAP map 到 keycloak对应的role group， 比如：</p>
-<ol>
-<li>from groups under <mark>ou=main</mark>,dc=example,dc=org map to <mark>realm role mappings</mark>, </li>
-<li>from groups under <mark>ou=finance</mark>,dc=example,dc=org map to <mark>client role mappings of client finance</mark>.</li>
-</ol>
-<p>Group Mapper</p>
-<p><mark>Certificate Mapper</mark></p>
-<p>此映射器映射 X.509 证书。Keycloak 将其与 X.509 身份验证和 PEM 格式的完整证书结合使用，作为身份源。此映射器的行为类似于用户属性映射器，但 Keycloak 可以过滤存储 PEM 或 DER 格式证书的 LDAP 属性。使用此映射器启用始终从 LDAP 读取值。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This mapper maps X.509 certificates. Keycloak uses it in conjunction with X.509 authentication and Full certificate in PEM format as an identity source. This mapper behaves similarly to the User Attribute Mapper, but Keycloak can filter for an LDAP attribute storing a PEM or DER format certificate. Enable Always Read Value From LDAP with this mapper.</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="Dealing-with-provider-failures"><a href="#Dealing-with-provider-failures" class="headerlink" title="Dealing with provider failures"></a>Dealing with provider failures</h6><ul>
-<li><p>Keycloak 先查询本地数据库来解析user，然后才考虑LDAP 或者其他custom user storage provider.<br>最好在keycloak 本地建立admin account，以防连接到 LDAP 和后端时出现问题。</p>
-</li>
-<li><p>任何external user storage provider 在admin 控制台都有<code>一个enable 开关</code><br>external user storage provider(ldap or custom user storage provicer) <code>has an enable toggle</code> on </p>
-</li>
-<li><p>如果您的提供程序使用导入策略并被禁用，则导入的用户仍可在只读模式下进行查找。<br>If your provider uses an import strategy and is disabled, imported users are still available for lookup in read-only mode.</p>
-</li>
-<li><p>Duplicate usernames and emails can cause problems</p>
-</li>
-</ul>
-<h6 id="Storage-mode"><a href="#Storage-mode" class="headerlink" title="Storage mode"></a>Storage mode</h6><ul>
-<li><p>keycloak 将LDAP user 同步到本地（定期或后台），但是不会同步密码， <code>password validation 只会在LDAP server上执行。</code><br>Password validation always occurs on the LDAP server.</p>
-</li>
-<li><p> 用户第一次登录keycloak时候，keycloak都会将它写入本地database。 Keycloak performs a corresponding database insert.</p>
-</li>
-<li><p> 可以但非必要，同步LDAP。 can synchronize， but unnecessary.</p>
-</li>
-<li><p>您可以将 LDAP 与 Keycloak 一起使用，而无需将用户导入 Keycloak 用户数据库。LDAP 服务器备份 Keycloak 运行时使用的通用用户模型</p>
-</li>
-</ul>
-<p><mark>如果选择 disable import users, 就无法将 user profile attributes 用户配置文件属性保存到keycloak中。</mark><br><mark>user profile attributes metadata mapped to the ldap 可以保存到keycloak中， 但是 user metadata不能被保存，user metadata=[role mappings, group mappings, other metadata based on the ldap mappers.]</mark></p>
-<p><mark>如果禁用导入用户，则无法将用户配置文件属性保存到 Keycloak 数据库中。 此外，除了映射到 LDAP 的用户配置文件元数据之外，您无法保存元数据。 此元数据可以包括角色映射、组映射和其他基于 LDAP 映射器配置的元数据。</mark></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">If you disable Import Users, you cannot save user profile attributes into the Keycloak database. </span><br><span class="line">Also, you cannot save metadata except for user profile metadata mapped to the LDAP. </span><br><span class="line">This metadata can include role mappings, group mappings, and other metadata based on the LDAP mappers&#x27; configuration.</span><br></pre></td></tr></table></figure>
-
-<p><strong>UNSYNCED</strong><br>keycloak 会把 更改 username, email, password 的动作保存在local，这些信息需要同步回ldap， must synchronize this data back to LDAP</p>
-<p>当 Keycloak 创建 LDAP 提供程序时，Keycloak 还会创建一组初始 LDAP 映射器。Keycloak 根据供应商、编辑模式和导入用户开关的组合来配置这些映射器。<br>based on a combination of the Vendor, Edit Mode, and Import Users switches.</p>
-<p><strong>Sync Registrations</strong><br>Toggle this switch to ON if you want new users created by Keycloak added to LDAP</p>
-<ul>
-<li><p>当选择 import user， 用户第一次登录后，从keycloak admin那里查看all user，会看到验证过的user展示在这里，意思是已经导入了，keycloak只在user 第一次login时候导入，而不是一次性导入整个LDAP的所有user。</p>
-</li>
-<li><p>如果想一次性同步所有user，有2种方式</p>
-</li>
-</ul>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">If you want to sync all LDAP users into the Keycloak database, configure and enable the Sync Settings on the LDAP provider configuration page.</span><br><span class="line"></span><br><span class="line">1. Periodic Full sync</span><br><span class="line">此类型将所有 LDAP 用户同步到 Keycloak 数据库中。已经在Keycloak中但与LDAP不同的LDAP用户直接在Keycloak数据库中更新。</span><br><span class="line">2. Periodic Changed users sync</span><br><span class="line">同步时，Keycloak 仅创建或更新在上次同步后创建或更新的用户。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>最佳同步策略： 在创建LDAP provider时，选择 <code>Synchronize all users</code>, 然后 <code>Synchronize all users</code><br>The best way to synchronize is to click Synchronize all users when you first create the LDAP provider, then set up Synchronize all usersSynchronize all users</li>
-</ul>
-<p><img src="/uploads/86293028586002.png"></p>
-<h6 id="Password-hashing"><a href="#Password-hashing" class="headerlink" title="Password hashing"></a>Password hashing</h6><p>当 Keycloak 更新密码时，Keycloak 以纯文本格式发送密码。<br>此操作不同于在内置 Keycloak 数据库中更新密码，Keycloak 在将密码发送到数据库之前对密码进行哈希处理和加盐处理。<br>对于 LDAP，Keycloak 依赖于 LDAP 服务器对密码进行散列和加盐。</p>
-<ol>
-<li>By default, LDAP servers such as MSAD, RHDS, or FreeIPA hash and salt passwords. </li>
-<li>Other LDAP servers such as OpenLDAP or ApacheDS store the passwords in plain-text unless you use the LDAPv3 Password Modify Extended Operation as described in RFC3062. </li>
-<li>Always verify that user passwords are properly hashed and not stored as plaintext by inspecting a changed directory entry using ldapsearch and base64 decode the userPassword attribute value.</li>
-</ol>
-<h4 id="Authentication-flow"><a href="#Authentication-flow" class="headerlink" title="Authentication flow"></a>Authentication flow</h4><p>flow是一个在登陆，注册或者其他workflow时候要进行的 身份验证，屏幕 和 操作。<br>An authentication flow is a container of<br>authentications, screens, and actions, during log in, registration, and other Keycloak workflows.<br>To view all the flows, actions, and checks, each flow requires:</p>
-<h5 id="browser-里面的-Forms："><a href="#browser-里面的-Forms：" class="headerlink" title="browser 里面的 Forms："></a><strong>browser 里面的 Forms：</strong></h5><p>先说cookie，user 首次登陆成功后，keycloak会 sets a session cookie.<br>如果这个cookie已经存在了，authentication type=success, cookie provider return success,<br>而同级其他验证方式都是alternative可选的， 那么keycloak不会再执行任何操作，这次请求会返回一个successful login.</p>
-<p>而这里的Forms， 是个可选的子flow alternative sub-flow，它能不能被执行，取决于它的parent status.<br>它包含了一个需要被执行的额外验证项目，因此如果想这个form被执行，就需要删掉cookie 验证。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Since this sub-flow is marked as alternative, it will not be executed if the Cookie authentication type passed. </span><br><span class="line">This sub-flow contains an additional authentication type that needs to be executed. Keycloak loads the executions for this sub-flow and processes them.</span><br></pre></td></tr></table></figure>
-
-<h5 id="验证步骤"><a href="#验证步骤" class="headerlink" title="验证步骤"></a>验证步骤</h5><ol>
-<li>Username Password Form, 在browser flow中，这个选项是required，并且不可更改， 需要用户输入uname+pwd</li>
-<li> Browser - Conditional OTP sub-flow， 它是based on the Condition-user configured</li>
-<li>Condition - User Configured. This authentication checks if Keycloak has configured other executions in the flow for the user</li>
-<li>OTP Form Keycloak 将此执行标记为必需，但仅当用户由于条件子流中的设置而设置了 OTP 凭据时，它才会运行。否则，用户不会看到 OTP 表单。</li>
-</ol>
-<p><mark>可以添加新的空白flow，也可以copy已经存在的flow， 里面的action有很多种， from sending a reset email to validating an OTP.</mark><br><mark>可以建立sub-flow, 可以拖动顺序</mark></p>
-<p><img src="/uploads/151286775946824.png"></p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.keycloak.org/docs/latest/server_admin/#configuring-authentication_server_administration_guide">https://www.keycloak.org/docs/latest/server_admin/#configuring-authentication_server_administration_guide</a></p>
-</blockquote>
 
       
     </div>

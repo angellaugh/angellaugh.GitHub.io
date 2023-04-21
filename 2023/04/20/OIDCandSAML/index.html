@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="OIDC and SAMLOIDC  OpenID Connectan open authentication protocol that works on top of the OAuth 2.0 framework1234OIDC 允许个人使用单点登录(SSO)的方式，访问那些用OPs验证身份的网站。OIDC 为应用程序或服务提供有关用户、其身份验证上下文以及访问其配置文件信息的信息。OIDC">
+  <meta name="description" content="1. OIDC 实现的业务场景举例：常用办公场景，上班第一件事，登录github，登录confluence，登录office365，登录论坛。 1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token, 带identity token 访问github,                 github        拿identity token去IDP 确认，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OIDC and SAML">
-<meta property="og:url" content="https://angellaugh.github.io/2023/02/19/OIDCandSAML/index.html">
+<meta property="og:url" content="https://angellaugh.github.io/2023/04/20/OIDCandSAML/index.html">
 <meta property="og:site_name" content="Angellaugh&#39;s blog">
-<meta property="og:description" content="OIDC and SAMLOIDC  OpenID Connectan open authentication protocol that works on top of the OAuth 2.0 framework1234OIDC 允许个人使用单点登录(SSO)的方式，访问那些用OPs验证身份的网站。OIDC 为应用程序或服务提供有关用户、其身份验证上下文以及访问其配置文件信息的信息。OIDC">
+<meta property="og:description" content="1. OIDC 实现的业务场景举例：常用办公场景，上班第一件事，登录github，登录confluence，登录office365，登录论坛。 1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token, 带identity token 访问github,                 github        拿identity token去IDP 确认，">
 <meta property="og:locale">
+<meta property="og:image" content="https://angellaugh.github.io/uploads/136865505836214.png">
 <meta property="og:image" content="https://angellaugh.github.io/uploads/528803599836013.png">
-<meta property="article:published_time" content="2023-02-19T17:59:46.000Z">
-<meta property="article:modified_time" content="2023-04-17T09:11:31.919Z">
+<meta property="article:published_time" content="2023-04-20T23:11:00.000Z">
+<meta property="article:modified_time" content="2023-04-20T23:11:00.000Z">
 <meta property="article:author" content="Angellaugh">
 <meta property="article:tag" content="cirrus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://angellaugh.github.io/uploads/528803599836013.png">
+<meta name="twitter:image" content="https://angellaugh.github.io/uploads/136865505836214.png">
 
-<link rel="canonical" href="https://angellaugh.github.io/2023/02/19/OIDCandSAML/">
+<link rel="canonical" href="https://angellaugh.github.io/2023/04/20/OIDCandSAML/">
 
 
 <script id="page-configurations">
@@ -198,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/19/OIDCandSAML/">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/20/OIDCandSAML/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -221,15 +222,8 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-02-19 17:59:46" itemprop="dateCreated datePublished" datetime="2023-02-19T17:59:46+00:00">2023-02-19</time>
+              <time title="Created: 2023-04-20 23:11:00" itemprop="dateCreated datePublished" datetime="2023-04-20T23:11:00+00:00">2023-04-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-17 09:11:31" itemprop="dateModified" datetime="2023-04-17T09:11:31+00:00">2023-04-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -251,9 +245,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="OIDC-and-SAML"><a href="#OIDC-and-SAML" class="headerlink" title="OIDC and SAML"></a>OIDC and SAML</h1><h3 id="OIDC-OpenID-Connect"><a href="#OIDC-OpenID-Connect" class="headerlink" title="OIDC  OpenID Connect"></a>OIDC  OpenID Connect</h3><h4 id="an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework"><a href="#an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework" class="headerlink" title="an open authentication protocol that works on top of the OAuth 2.0 framework"></a>an open authentication protocol that works on top of the OAuth 2.0 framework</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OIDC 允许个人使用单点登录(SSO)的方式，访问那些用OPs验证身份的网站。</span><br><span class="line">OIDC 为应用程序或服务提供有关用户、其身份验证上下文以及访问其配置文件信息的信息。</span><br><span class="line"></span><br><span class="line">OIDC 是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</span><br></pre></td></tr></table></figure>
+        <h2 id="1-OIDC-实现的业务场景"><a href="#1-OIDC-实现的业务场景" class="headerlink" title="1. OIDC 实现的业务场景"></a>1. OIDC 实现的业务场景</h2><p>举例：常用办公场景，上班第一件事，登录github，登录confluence，登录office365，登录论坛。</p>
+<h3 id="1-1-需要SSO-来免登陆：去IDP-认证，拿到identity-token"><a href="#1-1-需要SSO-来免登陆：去IDP-认证，拿到identity-token" class="headerlink" title="1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token,"></a>1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token,</h3><ol>
+<li>带identity token 访问github,                 github        拿identity token去IDP 确认，         然后 允许/拒绝；</li>
+<li>带identity token 访问confluence,           confluence 拿identity token去IDP 确认，          然后 允许/拒绝；</li>
+<li>带identity token 访问office365,             office365   拿identity token去IDP 确认，          然后 允许/拒绝；</li>
+<li>带identity token 访问论坛,                    论坛           拿identity token去IDP 确认，          然后 允许/拒绝；</li>
+</ol>
+<h3 id="1-2-IDP-access-token-issuer-IDP-带-authorization-功能后，变成-user-去IDP认证，同时返回access-token"><a href="#1-2-IDP-access-token-issuer-IDP-带-authorization-功能后，变成-user-去IDP认证，同时返回access-token" class="headerlink" title="1.2. IDP access token issuer:  IDP 带 authorization 功能后，变成 user 去IDP认证，同时返回access token:"></a>1.2. IDP access token issuer:  IDP 带 authorization 功能后，变成 user 去IDP认证，同时返回access token:</h3><pre><code>1. 带access token 访问github,                 github         在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+2. 带access token 访问confluence,           confluence       在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+3. 带access token 访问office365,             office365       在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+4. 带access token 访问论坛,                    论坛           在 local 用签名验证access token 真实性，有效性，然后 允许/拒绝；
+</code></pre>
+<p>在这里，user 申请的时候，提供2元组 scope（也是OIDC login 需要的一个参数）： 1. resource 类型， 2. 执行的操作</p>
+<h3 id="1-3-Resource-access-token-issuer-由-resource-来-authorization-颁发-access-token"><a href="#1-3-Resource-access-token-issuer-由-resource-来-authorization-颁发-access-token" class="headerlink" title="1.3. Resource access token issuer: 由 resource 来 authorization 颁发 access token:"></a>1.3. Resource access token issuer: 由 resource 来 authorization 颁发 access token:</h3><pre><code>1. 带identity token 访问github,                 github        在 local 用签名验证token 真实性，有效性，           然后 颁发 access token；
+2. 带identity token 访问confluence,           confluence 在 local 用签名验证token 真实性，有效性 ，          然后 颁发 access token；
+3. 带identity token 访问office365,             office365   在 local 用签名验证token 真实性，有效性 ，          然后 颁发 access token；
+4. 带identity token 访问论坛,                    论坛           在 local 用签名验证token 真实性，有效性 ，          然后 颁发 access token；
+</code></pre>
+<p>token存储在 用户的cookie中（身份 &amp; signed）,   或者作为一个index key 指向 应用后端的来自IDP authentication的信息。</p>
+<p>access token: 短期有效<br>refresh token：</p>
+<p><img src="/uploads/136865505836214.png"><br>![](vx_images/136865505836214.png =1000x)</p>
+<h2 id="2-OIDC-and-SAML"><a href="#2-OIDC-and-SAML" class="headerlink" title="2. OIDC and SAML"></a>2. OIDC and SAML</h2><h3 id="2-1-OIDC-OpenID-Connect"><a href="#2-1-OIDC-OpenID-Connect" class="headerlink" title="2.1. OIDC  OpenID Connect"></a>2.1. OIDC  OpenID Connect</h3><h4 id="2-1-1-an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework"><a href="#2-1-1-an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework" class="headerlink" title="2.1.1. an open authentication protocol that works on top of the OAuth 2.0 framework"></a>2.1.1. an open authentication protocol that works on top of the OAuth 2.0 framework</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OIDC 允许个人使用单点登录(SSO)的方式，访问那些用OPs验证身份的网站。</span><br><span class="line">OIDC 为应用程序或服务提供有关用户、其身份验证上下文以及访问其配置文件信息的信息。</span><br><span class="line"></span><br><span class="line">OIDC 是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</span><br></pre></td></tr></table></figure>
 
-<h4 id="OIDC-的目的"><a href="#OIDC-的目的" class="headerlink" title="OIDC 的目的"></a>OIDC 的目的</h4><blockquote>
+<h4 id="2-1-2-OIDC-的目的"><a href="#2-1-2-OIDC-的目的" class="headerlink" title="2.1.2. OIDC 的目的"></a>2.1.2. OIDC 的目的</h4><blockquote>
 <p>为用户提供一组认证信息来访问多个sites. for users to provide one set of credentials and access multiple sites.</p>
 </blockquote>
 <blockquote>
@@ -268,27 +283,27 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For example, there are currently two ways of creating a Spotify account. You can register with Spotify or you can sign on through Facebook. Facebook sends your name and email address to Spotify, <span class="built_in">which</span> uses that information to authenticate you.</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）"><a href="#Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）" class="headerlink" title="Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）"></a>Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）</h4><blockquote>
+<h4 id="2-1-3-Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）"><a href="#2-1-3-Identity-tokens-证明用户已经过身份验证-并且是-JSON-Web-令牌-（JWT）" class="headerlink" title="2.1.3. Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）"></a>2.1.3. Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）</h4><blockquote>
 <p>be read by client<br>prove that users were authenticated and are JSON Web Tokens (JWTs),<br>标识令牌（旨在由客户端读取）证明用户已经过身份验证，并且是 JSON Web 令牌 （JWT），发音为“jots”。这些文件包含有关用户的信息，例如其用户名、尝试登录到应用程序或服务时以及允许他们访问联机资源的时间长度。</p>
 </blockquote>
 <blockquote>
 <p>是基于 OAuth 2.0 的身份认证协议，增加了 Id Token</p>
 </blockquote>
-<h4 id="Access-tokens-访问被保护的资源"><a href="#Access-tokens-访问被保护的资源" class="headerlink" title="Access tokens: 访问被保护的资源"></a>Access tokens: 访问被保护的资源</h4><blockquote>
+<h4 id="2-1-4-Access-tokens-访问被保护的资源"><a href="#2-1-4-Access-tokens-访问被保护的资源" class="headerlink" title="2.1.4. Access tokens: 访问被保护的资源"></a>2.1.4. Access tokens: 访问被保护的资源</h4><blockquote>
 <p>be read and validated by the API.<br>are used to access protected resources<br>目的是通知API，此令牌的持有者已被授权访问API并执行特定操作(由已授予的范围指定)</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Their purpose is to inform the API that the bearer of this token has been authorized to access the API and perform specific actions (as specified by the scope that has been granted).</span><br></pre></td></tr></table></figure>
 
-<h4 id="ID-tokens"><a href="#ID-tokens" class="headerlink" title="ID tokens"></a>ID tokens</h4><blockquote>
+<h4 id="2-1-5-ID-tokens"><a href="#2-1-5-ID-tokens" class="headerlink" title="2.1.5. ID tokens"></a>2.1.5. ID tokens</h4><blockquote>
 <p>Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段</p>
 </blockquote>
-<h4 id="OpenID-Providers-OPs"><a href="#OpenID-Providers-OPs" class="headerlink" title="OpenID Providers (OPs)"></a>OpenID Providers (OPs)</h4><blockquote>
+<h4 id="2-1-6-OpenID-Providers-OPs"><a href="#2-1-6-OpenID-Providers-OPs" class="headerlink" title="2.1.6. OpenID Providers (OPs)"></a>2.1.6. OpenID Providers (OPs)</h4><blockquote>
 <p>OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。<br>Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段</p>
 </blockquote>
-<h4 id="JSON-Web-Tokens-JWTs-pronounced-“jots-”"><a href="#JSON-Web-Tokens-JWTs-pronounced-“jots-”" class="headerlink" title="JSON Web Tokens (JWTs)  pronounced “jots.”"></a>JSON Web Tokens (JWTs)  pronounced “jots.”</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。</span><br><span class="line">终端用户，Id Token 的信息中会包含终端用户的信息。</span><br><span class="line">调用方，请求 Id Token 的应用。</span><br><span class="line">Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段。</span><br><span class="line">Claim 指终端用户信息字段。</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-7-JSON-Web-Tokens-JWTs-pronounced-“jots-”"><a href="#2-1-7-JSON-Web-Tokens-JWTs-pronounced-“jots-”" class="headerlink" title="2.1.7. JSON Web Tokens (JWTs)  pronounced “jots.”"></a>2.1.7. JSON Web Tokens (JWTs)  pronounced “jots.”</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenID Provider，指授权服务器，负责签发 Id Token。Authing 是 OpenID Provider。</span><br><span class="line">终端用户，Id Token 的信息中会包含终端用户的信息。</span><br><span class="line">调用方，请求 Id Token 的应用。</span><br><span class="line">Id Token 由 OpenID Provider 颁发，包含关于终端用户的信息字段。</span><br><span class="line">Claim 指终端用户信息字段。</span><br></pre></td></tr></table></figure>
 
 <p><img src="/uploads/528803599836013.png"></p>
-<h3 id="Differences-between-SAML-OAuth-OpenID-Connect"><a href="#Differences-between-SAML-OAuth-OpenID-Connect" class="headerlink" title="Differences between SAML, OAuth, OpenID Connect"></a>Differences between SAML, OAuth, OpenID Connect</h3><h4 id="侧重点"><a href="#侧重点" class="headerlink" title="侧重点"></a>侧重点</h4><ul>
+<h3 id="2-2-Differences-between-SAML-OAuth-OpenID-Connect"><a href="#2-2-Differences-between-SAML-OAuth-OpenID-Connect" class="headerlink" title="2.2. Differences between SAML, OAuth, OpenID Connect"></a>2.2. Differences between SAML, OAuth, OpenID Connect</h3><h4 id="2-2-1-侧重点"><a href="#2-2-1-侧重点" class="headerlink" title="2.2.1. 侧重点"></a>2.2.1. 侧重点</h4><ul>
 <li><p>OAuth 是framework, 用于保护特定资源（如应用程序或文件集）的授权框架，</p>
 </li>
 <li><p>Oauth2.0, 主要用于资源授权。<br>OAuth is an authorization framework used to protect specific resources</p>
@@ -298,17 +313,17 @@
 <li><p>OIDC 能够认证用户并完成资源授权。 侧重于身份认定，他/她是谁， 而OAuth侧重于允许/限制他们能做什么。<br>who someone is，  what they are allowed to do<br>如果你希望实现单点登录或先鉴权用户再返回资源，建议使用 OIDC 协议。</p>
 </li>
 </ul>
-<h4 id="广泛性"><a href="#广泛性" class="headerlink" title="广泛性"></a>广泛性</h4><p>SAML 不支持移动设备的单点登录或API访问。does not support SSO for mobile devices or provide API access<br>OIDC 都支持。</p>
-<h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><ol>
+<h4 id="2-2-2-广泛性"><a href="#2-2-2-广泛性" class="headerlink" title="2.2.2. 广泛性"></a>2.2.2. 广泛性</h4><p>SAML 不支持移动设备的单点登录或API访问。does not support SSO for mobile devices or provide API access<br>OIDC 都支持。</p>
+<h4 id="2-2-3-格式"><a href="#2-2-3-格式" class="headerlink" title="2.2.3. 格式"></a>2.2.3. 格式</h4><ol>
 <li>SAML： tokens written in XML</li>
 <li>OIDC： JWTs， 它们是可移植的，并支持一系列签名和加密算法。</li>
 </ol>
-<h4 id="易用性"><a href="#易用性" class="headerlink" title="易用性"></a>易用性</h4><p>OIDC比SAML 更简单， is less complex than SAML</p>
-<h3 id="常见的-OAuth-2-0-授权流程如下："><a href="#常见的-OAuth-2-0-授权流程如下：" class="headerlink" title="常见的 OAuth 2.0 授权流程如下："></a>常见的 OAuth 2.0 授权流程如下：</h3><p>在你的应用中，让用户访问登录链接，浏览器跳转到 Authing，用户在 Authing 完成认证。<br>浏览器接收到一个从 Authing 服务器发来的授权码。<br>浏览器通过重定向将授权码发送到你的应用后端。<br>你的应用服务将授权码发送到 Authing 获取 AccessToken，如果需要，还会返回 refresh token。<br>你的应用后端现在知道了用户的身份，后续可以保存用户信息，重定向到前端其他页面，使用 AccessToken 调用资源方的其他 API 等等。</p>
+<h4 id="2-2-4-易用性"><a href="#2-2-4-易用性" class="headerlink" title="2.2.4. 易用性"></a>2.2.4. 易用性</h4><p>OIDC比SAML 更简单， is less complex than SAML</p>
+<h3 id="2-3-常见的-OAuth-2-0-授权流程如下："><a href="#2-3-常见的-OAuth-2-0-授权流程如下：" class="headerlink" title="2.3. 常见的 OAuth 2.0 授权流程如下："></a>2.3. 常见的 OAuth 2.0 授权流程如下：</h3><p>在你的应用中，让用户访问登录链接，浏览器跳转到 Authing，用户在 Authing 完成认证。<br>浏览器接收到一个从 Authing 服务器发来的授权码。<br>浏览器通过重定向将授权码发送到你的应用后端。<br>你的应用服务将授权码发送到 Authing 获取 AccessToken，如果需要，还会返回 refresh token。<br>你的应用后端现在知道了用户的身份，后续可以保存用户信息，重定向到前端其他页面，使用 AccessToken 调用资源方的其他 API 等等。</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://docs.authing.cn/v2/concepts/user-pool.html">https://docs.authing.cn/v2/concepts/user-pool.html</a></p>
 </blockquote>
-<h3 id="saml"><a href="#saml" class="headerlink" title="saml"></a>saml</h3><blockquote>
+<h3 id="2-4-saml"><a href="#2-4-saml" class="headerlink" title="2.4. saml"></a>2.4. saml</h3><blockquote>
 <p>允许 IdP 和 SP 彼此独立</p>
 </blockquote>
 <blockquote>
@@ -352,13 +367,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/02/11/202202112324/" rel="prev" title="202202112324">
-      <i class="fa fa-chevron-left"></i> 202202112324
+    <a href="/2023/04/12/daily/" rel="prev" title="Multiprocess_2 concurrent">
+      <i class="fa fa-chevron-left"></i> Multiprocess_2 concurrent
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/02/23/dailyEng/" rel="next" title="DailyEng Context.md">
-      DailyEng Context.md <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -417,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OIDC-and-SAML"><span class="nav-text">OIDC and SAML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OIDC-OpenID-Connect"><span class="nav-text">OIDC  OpenID Connect</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework"><span class="nav-text">an open authentication protocol that works on top of the OAuth 2.0 framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OIDC-%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-text">OIDC 的目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Identity-tokens-%E8%AF%81%E6%98%8E%E7%94%A8%E6%88%B7%E5%B7%B2%E7%BB%8F%E8%BF%87%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81-%E5%B9%B6%E4%B8%94%E6%98%AF-JSON-Web-%E4%BB%A4%E7%89%8C-%EF%BC%88JWT%EF%BC%89"><span class="nav-text">Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Access-tokens-%E8%AE%BF%E9%97%AE%E8%A2%AB%E4%BF%9D%E6%8A%A4%E7%9A%84%E8%B5%84%E6%BA%90"><span class="nav-text">Access tokens: 访问被保护的资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ID-tokens"><span class="nav-text">ID tokens</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenID-Providers-OPs"><span class="nav-text">OpenID Providers (OPs)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON-Web-Tokens-JWTs-pronounced-%E2%80%9Cjots-%E2%80%9D"><span class="nav-text">JSON Web Tokens (JWTs)  pronounced “jots.”</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Differences-between-SAML-OAuth-OpenID-Connect"><span class="nav-text">Differences between SAML, OAuth, OpenID Connect</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%A7%E9%87%8D%E7%82%B9"><span class="nav-text">侧重点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%BF%E6%B3%9B%E6%80%A7"><span class="nav-text">广泛性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F"><span class="nav-text">格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%93%E7%94%A8%E6%80%A7"><span class="nav-text">易用性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84-OAuth-2-0-%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-text">常见的 OAuth 2.0 授权流程如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#saml"><span class="nav-text">saml</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-OIDC-%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="nav-text">1. OIDC 实现的业务场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E9%9C%80%E8%A6%81SSO-%E6%9D%A5%E5%85%8D%E7%99%BB%E9%99%86%EF%BC%9A%E5%8E%BBIDP-%E8%AE%A4%E8%AF%81%EF%BC%8C%E6%8B%BF%E5%88%B0identity-token"><span class="nav-text">1.1. 需要SSO 来免登陆：去IDP 认证，拿到identity token,</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-IDP-access-token-issuer-IDP-%E5%B8%A6-authorization-%E5%8A%9F%E8%83%BD%E5%90%8E%EF%BC%8C%E5%8F%98%E6%88%90-user-%E5%8E%BBIDP%E8%AE%A4%E8%AF%81%EF%BC%8C%E5%90%8C%E6%97%B6%E8%BF%94%E5%9B%9Eaccess-token"><span class="nav-text">1.2. IDP access token issuer:  IDP 带 authorization 功能后，变成 user 去IDP认证，同时返回access token:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Resource-access-token-issuer-%E7%94%B1-resource-%E6%9D%A5-authorization-%E9%A2%81%E5%8F%91-access-token"><span class="nav-text">1.3. Resource access token issuer: 由 resource 来 authorization 颁发 access token:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-OIDC-and-SAML"><span class="nav-text">2. OIDC and SAML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-OIDC-OpenID-Connect"><span class="nav-text">2.1. OIDC  OpenID Connect</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-an-open-authentication-protocol-that-works-on-top-of-the-OAuth-2-0-framework"><span class="nav-text">2.1.1. an open authentication protocol that works on top of the OAuth 2.0 framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-OIDC-%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-text">2.1.2. OIDC 的目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-Identity-tokens-%E8%AF%81%E6%98%8E%E7%94%A8%E6%88%B7%E5%B7%B2%E7%BB%8F%E8%BF%87%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81-%E5%B9%B6%E4%B8%94%E6%98%AF-JSON-Web-%E4%BB%A4%E7%89%8C-%EF%BC%88JWT%EF%BC%89"><span class="nav-text">2.1.3. Identity tokens: 证明用户已经过身份验证,并且是 JSON Web 令牌 （JWT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-Access-tokens-%E8%AE%BF%E9%97%AE%E8%A2%AB%E4%BF%9D%E6%8A%A4%E7%9A%84%E8%B5%84%E6%BA%90"><span class="nav-text">2.1.4. Access tokens: 访问被保护的资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-5-ID-tokens"><span class="nav-text">2.1.5. ID tokens</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-6-OpenID-Providers-OPs"><span class="nav-text">2.1.6. OpenID Providers (OPs)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-7-JSON-Web-Tokens-JWTs-pronounced-%E2%80%9Cjots-%E2%80%9D"><span class="nav-text">2.1.7. JSON Web Tokens (JWTs)  pronounced “jots.”</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Differences-between-SAML-OAuth-OpenID-Connect"><span class="nav-text">2.2. Differences between SAML, OAuth, OpenID Connect</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E4%BE%A7%E9%87%8D%E7%82%B9"><span class="nav-text">2.2.1. 侧重点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-%E5%B9%BF%E6%B3%9B%E6%80%A7"><span class="nav-text">2.2.2. 广泛性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-%E6%A0%BC%E5%BC%8F"><span class="nav-text">2.2.3. 格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-%E6%98%93%E7%94%A8%E6%80%A7"><span class="nav-text">2.2.4. 易用性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%B8%B8%E8%A7%81%E7%9A%84-OAuth-2-0-%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-text">2.3. 常见的 OAuth 2.0 授权流程如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-saml"><span class="nav-text">2.4. saml</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
