@@ -1,0 +1,218 @@
+<mxfile host="app.diagrams.net" modified="2023-04-25T02:24:49.819Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="0uOmn_lj2q7YAEeoPdCk" version="21.1.8" type="github">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="1319" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-5" value="client" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};sketch=1;curveFitting=1;jiggle=2;rounded=0;glass=0;shadow=0;" parent="1" vertex="1">
+          <mxGeometry x="256" y="40" width="100" height="910" as="geometry" />
+        </mxCell>
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="aM9ryv3xv72pqoxQDRHE-5" vertex="1">
+          <mxGeometry x="45" y="80" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-1" value="SP/IDP/Resource service" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="436" y="40" width="100" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-42" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="cdXz-gP29iLM56BV_aXq-1" vertex="1">
+          <mxGeometry x="45" y="330" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-20" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="cdXz-gP29iLM56BV_aXq-1" vertex="1">
+          <mxGeometry x="45" y="80" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-53" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="cdXz-gP29iLM56BV_aXq-1" vertex="1">
+          <mxGeometry x="45" y="585" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-55" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="cdXz-gP29iLM56BV_aXq-1" source="cdXz-gP29iLM56BV_aXq-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-130.5" y="660" as="targetPoint" />
+            <mxPoint x="44" y="660" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-62" value="access_token&#xa;expires_in&#xa;refresh_expires_in&#xa;refresh_token&#xa;token_type&#xa;id_token&#xa;not-before-policy&#xa;session_state&#xa;scope" style="text;whiteSpace=wrap;html=1;" parent="cdXz-gP29iLM56BV_aXq-1" vertex="1">
+          <mxGeometry x="-90" y="665" width="130" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-11" value="https://keycloak-ali1.west.isilon.com:8443/realms/oidcflowB/protocol/openid-connect/auth?response_type=code&amp;client_id=myremotedev&amp;redirect_uri=http://10.224.66.66:18080/&amp;scope=openid&amp;stat=lemon123" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="847" y="198" width="560" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-21" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" source="aM9ryv3xv72pqoxQDRHE-5" target="cdXz-gP29iLM56BV_aXq-20" edge="1">
+          <mxGeometry x="0.0616" y="10" relative="1" as="geometry">
+            <mxPoint x="406" y="120" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="446" y="120" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-22" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" source="cdXz-gP29iLM56BV_aXq-20" edge="1">
+          <mxGeometry x="-0.0588" y="10" relative="1" as="geometry">
+            <mxPoint x="306" y="200" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-24" value="redirect to login url: authenticate&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="cdXz-gP29iLM56BV_aXq-22" vertex="1" connectable="0">
+          <mxGeometry x="-0.4294" y="-1" relative="1" as="geometry">
+            <mxPoint x="-1" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-23" value="req: authorization_endpoint" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="296" y="120" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-38" value="callback" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305.5" y="266" as="sourcePoint" />
+            <mxPoint x="131" y="266" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-39" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="-0.0029" relative="1" as="geometry">
+            <mxPoint x="305.5" y="335" as="targetPoint" />
+            <mxPoint x="131" y="335" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-41" value="input uname/pwd" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="cdXz-gP29iLM56BV_aXq-39" vertex="1" connectable="0">
+          <mxGeometry x="0.2321" y="5" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-40" value="req: login credentials" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="161" y="228" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-43" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry y="8" relative="1" as="geometry">
+            <mxPoint x="305.5" y="378" as="sourcePoint" />
+            <mxPoint x="476" y="378" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-44" value="return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.044" y="-2" relative="1" as="geometry">
+            <mxPoint x="304.5" y="442" as="targetPoint" />
+            <mxPoint x="475" y="442" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="https://keycloak-ali1.west.isilon.com:8443/realms/oidcflowB/login-actions/authenticate?session_code=Co1Z68pv7VZQZ_smGMJP6QaxBLtfk2L9b_uOwVeTuuo&amp;execution=8df12d0a-1fc3-4682-b84a-914714ddb27d&amp;client_id=myremotedev&amp;tab_id=boN_v9Bq7mQ" link="https://keycloak-ali1.west.isilon.com:8443/realms/oidcflowB/login-actions/authenticate?session_code=Co1Z68pv7VZQZ_smGMJP6QaxBLtfk2L9b_uOwVeTuuo&amp;execution=8df12d0a-1fc3-4682-b84a-914714ddb27d&amp;client_id=myremotedev&amp;tab_id=boN_v9Bq7mQ" id="cdXz-gP29iLM56BV_aXq-45">
+          <mxCell style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+            <mxGeometry x="847" y="296" width="560" height="70" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="http://10.224.66.66:18080/?session_state=6b83d7e0-b1ce-40e9-8442-65e286736780&amp;code=d40d1ce9-c1f9-40bd-a24a-1c1f621d6e66.6b83d7e0-b1ce-40e9-8442-65e286736780.5d0b5aff-5a4d-4687-ad1e-4adf1fa115b0" link="http://10.224.66.66:18080/?session_state=6b83d7e0-b1ce-40e9-8442-65e286736780&amp;code=d40d1ce9-c1f9-40bd-a24a-1c1f621d6e66.6b83d7e0-b1ce-40e9-8442-65e286736780.5d0b5aff-5a4d-4687-ad1e-4adf1fa115b0" id="cdXz-gP29iLM56BV_aXq-50">
+          <mxCell style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+            <mxGeometry x="847" y="548" width="560" height="70" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="https://keycloak-ali1.west.isilon.com:8443/realms/oidcflowB/login-actions/authenticate?session_code=Co1Z68pv7VZQZ_smGMJP6QaxBLtfk2L9b_uOwVeTuuo&amp;execution=8df12d0a-1fc3-4682-b84a-914714ddb27d&amp;client_id=myremotedev&amp;tab_id=boN_v9Bq7mQ" link="https://keycloak-ali1.west.isilon.com:8443/realms/oidcflowB/login-actions/authenticate?session_code=Co1Z68pv7VZQZ_smGMJP6QaxBLtfk2L9b_uOwVeTuuo&amp;execution=8df12d0a-1fc3-4682-b84a-914714ddb27d&amp;client_id=myremotedev&amp;tab_id=boN_v9Bq7mQ" id="cdXz-gP29iLM56BV_aXq-51">
+          <mxCell style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+            <mxGeometry x="847" y="448" width="560" height="70" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-52" value="&#39;https://keycloak-ali1.west.isilon.com:8443/realms/oidcflowB/protocol/openid-connect/token&#39;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="847" y="708" width="520" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-54" value="dispatch" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="0.1453" relative="1" as="geometry">
+            <mxPoint x="305.5" y="630" as="sourcePoint" />
+            <mxPoint x="481" y="630" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-60" value="req: token_endpoint" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="cdXz-gP29iLM56BV_aXq-54" vertex="1" connectable="0">
+          <mxGeometry x="0.3789" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-61" value="&lt;div style=&quot;color: rgb(131, 148, 150); background-color: rgb(0, 43, 54); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-weight: normal; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div&gt;&lt;span style=&quot;color: #268bd2;&quot;&gt;post_data&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: #859900;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt; {&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #839496;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color: #2aa198;&quot;&gt;&quot;grant_type&quot;&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot;color: #2aa198;&quot;&gt;&quot;authorization_code&quot;&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #839496;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color: #2aa198;&quot;&gt;&quot;client_id&quot;&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot;color: #268bd2;&quot;&gt;client_id&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #839496;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color: #2aa198;&quot;&gt;&quot;redirect_uri&quot;&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot;color: #268bd2;&quot;&gt;redirect_uri&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #839496;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color: #2aa198;&quot;&gt;&quot;code&quot;&lt;/span&gt;&lt;span style=&quot;color: #839496;&quot;&gt;: &lt;/span&gt;&lt;span style=&quot;color: #268bd2;&quot;&gt;code&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: #839496;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="917" y="728" width="350" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-64" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;auth code&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;response.is_redirect=True&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;from response.header.location&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;&lt;br style=&quot;border-color: var(--border-color); color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+          <mxGeometry x="316" y="450" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-66" value="Table" style="shape=table;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=0;strokeColor=default;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="827" y="48" width="560" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-67" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-66" vertex="1">
+          <mxGeometry y="30" width="560" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-68" value="SP" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-67" vertex="1">
+          <mxGeometry width="30" height="40" as="geometry">
+            <mxRectangle width="30" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-69" value="SP:&amp;nbsp; keycloak-ali1.west.isilon.com, config the client as its client named: myremotedev, also includes the client&#39;s redirect url: http://10.224.66.99:1880(here is a fake url)" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-67" vertex="1">
+          <mxGeometry x="30" width="530" height="40" as="geometry">
+            <mxRectangle width="530" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-70" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-66" vertex="1">
+          <mxGeometry y="70" width="560" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-71" value="Client" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-70" vertex="1">
+          <mxGeometry width="30" height="20" as="geometry">
+            <mxRectangle width="30" height="20" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-72" value="client: maybe is a machine running the script, or a browser who start the workflow" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-70" vertex="1">
+          <mxGeometry x="30" width="530" height="20" as="geometry">
+            <mxRectangle width="530" height="20" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-73" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-66" vertex="1">
+          <mxGeometry y="90" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-74" value="User" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-73" vertex="1">
+          <mxGeometry width="30" height="30" as="geometry">
+            <mxRectangle width="30" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-75" value="user:&amp;nbsp; configurated into the SP/keycloak,&amp;nbsp; no third IDP, just using the keycloak&#39;s authentication.&amp;nbsp; Uname: testuser1,&amp;nbsp; pwd:a" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=11;" parent="cdXz-gP29iLM56BV_aXq-73" vertex="1">
+          <mxGeometry x="30" width="530" height="30" as="geometry">
+            <mxRectangle width="530" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-87" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="cdXz-gP29iLM56BV_aXq-85" target="cdXz-gP29iLM56BV_aXq-86" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-85" value="" style="shape=requiredInterface;html=1;verticalLabelPosition=bottom;sketch=0;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="496" y="110" width="50" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-86" value="request authorization" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="591" y="135" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-90" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="cdXz-gP29iLM56BV_aXq-88" target="cdXz-gP29iLM56BV_aXq-89" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-88" value="" style="shape=requiredInterface;html=1;verticalLabelPosition=bottom;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="506" y="240" width="10" height="332" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-89" value="request authentication, get the auth code" style="whiteSpace=wrap;html=1;align=left;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="541" y="376" width="125" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-93" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;dashed=1;fillColor=#f8cecc;strokeColor=#b85450;shadow=0;opacity=80;metaEdit=0;fixDash=0;" parent="1" source="cdXz-gP29iLM56BV_aXq-91" target="cdXz-gP29iLM56BV_aXq-92" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-91" value="" style="shape=requiredInterface;html=1;verticalLabelPosition=bottom;sketch=1;curveFitting=1;jiggle=2;dashed=1;fillColor=#f8cecc;strokeColor=#b85450;shadow=0;opacity=80;metaEdit=0;fixDash=0;" parent="1" vertex="1">
+          <mxGeometry x="516" y="620" width="10" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-92" value="request authorization with authcode" style="whiteSpace=wrap;html=1;sketch=1;align=left;curveFitting=1;jiggle=2;dashed=1;fillColor=#f8cecc;strokeColor=#b85450;shadow=0;opacity=80;metaEdit=0;fixDash=0;" parent="1" vertex="1">
+          <mxGeometry x="551" y="660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-100" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.475;entryY=-0.175;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" parent="1" source="cdXz-gP29iLM56BV_aXq-94" target="cdXz-gP29iLM56BV_aXq-96" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="131" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-94" value="User" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="86" y="40" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-96" value="" style="shape=waypoint;sketch=1;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;rounded=0;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="121" y="440" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cdXz-gP29iLM56BV_aXq-98" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="126" y="258" width="10" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
