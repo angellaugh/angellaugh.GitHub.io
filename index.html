@@ -279,7 +279,9 @@
 4. 部署 test env;
 5. 部署 生产 env；
 </code></pre>
-<p>dockerfile 和 镜像  和 container的关系？</p>
+<p><strong>Dockerfile、镜像（Image）和容器（Container）是 Docker 技术中的三个关键概念。它们之间的关系如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. Dockerfile：Dockerfile 是一个包含了如何构建一个 Docker 镜像的指令集的文本文件。它定义了基础镜像、应用程序代码、</span><br><span class="line">依赖关系、配置文件、运行时环境以及其他相关设置。开发人员可以通过编写 Dockerfile 来定制自己的镜像，满足特定应用程序的需求。</span><br><span class="line"></span><br><span class="line">2. 镜像（Image）：镜像是一个轻量级、可执行的独立软件包，包含了运行应用程序所需的所有内容，如代码、运行时环境、系统工具、</span><br><span class="line">库和设置。通过 Dockerfile 构建完成后，会生成一个镜像。镜像可以被推送到 Docker Registry（如 Docker Hub）进行共享和分发，供其他用户下载和使用。</span><br><span class="line"></span><br><span class="line">3. 容器（Container）：容器是 Docker 镜像的运行实例。通过运行镜像，可以创建一个或多个容器。容器与镜像之间的关系类似于</span><br><span class="line">类（Class）和对象（Object）之间的关系。容器在隔离的环境中运行应用程序，确保应用程序在不同环境下的一致性和可移植性。</span><br><span class="line"></span><br><span class="line">Dockerfile、镜像和容器之间的关系可以简要概括为：Dockerfile 是镜像的“构建蓝图”，镜像是 Dockerfile 构建出的可执行软件包，</span><br><span class="line">而容器则是镜像运行时的实例。开发人员编写 Dockerfile 以定义和构建镜像，然后运行镜像来创建容器，从而实现应用程序的部署和运行。</span><br></pre></td></tr></table></figure>
+
 <p>镜像不是虚拟机模板， 容器进行，容器实例</p>
 <h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><p>防火墙作用， 数据包转发，sourceIP:port —&gt; Destination IP:port</p>
 <h3 id="容器化技术"><a href="#容器化技术" class="headerlink" title="容器化技术"></a>容器化技术</h3><p>容器， 镜像，仓库， 网络， 容器间的桥网络网段</p>
@@ -508,7 +510,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -582,7 +584,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -688,7 +690,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -772,7 +774,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -890,7 +892,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1002,7 +1004,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1077,7 +1079,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1158,7 +1160,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
+                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
               </span>
 
           
