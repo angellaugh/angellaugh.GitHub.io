@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"angellaugh.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="VM完整的OS， hypervisor利用hypervisor 做物理硬件和OS之间的中间虚拟化层，比如微软的Hyper-V。占用宿主机的 内存，硬盘资源，像是装了个完整的OS。 扩展管理工具： kvm penstack优点a. 环境隔离；b. 应用迁移 –&gt; clone;  LNMP: 代表了一种流行的网站服务器软件组合：Linux、Nginx、MySQL 和 PHP，  应用开发envc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker_study some points">
+<meta property="og:url" content="https://angellaugh.github.io/2023/04/29/docker_study/index.html">
+<meta property="og:site_name" content="Angellaugh&#39;s blog">
+<meta property="og:description" content="VM完整的OS， hypervisor利用hypervisor 做物理硬件和OS之间的中间虚拟化层，比如微软的Hyper-V。占用宿主机的 内存，硬盘资源，像是装了个完整的OS。 扩展管理工具： kvm penstack优点a. 环境隔离；b. 应用迁移 –&gt; clone;  LNMP: 代表了一种流行的网站服务器软件组合：Linux、Nginx、MySQL 和 PHP，  应用开发envc">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-04-29T20:34:00.000Z">
+<meta property="article:modified_time" content="2023-04-29T20:34:00.000Z">
+<meta property="article:author" content="Angellaugh">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://angellaugh.github.io/2023/04/29/docker_study/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Docker_study some points | Angellaugh's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Angellaugh's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Angellaugh's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录琐碎</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/29/docker_study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker_study some points
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-29 20:34:00" itemprop="dateCreated datePublished" datetime="2023-04-29T20:34:00+00:00">2023-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="VM"><a href="#VM" class="headerlink" title="VM"></a>VM</h2><h3 id="完整的OS，-hypervisor"><a href="#完整的OS，-hypervisor" class="headerlink" title="完整的OS， hypervisor"></a>完整的OS， hypervisor</h3><p>利用hypervisor 做物理硬件和OS之间的中间虚拟化层，比如微软的Hyper-V。<br>占用宿主机的 内存，硬盘资源，像是装了个完整的OS。</p>
+<h3 id="扩展管理工具：-kvm-penstack"><a href="#扩展管理工具：-kvm-penstack" class="headerlink" title="扩展管理工具： kvm penstack"></a>扩展管理工具： kvm penstack</h3><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>a. 环境隔离；<br>b. 应用迁移 –&gt; clone;  LNMP: 代表了一种流行的网站服务器软件组合：Linux、Nginx、MySQL 和 PHP，  应用开发env<br>c. 省钱</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>不管是否使用，都占用宿主机固定的resource，利用率低，无法应对瞬时并发压力。</p>
+<h2 id="Docker-（DotCloud-基于linux的-容器技术LXC）"><a href="#Docker-（DotCloud-基于linux的-容器技术LXC）" class="headerlink" title="Docker （DotCloud, 基于linux的 容器技术LXC）"></a>Docker （DotCloud, 基于linux的 容器技术LXC）</h2><h3 id="基于namespace的资源隔离"><a href="#基于namespace的资源隔离" class="headerlink" title="基于namespace的资源隔离"></a>基于namespace的资源隔离</h3><p>网络资源隔离（ip, port，网卡，接口）<br>进程资源隔离 （pid范围）<br>文件系统隔离（绝对路径）</p>
+<h3 id="LXC"><a href="#LXC" class="headerlink" title="LXC"></a>LXC</h3><p>libcontainer, 基于LXC 用golang开发</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>Docker 进程是对某个程序的封装，提供了独立运行的隔离环境。</p>
+<h2 id="docker和vm的共同点，以及优缺点"><a href="#docker和vm的共同点，以及优缺点" class="headerlink" title="docker和vm的共同点，以及优缺点"></a>docker和vm的共同点，以及优缺点</h2><h3 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h3><pre><code>两者都提供了一种在同一台物理机上运行多个独立环境的方式。
+都可以在宿主机上隔离应用程序和操作系统，提高软件的兼容性和安全性。
+它们都支持快速部署和管理，便于应用程序的开发、测试和发布。
+</code></pre>
+<h3 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h3><pre><code>实现方式：VM 在宿主机上运行完整的操作系统副本，包括内核和系统资源。而 Docker 使用容器技术，在宿主机操作系统上共享内核，每个容器只包含应用程序及其依赖项。
+资源占用：VM 通常需要更多的系统资源，因为它们运行完整的操作系统。而 Docker 容器更轻量级，启动速度更快，资源占用更低。
+系统支持：VM 可以运行不同类型的操作系统，如 Windows、Linux 和 macOS。Docker 最初仅支持 Linux，但现在也支持 Windows 和 macOS，尽管在某些方面可能存在限制。
+</code></pre>
+<h3 id="流行度："><a href="#流行度：" class="headerlink" title="流行度："></a>流行度：</h3><pre><code>Docker 和容器技术 在云计算、微服务和 DevOps 环境中大量使用。容器技术可以更好地支持快速迭代开发、轻量级部署和资源优化。
+然而，在某些需要更高安全性和隔离性的场景中，VM 仍然具有一定的优势。
+</code></pre>
+<h4 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h4><pre><code>是一种软件开发和交付方法，它强调开发（Dev）和运维（Ops）团队之间的紧密协作、快速迭代和持续改进。
+</code></pre>
+<p>在实践中，DevOps 通常涉及到以下技术和工具：</p>
+<pre><code>版本控制：如 Git，用于管理代码和协作开发。
+持续集成/持续部署：如 Jenkins、GitLab CI/CD 和 Travis CI，用于自动化构建、测试和部署代码。
+配置管理：如 Ansible、Puppet 和 Chef，用于自动化服务器和应用程序配置。
+容器化和虚拟化：如 Docker 和 Kubernetes，用于轻量级部署和资源管理。
+监控和日志：如 Prometheus、Grafana 和 ELK Stack（Elasticsearch, Logstash, Kibana），用于收集、分析和可视化系统指标和日志。
+</code></pre>
+<h2 id="K8s"><a href="#K8s" class="headerlink" title="K8s"></a>K8s</h2><p>容器随时创建，随时删除，IP不固定，所以交互要走主机名， 每次容器启动，自动对应容器主机名和容器IP；<br>如何维护iptables？<br>如何保证高可用负载均衡的实施？ 本质还是操作镜像，维护容器<br>        for instance： nginx 的 upstream {container 1; container2; container3; container4}<br>        如何保证一直存活？ 如何保证统一升级，统一回滚？</p>
+<h3 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h3><p>是个脚本，写部署逻辑（部署jdk， 安装python，sed修改配置，导入源码等一些列action）， 构建容器用的。</p>
+<p>docker的生命周期 2  大要素： 1. 镜像构建； 2. 基于镜像，运行容器；</p>
+<p>DevOps 部署流水线，环境一致性： </p>
+<pre><code>1. githhub 提供源码；
+2. docker hub / registry(私有) 存的是 dockerfile 构建的镜像；
+3. Jenkins ：
+    1. 从github 下载源码；
+    2. 从docker hub 下载镜像；
+
+4. 部署 test env;
+5. 部署 生产 env；
+</code></pre>
+<p>dockerfile 和 镜像  和 container的关系？</p>
+<p>镜像不是虚拟机模板， 容器进行，容器实例</p>
+<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><p>防火墙作用， 数据包转发，sourceIP:port —&gt; Destination IP:port</p>
+<h3 id="容器化技术"><a href="#容器化技术" class="headerlink" title="容器化技术"></a>容器化技术</h3><p>容器， 镜像，仓库， 网络， 容器间的桥网络网段</p>
+<p>容器编排</p>
+<p>网络： 跨主机通信<br>存储： 跨主机共享数据</p>
+<h3 id="pod"><a href="#pod" class="headerlink" title="pod"></a>pod</h3><p>管理一组容器，是一个逻辑单元，比如一整套的服务需要三个容器，分别提供微服务：python, nginx, mysql.<br>这三个容器可以一起给一个pod 管理。</p>
+<p>可能是要共享：</p>
+<ol>
+<li>存储（volume or local）;</li>
+<li>网络；</li>
+<li>互相依赖；</li>
+</ol>
+<h3 id="docker-compose：-单机容器编排"><a href="#docker-compose：-单机容器编排" class="headerlink" title="docker-compose： 单机容器编排"></a>docker-compose： 单机容器编排</h3><p>在一台主机上，要run 4个容器，执行4次 <code>docker run -v -p 镜像 --restart 容器名 --link</code><br><mark>可以用yaml 文件来写： —&gt; 网络资源，存储资源，镜像名，镜像资源，容器名，容器运行参数，容器资源</mark></p>
+<ol>
+<li>如何部署；</li>
+<li>用什么参数；</li>
+<li>什么卷；</li>
+<li>什么网络；</li>
+</ol>
+<h3 id="k8s-的部分组件介绍"><a href="#k8s-的部分组件介绍" class="headerlink" title="k8s 的部分组件介绍"></a>k8s 的部分组件介绍</h3><blockquote>
+<p>是基于yaml文件的 大而全的 容器管理平台</p>
+</blockquote>
+<blockquote>
+<p>master node 根据user写的yaml， 对容器的运行描述，创建具体容器，到node 工作节点上去干活；</p>
+</blockquote>
+<p>网络关系<br>数据共享关系<br>配置文件加密<br><mark>容器内的负载均衡反向代理</mark></p>
+<h4 id="deployment"><a href="#deployment" class="headerlink" title="deployment"></a>deployment</h4><p>保证弹性扩容，应用发布，升级降级， 保证container数量， 确认要4个container，当其中2个挂掉，会自动再启动2台补全；</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/20/OIDCandSAML/" rel="prev" title="OIDC and SAML">
+      <i class="fa fa-chevron-left"></i> OIDC and SAML
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#VM"><span class="nav-text">VM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84OS%EF%BC%8C-hypervisor"><span class="nav-text">完整的OS， hypervisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A-kvm-penstack"><span class="nav-text">扩展管理工具： kvm penstack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%EF%BC%88DotCloud-%E5%9F%BA%E4%BA%8Elinux%E7%9A%84-%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AFLXC%EF%BC%89"><span class="nav-text">Docker （DotCloud, 基于linux的 容器技术LXC）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Enamespace%E7%9A%84%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB"><span class="nav-text">基于namespace的资源隔离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LXC"><span class="nav-text">LXC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E5%92%8Cvm%E7%9A%84%E5%85%B1%E5%90%8C%E7%82%B9%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">docker和vm的共同点，以及优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="nav-text">共同点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="nav-text">不同点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E8%A1%8C%E5%BA%A6%EF%BC%9A"><span class="nav-text">流行度：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DevOps"><span class="nav-text">DevOps</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K8s"><span class="nav-text">K8s</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dockerfile"><span class="nav-text">dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iptables"><span class="nav-text">iptables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="nav-text">容器化技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod"><span class="nav-text">pod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose%EF%BC%9A-%E5%8D%95%E6%9C%BA%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92"><span class="nav-text">docker-compose： 单机容器编排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k8s-%E7%9A%84%E9%83%A8%E5%88%86%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-text">k8s 的部分组件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#deployment"><span class="nav-text">deployment</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Angellaugh"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Angellaugh</p>
+  <div class="site-description" itemprop="description">技术，生活，艺术，旅行，都记录下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angellaugh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

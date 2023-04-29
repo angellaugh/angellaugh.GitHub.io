@@ -193,6 +193,139 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/29/docker_study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/29/docker_study/" class="post-title-link" itemprop="url">Docker_study some points</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-29 20:34:00" itemprop="dateCreated datePublished" datetime="2023-04-29T20:34:00+00:00">2023-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="VM"><a href="#VM" class="headerlink" title="VM"></a>VM</h2><h3 id="完整的OS，-hypervisor"><a href="#完整的OS，-hypervisor" class="headerlink" title="完整的OS， hypervisor"></a>完整的OS， hypervisor</h3><p>利用hypervisor 做物理硬件和OS之间的中间虚拟化层，比如微软的Hyper-V。<br>占用宿主机的 内存，硬盘资源，像是装了个完整的OS。</p>
+<h3 id="扩展管理工具：-kvm-penstack"><a href="#扩展管理工具：-kvm-penstack" class="headerlink" title="扩展管理工具： kvm penstack"></a>扩展管理工具： kvm penstack</h3><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>a. 环境隔离；<br>b. 应用迁移 –&gt; clone;  LNMP: 代表了一种流行的网站服务器软件组合：Linux、Nginx、MySQL 和 PHP，  应用开发env<br>c. 省钱</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>不管是否使用，都占用宿主机固定的resource，利用率低，无法应对瞬时并发压力。</p>
+<h2 id="Docker-（DotCloud-基于linux的-容器技术LXC）"><a href="#Docker-（DotCloud-基于linux的-容器技术LXC）" class="headerlink" title="Docker （DotCloud, 基于linux的 容器技术LXC）"></a>Docker （DotCloud, 基于linux的 容器技术LXC）</h2><h3 id="基于namespace的资源隔离"><a href="#基于namespace的资源隔离" class="headerlink" title="基于namespace的资源隔离"></a>基于namespace的资源隔离</h3><p>网络资源隔离（ip, port，网卡，接口）<br>进程资源隔离 （pid范围）<br>文件系统隔离（绝对路径）</p>
+<h3 id="LXC"><a href="#LXC" class="headerlink" title="LXC"></a>LXC</h3><p>libcontainer, 基于LXC 用golang开发</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>Docker 进程是对某个程序的封装，提供了独立运行的隔离环境。</p>
+<h2 id="docker和vm的共同点，以及优缺点"><a href="#docker和vm的共同点，以及优缺点" class="headerlink" title="docker和vm的共同点，以及优缺点"></a>docker和vm的共同点，以及优缺点</h2><h3 id="共同点："><a href="#共同点：" class="headerlink" title="共同点："></a>共同点：</h3><pre><code>两者都提供了一种在同一台物理机上运行多个独立环境的方式。
+都可以在宿主机上隔离应用程序和操作系统，提高软件的兼容性和安全性。
+它们都支持快速部署和管理，便于应用程序的开发、测试和发布。
+</code></pre>
+<h3 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h3><pre><code>实现方式：VM 在宿主机上运行完整的操作系统副本，包括内核和系统资源。而 Docker 使用容器技术，在宿主机操作系统上共享内核，每个容器只包含应用程序及其依赖项。
+资源占用：VM 通常需要更多的系统资源，因为它们运行完整的操作系统。而 Docker 容器更轻量级，启动速度更快，资源占用更低。
+系统支持：VM 可以运行不同类型的操作系统，如 Windows、Linux 和 macOS。Docker 最初仅支持 Linux，但现在也支持 Windows 和 macOS，尽管在某些方面可能存在限制。
+</code></pre>
+<h3 id="流行度："><a href="#流行度：" class="headerlink" title="流行度："></a>流行度：</h3><pre><code>Docker 和容器技术 在云计算、微服务和 DevOps 环境中大量使用。容器技术可以更好地支持快速迭代开发、轻量级部署和资源优化。
+然而，在某些需要更高安全性和隔离性的场景中，VM 仍然具有一定的优势。
+</code></pre>
+<h4 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h4><pre><code>是一种软件开发和交付方法，它强调开发（Dev）和运维（Ops）团队之间的紧密协作、快速迭代和持续改进。
+</code></pre>
+<p>在实践中，DevOps 通常涉及到以下技术和工具：</p>
+<pre><code>版本控制：如 Git，用于管理代码和协作开发。
+持续集成/持续部署：如 Jenkins、GitLab CI/CD 和 Travis CI，用于自动化构建、测试和部署代码。
+配置管理：如 Ansible、Puppet 和 Chef，用于自动化服务器和应用程序配置。
+容器化和虚拟化：如 Docker 和 Kubernetes，用于轻量级部署和资源管理。
+监控和日志：如 Prometheus、Grafana 和 ELK Stack（Elasticsearch, Logstash, Kibana），用于收集、分析和可视化系统指标和日志。
+</code></pre>
+<h2 id="K8s"><a href="#K8s" class="headerlink" title="K8s"></a>K8s</h2><p>容器随时创建，随时删除，IP不固定，所以交互要走主机名， 每次容器启动，自动对应容器主机名和容器IP；<br>如何维护iptables？<br>如何保证高可用负载均衡的实施？ 本质还是操作镜像，维护容器<br>        for instance： nginx 的 upstream {container 1; container2; container3; container4}<br>        如何保证一直存活？ 如何保证统一升级，统一回滚？</p>
+<h3 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h3><p>是个脚本，写部署逻辑（部署jdk， 安装python，sed修改配置，导入源码等一些列action）， 构建容器用的。</p>
+<p>docker的生命周期 2  大要素： 1. 镜像构建； 2. 基于镜像，运行容器；</p>
+<p>DevOps 部署流水线，环境一致性： </p>
+<pre><code>1. githhub 提供源码；
+2. docker hub / registry(私有) 存的是 dockerfile 构建的镜像；
+3. Jenkins ：
+    1. 从github 下载源码；
+    2. 从docker hub 下载镜像；
+
+4. 部署 test env;
+5. 部署 生产 env；
+</code></pre>
+<p>dockerfile 和 镜像  和 container的关系？</p>
+<p>镜像不是虚拟机模板， 容器进行，容器实例</p>
+<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><p>防火墙作用， 数据包转发，sourceIP:port —&gt; Destination IP:port</p>
+<h3 id="容器化技术"><a href="#容器化技术" class="headerlink" title="容器化技术"></a>容器化技术</h3><p>容器， 镜像，仓库， 网络， 容器间的桥网络网段</p>
+<p>容器编排</p>
+<p>网络： 跨主机通信<br>存储： 跨主机共享数据</p>
+<h3 id="pod"><a href="#pod" class="headerlink" title="pod"></a>pod</h3><p>管理一组容器，是一个逻辑单元，比如一整套的服务需要三个容器，分别提供微服务：python, nginx, mysql.<br>这三个容器可以一起给一个pod 管理。</p>
+<p>可能是要共享：</p>
+<ol>
+<li>存储（volume or local）;</li>
+<li>网络；</li>
+<li>互相依赖；</li>
+</ol>
+<h3 id="docker-compose：-单机容器编排"><a href="#docker-compose：-单机容器编排" class="headerlink" title="docker-compose： 单机容器编排"></a>docker-compose： 单机容器编排</h3><p>在一台主机上，要run 4个容器，执行4次 <code>docker run -v -p 镜像 --restart 容器名 --link</code><br><mark>可以用yaml 文件来写： —&gt; 网络资源，存储资源，镜像名，镜像资源，容器名，容器运行参数，容器资源</mark></p>
+<ol>
+<li>如何部署；</li>
+<li>用什么参数；</li>
+<li>什么卷；</li>
+<li>什么网络；</li>
+</ol>
+<h3 id="k8s-的部分组件介绍"><a href="#k8s-的部分组件介绍" class="headerlink" title="k8s 的部分组件介绍"></a>k8s 的部分组件介绍</h3><blockquote>
+<p>是基于yaml文件的 大而全的 容器管理平台</p>
+</blockquote>
+<blockquote>
+<p>master node 根据user写的yaml， 对容器的运行描述，创建具体容器，到node 工作节点上去干活；</p>
+</blockquote>
+<p>网络关系<br>数据共享关系<br>配置文件加密<br><mark>容器内的负载均衡反向代理</mark></p>
+<h4 id="deployment"><a href="#deployment" class="headerlink" title="deployment"></a>deployment</h4><p>保证弹性扩容，应用发布，升级降级， 保证container数量， 确认要4个container，当其中2个挂掉，会自动再启动2台补全；</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/20/OIDCandSAML/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,7 +508,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -449,7 +582,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -555,7 +688,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -639,7 +772,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -757,7 +890,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -869,7 +1002,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -944,7 +1077,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1025,7 +1158,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
+                <time title="Modified: 2023-04-29 15:29:55" itemprop="dateModified" datetime="2023-04-29T15:29:55+00:00">2023-04-29</time>
               </span>
 
           
@@ -1048,145 +1181,6 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/15/saml2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/15/saml2/" class="post-title-link" itemprop="url">SAML 2.0</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-15 23:34:02" itemprop="dateCreated datePublished" datetime="2023-03-15T23:34:02+00:00">2023-03-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-25 03:37:35" itemprop="dateModified" datetime="2023-04-25T03:37:35+00:00">2023-04-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="SAML2-0"><a href="#SAML2-0" class="headerlink" title="SAML2.0"></a>SAML2.0</h1><h3 id="Conception"><a href="#Conception" class="headerlink" title="Conception"></a>Conception</h3><blockquote>
-<p> <strong>SAML</strong>, Security Assertion Markup Language</p>
-</blockquote>
-<blockquote>
-<p> <strong>IDP identity provider</strong>， for instance, AD,  ADFS, LDAP, 身份认证authentication<br>    * Performs authentication and passes the user’s identity and authorization level to the service provider</p>
-</blockquote>
-<blockquote>
-<p><strong>SP service provider</strong>, for instance, cluster, application,  access resources<br>    * Trusts the identity provider and authorizes the given user to access the requested resource.<br><code>credential 是啥？ idp authorization的是啥？</code></p>
-</blockquote>
-<ul>
-<li>is the link between the authentication of a user’s identity and the authorization to use a service.</li>
-<li>simplifies federated authentication and authorization processes for users, Identity providers, and service providers</li>
-<li>enable sso, users can log in once, and those same credentials can be reused to log into other service providers</li>
-<li>SAML authentication is the process of verifying the user’s identity and credentials (password, two-factor authentication, etc.). SAML authorization tells the service provider what access to grant the authenticated user.</li>
-<li>authentication = verify identity + verify credential  验证身份和凭证， <font bgcolor=##FF7F50>不理解这个credential 是啥</font></li>
-<li>SAML 做身份和凭证/资格的验证， SAML授权告诉SP 分配什么样的access 给通过验证的user</li>
-<li>SAML 同时做了authentication and authorization</li>
-<li>manage one login per user &gt; manage seperate logins to email, customer relationships management <strong>CRM</strong>, ADs.</li>
-<li>简化了users, idp，sp之间的认证和授权流程。 authentication and authorization processes for users, Identity providers, and service providers.</li>
-</ul>
-<h3 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h3><ol>
-<li>IDP 和 SP establish trust</li>
-<li>user 在IDP 和 SP中都存在</li>
-<li>user login from IDP, IDP验证通过后，生成SAML assertion，返回给user，</li>
-<li>user拿着SAML assertion 到SP验证，如果通过，user就可以访问SP；<ol>
-<li>SP 把SAML assertion中的user信息和 local的 user 对比验证，</li>
-</ol>
-</li>
-<li>IDP 拿着SAML assertion 到另一个SP 去验证，也通过的话，user也可以SSO 访问 another application；</li>
-</ol>
-<h3 id="IDP-和-SP-的交流"><a href="#IDP-和-SP-的交流" class="headerlink" title="IDP 和 SP 的交流"></a>IDP 和 SP 的交流</h3><ol>
-<li>IDP 和 SP 都config xml， contains settings and certificate of the system</li>
-<li>this metadata exchange is establish the trust between IDP and SP like <code>Workflow point 1</code></li>
-<li>this XML metadata file contains the form for the user identifier called <code>the name ID formats</code>, </li>
-</ol>
-<p><img src="/uploads/315430821585906.png"></p>
-<p><img src="/uploads/149184710911054.png"></p>
-<h3 id="2-ways-of-session-init"><a href="#2-ways-of-session-init" class="headerlink" title="2 ways of session init"></a>2 ways of session init</h3><p><img src="/uploads/288243668946728.png"></p>
-<p><img src="/uploads/409973578816914.png"></p>
-<h3 id="A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP"><a href="#A-SAML-REQ-is-generated-from-SP-request-the-authentication-from-the-IDP" class="headerlink" title="A SAML REQ, is generated from SP, request the authentication from the IDP"></a>A SAML REQ, is generated from SP, request the authentication from the IDP</h3><h3 id="A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile"><a href="#A-SAML-RES-is-generated-from-the-IDP-contains-the-actual-assertion-of-authenticated-user-and-additional-user-profile" class="headerlink" title="A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,"></a>A SAML RES, is generated from the IDP, contains the actual assertion of authenticated user, and additional user profile,</h3><p>such as group, role, depending on what the Service Provider can support.</p>
-<h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><ol>
-<li>SP 从不直接与IDP交流never directly interacts with IDP，browser 充当acts了执行carry out所有重定向的代理agent，acts as the agent to carry out all the redirections.</li>
-<li>SP 知道要去找哪个 IDP；</li>
-<li>SP在拿到 IDP返回的saml assertion之前是不知道 谁在要资源的，也就是说用户输入的用户名和密码，只传递到IDP，until the SAML assertion comes back from the Identity Provider.</li>
-<li>可以直接从IDP认证，然后去访问SP，无需必须从SP发起请求；</li>
-<li>SAML 身份验证流是异步的。SP不会维护生成的任何身份验证请求的任何状态。当 SP 收到来自 IDP 的响应时，响应必须包含所有必要的信息。</li>
-</ol>
-<h3 id="IdP-initiated-SSO-with-SAML-Authentication"><a href="#IdP-initiated-SSO-with-SAML-Authentication" class="headerlink" title="IdP-initiated SSO with SAML Authentication"></a>IdP-initiated SSO with SAML Authentication</h3><p><code>IDP 用之前和SP建立互信时产生的私钥来sign assertion， 然后通过user&#39;s browser 发给SP， 或者发送对assertion的引用。a reference to the assertion</code></p>
-<p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
-<p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
-<h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#112;&#x72;&#x69;&#x74;&#104;&#118;&#105;&#x72;&#97;&#x6a;&#46;&#x67;&#x61;&#x69;&#x6b;&#119;&#97;&#x64;&#x40;&#100;&#x65;&#x6c;&#108;&#x2e;&#x63;&#111;&#x6d;">&#112;&#x72;&#x69;&#x74;&#104;&#118;&#105;&#x72;&#97;&#x6a;&#46;&#x67;&#x61;&#x69;&#x6b;&#119;&#97;&#x64;&#x40;&#100;&#x65;&#x6c;&#108;&#x2e;&#x63;&#111;&#x6d;</a></li>
-<li>SP display a list of IDP,  user choose one </li>
-<li>The resource URL may be specific to one IdP. </li>
-<li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
-</ol>
-<h3 id="The-saml-assertion’s-context"><a href="#The-saml-assertion’s-context" class="headerlink" title="The saml assertion’s context"></a>The saml assertion’s context</h3><p><img src="/uploads/589974006532594.png"></p>
-<h3 id="SAML-IdP-Providers"><a href="#SAML-IdP-Providers" class="headerlink" title="SAML IdP Providers:"></a>SAML IdP Providers:</h3><ol>
-<li>Active Directory Federation Services (ADFS)</li>
-<li>Auth0</li>
-<li>Azure AD (Microsoft Azure Active Directory)</li>
-<li>Okta</li>
-<li>OneLogin</li>
-<li>Ping Identity</li>
-<li>Salesforce</li>
-</ol>
-
       
     </div>
 
@@ -1272,7 +1266,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1285,7 +1279,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
