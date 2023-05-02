@@ -193,6 +193,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/05/02/Oauth2.0ClientAuthentication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/02/Oauth2.0ClientAuthentication/" class="post-title-link" itemprop="url">Oauth2.0 client authentication</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-02 19:30:00" itemprop="dateCreated datePublished" datetime="2023-05-02T19:30:00+00:00">2023-05-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Client-Authentication-Methods"><a href="#Client-Authentication-Methods" class="headerlink" title="Client Authentication Methods"></a>Client Authentication Methods</h1><h2 id="1-Token-Endpoint"><a href="#1-Token-Endpoint" class="headerlink" title="1. Token Endpoint"></a>1. Token Endpoint</h2><p><img src="/uploads/182031511625388.png"><br><img src="vx_images/182031511625388.png"></p>
+<h2 id="2-client-type"><a href="#2-client-type" class="headerlink" title="2. client_type"></a>2. client_type</h2><p><img src="/uploads/316472234951139.png"><br><img src="vx_images/316472234951139.png"></p>
+<h2 id="3-client-secret-post-OIDC-Core-9-Client-Authentication"><a href="#3-client-secret-post-OIDC-Core-9-Client-Authentication" class="headerlink" title="3. client_secret_post (OIDC Core, 9. Client Authentication)."></a>3. client_secret_post <a target="_blank" rel="noopener" href="https://openid.net/specs/openid-connect-core-1_0.html">(OIDC Core, 9. Client Authentication).</a></h2><p>在传统的方式中，首先授权服务器会生成一对clientID 和 client secret，并提前将这对信息提供给客户端应用程序。<br>当client 发送 token request时， 会带上 clientID 和 client secret， authorization server 会校验这一对密码是否正确。</p>
+<p><img src="/uploads/477822074947007.png"><br><img src="vx_images/477822074947007.png"></p>
+<h2 id="4-client-secret-basicrfc7617"><a href="#4-client-secret-basicrfc7617" class="headerlink" title="4. client_secret_basicrfc7617"></a>4. client_secret_basic<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7617">rfc7617</a></h2><h3 id="4-1-将-clientID-和-client-secret-写成string格式："><a href="#4-1-将-clientID-和-client-secret-写成string格式：" class="headerlink" title="4.1. 将 clientID 和 client secret 写成string格式："></a>4.1. 将 clientID 和 client secret 写成string格式：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#123;Client ID&#125;: &#123;Client Secret&#125;&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-用base64-加密"><a href="#4-2-用base64-加密" class="headerlink" title="4.2. 用base64 加密"></a>4.2. 用base64 加密</h3><h3 id="4-3-在令牌请求的授权头中嵌入BASE64字符串。"><a href="#4-3-在令牌请求的授权头中嵌入BASE64字符串。" class="headerlink" title="4.3. 在令牌请求的授权头中嵌入BASE64字符串。"></a>4.3. 在令牌请求的授权头中嵌入BASE64字符串。</h3><p><img src="vx_images/581553216911333.png"></p>
+<p>client_secret_post and client_secret_basic are client authentication methods described in RFC 6749, 2.3.1. Client Password.</p>
+<h2 id="5-client-secret-jwt-无需把clientID-和-clientSecret-加入token-request-请求参数中"><a href="#5-client-secret-jwt-无需把clientID-和-clientSecret-加入token-request-请求参数中" class="headerlink" title="5. client_secret_jwt  无需把clientID 和 clientSecret 加入token request 请求参数中"></a>5. client_secret_jwt  无需把clientID 和 clientSecret 加入token request 请求参数中</h2><h3 id="5-1-client端准备一个data"><a href="#5-1-client端准备一个data" class="headerlink" title="5.1. client端准备一个data"></a>5.1. client端准备一个data</h3><h3 id="5-2-用client-secret-为-data生成-签名-signature"><a href="#5-2-用client-secret-为-data生成-签名-signature" class="headerlink" title="5.2. 用client secret 为 data生成 签名 signature"></a>5.2. 用client secret 为 data生成 签名 signature</h3><h3 id="5-3-在token-request-请求中包括data-和signature。"><a href="#5-3-在token-request-请求中包括data-和signature。" class="headerlink" title="5.3. 在token request 请求中包括data 和signature。"></a>5.3. 在token request 请求中包括data 和signature。</h3><p><img src="/uploads/345122512532873.png"><br><img src="vx_images/345122512532873.png"></p>
+<h3 id="5-4-data-是有格式要求的："><a href="#5-4-data-是有格式要求的：" class="headerlink" title="5.4. data 是有格式要求的："></a>5.4. data 是有格式要求的：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST /token.oauth2 HTTP/1.1</span><br><span class="line">     Host: as.example.com</span><br><span class="line">     Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">     grant_type=authorization_code&amp;</span><br><span class="line">     code=n0esc3NRze7LTCu7iYzS6a5acc3f0ogp4&amp;</span><br><span class="line">     client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3A</span><br><span class="line">     client-assertion-type%3Ajwt-bearer&amp;</span><br><span class="line">     client_assertion=eyJhbGciOiJSUzI1NiIsImtpZCI6IjIyIn0.</span><br><span class="line">     eyJpc3Mi[...omitted for brevity...].</span><br><span class="line">     cC4hiUPo[...omitted for brevity...]</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-data-是有格式要求的："><a href="#5-5-data-是有格式要求的：" class="headerlink" title="5.5. data 是有格式要求的："></a>5.5. data 是有格式要求的：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST /token.oauth2 HTTP/1.1</span><br><span class="line">     Host: as.example.com</span><br><span class="line">     Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">     grant_type=authorization_code&amp;</span><br><span class="line">     code=n0esc3NRze7LTCu7iYzS6a5acc3f0ogp4&amp;</span><br><span class="line">     client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3A</span><br><span class="line">     client-assertion-type%3Ajwt-bearer&amp;</span><br><span class="line">     client_assertion=eyJhbGciOiJSUzI1NiIsImtpZCI6IjIyIn0.</span><br><span class="line">     eyJpc3Mi[...omitted for brevity...].</span><br><span class="line">     cC4hiUPo[...omitted for brevity...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-6-签名后生成-JWT，-JWT-被称为-client-assertion"><a href="#5-6-签名后生成-JWT，-JWT-被称为-client-assertion" class="headerlink" title="5.6. 签名后生成 JWT， JWT 被称为 client assertion"></a>5.6. 签名后生成 JWT， JWT 被称为 client assertion</h3><h4 id="5-6-1-JWT-被作为-client-assertion-请求参数的值包含在token-request-请求中；"><a href="#5-6-1-JWT-被作为-client-assertion-请求参数的值包含在token-request-请求中；" class="headerlink" title="5.6.1. JWT 被作为 client_assertion 请求参数的值包含在token request 请求中；"></a>5.6.1. JWT 被作为 client_assertion 请求参数的值包含在token request 请求中；</h4><h4 id="5-6-2-同时需要包括-client-assertion-type-请求参数，是一个固定字符串：urn-ietf-params-oauth-client-assertion-type-jwt-bearer；"><a href="#5-6-2-同时需要包括-client-assertion-type-请求参数，是一个固定字符串：urn-ietf-params-oauth-client-assertion-type-jwt-bearer；" class="headerlink" title="5.6.2. 同时需要包括 client_assertion_type 请求参数，是一个固定字符串：urn:ietf:params:oauth:client-assertion-type:jwt-bearer；"></a>5.6.2. 同时需要包括 client_assertion_type 请求参数，是一个固定字符串：urn:ietf:params:oauth:client-assertion-type:jwt-bearer；</h4><p><img src="/uploads/393604423658709.png"><br><img src="vx_images/393604423658709.png"></p>
+<h2 id="6-private-key-jwt"><a href="#6-private-key-jwt" class="headerlink" title="6. private_key_jwt"></a>6. private_key_jwt</h2><p>这个是在client端，生成一对非对称密钥： public key &amp; private key；<br>public key 发送到 authorization server中；<br>private key 来加密data， 签名；<br>然后将这种JWT 加入token request，发给authorization sever， 进行验证；</p>
+<p><img src="/uplo/25595270559249.png"><br><img src="vx_images/25595270559249.png"></p>
+<h2 id="7-tls-client-auth"><a href="#7-tls-client-auth" class="headerlink" title="7. tls_client_auth"></a>7. tls_client_auth</h2><h2 id="8-self-signed-tls-client-auth"><a href="#8-self-signed-tls-client-auth" class="headerlink" title="8. self_signed_tls_client_auth"></a>8. self_signed_tls_client_auth</h2><p><img src="/uploads/169442698899543.png"><br><img src="vx_images/169442698899543.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/04/29/docker_study/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,7 +591,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -584,7 +665,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -690,7 +771,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -774,7 +855,7 @@ Finished in time:  1.282027666
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -892,7 +973,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1004,7 +1085,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1079,7 +1160,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1106,78 +1187,6 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/03/28/openssl_2_signed/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/28/trypassword/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/28/trypassword/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-28 22:18:02" itemprop="dateCreated datePublished" datetime="2023-03-28T22:18:02+00:00">2023-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/28/trypassword/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1268,7 +1277,7 @@ list(map(func, list_))： 等于 for 循环取出 map得到的len(list_)个元�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

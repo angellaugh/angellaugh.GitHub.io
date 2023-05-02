@@ -193,6 +193,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/28/trypassword/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Angellaugh">
+      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angellaugh's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/28/trypassword/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-28 22:18:02" itemprop="dateCreated datePublished" datetime="2023-03-28T22:18:02+00:00">2023-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/28/trypassword/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/03/15/saml2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -224,7 +296,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,7 +370,7 @@
 <p><code>SP receive the assertion, 用pub key来验证这个assertion是否真的来自它信任的IDP，以及验证这个assertion是否被修改过。 it validates the signature using the public key in order to ensure the SAML assertion really came from its trusted IDP</code></p>
 <p><code>然后 SP 从 assertion中提取 extract identity和其他它需要的信息。</code></p>
 <h3 id="SP-determine-which-IDP"><a href="#SP-determine-which-IDP" class="headerlink" title="SP determine which IDP"></a>SP determine which IDP</h3><ol>
-<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#x70;&#114;&#105;&#116;&#104;&#118;&#105;&#114;&#x61;&#x6a;&#x2e;&#x67;&#97;&#105;&#107;&#119;&#97;&#100;&#x40;&#100;&#101;&#108;&#108;&#46;&#99;&#x6f;&#x6d;">&#x70;&#114;&#105;&#116;&#104;&#118;&#105;&#114;&#x61;&#x6a;&#x2e;&#x67;&#97;&#105;&#107;&#119;&#97;&#100;&#x40;&#100;&#101;&#108;&#108;&#46;&#99;&#x6f;&#x6d;</a></li>
+<li>通过登录用户的域名， The SP may ask the user for their email address and use the domain of the email, such as  <a href="mailto:&#112;&#114;&#x69;&#116;&#x68;&#118;&#x69;&#114;&#97;&#106;&#x2e;&#103;&#97;&#x69;&#107;&#119;&#x61;&#100;&#64;&#100;&#x65;&#x6c;&#x6c;&#46;&#99;&#x6f;&#109;">&#112;&#114;&#x69;&#116;&#x68;&#118;&#x69;&#114;&#97;&#106;&#x2e;&#103;&#97;&#x69;&#107;&#119;&#x61;&#100;&#64;&#100;&#x65;&#x6c;&#x6c;&#46;&#99;&#x6f;&#109;</a></li>
 <li>SP display a list of IDP,  user choose one </li>
 <li>The resource URL may be specific to one IdP. </li>
 <li>The SP may have placed a cookie containing IdP information in the user’s browser the first time the user successfully signed on from the IDP and will use this information on subsequent accesses.</li>
@@ -363,7 +435,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -547,7 +619,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -760,7 +832,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -929,7 +1001,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1008,7 +1080,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1121,7 +1193,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
 
           
@@ -1186,7 +1258,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1262,7 +1334,7 @@ decrypted string:  hello geeks
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
+                <time title="Modified: 2023-05-02 12:44:50" itemprop="dateModified" datetime="2023-05-02T12:44:50+00:00">2023-05-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1288,90 +1360,6 @@ decrypted string:  hello geeks
           <h3 id="1-hostnamectl-set-hostname-ES-suse"><a href="#1-hostnamectl-set-hostname-ES-suse" class="headerlink" title="1. hostnamectl set-hostname ES-suse"></a>1. <code>hostnamectl set-hostname ES-suse</code></h3><h3 id="2-reboot"><a href="#2-reboot" class="headerlink" title="2. reboot"></a>2. <code>reboot</code></h3><h3 id="3-change-the-network-config-to-generate-ip"><a href="#3-change-the-network-config-to-generate-ip" class="headerlink" title="3. change the network config to generate ip"></a>3. change the network config to generate ip</h3><h4 id="3-1-vi-etc-sysconfig-network-ifcfg-eth0"><a href="#3-1-vi-etc-sysconfig-network-ifcfg-eth0" class="headerlink" title="3.1 vi /etc/sysconfig/network/ifcfg-eth0"></a>3.1 <code>vi /etc/sysconfig/network/ifcfg-eth0</code></h4><h4 id="3-2-add-one-line-ZONE-public"><a href="#3-2-add-one-line-ZONE-public" class="headerlink" title="3.2 add one line ZONE=public"></a>3.2 add one line <code>ZONE=public</code></h4>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;/etc/sysconfig/network/ifcfg-eth0&quot; 3L, 46B                                                                                        3,11         </span><br><span class="line">BOOTPROTO=&#x27;dhcp&#x27;</span><br><span class="line">STARTMODE=&#x27;auto&#x27;</span><br><span class="line">ZONE=public</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
 
 <h3 id="4-zypper-update"><a href="#4-zypper-update" class="headerlink" title="4. zypper update"></a>4. <code>zypper update</code></h3><h3 id="5-zypper-install-net-tools-deprecated"><a href="#5-zypper-install-net-tools-deprecated" class="headerlink" title="5. zypper install net-tools-deprecated"></a>5. <code>zypper install net-tools-deprecated</code></h3><h3 id="6-zypper-install-cnf"><a href="#6-zypper-install-cnf" class="headerlink" title="6. zypper install cnf"></a>6. <code>zypper install cnf</code></h3><h3 id="7-cnf-yum"><a href="#7-cnf-yum" class="headerlink" title="7. cnf yum"></a>7. <code>cnf yum</code></h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://angellaugh.github.io/2023/02/11/ES/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Angellaugh">
-      <meta itemprop="description" content="技术，生活，艺术，旅行，都记录下来">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Angellaugh's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/02/11/ES/" class="post-title-link" itemprop="url">ES</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-02-11 20:37:46" itemprop="dateCreated datePublished" datetime="2023-02-11T20:37:46+00:00">2023-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-29 15:33:39" itemprop="dateModified" datetime="2023-04-29T15:33:39+00:00">2023-04-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Teckknowledge/" itemprop="url" rel="index"><span itemprop="name">Teckknowledge</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>sudo zypper refresh<br>sudo zypper update -y<br>sudo zypper install yum</p>
-<h3 id="Import-the-Elasticsearch-GPG-Key"><a href="#Import-the-Elasticsearch-GPG-Key" class="headerlink" title="Import the Elasticsearch GPG Key"></a>Import the Elasticsearch GPG Key</h3><p><code>sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch</code></p>
-<h3 id="Install-Elasticsearch-from-the-RPM-repository"><a href="#Install-Elasticsearch-from-the-RPM-repository" class="headerlink" title="Install Elasticsearch from the RPM repository"></a>Install Elasticsearch from the RPM repository</h3><p>create elasticsearch.repo and config the es install repo</p>
-<p><code>sudo vim /etc/zypp/repos.d/elasticsearch.repo</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/02/11/ES/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -1457,7 +1445,7 @@ decrypted string:  hello geeks
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
